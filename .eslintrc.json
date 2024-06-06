@@ -11,5 +11,13 @@
   },
   "rules": {
     "react/react-in-jsx-scope": "off"
-  }
+  },
+  "ignorePatterns": [
+    "build",
+    "dist",
+    "public",
+    "node_modules",
+    "src/stories",
+    "src/__test__"
+  ]
 }

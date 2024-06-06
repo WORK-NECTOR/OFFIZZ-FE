@@ -6,13 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint:check": "next lint",
+    "lint:fix": "next lint --fix",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "format": "prettier --check --ignore-path .gitignore .",
-    "format:fix": "prettier --write --ignore-path .gitignore ."
+    "prettier:check": "prettier --check --ignore-path .gitignore .",
+    "prettier:fix": "prettier --write --ignore-path .gitignore .",
+    "format": "npm run prettier:check && npm run lint:check",
+    "format:fix": "npm run prettier:fix && npm run lint:fix"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.40.1",
