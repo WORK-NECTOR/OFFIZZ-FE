@@ -1,10 +1,10 @@
-import Link from 'next/link';
+'use client';
+import Header from '@/components/Header';
 
-export default function Home() {
+export default function MainPage() {
   return (
     <div>
-      <h1>Home</h1>
-      <Link href="/about">About</Link>
+      <Header />
     </div>
   );
 }
