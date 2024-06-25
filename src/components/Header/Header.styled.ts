@@ -28,7 +28,9 @@ export const HeaderMenuContainer = styled.ul`
   list-style-type: none;
 `;
 
-export const HeaderMenu = styled.li`
+export const HeaderMenu = styled.li<{ $isSelected: boolean }>`
   font-size: 1.5rem;
   cursor: pointer;
+  color: ${(props) =>
+    props.$isSelected ? 'var(--main-black)' : 'var(--inactive-gray)'};
 `;
