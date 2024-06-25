@@ -1,6 +1,6 @@
+import { create } from 'zustand';
 import { HEADER_TEXT } from '@/constants/header';
 import { HeaderTextUnion } from '@/types/header.type';
-import { create } from 'zustand';
 
 interface HeaderMenuStoreType {
   selectedMenu: HeaderTextUnion;

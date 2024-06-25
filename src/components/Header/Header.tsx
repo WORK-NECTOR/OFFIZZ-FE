@@ -39,7 +39,7 @@ function Header() {
           {HEADER_TEXT.recap}
         </HeaderMenu>
       </HeaderMenuContainer>
-      <button>{HEADER_TEXT.start}</button>
+      <button type="button">{HEADER_TEXT.start}</button>
     </HeaderContainer>
   );
 }
