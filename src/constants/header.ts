@@ -4,4 +4,4 @@ export const HEADER_TEXT = {
   recommendation: 'recommendation',
   recap: 'recap',
   start: '시작하기',
-};
+} as const;
