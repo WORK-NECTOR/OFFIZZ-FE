@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { sortMethod } from '@/types/titleDesc.type';
+import { SortMethod } from '@/types/titleDesc.type';
 
-export const TitleDescContainer = styled.div<{ $sort: sortMethod }>`
+export const TitleDescContainer = styled.div<{ $sort: SortMethod }>`
   white-space: pre;
-  text-align: ${(props) => (props.$sort == 'left' ? 'left' : 'center')};
+  text-align: ${(props) => (props.$sort === 'left' ? 'left' : 'center')};
 
   h2 {
     font-size: 2rem;
