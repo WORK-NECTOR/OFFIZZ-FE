@@ -1,5 +1,5 @@
-import { sortMethod } from '@/types/titleDesc.type';
 import styled from 'styled-components';
+import { sortMethod } from '@/types/titleDesc.type';
 
 export const TitleDescContainer = styled.div<{ $sort: sortMethod }>`
   white-space: pre;
