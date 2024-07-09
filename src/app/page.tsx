@@ -2,12 +2,12 @@
 
 import Header from '@/components/Header';
 import Image from 'next/image';
+import dummy from '../../public/dummy-working.jpg';
 import thumbnail from '../../public/thumbnail.png';
 import { Fragment } from 'react';
 import TitleDesc from '@/components/TitleDesc';
-import { TOP_MAIN } from '@/constants/main';
+import { DASHBOARD_MAIN, TOP_MAIN } from '@/constants/main';
 import Button from '@/components/Button';
-import StatLabel from '@/components/StatLabel';
 
 export default function MainPage() {
   return (
@@ -54,17 +54,65 @@ export default function MainPage() {
             style={{
               position: 'absolute',
               right: '0',
-              width: '42.69rem',
+              width: '50%',
               height: '48rem',
+            }}
+          >
+            <Image
+              src={thumbnail}
+              alt="서비스 메인 이미지"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+            />
+          </div>
+        </section>
+        <section
+          id="second-main"
+          style={{
+            width: '100%',
+            height: '100%',
+            marginTop: '5.25rem',
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+            textAlign: 'center',
+          }}
+        >
+          <p
+            style={{
+              fontSize: '1.25rem',
+              fontWeight: '600',
+              color: 'var(--blue-main)',
+              textAlign: 'center',
+              marginBottom: '1.25rem',
+            }}
+          >
+            {DASHBOARD_MAIN.index}
+          </p>
+          <TitleDesc
+            title={DASHBOARD_MAIN.title}
+            desc={DASHBOARD_MAIN.desc}
+            sort="center"
+          />
+          <div
+            id="second-main-image"
+            style={{
+              position: 'relative',
+              marginTop: '4rem',
             }}
           >
             <Image
               src={thumbnail}
               alt="임시 이미지"
               style={{
-                width: '100%',
-                height: '100%',
+                width: '62.5rem',
+                height: '36.25rem',
+                borderRadius: '1.91206rem',
                 objectFit: 'cover',
+                marginBottom: '6.62rem',
               }}
             />
           </div>
