@@ -12,7 +12,7 @@ export const StyledBtn = styled.button<{
   border: ${(props) =>
     props.$btnType === 'full' ? 'none' : `1px solid ${props.$textColor}`};
   color: ${(props) => props.$textColor};
-  border-radius: 0.5rem;
+  border-radius: 3rem;
   height: ${(props) => (props.$btnSize === 'medium' ? '2.75rem' : '3rem')};
   padding: 1rem 2rem;
   font-size: 1.125rem;
