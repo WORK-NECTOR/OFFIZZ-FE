@@ -7,6 +7,10 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 2.5rem;
+  backdrop-filter: blur(14px);
+  position: fixed;
+  top: 0;
+  z-index: 1;
 
   h1 {
     cursor: pointer;
