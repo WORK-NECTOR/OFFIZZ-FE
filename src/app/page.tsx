@@ -45,7 +45,8 @@ export default function MainPage() {
               btnText={TOP_MAIN.start}
               btnType="full"
               btnColor="var(--blue-main)"
-              textColor="#fff"
+              textColor="var(--main-white)"
+              hoverColor="var(--blue-dark)"
             />
           </section>
           <div

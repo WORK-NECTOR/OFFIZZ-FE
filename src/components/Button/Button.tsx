@@ -2,7 +2,7 @@ import { ButtonProps } from '@/types/button.type';
 import { StyledBtn } from './Button.styled';
 
 function Button(props: ButtonProps) {
-  const { btnType, btnSize, btnText, btnColor, textColor } = props;
+  const { btnType, btnSize, btnText, btnColor, textColor, hoverColor } = props;
 
   return (
     <StyledBtn
@@ -10,6 +10,7 @@ function Button(props: ButtonProps) {
       $btnSize={btnSize}
       $btnColor={btnColor}
       $textColor={textColor}
+      $hoverColor={hoverColor}
     >
       {btnText}
     </StyledBtn>

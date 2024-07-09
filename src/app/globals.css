@@ -1,8 +1,10 @@
 :root {
   --main-black: #1e1e1e;
+  --main-white: #fff;
   --inactive-gray: #c7c7c7;
   --desc-gray: #999999;
   --blue-main: #498df2;
+  --blue-dark: #3e6bc3;
 }
 
 * {
