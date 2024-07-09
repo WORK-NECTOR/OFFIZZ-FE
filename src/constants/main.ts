@@ -1,6 +1,7 @@
 export const TOP_MAIN = {
+  slogan: 'the sparkling way to work',
   title: `답답한 사무실을 벗어나\n톡 쏘는 워케이션!`,
-  desc: `일할 때는 누구보다 열심히, 쉴 때는 누구보다 재밌게!\n당신의 잠재력을 최대로 끌어올릴게요`,
+  desc: `워케이션 기간동안 오피츠와 함께\n최고의 생산성을 경험하세요`,
   start: '워케이션 시작하기 >',
   regionNum: '300+',
   regionText: '워케이션 지역 큐레이션',
