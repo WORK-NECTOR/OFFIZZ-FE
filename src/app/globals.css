@@ -26,3 +26,30 @@ body {
     color-scheme: dark;
   }
 }
+
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local('Pretendard'),
+    url(../../public/fonts/Pretendard-Bold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  src:
+    local('Pretendard'),
+    url(../../public//fonts/Pretendard-SemiBold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local('Pretendard'),
+    url(../../public//fonts/Pretendard-Regular.woff2) format('woff2');
+}
