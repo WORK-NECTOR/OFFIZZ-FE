@@ -1,17 +1,15 @@
 'use client';
 
-import Header from '@/components/Header';
 import Image from 'next/image';
-import dummy from '../../public/dummy-working.jpg';
+import Header from '@/components/Header';
 import thumbnail from '../../public/thumbnail.png';
-import { Fragment } from 'react';
 import TitleDesc from '@/components/TitleDesc';
 import { DASHBOARD_MAIN, TOP_MAIN } from '@/constants/main';
 import Button from '@/components/Button';
 
 export default function MainPage() {
   return (
-    <Fragment>
+    <>
       <Header />
       <main style={{ width: '100%', height: '100%', position: 'relative' }}>
         <section
@@ -118,6 +116,6 @@ export default function MainPage() {
           </div>
         </section>
       </main>
-    </Fragment>
+    </>
   );
 }
