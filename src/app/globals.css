@@ -1,10 +1,21 @@
 :root {
-  --main-black: #1e1e1e;
+  --black-main: #000;
+  --black-800: #262626;
+  --black-700: #434343;
+  --black-600: #555;
   --main-white: #fff;
   --inactive-gray: #c7c7c7;
   --desc-gray: #999999;
   --blue-main: #498df2;
   --blue-dark: #3e6bc3;
+  --blue-bright: #67adfb;
+  --blue-pale: #eef7ff;
+  --blue-greyish: #f4f7f9;
+  --pink-dark: #b50096;
+  --pink-main: #f06fd4;
+  --pink-bright: #f0b1e1;
+  --pink-pale: #fff2fb;
+  --pink-greyish: #f9f7fc;
 }
 
 * {

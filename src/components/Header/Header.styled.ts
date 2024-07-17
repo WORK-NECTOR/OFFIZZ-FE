@@ -36,5 +36,5 @@ export const HeaderMenu = styled.li<{ $isSelected: boolean }>`
   font-size: 1.5rem;
   cursor: pointer;
   color: ${(props) =>
-    props.$isSelected ? 'var(--main-black)' : 'var(--inactive-gray)'};
+    props.$isSelected ? 'var(--black-main)' : 'var(--inactive-gray)'};
 `;
