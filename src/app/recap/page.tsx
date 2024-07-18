@@ -1,11 +1,16 @@
-import React from 'react'
+'use client';
+
+import React from 'react';
+import Header from '@/components/Header';
+import RecapBox from '@/components/RecapBox/RecapBox';
 
 function page() {
   return (
     <div>
-      리캡 페이지 입니다
+      <Header />
+      <RecapBox />
     </div>
-  )
+  );
 }
 
-export default page
+export default page;

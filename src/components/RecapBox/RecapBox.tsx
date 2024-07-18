@@ -1,11 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { RecapLayout } from './RecapBox.styled';
 
 function RecapBox() {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <RecapLayout />;
 }
 
-export default RecapBox
+export default RecapBox;
