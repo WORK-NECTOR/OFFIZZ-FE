@@ -53,7 +53,7 @@ export default function MainPage() {
               position: 'absolute',
               right: '0',
               width: '50%',
-              height: '48rem',
+              height: '100vh',
             }}
           >
             <Image
