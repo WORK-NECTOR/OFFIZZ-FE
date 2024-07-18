@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import thumbnail from '../../public/thumbnail.png';
 import TitleDesc from '@/components/TitleDesc';
-import { DASHBOARD_MAIN, TOP_MAIN } from '@/constants/main';
+import { DASHBOARD_MAIN, TODO_MAIN, TOP_MAIN } from '@/constants/main';
 import Button from '@/components/Button';
 
 export default function MainPage() {
@@ -71,8 +71,9 @@ export default function MainPage() {
           id="second-main"
           style={{
             width: '100%',
-            height: '100%',
+            height: '100vh',
             marginTop: '5.25rem',
+            marginBottom: '6.625rem',
             position: 'relative',
             display: 'flex',
             flexDirection: 'column',
@@ -86,6 +87,7 @@ export default function MainPage() {
               color: 'var(--blue-main)',
               textAlign: 'center',
               marginBottom: '1.25rem',
+              fontFamily: 'Figtree',
             }}
           >
             {DASHBOARD_MAIN.index}
@@ -98,6 +100,8 @@ export default function MainPage() {
           <div
             id="second-main-image"
             style={{
+              width: '100%',
+              height: '100%',
               position: 'relative',
               marginTop: '4rem',
             }}
@@ -106,14 +110,71 @@ export default function MainPage() {
               src={thumbnail}
               alt="임시 이미지"
               style={{
-                width: '62.5rem',
-                height: '36.25rem',
+                width: '73%',
+                height: '58%',
                 borderRadius: '1.91206rem',
                 objectFit: 'cover',
-                marginBottom: '6.62rem',
+                boxShadow: '0px 3.824px 42.065px 0px rgba(0, 0, 0, 0.08)',
               }}
             />
           </div>
+        </section>
+        <section
+          id="third-main"
+          style={{
+            width: '100%',
+            height: '100vh',
+            position: 'relative',
+            display: 'flex',
+            backgroundColor: 'var(--blue-greyish)',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <section
+            id="third-main-content"
+            style={{
+              width: '73%',
+              height: '64%',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            <section id="third-main-text">
+              <p
+                style={{
+                  fontSize: '1.25rem',
+                  fontWeight: '600',
+                  color: 'var(--blue-main)',
+                  fontFamily: 'Figtree',
+                  marginBottom: '1.25rem',
+                }}
+              >
+                {TODO_MAIN.index}
+              </p>
+              <TitleDesc
+                title={TODO_MAIN.title}
+                desc={TODO_MAIN.desc}
+                sort="left"
+              />
+            </section>
+            <Image
+              src={thumbnail}
+              alt="임시 이미지"
+              style={{
+                width: '60%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: '1.75rem',
+                boxShadow: '0px 3.824px 42.065px 0px rgba(0, 0, 0, 0.08)',
+              }}
+            />
+          </section>
         </section>
       </main>
     </>
