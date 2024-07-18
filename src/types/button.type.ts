@@ -6,6 +6,7 @@ export interface BaseProps {
   textColor: string;
   btnText: string;
   btnSize: BtnSize;
+  hoverColor?: string;
 }
 
 // btnType이 'full'일 때 btnColor 입력을 강제하기 위해 정의
