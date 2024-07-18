@@ -7,6 +7,10 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 2.5rem;
+  backdrop-filter: blur(14px);
+  position: fixed;
+  top: 0;
+  z-index: 1;
 
   h1 {
     cursor: pointer;
@@ -32,5 +36,5 @@ export const HeaderMenu = styled.li<{ $isSelected: boolean }>`
   font-size: 1.5rem;
   cursor: pointer;
   color: ${(props) =>
-    props.$isSelected ? 'var(--main-black)' : 'var(--inactive-gray)'};
+    props.$isSelected ? 'var(--black-main)' : 'var(--inactive-gray)'};
 `;

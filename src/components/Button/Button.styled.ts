@@ -6,6 +6,7 @@ export const StyledBtn = styled.button<{
   $btnSize: BtnSize;
   $btnColor?: string;
   $textColor: string;
+  $hoverColor?: string;
 }>`
   background-color: ${(props) =>
     props.$btnType === 'empty' ? 'transparent' : props.$btnColor};
@@ -19,4 +20,11 @@ export const StyledBtn = styled.button<{
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${(props) =>
+      props.$hoverColor || props.$btnColor || 'initial'};
+    transition: 0.5s;
+  }
 `;
