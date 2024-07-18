@@ -1,16 +1,15 @@
 'use client';
-
-import React from 'react';
+import React ,{Fragment}from 'react';
 import Header from '@/components/Header';
 import RecapBox from '@/components/RecapBox/RecapBox';
 
-function page() {
+function RecapPage() {
   return (
-    <div>
+    <Fragment>
       <Header />
       <RecapBox />
-    </div>
+    </Fragment>
   );
 }
 
-export default page;
+export default RecapPage;
