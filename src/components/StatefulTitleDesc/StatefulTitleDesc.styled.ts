@@ -1,5 +1,5 @@
-import { TextState } from '@/types/statefulTitleDesc.type';
 import styled from 'styled-components';
+import { TextState } from '@/types/statefulTitleDesc.type';
 
 export const StatefulTitleDescContainer = styled.div<{ $state: TextState }>`
   height: 3.5rem;

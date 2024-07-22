@@ -1,5 +1,5 @@
-import { ThumbnailProps } from '@/types/thumbnail.type';
 import Image from 'next/image';
+import { ThumbnailProps } from '@/types/thumbnail.type';
 
 function Thumbnail(props: ThumbnailProps) {
   const {

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { Fragment } from 'react';
 import Header from '@/components/Header';
 import thumbnail from '../../public/thumbnail.png';
 import TitleDesc from '@/components/TitleDesc';
@@ -11,12 +12,11 @@ import {
   TOP_MAIN,
 } from '@/constants/main';
 import Button from '@/components/Button';
-import { Fragment } from 'react';
 import styles from './page.module.css';
 
 export default function MainPage() {
   return (
-    <Fragment>
+    <>
       <Header />
       <main className={styles.main}>
         <section className={styles['first-main']}>
@@ -101,6 +101,6 @@ export default function MainPage() {
           </section>
         </section>
       </main>
-    </Fragment>
+    </>
   );
 }
