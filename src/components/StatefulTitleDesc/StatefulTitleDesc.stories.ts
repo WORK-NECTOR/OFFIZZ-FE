@@ -8,6 +8,11 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
+  args: {
+    title: 'title',
+    desc: 'description',
+    state: 'active',
+  },
 } satisfies Meta<typeof StatefulTitleDesc>;
 
 export default meta;
