@@ -1,4 +1,4 @@
 export interface PriceUnitProps {
-  price: string;
+  price: number;
   unit: string;
 }
