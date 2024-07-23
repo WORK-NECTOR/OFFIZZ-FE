@@ -1,0 +1,12 @@
+.recap-wrapper{
+    border: 1px solid black;
+    width: 62.5rem;
+    margin-top: 7.5rem;
+    margin-left: 11.44rem;
+}
+.recap-title-wrapper{
+    width: 13.5rem;
+    height: 5.75rem;
+    border: 1px solid black;
+    margin-bottom: 2.25rem;
+}
