@@ -7,7 +7,7 @@ export const TitleDescContainer = styled.div<{ $sort: SortMethod }>`
 
   h2 {
     font-size: 2rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.25rem;
   }
 
   p {
