@@ -1,7 +1,7 @@
 import { ButtonProps } from '@/types/button.type';
-import { StyledBtn } from './Button.styled';
+import { StyledBtn } from './BasicButton.styled';
 
-function Button(props: ButtonProps) {
+function BasicButton(props: ButtonProps) {
   const {
     btnType,
     btnHeight,
@@ -26,4 +26,4 @@ function Button(props: ButtonProps) {
   );
 }
 
-export default Button;
+export default BasicButton;

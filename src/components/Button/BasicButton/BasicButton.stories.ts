@@ -1,21 +1,21 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Button from '.';
+import BasicButton from '.';
 
 const meta = {
-  title: 'Button',
-  component: Button,
+  title: 'BasicButton',
+  component: BasicButton,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
   },
   args: {
-    btnText: 'Button',
+    btnText: 'BasicButton',
     btnHeight: '2.75rem',
     btnType: 'empty',
     textColor: '#000',
     clickHandler: () => {},
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof BasicButton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
