@@ -10,9 +10,10 @@ const meta = {
   },
   args: {
     btnText: 'Button',
-    btnSize: 'medium',
+    btnHeight: '2.75rem',
     btnType: 'empty',
-    textColor: '#fff',
+    textColor: '#000',
+    clickHandler: () => {},
   },
 } satisfies Meta<typeof Button>;
 
