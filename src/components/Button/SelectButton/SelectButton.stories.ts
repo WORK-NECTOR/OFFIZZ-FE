@@ -11,6 +11,7 @@ const meta = {
   args: {
     selected: true,
     btnHeight: '2.5rem',
+    btnText: '서울',
   },
 } satisfies Meta<typeof SelectButton>;
 
