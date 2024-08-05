@@ -1,9 +1,9 @@
-import { OfficeInfoProps } from '@/types/info/officeInfo.type';
-import { OfficeInfoContainer } from './OfficeInfo.styled';
+import { OfficeAccordionProps } from '@/types/office.type';
+import { OfficeAccordionContainer } from './OfficeAccordion.styled';
 import Badge from '@/components/Badge';
 import PriceUnit from '@/components/PriceUnit';
 
-function OfficeInfo(props: OfficeInfoProps) {
+function OfficeAccordion(props: OfficeAccordionProps) {
   const {
     placeName,
     officeType = '분류없음',
@@ -13,15 +13,15 @@ function OfficeInfo(props: OfficeInfoProps) {
   } = props;
 
   return (
-    <OfficeInfoContainer>
+    <OfficeAccordionContainer>
       <h3>{placeName}</h3>
       <div id="badge-container">
         <Badge text={officeType} />
         <Badge text={dayAndNight} />
       </div>
       <PriceUnit price={price} unit={priceUnit} />
-    </OfficeInfoContainer>
+    </OfficeAccordionContainer>
   );
 }
 
-export default OfficeInfo;
+export default OfficeAccordion;

@@ -1,4 +1,4 @@
-export interface OfficeInfoProps {
+export interface OfficeAccordionProps {
   placeName: string;
   officeType?: string;
   dayAndNight?: string;
