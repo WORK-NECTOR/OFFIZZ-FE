@@ -1,6 +1,6 @@
 export interface OfficeAccordionProps {
   placeName: string;
-  officeType?: string;
+  allYearRound?: string;
   dayAndNight?: string;
   price?: number;
   priceUnit?: string;

@@ -6,7 +6,7 @@ import PriceUnit from '@/components/PriceUnit';
 function OfficeAccordion(props: OfficeAccordionProps) {
   const {
     placeName,
-    officeType = '분류없음',
+    allYearRound = '연중무휴',
     dayAndNight = '미등록',
     price = 0,
     priceUnit = '미정',
@@ -16,7 +16,7 @@ function OfficeAccordion(props: OfficeAccordionProps) {
     <OfficeAccordionContainer>
       <h3>{placeName}</h3>
       <div id="badge-container">
-        <Badge text={officeType} />
+        <Badge text={allYearRound} />
         <Badge text={dayAndNight} />
       </div>
       <PriceUnit price={price} unit={priceUnit} />
