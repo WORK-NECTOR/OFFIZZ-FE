@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
-export const OfficeAccordionContainer = styled.div<{ $isOpen: boolean }>`
+export const OfficeAccordionContainer = styled.div`
+  width: 73%;
+`;
+
+export const OfficeAccordionToggle = styled.div<{ $isOpen: boolean }>`
   display: flex;
   justify-content: space-between;
-  width: 73%;
+  width: 100%;
   min-height: 3.5rem;
   border: 1px solid var(--black-100);
   border-radius: 1rem;
@@ -41,4 +45,8 @@ export const OfficeAccordionContainer = styled.div<{ $isOpen: boolean }>`
       transform: ${(props) => (props.$isOpen ? 'rotate(180deg)' : 'none')};
     }
   }
+`;
+
+export const OfficeAccordionContent = styled.div`
+  width: 100%;
 `;

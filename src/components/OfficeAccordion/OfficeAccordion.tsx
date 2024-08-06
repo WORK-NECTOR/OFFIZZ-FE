@@ -1,5 +1,8 @@
 import { OfficeAccordionProps } from '@/types/office.type';
-import { OfficeAccordionContainer } from './OfficeAccordion.styled';
+import {
+  OfficeAccordionContainer,
+  OfficeAccordionToggle,
+} from './OfficeAccordion.styled';
 import Badge from '@/components/Badge';
 import PriceUnit from '@/components/PriceUnit';
 import Image from 'next/image';
@@ -19,26 +22,31 @@ function OfficeAccordion(props: OfficeAccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <OfficeAccordionContainer
-      $isOpen={isOpen}
-      onClick={() => setIsOpen(!isOpen)}
-    >
-      <div id="core-info-container">
-        <h3>{placeName}</h3>
-        <div id="badge-container">
-          <Badge text={allYearRound} />
-          <Badge text={dayAndNight} />
+    <OfficeAccordionContainer>
+      <OfficeAccordionToggle
+        $isOpen={isOpen}
+        onClick={(e) => {
+          setIsOpen(!isOpen);
+          e.stopPropagation();
+        }}
+      >
+        <div id="core-info-container">
+          <h3>{placeName}</h3>
+          <div id="badge-container">
+            <Badge text={allYearRound} />
+            <Badge text={dayAndNight} />
+          </div>
+          <p id="place-address">{placeAddress}</p>
         </div>
-        <p id="place-address">{placeAddress}</p>
-      </div>
-      <div id="price-info-container">
-        <PriceUnit price={price} unit={priceUnit} />
-        <Image
-          id="accordion-down-arrow"
-          src={down_arrow}
-          alt="아코디언 아래 화살표"
-        />
-      </div>
+        <div id="price-info-container">
+          <PriceUnit price={price} unit={priceUnit} />
+          <Image
+            id="accordion-down-arrow"
+            src={down_arrow}
+            alt="아코디언 아래 화살표"
+          />
+        </div>
+      </OfficeAccordionToggle>
     </OfficeAccordionContainer>
   );
 }
