@@ -9,3 +9,9 @@ export const regionArr = [
   '경상',
   '기타',
 ];
+
+export const OFFICE_INFO_TITLE = {
+  facility: '시설',
+  capacity: '수용인원',
+  operatingTime: '운영시간',
+};
