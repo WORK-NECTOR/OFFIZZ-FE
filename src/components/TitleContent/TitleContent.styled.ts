@@ -15,6 +15,7 @@ export const TitleContentContainer = styled.div`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    gap: 0.5rem;
     color: var(--black-600);
   }
 `;

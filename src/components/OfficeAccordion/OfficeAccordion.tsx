@@ -1,6 +1,7 @@
 import { OfficeAccordionProps } from '@/types/office.type';
 import {
   OfficeAccordionContainer,
+  OfficeAccordionContent,
   OfficeAccordionToggle,
 } from './OfficeAccordion.styled';
 import Badge from '@/components/Badge';
@@ -8,6 +9,8 @@ import PriceUnit from '@/components/PriceUnit';
 import Image from 'next/image';
 import down_arrow from '../../../public/down-arrow.png';
 import { useState } from 'react';
+import TitleContent from '../TitleContent';
+import { OFFICE_INFO_TITLE, regionArr } from '@/constants/office';
 
 function OfficeAccordion(props: OfficeAccordionProps) {
   const {
@@ -47,6 +50,22 @@ function OfficeAccordion(props: OfficeAccordionProps) {
           />
         </div>
       </OfficeAccordionToggle>
+      <OfficeAccordionContent $isOpen={isOpen}>
+        <TitleContent title={OFFICE_INFO_TITLE.facility}>
+          {regionArr.map((item, idx) => (
+            <Badge
+              key={idx}
+              text={item}
+              height="1.875rem"
+              fontSize="1rem"
+              padding="0.25rem 0.75rem"
+              backgroundColor="var(--black-50)"
+              color="var(--black-600)"
+              borderRadius="1.75rem"
+            />
+          ))}
+        </TitleContent>
+      </OfficeAccordionContent>
     </OfficeAccordionContainer>
   );
 }
