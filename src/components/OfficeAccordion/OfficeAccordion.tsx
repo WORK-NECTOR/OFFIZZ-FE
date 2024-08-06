@@ -23,7 +23,7 @@ function OfficeAccordion(props: OfficeAccordionProps) {
           <Badge text={allYearRound} />
           <Badge text={dayAndNight} />
         </div>
-        <p>{placeAddress}</p>
+        <p id="place-address">{placeAddress}</p>
       </div>
       <div id="price-info-container">
         <PriceUnit price={price} unit={priceUnit} />
