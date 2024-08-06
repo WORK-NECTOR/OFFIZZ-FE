@@ -65,6 +65,12 @@ function OfficeAccordion(props: OfficeAccordionProps) {
             />
           ))}
         </TitleContent>
+        <TitleContent title={OFFICE_INFO_TITLE.capacity}>
+          <p>1명~20명</p>
+        </TitleContent>
+        <TitleContent title={OFFICE_INFO_TITLE.operatingTime}>
+          <p>월 00:00 ~ 24:00</p>
+        </TitleContent>
       </OfficeAccordionContent>
     </OfficeAccordionContainer>
   );
