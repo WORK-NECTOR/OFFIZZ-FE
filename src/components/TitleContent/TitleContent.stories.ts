@@ -11,7 +11,11 @@ const meta = {
   },
   args: {
     title: '제목',
-    children: React.createElement('div', 'Hello'),
+    children: React.createElement(
+      'div',
+      { className: 'my-div' },
+      'Hello, React!',
+    ),
   },
 } satisfies Meta<typeof TitleContent>;
 
