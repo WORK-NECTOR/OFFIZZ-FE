@@ -8,17 +8,20 @@ function Badge(props: BadgeProps) {
     borderRadius = '0.5rem',
     backgroundColor = 'var(--blue-greyish)',
     color = 'var(--blue-dark)',
+    fontSize = '0.875rem',
   } = props;
 
   return (
     <div
       style={{
-        width: 'max-content',
+        width: 'fit-content',
         height,
         padding,
         borderRadius,
         backgroundColor,
         color,
+        fontSize,
+        boxSizing: 'border-box',
       }}
     >
       {text}

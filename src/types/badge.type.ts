@@ -4,5 +4,6 @@ export interface BadgeProps {
   padding?: string;
   borderRadius?: string;
   height?: string;
+  fontSize?: string;
   text: string;
 }
