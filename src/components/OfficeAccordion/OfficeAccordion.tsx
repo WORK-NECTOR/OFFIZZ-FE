@@ -4,6 +4,7 @@ import Badge from '@/components/Badge';
 import PriceUnit from '@/components/PriceUnit';
 import Image from 'next/image';
 import down_arrow from '../../../public/down-arrow.png';
+import { useState } from 'react';
 
 function OfficeAccordion(props: OfficeAccordionProps) {
   const {
@@ -15,8 +16,13 @@ function OfficeAccordion(props: OfficeAccordionProps) {
     priceUnit = '미정',
   } = props;
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <OfficeAccordionContainer>
+    <OfficeAccordionContainer
+      $isOpen={isOpen}
+      onClick={() => setIsOpen(!isOpen)}
+    >
       <div id="core-info-container">
         <h3>{placeName}</h3>
         <div id="badge-container">

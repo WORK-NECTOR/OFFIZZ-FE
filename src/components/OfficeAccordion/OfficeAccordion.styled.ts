@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const OfficeAccordionContainer = styled.div`
+export const OfficeAccordionContainer = styled.div<{ $isOpen: boolean }>`
   display: flex;
   justify-content: space-between;
   width: 73%;
@@ -9,6 +9,7 @@ export const OfficeAccordionContainer = styled.div`
   border-radius: 1rem;
   align-items: center;
   padding: 0 1.5rem;
+  cursor: pointer;
 
   #core-info-container {
     display: flex;
@@ -36,6 +37,8 @@ export const OfficeAccordionContainer = styled.div`
     #accordion-down-arrow {
       width: 0.875rem;
       height: 0.4375rem;
+      transition: transform 0.5s ease-in-out;
+      transform: ${(props) => (props.$isOpen ? 'rotate(180deg)' : 'none')};
     }
   }
 `;
