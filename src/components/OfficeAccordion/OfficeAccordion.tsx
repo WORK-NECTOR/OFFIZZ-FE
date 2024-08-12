@@ -52,10 +52,10 @@ function OfficeAccordion(props: OfficeAccordionProps) {
       </OfficeAccordionToggle>
       <OfficeAccordionContent $isOpen={isOpen}>
         <TitleContent title={OFFICE_INFO_TITLE.facility}>
-          {regionArr.map((item, idx) => (
+          {regionArr.map((item) => (
             <Badge
-              key={idx}
-              text={item}
+              key={item.id}
+              text={item.region}
               height="1.875rem"
               fontSize="1rem"
               padding="0.25rem 0.75rem"
