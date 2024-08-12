@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const RecapLayout = styled.div`
   width: 30.625rem;
-  height: 17.7rem;
+  height: 18.7rem;
   border-radius: 16px;
   background-color: var(--blue-pale);
 
@@ -22,7 +22,7 @@ export const RecapLayout = styled.div`
     line-height: 1.75rem;
     margin-bottom: 0.69rem;
   }
-  ㄴ
+  
   #recap-info-sub {
     color: var(--black-700);
     font-family: Pretendard;
@@ -30,5 +30,13 @@ export const RecapLayout = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 1.375rem;
+  }
+
+  #recap-img{
+    position: absolute;
+    z-index: 1;
+    width: 15rem;
+    height: 15rem;
+    margin-left:13.63rem;
   }
 `;
