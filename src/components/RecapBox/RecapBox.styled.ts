@@ -5,12 +5,14 @@ export const RecapLayout = styled.div`
   height: 17.7rem;
   border-radius: 16px;
   background-color: var(--blue-pale);
+
   #recap-info-wrapper {
     width: 15.875rem;
     height: 6.565rem;
     margin-top: 1.81rem;
     margin-left: 1.5rem;
   }
+
   #recap-info-main {
     color: var(--black-main);
     font-family: Pretendard;
@@ -20,6 +22,7 @@ export const RecapLayout = styled.div`
     line-height: 1.75rem;
     margin-bottom: 0.69rem;
   }
+  ㄴ
   #recap-info-sub {
     color: var(--black-700);
     font-family: Pretendard;
