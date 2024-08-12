@@ -49,6 +49,7 @@ export default function MainPage() {
               btnColor="var(--blue-main)"
               textColor="var(--white-main)"
               hoverColor="var(--blue-dark)"
+              padding="1rem 2rem"
               clickHandler={() => {}}
             />
           </section>
@@ -121,18 +122,29 @@ export default function MainPage() {
             desc={RECOMMEND_MAIN.desc}
             sort="left"
           />
-          <ul className={styles['sixth-btn-list']}>
-            {regionArr.map((item) => (
-              <li key={item.id} className={styles['sixth-btn-li']}>
-                <SelectButton
-                  selected={selectedRegion === item.region}
-                  btnText={item.region}
-                  btnHeight="2.5rem"
-                  clickHandler={clickHandler}
-                />
-              </li>
-            ))}
-          </ul>
+          <div className={styles['sixth-select-bar']}>
+            <ul className={styles['sixth-btn-list']}>
+              {regionArr.map((item) => (
+                <li key={item.id} className={styles['sixth-btn-li']}>
+                  <SelectButton
+                    selected={selectedRegion === item.region}
+                    btnText={item.region}
+                    btnHeight="2.5rem"
+                    clickHandler={clickHandler}
+                  />
+                </li>
+              ))}
+            </ul>
+            <BasicButton
+              btnText={RECOMMEND_MAIN.viewAllBtnText}
+              btnType="empty"
+              btnHeight="2.75rem"
+              textColor="var(--blue-main)"
+              hoverColor="var(--blue-greyish)"
+              padding="0.5rem 1rem"
+              clickHandler={() => {}}
+            />
+          </div>
         </section>
       </main>
     </>
