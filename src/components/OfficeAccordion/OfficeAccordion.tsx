@@ -1,3 +1,5 @@
+import Image from 'next/image';
+import { useState } from 'react';
 import { OfficeAccordionProps } from '@/types/office.type';
 import {
   OfficeAccordionContainer,
@@ -6,9 +8,7 @@ import {
 } from './OfficeAccordion.styled';
 import Badge from '@/components/Badge';
 import PriceUnit from '@/components/PriceUnit';
-import Image from 'next/image';
 import down_arrow from '../../../public/down-arrow.png';
-import { useState } from 'react';
 import TitleContent from '../TitleContent';
 import { OFFICE_INFO_TITLE, regionArr } from '@/constants/office';
 
