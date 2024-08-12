@@ -4,8 +4,8 @@ import React from 'react';
 import Header from '@/components/Header';
 import RecapBox from '@/components/RecapBox/RecapBox';
 import styles from './page.module.css';
-import Title from '@/components/Title/Title';
 import { TOP_RECAP } from '@/constants/recap';
+import TitleDesc from '@/components/TitleDesc';
 
 function RecapPage() {
   return (
@@ -13,7 +13,7 @@ function RecapPage() {
       <Header />
       <div className={styles['recap-wrapper']}>
         <div className={styles['recap-title-wrapper']}>
-          <Title title={TOP_RECAP.title} desc={TOP_RECAP.desc} />
+          <TitleDesc sort='left' title={TOP_RECAP.title} desc={TOP_RECAP.desc} />
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <RecapBox
