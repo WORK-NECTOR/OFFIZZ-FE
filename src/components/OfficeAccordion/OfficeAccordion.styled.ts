@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const OfficeAccordionContainer = styled.div`
   width: 62.5rem;
+  height: auto;
 `;
 
 export const OfficeAccordionToggle = styled.div<{ $isOpen: boolean }>`
@@ -41,7 +42,7 @@ export const OfficeAccordionToggle = styled.div<{ $isOpen: boolean }>`
     #accordion-down-arrow {
       width: 0.875rem;
       height: 0.4375rem;
-      transition: transform 0.5s ease-in-out;
+      transition: transform 0.3s ease-in-out;
       transform: ${(props) => (props.$isOpen ? 'rotate(180deg)' : 'none')};
     }
   }
@@ -49,8 +50,12 @@ export const OfficeAccordionToggle = styled.div<{ $isOpen: boolean }>`
 
 export const OfficeAccordionContent = styled.div<{ $isOpen: boolean }>`
   width: 100%;
-  height: ${(props) => (props.$isOpen ? 'auto' : '0')};
-  padding: 1rem 1.5rem;
+  max-height: ${(props) => (props.$isOpen ? '31.25rem' : '0')};
+  transition:
+    max-height 0.3s ease-out,
+    padding 0.3s ease-out;
+  overflow: hidden;
+  padding: ${(props) => (props.$isOpen ? '1rem 1.5rem' : '0')};
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
