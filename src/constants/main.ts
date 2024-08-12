@@ -46,7 +46,6 @@ export const RECAP_MAIN = {
 export const RECOMMEND_MAIN = {
   title: '그럼, 어디로 떠나볼까요?',
   desc: '워케이션 기간동안 생산성을 높여 줄 공유 오피스예요',
-  regionArr: ['서울', '강원', '제주', '부산', '경기', '기타'],
   notLoginDesc: '로그인하고 더 많은 공유오피스 보기 >',
   viewAllBtnText: '전체보기 >',
 };
