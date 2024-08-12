@@ -39,4 +39,10 @@ export const RecapLayout = styled.div`
     height: 15rem;
     margin-left:13.63rem;
   }
+
+  #recap-play{
+    width: 1.75rem;
+height: 1.75rem;
+margin-top: 1rem;
+  }
 `;
