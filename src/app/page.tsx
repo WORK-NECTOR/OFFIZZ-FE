@@ -15,8 +15,19 @@ import BasicButton from '@/components/Button/BasicButton';
 import styles from './page.module.css';
 import { regionArr } from '@/constants/office';
 import SelectButton from '@/components/Button/SelectButton';
+import useRegionStore, { Region } from '@/store/useRegionStore';
 
 export default function MainPage() {
+  const { selectedRegion, setSelectedRegion } = useRegionStore((state) => ({
+    selectedRegion: state.selectedRegion,
+    setSelectedRegion: state.setSelectedRegion,
+  }));
+
+  const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
+    const text = e.currentTarget.innerText as Region;
+    setSelectedRegion(text);
+  };
+
   return (
     <>
       <Header />
@@ -114,9 +125,10 @@ export default function MainPage() {
             {regionArr.map((item) => (
               <li key={item.id} className={styles['sixth-btn-li']}>
                 <SelectButton
-                  selected={false}
+                  selected={selectedRegion === item.region}
                   btnText={item.region}
                   btnHeight="2.5rem"
+                  clickHandler={clickHandler}
                 />
               </li>
             ))}

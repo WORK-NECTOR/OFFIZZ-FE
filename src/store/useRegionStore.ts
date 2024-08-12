@@ -1,7 +1,7 @@
 import { regionArr } from '@/constants/office';
 import { create } from 'zustand';
 
-type Region = (typeof regionArr)[number]['region'];
+export type Region = (typeof regionArr)[number]['region'];
 
 interface RegionStoreType {
   selectedRegion: Region;
