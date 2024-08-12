@@ -1,18 +1,20 @@
 'use client';
 
 import Image from 'next/image';
-import { Fragment } from 'react';
 import Header from '@/components/Header';
 import thumbnail from '../../public/thumbnail.png';
 import TitleDesc from '@/components/TitleDesc';
 import {
   DASHBOARD_MAIN,
+  RECOMMEND_MAIN,
   RETROSPECT_MAIN,
   TODO_MAIN,
   TOP_MAIN,
 } from '@/constants/main';
 import BasicButton from '@/components/Button/BasicButton';
 import styles from './page.module.css';
+import { regionArr } from '@/constants/office';
+import SelectButton from '@/components/Button/SelectButton';
 
 export default function MainPage() {
   return (
@@ -100,6 +102,25 @@ export default function MainPage() {
               sort="left"
             />
           </section>
+        </section>
+        <section className={styles['fifth-main']}></section>
+        <section className={styles['sixth-main']}>
+          <TitleDesc
+            title={RECOMMEND_MAIN.title}
+            desc={RECOMMEND_MAIN.desc}
+            sort="left"
+          />
+          <ul className={styles['sixth-btn-list']}>
+            {regionArr.map((item) => (
+              <li key={item.id} className={styles['sixth-btn-li']}>
+                <SelectButton
+                  selected={false}
+                  btnText={item.region}
+                  btnHeight="2.5rem"
+                />
+              </li>
+            ))}
+          </ul>
         </section>
       </main>
     </>
