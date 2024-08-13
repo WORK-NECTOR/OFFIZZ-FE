@@ -1,12 +1,12 @@
 export type BtnType = 'full' | 'empty';
-export type BtnSize = 'small' | 'medium' | 'large';
 
 export interface BaseProps {
   btnType: BtnType;
   textColor: string;
   btnText: string;
-  btnSize: BtnSize;
+  btnHeight: string;
   hoverColor?: string;
+  clickHandler: () => void;
 }
 
 // btnType이 'full'일 때 btnColor 입력을 강제하기 위해 정의

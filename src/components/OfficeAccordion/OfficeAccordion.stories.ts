@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
-import OfficeInfo from '.';
+import OfficeAccordion from '.';
 
 const meta = {
-  title: 'OfficeInfo',
-  component: OfficeInfo,
+  title: 'OfficeAccordion',
+  component: OfficeAccordion,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -11,7 +11,7 @@ const meta = {
   args: {
     placeName: '임시 오피스명',
   },
-} satisfies Meta<typeof OfficeInfo>;
+} satisfies Meta<typeof OfficeAccordion>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

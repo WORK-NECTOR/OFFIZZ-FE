@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { BtnSize, BtnType } from '@/types/button.type';
+import { BtnType } from '@/types/button.type';
 
 export const StyledBtn = styled.button<{
   $btnType: BtnType;
-  $btnSize: BtnSize;
+  $btnHeight: string;
   $btnColor?: string;
   $textColor: string;
   $hoverColor?: string;
@@ -14,7 +14,7 @@ export const StyledBtn = styled.button<{
     props.$btnType === 'full' ? 'none' : `1px solid ${props.$textColor}`};
   color: ${(props) => props.$textColor};
   border-radius: 3rem;
-  height: ${(props) => (props.$btnSize === 'medium' ? '2.75rem' : '3rem')};
+  height: ${(props) => props.$btnHeight};
   padding: 1rem 2rem;
   font-size: 1.125rem;
   display: flex;

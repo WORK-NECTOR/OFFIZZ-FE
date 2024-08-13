@@ -1,20 +1,19 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Button from '.';
+import SelectButton from '.';
 
 const meta = {
-  title: 'Button',
-  component: Button,
+  title: 'SelectButton',
+  component: SelectButton,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
   },
   args: {
-    btnText: 'Button',
-    btnSize: 'medium',
-    btnType: 'empty',
-    textColor: '#fff',
+    selected: true,
+    btnHeight: '2.5rem',
+    btnText: '서울',
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof SelectButton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

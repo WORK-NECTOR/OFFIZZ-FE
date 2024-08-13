@@ -11,7 +11,7 @@ import {
   TODO_MAIN,
   TOP_MAIN,
 } from '@/constants/main';
-import Button from '@/components/Button';
+import BasicButton from '@/components/Button/BasicButton';
 import styles from './page.module.css';
 
 export default function MainPage() {
@@ -29,13 +29,14 @@ export default function MainPage() {
                 sort="left"
               />
             </div>
-            <Button
-              btnSize="small"
+            <BasicButton
+              btnHeight="2.75rem"
               btnText={TOP_MAIN.start}
               btnType="full"
               btnColor="var(--blue-main)"
               textColor="var(--white-main)"
               hoverColor="var(--blue-dark)"
+              clickHandler={() => {}}
             />
           </section>
           <div className={styles['first-main-image-wrapper']}>
