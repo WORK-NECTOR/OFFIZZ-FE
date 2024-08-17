@@ -5,6 +5,7 @@ export interface BaseProps {
   textColor: string;
   btnText: string;
   btnHeight: string;
+  padding: string;
   hoverColor?: string;
   clickHandler: () => void;
 }
