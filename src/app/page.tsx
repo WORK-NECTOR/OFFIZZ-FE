@@ -115,7 +115,7 @@ export default function MainPage() {
             />
           </section>
         </section>
-        <section className={styles['fifth-main']}></section>
+        <section className={styles['fifth-main']} />
         <section className={styles['sixth-main']}>
           <TitleDesc
             title={RECOMMEND_MAIN.title}

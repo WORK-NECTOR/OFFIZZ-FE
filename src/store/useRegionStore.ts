@@ -1,5 +1,5 @@
-import { regionArr } from '@/constants/office';
 import { create } from 'zustand';
+import { regionArr } from '@/constants/office';
 
 export type Region = (typeof regionArr)[number]['region'];
 
