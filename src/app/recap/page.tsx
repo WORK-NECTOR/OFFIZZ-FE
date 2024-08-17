@@ -16,7 +16,7 @@ function RecapPage() {
       <div className={styles['recap-wrapper']}>
         <div className={styles['recap-title-wrapper']}>
           <TitleDesc
-            type='recap'
+            type="recap"
             sort="left"
             title={TOP_RECAP.title}
             desc={TOP_RECAP.desc}

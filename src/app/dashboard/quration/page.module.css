@@ -1,38 +1,38 @@
-.QurationContent{
-    width: 100%;
-    height: 39.68rem;
-    border: 1px solid red;
-    margin-top: 4.37rem;
+.QurationContent {
+  width: 100%;
+  height: 39.68rem;
+  border: 1px solid red;
+  margin-top: 4.37rem;
 }
-.nowLocation{
-    display: flex;
-    margin-left: 3.1rem;
-    margin-top: 3rem;
-    color: var(--Greyscale-Black, #000);
-font-family: Inter;
-font-size: 1rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+.nowLocation {
+  display: flex;
+  margin-left: 3.1rem;
+  margin-top: 3rem;
+  color: var(--Greyscale-Black, #000);
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
-.now-title{
-    margin-right: 0.75rem;
+.now-title {
+  margin-right: 0.75rem;
 }
-.now-desc{
-    margin-right: 2.19rem;
-    color: var(--Greyscale-Black, #000);
-font-family: Inter;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+.now-desc {
+  margin-right: 2.19rem;
+  color: var(--Greyscale-Black, #000);
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
-.now-suggest{
-    color: #999;
-font-family: Inter;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+.now-suggest {
+  color: #999;
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }

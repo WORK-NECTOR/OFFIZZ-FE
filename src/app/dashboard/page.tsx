@@ -1,13 +1,14 @@
 'use client';
-import Tab from '@/components/Tab/Tab'
-import React from 'react'
+
+import React from 'react';
+import Tab from '@/components/Tab/Tab';
 
 function page() {
   return (
     <div>
-      <Tab/>
+      <Tab />
     </div>
-  )
+  );
 }
 
-export default page
+export default page;

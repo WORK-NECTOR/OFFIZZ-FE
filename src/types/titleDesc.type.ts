@@ -4,5 +4,5 @@ export interface TitleDescProps {
   title: string;
   desc: string;
   sort?: SortMethod;
-  type?:SortType;
+  type?: SortType;
 }
