@@ -1,0 +1,83 @@
+.QurationContent {
+  width: 36rem;
+  margin-top: 2.75rem;
+}
+.nowLocation {
+  display: flex;
+  margin-left: 3.1rem;
+  margin-top: 1.5rem;
+  color: var(--Greyscale-Black, #000);
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.now-title {
+  margin-right: 0.75rem;
+}
+.now-desc {
+  margin-right: 2.19rem;
+  color: var(--Greyscale-Black, #000);
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.now-suggest {
+  color: #999;
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-left: 0.31rem;
+}
+.Search{
+margin-top: 2.4rem;
+display: flex;
+width: 33rem;
+height: 4rem;
+padding-left: 1rem;
+justify-content: space-between;
+align-items: center;
+flex-shrink: 0;
+margin-left: 1.37rem;
+border-radius: 0.5rem;
+border: 1px solid #C7C7C7;
+background: var(--Greyscale-White, #FFF);
+}
+
+.SearchInput{
+  width: 60%;
+  height: 3.7rem;
+  padding-left: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  border: none;
+}
+.SearchBtn{
+  color: white;
+  display: flex;
+width: 7.3125rem;
+padding: 0rem 1rem;
+justify-content: center;
+align-items: center;
+gap: 0.5rem;
+flex-shrink: 0;
+align-self: stretch;
+border-radius: 0.5rem;
+background-color: var(--Greyscale-Black, #000);
+}
+.MapView{
+  margin-top: 9rem;
+  margin-left: 1rem;
+  width: 40rem;
+height: 38rem;
+flex-shrink: 0;
+border-radius: 1.25rem;
+background-color:var(--Greyscale-200, #D9D9D9);
+}
