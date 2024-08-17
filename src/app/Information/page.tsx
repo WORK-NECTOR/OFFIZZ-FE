@@ -3,7 +3,7 @@
 import React from 'react';
 import Tab from '@/components/Tab/Tab';
 
-function page() {
+function InformationPage() {
   return (
     <div>
       <Tab />
@@ -11,4 +11,4 @@ function page() {
   );
 }
 
-export default page;
+export default InformationPage;

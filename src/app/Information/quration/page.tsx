@@ -8,7 +8,7 @@ import Tab from '@/components/Tab/Tab';
 import heart from '../../../../public/heart.png';
 import InFoBox from '@/components/InFoBox/InFoBox';
 
-const getWelcomeMessage = (activity: string, name: string, space: string) => (
+const WelcomeMessage = (activity: string, name: string, space: string) => (
   <div style={{ marginLeft: '3.1rem' }}>
     <NormalText>{activity}을 즐기는 </NormalText>
     <HighlightedText>{name}</HighlightedText>
@@ -24,7 +24,7 @@ const getWelcomeMessage = (activity: string, name: string, space: string) => (
 function Category() {
   return <CategoryBox>카페</CategoryBox>;
 }
-function page() {
+function QurationPage() {
   const activity = '영화';
   const name = '홍길동';
   const space = '공간';
@@ -34,7 +34,7 @@ function page() {
       <Tab />
       <div>
         <div className={styles.QurationContent}>
-          {getWelcomeMessage(activity, name, space)}
+          {WelcomeMessage(activity, name, space)}
           <div className={styles.nowLocation}>
             <div className={styles['now-title']}>현재위치</div>
             <div>
@@ -56,7 +56,7 @@ function page() {
   );
 }
 
-export default page;
+export default QurationPage;
 
 const HighlightedText = styled.span`
   color: var(--Greyscale-Black, #000);
