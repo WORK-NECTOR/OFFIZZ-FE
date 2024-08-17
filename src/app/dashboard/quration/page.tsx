@@ -104,7 +104,7 @@ const NormalText = styled.span`
   line-height: normal;
 `;
 const PlaceMainContent = styled.div`
-  width: 31rem;
+  width: 30rem;
   height: 25.5625rem;
   flex-shrink: 0;
   border-radius: 1rem;

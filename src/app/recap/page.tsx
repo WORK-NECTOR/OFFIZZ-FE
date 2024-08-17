@@ -18,7 +18,7 @@ function NonRecapDataBox(){
 }
 function RecapPage() {
   //리캡 데이터 조회
-  const recapData = false
+  const recapData = true
   return (
     <>
       <Header />
