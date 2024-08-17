@@ -21,10 +21,8 @@ const getWelcomeMessage = (activity: string, name: string, space: string) => (
   </div>
 );
 
-function Category(){
-  return(
-<CategoryBox>카페</CategoryBox>
-  );
+function Category() {
+  return <CategoryBox>카페</CategoryBox>;
 }
 function page() {
   const activity = '영화';
@@ -40,18 +38,20 @@ function page() {
           <div className={styles.nowLocation}>
             <div className={styles['now-title']}>현재위치</div>
             <div>
-            <div className={styles['now-desc']}>{nowLocation}</div>
-            <div className={styles['now-suggest']}>현재 위치가 아니신가요?</div>
+              <div className={styles['now-desc']}>{nowLocation}</div>
+              <div className={styles['now-suggest']}>
+                현재 위치가 아니신가요?
+              </div>
             </div>
           </div>
         </div>
         <div className={styles.Search}>
-          <input className={styles.SearchInput}></input>
+          <input className={styles.SearchInput} />
           <div className={styles.SearchBtn}>검색</div>
         </div>
         <InFoBox />
       </div>
-      <div className={styles.MapView}></div>
+      <div className={styles.MapView} />
     </div>
   );
 }
@@ -76,11 +76,11 @@ const NormalText = styled.span`
   line-height: normal;
 `;
 const CategoryBox = styled.div`
-display: flex;
-padding: 0.6rem 1.2rem;
-justify-content: center;
-align-items: center;
-gap: 0.6rem;
-border-radius: 1.8rem;
-border: 1.2px solid var(--Greyscale-Black, #000);
-`
+  display: flex;
+  padding: 0.6rem 1.2rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 1.8rem;
+  border: 1.2px solid var(--Greyscale-Black, #000);
+`;
