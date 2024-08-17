@@ -10,17 +10,17 @@ import { DashboardBoxContent } from '@/components/dashboardBox/dashboard.styled'
 import DashboardBox from '@/components/dashboardBox/dashboardBox';
 
 const getWelcomeMessage = (activity: string, name: string, space: string) => (
-    <div style={{ marginLeft: '3.1rem' }}>
-      <NormalText>{activity}을 즐기는 </NormalText>
-      <HighlightedText>{name}</HighlightedText>
-      <NormalText>
-        님을 위한
-        <br />
-      </NormalText>
-      <HighlightedText>{space}</HighlightedText>
-      <NormalText> 추천</NormalText>
-    </div>
-  );
+  <div style={{ marginLeft: '3.1rem' }}>
+    <NormalText>{activity}을 즐기는 </NormalText>
+    <HighlightedText>{name}</HighlightedText>
+    <NormalText>
+      님을 위한
+      <br />
+    </NormalText>
+    <HighlightedText>{space}</HighlightedText>
+    <NormalText> 추천</NormalText>
+  </div>
+);
 function PlaceMainBox() {
   return (
     <PlaceMainContent>
