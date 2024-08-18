@@ -1,6 +1,6 @@
 import { instance } from '../axios';
 
-export interface GetRegionOfficeParams {
+export interface GetRecRegionOfficeParams {
   region: string; // available한 값만 들어오게 수정 예정
   size: number;
 }
@@ -25,7 +25,7 @@ export interface GetAllOfficeResponse extends GetOfficeResponse {
   totalPage: number;
 }
 
-export const getRecRegionOffice = (params: GetRegionOfficeParams) => {
+export const getRecRegionOffice = (params: GetRecRegionOfficeParams) => {
   const { region = '서울', size = 4 } = params;
 
   return instance.get<GetOfficeResponse>(`/api/office/rec/${region}/${size}`);
