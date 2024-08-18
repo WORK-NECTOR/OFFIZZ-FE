@@ -9,6 +9,4 @@ export const instance = axios.create({
   withCredentials: true,
 });
 
-instance.interceptors.request.use((config) => {
-  return config;
-});
+instance.interceptors.request.use((config) => config);

@@ -1,8 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
 import {
   GetRecRegionOfficeParams,
   getRecRegionOffice,
 } from '@/api/office/getOffice';
-import { useQuery } from '@tanstack/react-query';
 
 export const useRecRegionOfficeQuery = (params: GetRecRegionOfficeParams) =>
   useQuery({

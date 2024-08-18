@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect } from 'react';
 import Header from '@/components/Header';
 import thumbnail from '../../public/thumbnail.png';
 import TitleDesc from '@/components/TitleDesc';
@@ -17,7 +18,6 @@ import { regionArr } from '@/constants/office';
 import SelectButton from '@/components/Button/SelectButton';
 import useRegionStore, { Region } from '@/store/useRegionStore';
 import { useRecRegionOfficeQuery } from '@/services/office/useRecRegionOfficeQuery';
-import { useEffect } from 'react';
 
 export default function MainPage() {
   const { selectedRegion, setSelectedRegion } = useRegionStore((state) => ({
