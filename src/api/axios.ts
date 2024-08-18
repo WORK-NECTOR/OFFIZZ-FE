@@ -1,4 +1,3 @@
-import useUserStore from '@/store/useUserStore';
 import axios from 'axios';
 
 export const instance = axios.create({
@@ -11,13 +10,5 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const { accessToken } = useUserStore((state) => ({
-    accessToken: state.accessToken,
-  }));
-
-  if (accessToken) {
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
-  }
-
   return config;
 });
