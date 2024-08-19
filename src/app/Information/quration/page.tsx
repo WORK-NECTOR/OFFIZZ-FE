@@ -7,23 +7,8 @@ import styles from './page.module.css';
 import Tab from '@/components/Tab/Tab';
 import heart from '../../../../public/heart.png';
 import InFoBox from '@/components/InFoBox/InFoBox';
+import MainMsg from './components/MainMsg/MainMsg';
 
-const WelcomeMessage = (activity: string, name: string, space: string) => (
-  <div style={{ marginLeft: '3.1rem' }}>
-    <NormalText>{activity}을 즐기는 </NormalText>
-    <HighlightedText>{name}</HighlightedText>
-    <NormalText>
-      님을 위한
-      <br />
-    </NormalText>
-    <HighlightedText>{space}</HighlightedText>
-    <NormalText> 추천</NormalText>
-  </div>
-);
-
-function Category() {
-  return <CategoryBox>카페</CategoryBox>;
-}
 function QurationPage() {
   const activity = '영화';
   const name = '홍길동';
@@ -34,7 +19,7 @@ function QurationPage() {
       <Tab />
       <div>
         <div className={styles.QurationContent}>
-          {WelcomeMessage(activity, name, space)}
+          <MainMsg activity={activity} name={name} space={nowLocation}/>
           <div className={styles.nowLocation}>
             <div className={styles['now-title']}>현재위치</div>
             <div>
