@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect } from 'react';
 import Header from '@/components/Header';
 import thumbnail from '../../public/thumbnail.png';
 import TitleDesc from '@/components/TitleDesc';
@@ -16,12 +17,22 @@ import styles from './page.module.css';
 import { regionArr } from '@/constants/office';
 import SelectButton from '@/components/Button/SelectButton';
 import useRegionStore, { Region } from '@/store/useRegionStore';
+import { useRecRegionOfficeQuery } from '@/services/office/useRecRegionOfficeQuery';
 
 export default function MainPage() {
   const { selectedRegion, setSelectedRegion } = useRegionStore((state) => ({
     selectedRegion: state.selectedRegion,
     setSelectedRegion: state.setSelectedRegion,
   }));
+
+  const { data, status } = useRecRegionOfficeQuery({
+    region: '서울',
+    size: 4,
+  });
+
+  useEffect(() => {
+    console.log(data);
+  }, [status]);
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     const text = e.currentTarget.innerText as Region;
