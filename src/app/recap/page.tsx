@@ -8,6 +8,7 @@ import { TOP_RECAP } from '@/constants/recap';
 import TitleDesc from '@/components/TitleDesc';
 import recapImg1 from '../../../public/recapimg.png';
 import recapImg2 from '../../../public/recapimg2.png';
+import { ThemeProvider } from 'styled-components';
 
 function NonRecapDataBox() {
   return (
@@ -23,17 +24,35 @@ function NonRecapDataBox() {
 function RecapPage() {
   // 리캡 데이터 조회
   const recapData = true;
+  const theme = {
+    recap:{
+      h2: {
+        fontFamily: 'Figtree',
+        fontSize: '2.5rem',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '3.5rem',
+      },
+      p: {
+        color: 'var(--Greyscale-400, #9d9d9d)',
+        fontFamily: 'Pretendard',
+        fontSize: '1.125rem',
+        fontWeight: 400,
+      },
+    }
+  };
   return (
     <>
       <Header />
       <div className={styles['recap-wrapper']}>
         <div className={styles['recap-title-wrapper']}>
+        <ThemeProvider theme={theme}>
           <TitleDesc
-            type="recap"
             sort="left"
             title={TOP_RECAP.title}
             desc={TOP_RECAP.desc}
           />
+          </ThemeProvider>
         </div>
         {!recapData && <NonRecapDataBox />}
         {recapData && (

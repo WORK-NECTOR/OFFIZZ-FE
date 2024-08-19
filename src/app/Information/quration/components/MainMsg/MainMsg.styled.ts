@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const HighlightedText = styled.span`
   color: var(--Greyscale-Black, #000);

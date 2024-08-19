@@ -19,7 +19,7 @@ function QurationPage() {
       <Tab />
       <div>
         <div className={styles.QurationContent}>
-          <MainMsg activity={activity} name={name} space={nowLocation}/>
+          <MainMsg activity={activity} name={name} space={nowLocation} />
           <div className={styles.nowLocation}>
             <div className={styles['now-title']}>현재위치</div>
             <div>

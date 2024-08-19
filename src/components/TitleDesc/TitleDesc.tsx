@@ -1,19 +1,15 @@
-import { type } from 'os';
+import React from 'react';
 import { TitleDescProps } from '@/types/titleDesc.type';
-import {
-  RecapTitleDescContainer,
-  TitleDescContainer,
-} from './TitleDesc.styled';
+import { TitleDescContainer } from './TitleDesc.styled';
 
 function TitleDesc(props: TitleDescProps) {
-  const { sort, title, desc, type } = props;
-  const Container =
-    type === 'recap' ? RecapTitleDescContainer : TitleDescContainer;
+  const { sort, title, desc} = props;
+
   return (
-    <Container $sort={sort} $type={type}>
+    <TitleDescContainer $sort={sort}>
       <h2>{title}</h2>
       <p>{desc}</p>
-    </Container>
+    </TitleDescContainer>
   );
 }
 
