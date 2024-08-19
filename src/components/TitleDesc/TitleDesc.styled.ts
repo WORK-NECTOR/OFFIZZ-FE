@@ -3,7 +3,7 @@ import { SortMethod } from '@/types/titleDesc.type';
 
 export const TitleDescContainer = styled.div<{
   $sort: SortMethod;
-  themeName: string;
+  $themeName: string;
 }>`
   white-space: pre;
   text-align: ${(props) => (props.$sort === 'left' ? 'left' : 'center')};
