@@ -1,3 +1,4 @@
+import React from 'react';
 import { TitleDescProps } from '@/types/titleDesc.type';
 import { TitleDescContainer } from './TitleDesc.styled';
 
