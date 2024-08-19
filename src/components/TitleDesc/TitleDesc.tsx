@@ -3,7 +3,7 @@ import { TitleDescProps } from '@/types/titleDesc.type';
 import { TitleDescContainer } from './TitleDesc.styled';
 
 function TitleDesc(props: TitleDescProps) {
-  const { sort, title, desc} = props;
+  const { sort, title, desc } = props;
 
   return (
     <TitleDescContainer $sort={sort}>
