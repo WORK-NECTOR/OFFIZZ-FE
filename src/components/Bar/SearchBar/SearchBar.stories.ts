@@ -8,6 +8,10 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
+  args: {
+    width: '41.75rem',
+    height: '3.25rem',
+  },
 } satisfies Meta<typeof SearchBar>;
 
 export default meta;
