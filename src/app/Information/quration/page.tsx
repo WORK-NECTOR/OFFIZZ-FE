@@ -5,8 +5,11 @@ import styles from './page.module.css';
 import Tab from '@/components/Tab/Tab';
 import InFoBox from '@/components/InFoBox/InFoBox';
 import MainMsg from './components/MainMsg/MainMsg';
+import { Map } from 'react-kakao-maps-sdk';
+import useKakaoLoader from '@/components/KakaoMap/use-kakao-loader';
 
 function QurationPage() {
+  useKakaoLoader()
   const activity = '영화';
   const name = '홍길동';
   const space = '공간';
@@ -33,7 +36,22 @@ function QurationPage() {
         </div>
         <InFoBox />
       </div>
-      <div className={styles.MapView} />
+      <div className={styles.MapView}>
+      <Map // 지도를 표시할 Container
+      id="map"
+      center={{
+        // 지도의 중심좌표
+        lat: 33.450701,
+        lng: 126.570667,
+      }}
+      style={{
+        // 지도의 크기
+        width: "100%",
+        height: "350px",
+      }}
+      level={3} // 지도의 확대 레벨
+    />
+      </div>
     </div>
   );
 }
