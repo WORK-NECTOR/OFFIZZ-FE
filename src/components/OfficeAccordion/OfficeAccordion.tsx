@@ -10,6 +10,7 @@ import Badge from '@/components/Badge';
 import PriceUnit from '@/components/PriceUnit';
 import down_arrow from '../../../public/down-arrow.png';
 import { OFFICE_INFO_TITLE, regionArr } from '@/constants/office';
+import TitleContent from '../TitleContent';
 
 function OfficeAccordion(props: OfficeAccordionProps) {
   const {
