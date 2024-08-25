@@ -1,8 +1,8 @@
-import { SearchBarProps } from '@/types/searchBar.type';
 import { Fragment } from 'react';
+import Image from 'next/image';
+import { SearchBarProps } from '@/types/searchBar.type';
 import { SearchBarContainer } from './SearchBar.styled';
 import search from '../../../../public/search.png';
-import Image from 'next/image';
 import { RECOMMEND_TEXT } from '@/constants/recommend';
 
 function SearchBar(props: SearchBarProps) {
