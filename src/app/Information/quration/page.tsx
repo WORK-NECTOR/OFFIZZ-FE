@@ -5,10 +5,10 @@ import KakaoMap from '@/components/KakaoMap/KakaoMap';
 import useKakaoLoader from '@/components/KakaoMap/use-kakao-loader';
 import Tab from '@/components/Tab/Tab';
 import { useSearchOfficesQuery } from '@/services/office/useSearchOfficeQuery';
-import MainMsg from './components/MainMsg/MainMsg';
 import styles from './page.module.css';
 import InFoBox from '@/components/InFoBox';
 import useUserLocationStore from '@/store/userLocation';
+import MainMsg from './components/MainMsg/MainMsg';
 
 function QurationPage() {
   useKakaoLoader();
