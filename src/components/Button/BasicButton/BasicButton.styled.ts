@@ -26,7 +26,7 @@ export const StyledBtn = styled.button<{
   align-items: center;
   cursor: pointer;
 
-  :hover {
+  &:hover {
     background-color: ${(props) =>
       props.$hoverColor || props.$btnColor || 'initial'};
     transition: background-color 0.5s ease-out;
