@@ -10,14 +10,14 @@ export const TitleDescContainer = styled.div<{
 
   h2 {
     font-size: 2rem;
-    font-size: ${(props) => props.theme.recap.h2.fontSize || '2rem'};
+    font-size: ${(props) => props.theme.recap || '2rem'};
     margin-bottom: 1.25rem;
   }
 
   p {
     font-size: 1.25rem;
     color: var(--desc-gray);
-    font-weight: ${(props) => props.theme.recap.p.fontWeight};
-    font-family: ${(props) => props.theme.recap.p.fontFamily};
+    font-weight: ${(props) => props.theme.recap};
+    font-family: ${(props) => props.theme.recap};
   }
 `;

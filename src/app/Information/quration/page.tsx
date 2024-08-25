@@ -1,19 +1,36 @@
 'use client';
 
-import React from 'react';
-import styles from './page.module.css';
-import Tab from '@/components/Tab/Tab';
-import InFoBox from '@/components/InFoBox/InFoBox';
-import MainMsg from './components/MainMsg/MainMsg';
-import { Map } from 'react-kakao-maps-sdk';
+import KakaoMap from '@/components/KakaoMap/KakaoMap';
 import useKakaoLoader from '@/components/KakaoMap/use-kakao-loader';
+import Tab from '@/components/Tab/Tab';
+import { useSearchOfficesQuery } from '@/services/office/useSearchOfficeQuery';
+import React, { useState } from 'react';
+import MainMsg from './components/MainMsg/MainMsg';
+import styles from './page.module.css';
+import InFoBox from '@/components/InFoBox';
 
 function QurationPage() {
-  useKakaoLoader()
+  useKakaoLoader();
+
+  const [searchString, setSearchString] = useState<string>(''); //검색하기 위한 입력값
+  const [searchText, setSearchText] = useState<string>(''); //검색클릭 값
+  const { data, isLoading, error } = useSearchOfficesQuery({ searchText });
+  console.log(searchString,data)
+
   const activity = '영화';
   const name = '홍길동';
   const space = '공간';
   const nowLocation = '경기도 광명시';
+
+  const handleSearch = () => {
+    setSearchText(searchString)
+  };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div style={{ display: 'flex' }}>
       <Tab />
@@ -31,26 +48,40 @@ function QurationPage() {
           </div>
         </div>
         <div className={styles.Search}>
-          <input className={styles.SearchInput} />
-          <div className={styles.SearchBtn}>검색</div>
+          <input
+            className={styles.SearchInput}
+            type="text"
+            value={searchString}
+            onChange={(e) => setSearchString(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <div className={styles.SearchBtn} onClick={handleSearch}>
+            검색
+          </div>
         </div>
-        <InFoBox />
+        <div className={styles.officeList}>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>Error: {error.message}</p>
+          ) : (
+            data?.offices && data.offices.length > 0 ? (
+              data.offices.map((office) => (
+                <div key={office.officeId} className={styles.officeItem}>
+                  <InFoBox 
+                    title={office.name}   // Correctly pass title as string
+                    address={office.address}  // Correctly pass address as string
+                  />
+                </div>
+              ))
+            ) : (
+              <p>No offices found</p>
+            )
+          )}
+        </div>
       </div>
       <div className={styles.MapView}>
-      <Map // 지도를 표시할 Container
-      id="map"
-      center={{
-        // 지도의 중심좌표
-        lat: 33.450701,
-        lng: 126.570667,
-      }}
-      style={{
-        // 지도의 크기
-        width: "100%",
-        height: "350px",
-      }}
-      level={3} // 지도의 확대 레벨
-    />
+        <KakaoMap />
       </div>
     </div>
   );
