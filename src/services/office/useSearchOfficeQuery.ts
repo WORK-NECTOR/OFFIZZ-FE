@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { SearchOfficeParams, searchOffices } from '@/api/office/searchOffice';
+import { searchOffices } from '@/api/office/searchOffice';
 
 export const useSearchOfficesQuery = (params: { searchText?: string }) => {
   const { searchText } = params;

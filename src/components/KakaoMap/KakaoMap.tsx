@@ -5,7 +5,7 @@ import useUserLocationStore from '@/store/userLocation';
 
 function KakaoMap() {
   useKakaoLoader();
-  const [state, setState] = useState<{
+  const [locationstate, setLocationState] = useState<{
     center: { lat: number; lng: number };
     errMsg: string | null;
     isLoading: boolean;
@@ -25,7 +25,7 @@ function KakaoMap() {
         async (position) => {
           const { latitude, longitude } = position.coords;
 
-          setState((prev) => ({
+          setLocationState((prev) => ({
             ...prev,
             center: {
               lat: latitude,
@@ -40,27 +40,26 @@ function KakaoMap() {
               if (status === window.kakao.maps.services.Status.OK) {
                 const address = result[0].address.address_name;
                 setUserAddress(address);
-                setState((prev) => ({
+                setLocationState((prev) => ({
                   ...prev,
                   address,
                 }));
               } else {
-                console.error('Failed to fetch address:', status);
-                setState((prev) => ({
+                setLocationState((prev) => ({
                   ...prev,
                   errMsg: 'error',
                 }));
               }
             });
           } catch (error) {
-            setState((prev) => ({
+            setLocationState((prev) => ({
               ...prev,
               errMsg: 'error',
             }));
           }
         },
         (err) => {
-          setState((prev) => ({
+          setLocationState((prev) => ({
             ...prev,
             errMsg: err.message,
             isLoading: false,
@@ -68,28 +67,28 @@ function KakaoMap() {
         },
       );
     } else {
-      setState((prev) => ({
+      setLocationState((prev) => ({
         ...prev,
         errMsg: 'error',
         isLoading: false,
       }));
     }
-  }, []);
+  }, [setUserAddress]);
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <Map
         id="map"
-        center={state.center}
+        center={locationstate.center}
         style={{
           width: '100%',
           height: '100%',
         }}
         level={3} // 지도의 확대 레벨
       >
-        {!state.isLoading && (
-          <MapMarker position={state.center}>
+        {!locationstate.isLoading && (
+          <MapMarker position={locationstate.center}>
             <div style={{ padding: '5px', color: '#000' }}>
-              {state.errMsg ? state.errMsg : '사용자의 위치'}
+              {locationstate.errMsg ? locationstate.errMsg : '사용자의 위치'}
             </div>
           </MapMarker>
         )}

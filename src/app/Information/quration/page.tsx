@@ -25,12 +25,9 @@ function QurationPage() {
   const space = '공간';
   const nowLocation = userAddress || '위치를 가져오는 중...';
 
-  const handleSearch = () => {
-    setSearchText(searchString);
-  };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      setSearchText(searchString);
     }
   };
 
@@ -58,24 +55,18 @@ function QurationPage() {
             onChange={(e) => setSearchString(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <div className={styles.SearchBtn} onClick={handleSearch}>
-            검색
-          </div>
         </div>
         <div className={styles.officeList}>
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p>Error: {error.message}</p>
-          ) : data?.offices && data.offices.length > 0 ? (
+          {isLoading && <p>Loading...</p>}
+          {error && <p>Error: {error.message}</p>}
+          {!isLoading &&
+            !error &&
+            data?.offices.length &&
             data.offices.map((office) => (
               <div key={office.officeId} className={styles.officeItem}>
                 <InFoBox title={office.name} address={office.address} />
               </div>
-            ))
-          ) : (
-            <p>No offices found</p>
-          )}
+            ))}
         </div>
       </div>
       <div className={styles.MapView}>
