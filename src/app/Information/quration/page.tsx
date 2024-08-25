@@ -1,16 +1,39 @@
 'use client';
 
-import React from 'react';
-import styles from './page.module.css';
+import React, { useState } from 'react';
+import KakaoMap from '@/components/KakaoMap/KakaoMap';
+import useKakaoLoader from '@/components/KakaoMap/use-kakao-loader';
 import Tab from '@/components/Tab/Tab';
-import InFoBox from '@/components/InFoBox/InFoBox';
+import { useSearchOfficesQuery } from '@/services/office/useSearchOfficeQuery';
+import styles from './page.module.css';
+import InFoBox from '@/components/InFoBox';
+import useUserLocationStore from '@/store/userLocation';
 import MainMsg from './components/MainMsg/MainMsg';
+import useDebounce from '@/hook/useDebounce';
 
 function QurationPage() {
+  useKakaoLoader();
+
+  const [searchString, setSearchString] = useState<string>(''); // 검색하기 위한 입력값
+  const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
+  const { data, isLoading, error } = useSearchOfficesQuery({
+    searchText: debouncedSearchText,
+  });
+  const { userAddress } = useUserLocationStore((state) => ({
+    userAddress: state.userAddress,
+  }));
+
   const activity = '영화';
   const name = '홍길동';
   const space = '공간';
-  const nowLocation = '경기도 광명시';
+  const nowLocation = userAddress || '위치를 가져오는 중...';
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setSearchString((e.target as HTMLInputElement).value);
+    }
+  };
+
   return (
     <div style={{ display: 'flex' }}>
       <Tab />
@@ -28,12 +51,30 @@ function QurationPage() {
           </div>
         </div>
         <div className={styles.Search}>
-          <input className={styles.SearchInput} />
-          <div className={styles.SearchBtn}>검색</div>
+          <input
+            className={styles.SearchInput}
+            type="text"
+            value={searchString}
+            onChange={(e) => setSearchString(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
         </div>
-        <InFoBox />
+        <div className={styles.officeList}>
+          {isLoading && <p>Loading...</p>}
+          {error && <p>Error: {error.message}</p>}
+          {!isLoading &&
+            !error &&
+            data?.offices.length &&
+            data.offices.map((office) => (
+              <div key={office.officeId} className={styles.officeItem}>
+                <InFoBox title={office.name} address={office.address} />
+              </div>
+            ))}
+        </div>
       </div>
-      <div className={styles.MapView} />
+      <div className={styles.MapView}>
+        <KakaoMap />
+      </div>
     </div>
   );
 }
