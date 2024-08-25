@@ -1,10 +1,10 @@
 'use client';
 
+import React, { useState } from 'react';
 import KakaoMap from '@/components/KakaoMap/KakaoMap';
 import useKakaoLoader from '@/components/KakaoMap/use-kakao-loader';
 import Tab from '@/components/Tab/Tab';
 import { useSearchOfficesQuery } from '@/services/office/useSearchOfficeQuery';
-import React, { useState } from 'react';
 import MainMsg from './components/MainMsg/MainMsg';
 import styles from './page.module.css';
 import InFoBox from '@/components/InFoBox';
@@ -13,20 +13,20 @@ import useUserLocationStore from '@/store/userLocation';
 function QurationPage() {
   useKakaoLoader();
 
-  const [searchString, setSearchString] = useState<string>(''); //검색하기 위한 입력값
-  const [searchText, setSearchText] = useState<string>(''); //검색클릭 값
+  const [searchString, setSearchString] = useState<string>(''); // 검색하기 위한 입력값
+  const [searchText, setSearchText] = useState<string>(''); // 검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({ searchText });
-  const { userAddress } = useUserLocationStore(state => ({
+  const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,
-  })); 
+  }));
 
   const activity = '영화';
   const name = '홍길동';
   const space = '공간';
-  const nowLocation = userAddress ||'위치를 가져오는 중...';
+  const nowLocation = userAddress || '위치를 가져오는 중...';
 
   const handleSearch = () => {
-    setSearchText(searchString)
+    setSearchText(searchString);
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -67,19 +67,14 @@ function QurationPage() {
             <p>Loading...</p>
           ) : error ? (
             <p>Error: {error.message}</p>
+          ) : data?.offices && data.offices.length > 0 ? (
+            data.offices.map((office) => (
+              <div key={office.officeId} className={styles.officeItem}>
+                <InFoBox title={office.name} address={office.address} />
+              </div>
+            ))
           ) : (
-            data?.offices && data.offices.length > 0 ? (
-              data.offices.map((office) => (
-                <div key={office.officeId} className={styles.officeItem}>
-                  <InFoBox 
-                    title={office.name}
-                    address={office.address}
-                  />
-                </div>
-              ))
-            ) : (
-              <p>No offices found</p>
-            )
+            <p>No offices found</p>
           )}
         </div>
       </div>

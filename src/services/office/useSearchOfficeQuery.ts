@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query';
 import { SearchOfficeParams, searchOffices } from '@/api/office/searchOffice';
 
@@ -17,7 +16,7 @@ export const useSearchOfficesQuery = (params: { searchText?: string }) => {
 
       const { recOffices, totalPage } = data;
 
-      return { offices: recOffices, totalPage }; 
+      return { offices: recOffices, totalPage };
     },
     staleTime: 1000 * 20,
   });

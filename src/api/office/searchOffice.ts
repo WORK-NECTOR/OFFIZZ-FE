@@ -1,8 +1,7 @@
-
 import { instance } from '../axios';
 
 export interface SearchOfficeParams {
-  searchText?: string |undefined;
+  searchText?: string | undefined;
 }
 
 export interface OfficeInfoType {
