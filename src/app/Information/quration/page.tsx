@@ -9,13 +9,16 @@ import styles from './page.module.css';
 import InFoBox from '@/components/InFoBox';
 import useUserLocationStore from '@/store/userLocation';
 import MainMsg from './components/MainMsg/MainMsg';
+import useDebounce from '@/hook/useDebounce';
 
 function QurationPage() {
   useKakaoLoader();
 
   const [searchString, setSearchString] = useState<string>(''); // 검색하기 위한 입력값
-  const [searchText, setSearchText] = useState<string>(''); // 검색클릭 값
-  const { data, isLoading, error } = useSearchOfficesQuery({ searchText });
+  const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
+  const { data, isLoading, error } = useSearchOfficesQuery({
+    searchText: debouncedSearchText,
+  });
   const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,
   }));
@@ -27,7 +30,7 @@ function QurationPage() {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      setSearchText(searchString);
+      setSearchString((e.target as HTMLInputElement).value);
     }
   };
 
