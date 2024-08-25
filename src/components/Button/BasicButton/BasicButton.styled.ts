@@ -7,16 +7,20 @@ export const StyledBtn = styled.button<{
   $btnColor?: string;
   $textColor: string;
   $hoverColor?: string;
+  $padding: string;
 }>`
   background-color: ${(props) =>
     props.$btnType === 'empty' ? 'transparent' : props.$btnColor};
   border: ${(props) =>
-    props.$btnType === 'full' ? 'none' : `1px solid ${props.$textColor}`};
+    props.$btnType === 'empty' ? 'none' : `1px solid ${props.$textColor}`};
   color: ${(props) => props.$textColor};
   border-radius: 3rem;
   height: ${(props) => props.$btnHeight};
-  padding: 1rem 2rem;
-  font-size: 1.125rem;
+  padding: ${(props) => props.$padding};
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: Pretendard;
+  line-height: 1.75rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,6 +29,6 @@ export const StyledBtn = styled.button<{
   :hover {
     background-color: ${(props) =>
       props.$hoverColor || props.$btnColor || 'initial'};
-    transition: 0.5s;
+    transition: background-color 0.5s ease-out;
   }
 `;

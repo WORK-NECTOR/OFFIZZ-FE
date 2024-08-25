@@ -9,6 +9,7 @@ function BasicButton(props: ButtonProps) {
     btnColor,
     textColor,
     hoverColor,
+    padding,
     clickHandler,
   } = props;
 
@@ -20,6 +21,7 @@ function BasicButton(props: ButtonProps) {
       $btnColor={btnColor}
       $textColor={textColor}
       $hoverColor={hoverColor}
+      $padding={padding}
     >
       {btnText}
     </StyledBtn>

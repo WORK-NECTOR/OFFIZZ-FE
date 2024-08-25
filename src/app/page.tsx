@@ -1,20 +1,44 @@
 'use client';
 
 import Image from 'next/image';
-import { Fragment } from 'react';
+import { useEffect } from 'react';
 import Header from '@/components/Header';
 import thumbnail from '../../public/thumbnail.png';
 import TitleDesc from '@/components/TitleDesc';
 import {
   DASHBOARD_MAIN,
+  RECOMMEND_MAIN,
   RETROSPECT_MAIN,
   TODO_MAIN,
   TOP_MAIN,
 } from '@/constants/main';
 import BasicButton from '@/components/Button/BasicButton';
 import styles from './page.module.css';
+import { regionArr } from '@/constants/office';
+import SelectButton from '@/components/Button/SelectButton';
+import useRegionStore, { Region } from '@/store/useRegionStore';
+import { useRecRegionOfficeQuery } from '@/services/office/useRecRegionOfficeQuery';
 
 export default function MainPage() {
+  const { selectedRegion, setSelectedRegion } = useRegionStore((state) => ({
+    selectedRegion: state.selectedRegion,
+    setSelectedRegion: state.setSelectedRegion,
+  }));
+
+  const { data, status } = useRecRegionOfficeQuery({
+    region: '서울',
+    size: 4,
+  });
+
+  useEffect(() => {
+    console.log(data);
+  }, [status]);
+
+  const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
+    const text = e.currentTarget.innerText as Region;
+    setSelectedRegion(text);
+  };
+
   return (
     <>
       <Header />
@@ -36,6 +60,7 @@ export default function MainPage() {
               btnColor="var(--blue-main)"
               textColor="var(--white-main)"
               hoverColor="var(--blue-dark)"
+              padding="1rem 2rem"
               clickHandler={() => {}}
             />
           </section>
@@ -100,6 +125,37 @@ export default function MainPage() {
               sort="left"
             />
           </section>
+        </section>
+        <section className={styles['fifth-main']} />
+        <section className={styles['sixth-main']}>
+          <TitleDesc
+            title={RECOMMEND_MAIN.title}
+            desc={RECOMMEND_MAIN.desc}
+            sort="left"
+          />
+          <div className={styles['sixth-select-bar']}>
+            <ul className={styles['sixth-btn-list']}>
+              {regionArr.map((item) => (
+                <li key={item.id} className={styles['sixth-btn-li']}>
+                  <SelectButton
+                    selected={selectedRegion === item.region}
+                    btnText={item.region}
+                    btnHeight="2.5rem"
+                    clickHandler={clickHandler}
+                  />
+                </li>
+              ))}
+            </ul>
+            <BasicButton
+              btnText={RECOMMEND_MAIN.viewAllBtnText}
+              btnType="empty"
+              btnHeight="2.75rem"
+              textColor="var(--blue-main)"
+              hoverColor="var(--blue-greyish)"
+              padding="0.5rem 1rem"
+              clickHandler={() => {}}
+            />
+          </div>
         </section>
       </main>
     </>
