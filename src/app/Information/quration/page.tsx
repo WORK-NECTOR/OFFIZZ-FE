@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import MainMsg from './components/MainMsg/MainMsg';
 import styles from './page.module.css';
 import InFoBox from '@/components/InFoBox';
+import useUserLocationStore from '@/store/userLocation';
 
 function QurationPage() {
   useKakaoLoader();
@@ -15,12 +16,14 @@ function QurationPage() {
   const [searchString, setSearchString] = useState<string>(''); //검색하기 위한 입력값
   const [searchText, setSearchText] = useState<string>(''); //검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({ searchText });
-  console.log(searchString,data)
+  const { userAddress } = useUserLocationStore(state => ({
+    userAddress: state.userAddress,
+  })); 
 
   const activity = '영화';
   const name = '홍길동';
   const space = '공간';
-  const nowLocation = '경기도 광명시';
+  const nowLocation = userAddress ||'위치를 가져오는 중...';
 
   const handleSearch = () => {
     setSearchText(searchString)
@@ -69,8 +72,8 @@ function QurationPage() {
               data.offices.map((office) => (
                 <div key={office.officeId} className={styles.officeItem}>
                   <InFoBox 
-                    title={office.name}   // Correctly pass title as string
-                    address={office.address}  // Correctly pass address as string
+                    title={office.name}
+                    address={office.address}
                   />
                 </div>
               ))

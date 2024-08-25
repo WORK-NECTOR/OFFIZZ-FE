@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
 import useKakaoLoader from './use-kakao-loader'
+import useUserLocationStore from '@/store/userLocation';
 
 function KakaoMap() {
+  useKakaoLoader()
   const [state, setState] = useState<{
     center: { lat: number; lng: number };
     errMsg: string | null;
@@ -15,24 +17,50 @@ function KakaoMap() {
     errMsg: null,
     isLoading: true,
   });
-    useKakaoLoader()
+  const setUserAddress = useUserLocationStore((state) => state.setUserAddress);
 
     useEffect(() => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          (position) => {
-            setState((prev) => ({
+          async (position) => {
+            const { latitude, longitude } = position.coords;
+  
+            setState(prev => ({
               ...prev,
               center: {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
+                lat: latitude,
+                lng: longitude,
               },
               isLoading: false,
               errMsg: null,
             }));
+            try {
+              const geocoder = new window.kakao.maps.services.Geocoder();
+              geocoder.coord2Address(longitude, latitude, (result, status) => {
+                if (status === window.kakao.maps.services.Status.OK) {
+                  const address = result[0].address.address_name;
+                  setUserAddress(address);
+                  setState(prev => ({
+                    ...prev,
+                    address,
+                  }));
+                } else {
+                  console.error('Failed to fetch address:', status);
+                  setState(prev => ({
+                    ...prev,
+                    errMsg: 'error',
+                  }));
+                }
+              });
+            } catch (error) {
+              setState(prev => ({
+                ...prev,
+                errMsg: 'error',
+              }));
+            }
           },
           (err) => {
-            setState((prev) => ({
+            setState(prev => ({
               ...prev,
               errMsg: err.message,
               isLoading: false,
@@ -40,9 +68,9 @@ function KakaoMap() {
           }
         );
       } else {
-        setState((prev) => ({
+        setState(prev => ({
           ...prev,
-          errMsg: 'geolocation을 사용할 수 없어요..',
+          errMsg: 'error',
           isLoading: false,
         }));
       }
@@ -51,13 +79,8 @@ function KakaoMap() {
     <div style={{ width: '100%', height: '100%' }}>
       <Map
       id="map"
-      center={{
-        // 지도의 중심좌표
-        lat: 33.450701,
-        lng: 126.570667,
-      }}
+      center={state.center}
       style={{
-        // 지도의 크기
         width: "100%",
         height: "100%",
       }}
@@ -66,7 +89,7 @@ function KakaoMap() {
       {!state.isLoading && (
           <MapMarker position={state.center}>
             <div style={{ padding: "5px", color: "#000" }}>
-              {state.errMsg ? state.errMsg : "여기에 계신가요?!"}
+              {state.errMsg ? state.errMsg : "사용자의 위치"}
             </div>
           </MapMarker>
         )}
