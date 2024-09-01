@@ -27,7 +27,10 @@ export const searchOffices = (params: SearchOfficeParams) => {
   const page = 1;
   const size = 8;
 
-  return instance.get<SearchOfficeResponse>(`/office/search/${page}/${size}`, {
-    params: { search: searchText },
-  });
+  return instance.get<SearchOfficeResponse>(
+    `/work/office/search/${page}/${size}`,
+    {
+      params: { search: searchText },
+    },
+  );
 };
