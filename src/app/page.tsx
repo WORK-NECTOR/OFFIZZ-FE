@@ -26,7 +26,7 @@ export default function MainPage() {
   }));
 
   const { data, status } = useRecRegionOfficeQuery({
-    region: '서울',
+    region: '수도권',
     size: 4,
   });
 
