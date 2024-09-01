@@ -18,21 +18,16 @@ import { regionArr } from '@/constants/office';
 import SelectButton from '@/components/Button/SelectButton';
 import useRegionStore, { Region } from '@/store/useRegionStore';
 import { useRecRegionOfficeQuery } from '@/services/office/useRecRegionOfficeQuery';
+import useUserStore from '@/store/useUserStore';
 
 export default function MainPage() {
-  const { selectedRegion, setSelectedRegion } = useRegionStore((state) => ({
-    selectedRegion: state.selectedRegion,
-    setSelectedRegion: state.setSelectedRegion,
-  }));
+  const { accessToken, setAccessToken } = useUserStore.getState();
+  const { selectedRegion, setSelectedRegion } = useRegionStore.getState();
 
   const { data, status } = useRecRegionOfficeQuery({
     region: '수도권',
     size: 4,
   });
-
-  useEffect(() => {
-    console.log(data);
-  }, [status]);
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     const text = e.currentTarget.innerText as Region;
