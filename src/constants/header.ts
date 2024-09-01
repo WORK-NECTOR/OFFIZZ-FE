@@ -3,5 +3,5 @@ export const HEADER_TEXT = {
   home: 'home',
   recommendation: 'recommendation',
   recap: 'recap',
-  start: '시작하기',
+  login: '로그인',
 } as const;
