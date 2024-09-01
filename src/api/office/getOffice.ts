@@ -28,5 +28,5 @@ export interface GetAllOfficeResponse extends GetOfficeResponse {
 export const getRecRegionOffice = (params: GetRecRegionOfficeParams) => {
   const { region = '수도권', size = 4 } = params;
 
-  return instance.get<GetOfficeResponse>(`work/office/rec/${region}/${size}`);
+  return instance.get<GetOfficeResponse>(`/work/office/rec/${region}/${size}`);
 };
