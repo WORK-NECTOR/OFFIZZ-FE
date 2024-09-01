@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { QueryClientProvider } from '@tanstack/react-query';
 import queryClient from '@/services/queryClient';
+import StyledComponentsRegistry from '@/lib/registry';
 
 export const metadata: Metadata = {
   title: 'OFFIZZ',
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <QueryClientProvider client={queryClient}>
       <html lang="ko">
-        <body>{children}</body>
+        <body>
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        </body>
       </html>
     </QueryClientProvider>
   );
