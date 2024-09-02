@@ -4,7 +4,7 @@ import {
   HeaderMenu,
   HeaderMenuContainer,
 } from './Header.styled';
-import useHeaderMenuStore from '@/store/menuStore';
+import useHeaderMenuStore from '@/store/useMenuStore';
 import { HeaderTextUnion } from '@/types/header.type';
 
 function Header() {
