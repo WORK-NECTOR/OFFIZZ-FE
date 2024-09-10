@@ -1,5 +1,11 @@
 'use client';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import kakao_login from '../../../public/kakao-login.png';
+import thumbnail from '../../../public/thumbnail.png';
+import offizz_logo from '../../../public/offizz-logo.png';
+import styles from './page.module.css';
+import { TOP_MAIN } from '@/constants/main';
 
 function LoginPage() {
   const router = useRouter();
@@ -13,13 +19,31 @@ function LoginPage() {
   };
 
   return (
-    <button
-      onClick={() => {
-        loginHandler();
-      }}
-    >
-      카카오 로그인
-    </button>
+    <main className={styles['main']}>
+      <section className={styles['fir-section']}>
+        <div className={styles['fir-section-container']}>
+          <Image
+            src={offizz_logo}
+            alt="offizz 로고"
+            className={styles['logo-img']}
+          />
+          <p className={styles['service-text']}>{TOP_MAIN.title}</p>
+          <Image
+            src={kakao_login}
+            alt="카카오 로그인 버튼"
+            onClick={loginHandler}
+            className={styles['login-btn']}
+          />
+        </div>
+      </section>
+      <section className={styles['sec-section']}>
+        <Image
+          src={thumbnail}
+          alt="메인 이미지"
+          className={styles['thumbnail-img']}
+        />
+      </section>
+    </main>
   );
 }
 
