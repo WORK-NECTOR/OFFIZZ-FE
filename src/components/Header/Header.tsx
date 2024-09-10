@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { HEADER_TEXT } from '@/constants/header';
 import {
   HeaderContainer,
@@ -6,7 +7,6 @@ import {
 } from './Header.styled';
 import useHeaderMenuStore from '@/store/useMenuStore';
 import { HeaderTextUnion } from '@/types/header.type';
-import { useRouter } from 'next/navigation';
 
 function Header() {
   const router = useRouter();

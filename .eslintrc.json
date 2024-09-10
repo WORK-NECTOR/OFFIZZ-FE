@@ -18,7 +18,8 @@
         "devDependencies": ["**/*.stories.*", "**/.storybook/**/*.*"],
         "peerDependencies": true
       }
-    ]
+    ],
+    "no-console": ["error", { "allow": ["warn", "error"] }]
   },
   "ignorePatterns": [
     "build",

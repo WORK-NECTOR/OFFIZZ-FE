@@ -1,15 +1,16 @@
 'use client';
-import { instance } from '@/api/axios';
+
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { instance } from '@/api/axios';
 
 function KakaoLoginPage() {
   const router = useRouter();
-  let code = '';
+  const code = useRef('');
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    code = urlParams.get('code') || '';
+    code.current = urlParams.get('code') || '';
 
     if (code) {
       instance
@@ -25,7 +26,7 @@ function KakaoLoginPage() {
           router.replace('/');
         });
     }
-  }, [code]);
+  }, [code, router]);
 }
 
 export default KakaoLoginPage;
