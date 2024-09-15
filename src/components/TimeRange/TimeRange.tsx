@@ -22,14 +22,15 @@ import ic_day from '../../../public/ic-day.png';
 function TimeRange(props: TimeRangeProps) {
   const { timeArr } = props;
   const fixedHours = Array.from({ length: 25 }, (_, i) => i);
-  let newFixedHourElArr = fixedHours.map((hour) => ({
-    hour,
-    left: '0',
-    width: '0',
-    activity: '',
-  }));
 
   const fixedHourElArr: Array<TimeRangeElType> = useMemo(() => {
+    let newFixedHourElArr = fixedHours.map((hour) => ({
+      hour,
+      left: '0',
+      width: '0',
+      activity: '',
+    }));
+
     for (let i = 0; i < fixedHours.length; i += 1) {
       timeArr.forEach((timeEl) => {
         if (Number(getHour(timeEl.from)) === fixedHours[i]) {
