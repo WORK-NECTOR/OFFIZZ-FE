@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { HEADER_TEXT } from '@/constants/header';
 import {
   HeaderContainer,
@@ -8,12 +9,12 @@ import useHeaderMenuStore from '@/store/useMenuStore';
 import { HeaderTextUnion } from '@/types/header.type';
 
 function Header() {
-  const selectedMenu = useHeaderMenuStore((state) => state.selectedMenu);
-  const selectMenu = useHeaderMenuStore((state) => state.setSelectedMenu);
+  const router = useRouter();
+  const { selectedMenu, setSelectedMenu } = useHeaderMenuStore.getState();
 
   const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
     const text = e.currentTarget.innerText as HeaderTextUnion;
-    selectMenu(text);
+    setSelectedMenu(text);
   };
 
   return (
@@ -39,7 +40,14 @@ function Header() {
           {HEADER_TEXT.recap}
         </HeaderMenu>
       </HeaderMenuContainer>
-      <button type="button">{HEADER_TEXT.start}</button>
+      <button
+        type="button"
+        onClick={() => {
+          router.push('/login');
+        }}
+      >
+        {HEADER_TEXT.login}
+      </button>
     </HeaderContainer>
   );
 }
