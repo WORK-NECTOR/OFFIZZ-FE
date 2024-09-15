@@ -2,8 +2,11 @@ import { TimeRangeElType, TimeRangeProps } from '@/types/timeRange.type';
 import {
   FixedHour,
   TimeRangeBg,
+  TimeRangeContainer,
   TimeRangeEl,
+  TimeRangeElWrapper,
   TimeRangeFill,
+  TimeRangeIconWrapper,
 } from './TimeRange.styled';
 import {
   convertHourFormat,
@@ -12,12 +15,15 @@ import {
   getMinute,
 } from '@/utils/formatTime';
 import { useMemo } from 'react';
+import ic_night from '../../../public/ic-night.png';
+import ic_day from '../../../public/ic-day.png';
+import Image from 'next/image';
 
 function TimeRange(props: TimeRangeProps) {
   const { timeArr } = props;
   const fixedHours = Array.from({ length: 25 }, (_, i) => i);
 
-  const fixedHourElArr = useMemo(() => {
+  const fixedHourElArr: Array<TimeRangeElType> = useMemo(() => {
     let newFixedHourElArr = fixedHours.map((hour) => ({
       hour: hour,
       left: '0',
@@ -86,16 +92,27 @@ function TimeRange(props: TimeRangeProps) {
     return newFixedHourElArr;
   }, [timeArr, fixedHours]);
 
-  return fixedHourElArr.map((el, idx) => (
-    <TimeRangeEl key={idx}>
-      <FixedHour>{convertHourFormat(el.hour)}</FixedHour>
-      <TimeRangeBg>
-        <TimeRangeFill $left={el.left} $width={el.width}>
-          {el.activity}
-        </TimeRangeFill>
-      </TimeRangeBg>
-    </TimeRangeEl>
-  ));
+  return (
+    <TimeRangeContainer>
+      <TimeRangeIconWrapper>
+        <Image className="time-icon" src={ic_night} alt="밤 아이콘" />
+        <Image className="time-icon" src={ic_day} alt="낮 아이콘" />
+        <Image className="time-icon" src={ic_night} alt="밤 아이콘" />
+      </TimeRangeIconWrapper>
+      <TimeRangeElWrapper>
+        {fixedHourElArr.map((el, idx) => (
+          <TimeRangeEl key={idx}>
+            <FixedHour>{convertHourFormat(el.hour)}</FixedHour>
+            <TimeRangeBg>
+              <TimeRangeFill $left={el.left} $width={el.width}>
+                {el.activity}
+              </TimeRangeFill>
+            </TimeRangeBg>
+          </TimeRangeEl>
+        ))}
+      </TimeRangeElWrapper>
+    </TimeRangeContainer>
+  );
 }
 
 export default TimeRange;

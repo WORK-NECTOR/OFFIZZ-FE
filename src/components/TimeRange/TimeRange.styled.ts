@@ -9,6 +9,18 @@ export const TimeRangeContainer = styled.div`
   position: relative;
 `;
 
+export const TimeRangeIconWrapper = styled.div`
+  height: 36rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .time-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+`;
+
 export const TimeRangeElWrapper = styled.div`
   width: 18.875rem;
   height: 36.25rem;
