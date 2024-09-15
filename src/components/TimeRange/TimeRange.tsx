@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+import Image from 'next/image';
 import { TimeRangeElType, TimeRangeProps } from '@/types/timeRange.type';
 import {
   FixedHour,
@@ -14,24 +16,21 @@ import {
   getHour,
   getMinute,
 } from '@/utils/formatTime';
-import { useMemo } from 'react';
 import ic_night from '../../../public/ic-night.png';
 import ic_day from '../../../public/ic-day.png';
-import Image from 'next/image';
 
 function TimeRange(props: TimeRangeProps) {
   const { timeArr } = props;
   const fixedHours = Array.from({ length: 25 }, (_, i) => i);
+  let newFixedHourElArr = fixedHours.map((hour) => ({
+    hour,
+    left: '0',
+    width: '0',
+    activity: '',
+  }));
 
   const fixedHourElArr: Array<TimeRangeElType> = useMemo(() => {
-    let newFixedHourElArr = fixedHours.map((hour) => ({
-      hour: hour,
-      left: '0',
-      width: '0',
-      activity: '',
-    }));
-
-    for (let i = 0; i < fixedHours.length; i++) {
+    for (let i = 0; i < fixedHours.length; i += 1) {
       timeArr.forEach((timeEl) => {
         if (Number(getHour(timeEl.from)) === fixedHours[i]) {
           if (getHour(timeEl.to) === getHour(timeEl.from)) {
@@ -46,7 +45,7 @@ function TimeRange(props: TimeRangeProps) {
                 : el,
             );
           } else if (getHour(timeEl.from) < getHour(timeEl.to)) {
-            let interval = getHour(timeEl.to) - getHour(timeEl.from);
+            const interval = getHour(timeEl.to) - getHour(timeEl.from);
             let j = 1;
 
             newFixedHourElArr = newFixedHourElArr.map((el) =>
@@ -100,8 +99,8 @@ function TimeRange(props: TimeRangeProps) {
         <Image className="time-icon" src={ic_night} alt="밤 아이콘" />
       </TimeRangeIconWrapper>
       <TimeRangeElWrapper>
-        {fixedHourElArr.map((el, idx) => (
-          <TimeRangeEl key={idx}>
+        {fixedHourElArr.map((el) => (
+          <TimeRangeEl key={el.hour}>
             <FixedHour>{convertHourFormat(el.hour)}</FixedHour>
             <TimeRangeBg>
               <TimeRangeFill $left={el.left} $width={el.width}>

@@ -5,8 +5,8 @@ export function convertHourFormat(hour: number) {
 
 /** 0 ~ 60분을 0 ~ 100%로 바꿔주는 함수 */
 export function convertMintoPercent(minute: number) {
-  if (minute == 0) return 0;
-  else return (minute / 60) * 100;
+  if (minute === 0) return 0;
+  return (minute / 60) * 100;
 }
 
 export function getHour(time: string) {
