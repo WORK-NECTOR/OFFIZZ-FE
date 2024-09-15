@@ -13,7 +13,6 @@ const meta = {
       {
         to: '10:30',
         from: '15:30',
-        color: 'var(--blue-main)',
         activity: 'Core Time',
       },
     ],

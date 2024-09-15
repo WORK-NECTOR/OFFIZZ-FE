@@ -5,7 +5,6 @@ export type TimeFormat = `${number}:${number}`;
 export type TimeRangeType = {
   to: TimeFormat;
   from: TimeFormat;
-  color: string;
   icon?: string | StaticImageData;
   activity: string;
 };
