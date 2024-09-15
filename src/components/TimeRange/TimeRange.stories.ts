@@ -11,8 +11,8 @@ const meta = {
   args: {
     timeArr: [
       {
-        to: '10:30',
-        from: '15:30',
+        from: '10:30',
+        to: '15:30',
         activity: 'Core Time',
       },
     ],

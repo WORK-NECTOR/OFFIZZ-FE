@@ -35,12 +35,12 @@ export const TimeRangeBg = styled.div`
   border-bottom: 1px solid var(--black-200);
 `;
 
-export const TimeRangeFill = styled.div`
-  // width: 17.5rem;
+export const TimeRangeFill = styled.div<{ $left: string; $width: string }>`
+  width: ${(props) => props.$width};
   max-width: 17.5rem;
   height: 1.45rem;
   position: absolute;
-  left: 50%; // 바뀌어야 되는 값
+  left: ${(props) => props.$left};
   overflow: hidden;
   background-color: var(--blue-bright);
   border: 1px solid var(--blue-main);
