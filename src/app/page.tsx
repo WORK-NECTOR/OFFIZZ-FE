@@ -18,6 +18,8 @@ import { regionArr } from '@/constants/office';
 import SelectButton from '@/components/Button/SelectButton';
 import useRegionStore, { Region } from '@/store/useRegionStore';
 import { useRecRegionOfficeQuery } from '@/services/office/useRecRegionOfficeQuery';
+import TimeRange from '@/components/TimeRange';
+import { TimeRangeType } from '@/types/timeRange.type';
 
 export default function MainPage() {
   const { selectedRegion, setSelectedRegion } = useRegionStore((state) => ({
@@ -30,9 +32,22 @@ export default function MainPage() {
     size: 4,
   });
 
-  useEffect(() => {
-    console.log(data);
-  }, [status]);
+  const timeArr: Array<TimeRangeType> = [
+    {
+      from: '10:30',
+      to: '15:30',
+      activity: 'Core Time',
+    },
+    {
+      from: '16:00',
+      to: '17:15',
+      activity: 'test',
+    },
+  ];
+
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [status]);
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     const text = e.currentTarget.innerText as Region;
@@ -156,6 +171,7 @@ export default function MainPage() {
               clickHandler={() => {}}
             />
           </div>
+          <TimeRange timeArr={timeArr} />
         </section>
       </main>
     </>
