@@ -11,24 +11,25 @@ import {
   getHour,
   getMinute,
 } from '@/utils/formatTime';
-import { useEffect } from 'react';
+import { useMemo } from 'react';
 
 function TimeRange(props: TimeRangeProps) {
   const { timeArr } = props;
-  const fixedHours = Array.from({ length: 25 }, (_, i) => i); // 0 ~ 24
-  let fixedHourElArr: Array<TimeRangeElType> = fixedHours.map((hour) => ({
-    hour: hour,
-    left: '0',
-    width: '0',
-    activity: '',
-  }));
+  const fixedHours = Array.from({ length: 25 }, (_, i) => i);
 
-  useEffect(() => {
+  const fixedHourElArr = useMemo(() => {
+    let newFixedHourElArr = fixedHours.map((hour) => ({
+      hour: hour,
+      left: '0',
+      width: '0',
+      activity: '',
+    }));
+
     for (let i = 0; i < fixedHours.length; i++) {
       timeArr.forEach((timeEl) => {
-        if (Number(getHour(timeEl.from)) == fixedHours[i]) {
+        if (Number(getHour(timeEl.from)) === fixedHours[i]) {
           if (getHour(timeEl.to) === getHour(timeEl.from)) {
-            fixedHourElArr = fixedHourElArr.map((el) =>
+            newFixedHourElArr = newFixedHourElArr.map((el) =>
               el.hour === getHour(timeEl.to)
                 ? {
                     ...el,
@@ -38,13 +39,11 @@ function TimeRange(props: TimeRangeProps) {
                   }
                 : el,
             );
-          }
-
-          if (getHour(timeEl.from) < getHour(timeEl.to)) {
+          } else if (getHour(timeEl.from) < getHour(timeEl.to)) {
             let interval = getHour(timeEl.to) - getHour(timeEl.from);
             let j = 1;
 
-            fixedHourElArr = fixedHourElArr.map((el) =>
+            newFixedHourElArr = newFixedHourElArr.map((el) =>
               el.hour === fixedHours[i]
                 ? {
                     ...el,
@@ -56,7 +55,7 @@ function TimeRange(props: TimeRangeProps) {
             );
 
             while (j < interval) {
-              fixedHourElArr = fixedHourElArr.map((el) =>
+              newFixedHourElArr = newFixedHourElArr.map((el) =>
                 el.hour === fixedHours[i] + j
                   ? {
                       ...el,
@@ -68,7 +67,7 @@ function TimeRange(props: TimeRangeProps) {
               j += 1;
             }
 
-            fixedHourElArr = fixedHourElArr.map((el) =>
+            newFixedHourElArr = newFixedHourElArr.map((el) =>
               el.hour === fixedHours[i] + j
                 ? {
                     ...el,
@@ -83,20 +82,17 @@ function TimeRange(props: TimeRangeProps) {
         }
       });
     }
-  }, []);
 
-  useEffect(() => {
-    console.log(fixedHourElArr);
-  }, [fixedHourElArr.length]);
+    return newFixedHourElArr;
+  }, [timeArr, fixedHours]);
 
-  return fixedHours.map((el, idx) => (
+  return fixedHourElArr.map((el, idx) => (
     <TimeRangeEl key={idx}>
-      <FixedHour>{convertHourFormat(el)}</FixedHour>
+      <FixedHour>{convertHourFormat(el.hour)}</FixedHour>
       <TimeRangeBg>
-        <TimeRangeFill
-          $left={fixedHourElArr.find((item) => item.hour == el)?.left || ''}
-          $width={fixedHourElArr.find((item) => item.hour == el)?.width || ''}
-        ></TimeRangeFill>
+        <TimeRangeFill $left={el.left} $width={el.width}>
+          {el.activity}
+        </TimeRangeFill>
       </TimeRangeBg>
     </TimeRangeEl>
   ));
