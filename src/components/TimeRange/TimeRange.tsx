@@ -5,6 +5,7 @@ import {
   TimeRangeEl,
   TimeRangeFill,
 } from './TimeRange.styled';
+import { convertHourFormat } from '@/utils/convertHourFormat';
 
 function TimeRange(props: TimeRangeProps) {
   const { timeArr } = props;
@@ -13,7 +14,7 @@ function TimeRange(props: TimeRangeProps) {
 
   return fixedHourArr.map((el, idx) => (
     <TimeRangeEl key={idx}>
-      <FixedHour>{el}</FixedHour>
+      <FixedHour>{convertHourFormat(el)}</FixedHour>
       <TimeRangeBg>
         <TimeRangeFill></TimeRangeFill>
       </TimeRangeBg>

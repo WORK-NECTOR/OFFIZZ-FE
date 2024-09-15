@@ -40,7 +40,7 @@ export const TimeRangeFill = styled.div`
   max-width: 17.5rem;
   height: 1.45rem;
   position: absolute;
-  left: 50%;
+  left: 50%; // 바뀌어야 되는 값
   overflow: hidden;
   background-color: var(--blue-bright);
   border: 1px solid var(--blue-main);
