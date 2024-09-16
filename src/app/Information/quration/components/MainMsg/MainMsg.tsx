@@ -1,5 +1,5 @@
 import React from 'react';
-import { HighlightedText, NormalText ,BoldText} from './MainMsg.styled';
+import { HighlightedText, NormalText, BoldText } from './MainMsg.styled';
 
 interface MainMsgProps {
   activity: string;
