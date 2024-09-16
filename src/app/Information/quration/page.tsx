@@ -10,7 +10,9 @@ import InFoBox from '@/components/InFoBox';
 import useUserLocationStore from '@/store/userLocation';
 import MainMsg from './components/MainMsg/MainMsg';
 import useDebounce from '@/hook/useDebounce';
-
+import QurationCategory from './components/Category';
+import search from '../../../../public/search.png'
+import Image from 'next/image';
 function QurationPage() {
   useKakaoLoader();
 
@@ -42,6 +44,7 @@ function QurationPage() {
      <div style={{display:'flex'}}>
      <div style={{width:'22.75rem'}}>
      <div className={styles.Search}>
+      <Image src={search} alt='search' width={20} height={20}></Image>
           <input
             className={styles.SearchInput}
             type="text"
@@ -55,14 +58,11 @@ function QurationPage() {
             <div className={styles['now-title']}>현재위치</div>
             <div>
               <div className={styles['now-desc']}>{nowLocation}</div>
-              {/* <div className={styles['now-suggest']}>
-                현재 위치가 아니신가요?
-              </div> */}
             </div>
           </div>
           <MainMsg activity={activity} name={name} space={space} />
       </div>
-      <div className={styles.Category}>카테고리</div>
+      <div className={styles.Category}><QurationCategory/></div>
         <div className={styles.officeList}>
           {isLoading && <p>Loading...</p>}
           {error && <p>Error: {error.message}</p>}
