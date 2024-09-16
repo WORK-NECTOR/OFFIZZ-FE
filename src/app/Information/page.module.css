@@ -1,17 +1,17 @@
 .Day {
-    border: 1px solid black;
-    width: 8rem;
-    height: 2rem;
-    margin-top: 2.5rem;
+  border: 1px solid black;
+  width: 8rem;
+  height: 2rem;
+  margin-top: 2.5rem;
 }
 .Top {
-   width: 100%;
-   display: flex;
-   justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 .Switch {
-    border: 1px solid black;
-    width: 8rem;
-    height: 2rem;
-    margin-top: 2.5rem;
+  border: 1px solid black;
+  width: 8rem;
+  height: 2rem;
+  margin-top: 2.5rem;
 }
