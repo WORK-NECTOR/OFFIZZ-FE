@@ -3,6 +3,7 @@ export type BtnType = 'full' | 'empty';
 export interface BaseProps {
   btnType: BtnType;
   textColor: string;
+  fontSize?: string;
   btnText: string;
   btnHeight: string;
   padding: string;
