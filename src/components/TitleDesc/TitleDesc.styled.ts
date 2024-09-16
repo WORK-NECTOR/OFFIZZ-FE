@@ -10,8 +10,7 @@ export const TitleDescContainer = styled.div<{
   text-align: ${(props) => (props.$sort === 'left' ? 'left' : 'center')};
 
   h2 {
-    font-size: ${(props) => props.$titleSize || '2rem'};
-    font-size: ${(props) => props.theme.recap || '2rem'};
+    font-size: ${(props) => props.theme.recap || props.$titleSize || '2rem'};
     margin-bottom: 1.25rem;
   }
 
