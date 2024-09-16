@@ -32,7 +32,7 @@ function InFoBox({ title, address }: InfoBoxProps) {
         alt="heart"
         width={20}
         height={20}
-        style={{ marginTop: '0.81rem' }}
+        style={{ marginTop: '0.81rem'}}
       />
     </InFoBoxContent>
   );
