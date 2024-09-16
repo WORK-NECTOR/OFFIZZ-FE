@@ -38,19 +38,10 @@ function QurationPage() {
     <div style={{ display: 'flex' }}>
       <Tab />
       <div>
-        <div className={styles.QurationContent}>
-          <MainMsg activity={activity} name={name} space={space} />
-          <div className={styles.nowLocation}>
-            <div className={styles['now-title']}>현재위치</div>
-            <div>
-              <div className={styles['now-desc']}>{nowLocation}</div>
-              <div className={styles['now-suggest']}>
-                현재 위치가 아니신가요?
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.Search}>
+      <div className={styles.SwitchBtn}>switchBtn</div>
+     <div style={{display:'flex'}}>
+     <div style={{width:'22.75rem'}}>
+     <div className={styles.Search}>
           <input
             className={styles.SearchInput}
             type="text"
@@ -58,7 +49,20 @@ function QurationPage() {
             onChange={(e) => setSearchString(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-        </div>
+      </div>
+      <div className={styles.QurationContent}>
+        <div className={styles.nowLocation}>
+            <div className={styles['now-title']}>현재위치</div>
+            <div>
+              <div className={styles['now-desc']}>{nowLocation}</div>
+              {/* <div className={styles['now-suggest']}>
+                현재 위치가 아니신가요?
+              </div> */}
+            </div>
+          </div>
+          <MainMsg activity={activity} name={name} space={space} />
+      </div>
+      <div className={styles.Category}>카테고리</div>
         <div className={styles.officeList}>
           {isLoading && <p>Loading...</p>}
           {error && <p>Error: {error.message}</p>}
@@ -72,8 +76,12 @@ function QurationPage() {
             ))}
         </div>
       </div>
-      <div className={styles.MapView}>
+     <div >
+     <div className={styles.MapView}>
         <KakaoMap />
+      </div>
+     </div>
+     </div>
       </div>
     </div>
   );
