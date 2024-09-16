@@ -4,7 +4,12 @@ import { StyledInput } from './Input.styled';
 function Input(props: InputProps) {
   const { placeholder, setState } = props;
 
-  return <StyledInput placeholder={placeholder} />;
+  return (
+    <StyledInput
+      onChange={(e) => setState(e.currentTarget.value)}
+      placeholder={placeholder}
+    />
+  );
 }
 
 export default Input;
