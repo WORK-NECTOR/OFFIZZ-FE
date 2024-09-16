@@ -36,7 +36,7 @@ export const InfoDescP = styled.div`
   line-height: 1.125rem; /* 128.571% */
 `;
 export const Info = styled.div`
-width: 11.25rem;
+  width: 11.25rem;
   margin-left: 1.25rem;
   align-items: center;
 `;

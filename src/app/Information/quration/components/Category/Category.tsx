@@ -6,8 +6,8 @@ function QurationCategory() {
 
   return (
     <>
-      {categories.map((category, index) => (
-        <CategoryBox key={index}>{category}</CategoryBox>
+      {categories.map((category) => (
+        <CategoryBox key={category}>{category}</CategoryBox>
       ))}
     </>
   );
