@@ -10,6 +10,7 @@ function TitleDesc(props: TitleDescProps) {
       $sort={sort}
       $titleSize={titleSize}
       $descSize={descSize}
+      id="title-desc"
     >
       <h2>{title}</h2>
       <p>{desc}</p>
