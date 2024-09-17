@@ -14,6 +14,9 @@ import BasicButton from '@/components/Button/BasicButton';
 import { useEffect, useState } from 'react';
 import useOnboardingStore from '@/store/useOnboardingStore';
 
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 function OnboardingPeriod() {
   const [today, setToday] = useState('');
   const { fromDate, setFromDate, toDate, setToDate } = useOnboardingStore();
@@ -21,13 +24,33 @@ function OnboardingPeriod() {
 
   useEffect(() => {
     const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
+    const formattedToday = formatDate(today);
 
-    const formattedDate = `${year}.${month}.${day}`;
-    setToday(formattedDate);
+    setToday(formattedToday);
   }, []);
+
+  function formatDate(date: Date | null): string {
+    if (!date) return '';
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  }
+
+  function setDateRange(value: Value) {
+    if (Array.isArray(value)) {
+      // 날짜 범위 선택
+      const [start, end] = value;
+      setFromDate(formatDate(start));
+      setToDate(formatDate(end));
+    } else {
+      // 단일 날짜 선택 🐛
+      const formattedDate = formatDate(value);
+      setFromDate(formattedDate);
+      setToDate(formattedDate);
+    }
+  }
 
   return (
     <PeriodContainer>
@@ -36,11 +59,11 @@ function OnboardingPeriod() {
       <DateCalendarWrapper>
         <DateInputContainer>
           <DateInput>
-            <input type="text" placeholder={today} />
+            <input type="text" placeholder={today} defaultValue={fromDate} />
             <p>{ONBOARDING_DESC.fromText}</p>
           </DateInput>
           <DateInput>
-            <input type="text" placeholder={today} />
+            <input type="text" placeholder={today} defaultValue={toDate} />
             <p>{ONBOARDING_DESC.toText}</p>
           </DateInput>
         </DateInputContainer>
@@ -49,6 +72,9 @@ function OnboardingPeriod() {
           next2Label={null}
           calendarType="gregory"
           formatDay={(locale, date) => String(date.getDate())}
+          returnValue="range"
+          selectRange={true}
+          onChange={setDateRange}
         />
       </DateCalendarWrapper>
       <BtnContainer>

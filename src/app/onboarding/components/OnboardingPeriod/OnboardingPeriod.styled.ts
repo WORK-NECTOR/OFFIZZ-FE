@@ -17,18 +17,22 @@ export const DateCalendarWrapper = styled.div`
 
   .react-calendar {
     width: 20rem;
-    height: 17.875rem;
+    height: 21rem;
     font-size: 0.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid var(--black-100);
 
+    .react-calendar__tile--now {
+      background-color: transparent;
+    }
+
     .react-calendar__navigation {
       width: 17rem;
       display: flex;
       justify-content: space-between;
-      margin: 1rem 0 1.1875rem 0;
+      margin: 1rem 0;
     }
 
     .react-calendar__navigation__label {
@@ -65,9 +69,22 @@ export const DateCalendarWrapper = styled.div`
 
     .react-calendar__tile {
       width: 1.75rem;
-      height: 1.75rem;
+      height: 2.5713rem;
       border: none;
-      background-color: var(--white-main);
+      font-size: 0.75rem;
+    }
+
+    .react-calendar__tile--active {
+      background-color: var(--blue-pale);
+      color: var(--black-700);
+      border-radius: 0;
+    }
+
+    .react-calendar__tile--rangeStart,
+    .react-calendar__tile--rangeEnd {
+      background-color: var(--blue-main);
+      color: var(--white-main);
+      border-radius: 0.5rem;
     }
 
     .react-calendar__month-view__days__day--neighboringMonth {
