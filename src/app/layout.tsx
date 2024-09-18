@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { QueryClientProvider } from '@tanstack/react-query';
+import Script from 'next/script';
 import queryClient from '@/services/queryClient';
 import StyledComponentsRegistry from '@/lib/registry';
-import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'OFFIZZ',

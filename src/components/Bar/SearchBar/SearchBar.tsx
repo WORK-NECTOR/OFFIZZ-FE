@@ -19,6 +19,7 @@ function SearchBar(props: SearchBarProps) {
     width,
     height,
     focusColor = 'var(--black-200)',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     focusContent = Fragment,
     placeholder = RECOMMEND_TEXT.searchPlaceholder,
   } = props;
@@ -36,7 +37,7 @@ function SearchBar(props: SearchBarProps) {
     kakao.maps.load(() => {
       const ps = new kakao.maps.services.Places();
 
-      ps.keywordSearch(keyword, (data, status, _pagination) => {
+      ps.keywordSearch(keyword, (data, status) => {
         if (status) {
           const requiredArr = data.map(({ address_name, place_name }) => ({
             address_name,
@@ -78,6 +79,7 @@ function SearchBar(props: SearchBarProps) {
         <SearchResultContainer>
           {searchResult.map((el, idx) => (
             <LocationItem
+              // eslint-disable-next-line react/prop-types, react/no-array-index-key
               key={idx}
               address_name={el.address_name}
               place_name={el.place_name}

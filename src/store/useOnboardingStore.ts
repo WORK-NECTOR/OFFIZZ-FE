@@ -26,7 +26,7 @@ const useOnboardingStore = create<OnboardingType>((set) => ({
   },
   place: '',
   setPlace: (place) => {
-    set(() => ({ place: place }));
+    set(() => ({ place }));
   },
 }));
 

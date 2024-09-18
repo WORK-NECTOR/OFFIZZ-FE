@@ -1,3 +1,5 @@
+import Calendar from 'react-calendar';
+import { useEffect, useState } from 'react';
 import { ONBOARDING_DESC } from '@/constants/onboarding';
 import {
   BtnContainer,
@@ -7,11 +9,9 @@ import {
   PeriodContainer,
 } from './OnboardingPeriod.styled';
 import ProgressBar from '@/components/Bar/ProgressBar';
-import Calendar from 'react-calendar';
 import BackButton from '@/components/Button/BackButton';
 import useStepstore from '@/store/useStepStore';
 import BasicButton from '@/components/Button/BasicButton';
-import { useEffect, useState } from 'react';
 import useOnboardingStore from '@/store/useOnboardingStore';
 
 type ValuePiece = Date | null;
@@ -21,13 +21,6 @@ function OnboardingPeriod() {
   const [today, setToday] = useState('');
   const { fromDate, setFromDate, toDate, setToDate } = useOnboardingStore();
   const { incrementStep, decrementStep } = useStepstore();
-
-  useEffect(() => {
-    const today = new Date();
-    const formattedToday = formatDate(today);
-
-    setToday(formattedToday);
-  }, []);
 
   function formatDate(date: Date | null): string {
     if (!date) return '';
@@ -52,6 +45,13 @@ function OnboardingPeriod() {
     }
   }
 
+  useEffect(() => {
+    const rawToday = new Date();
+    const formattedToday = formatDate(rawToday);
+
+    setToday(formattedToday);
+  }, []);
+
   return (
     <PeriodContainer>
       <ProgressBar width="41.25rem" current={2} total={8} />
@@ -73,7 +73,8 @@ function OnboardingPeriod() {
           calendarType="gregory"
           formatDay={(locale, date) => String(date.getDate())}
           returnValue="range"
-          selectRange={true}
+          selectRange
+          // eslint-disable-next-line react/jsx-no-bind
           onChange={setDateRange}
         />
       </DateCalendarWrapper>

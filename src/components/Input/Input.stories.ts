@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Input from '.';
-import useOnboardingStore from '@/store/useOnboardingStore';
 import { ONBOARDING_DESC } from '@/constants/onboarding';
 
 const meta = {

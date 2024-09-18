@@ -1,5 +1,5 @@
-import { StartContainer, StartTextWrapper } from './Onboarding.styled';
 import Image from 'next/image';
+import { StartContainer, StartTextWrapper } from './Onboarding.styled';
 import start_character from '../../../../../public/onboarding-character.png';
 import TitleDesc from '@/components/TitleDesc';
 import { ONBOARDING_DESC } from '@/constants/onboarding';

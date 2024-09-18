@@ -1,9 +1,10 @@
+import Image from 'next/image';
 import { LocationItemProps } from '@/types/searchPlace.type';
 import { LocationItemWraper, LocationTextWrapper } from './LocationItem.styled';
-import Image from 'next/image';
 import ic_loc from '../../../public/ic-location.png';
 
 function LocationItem(props: LocationItemProps) {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   const { address_name, place_name, setPlace } = props;
 
   return (

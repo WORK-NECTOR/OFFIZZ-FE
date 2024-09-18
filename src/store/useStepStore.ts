@@ -10,7 +10,7 @@ interface StepType {
 const useStepstore = create<StepType>((set) => ({
   step: 0,
   setStep: (step) => {
-    set(() => ({ step: step }));
+    set(() => ({ step }));
   },
   incrementStep: () => {
     set((state) => ({

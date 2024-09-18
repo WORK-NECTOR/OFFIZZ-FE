@@ -1,4 +1,5 @@
 'use client';
+
 import useStepstore from '@/store/useStepStore';
 import styles from './page.module.css';
 import OnboardingStart from './components/OnboardingStart';
@@ -17,8 +18,8 @@ function OnboardingPage() {
   const { step } = useStepstore();
 
   return (
-    <div className={styles['background']}>
-      <div className={styles['container']}>{stepPage[step]}</div>
+    <div className={styles.background}>
+      <div className={styles.container}>{stepPage[step]}</div>
     </div>
   );
 }
