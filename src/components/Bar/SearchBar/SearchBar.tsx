@@ -11,6 +11,7 @@ import { RECOMMEND_TEXT } from '@/constants/recommend';
 import useSearchStore from '@/store/useSearchStore';
 import { SearchPlaceType } from '@/types/searchPlace.type';
 import LocationItem from '@/components/LocationItem';
+import useOnboardingStore from '@/store/useOnboardingStore';
 
 function SearchBar(props: SearchBarProps) {
   // 추후 ① 카카오 맵 api ② 우리 서버 api 분리할 예정
@@ -22,7 +23,14 @@ function SearchBar(props: SearchBarProps) {
     placeholder = RECOMMEND_TEXT.searchPlaceholder,
   } = props;
   const { keyword, setKeyword } = useSearchStore();
+  const { place, setPlace } = useOnboardingStore();
   const [searchResult, setSearchResult] = useState<Array<SearchPlaceType>>([]);
+  const [resultOpen, isResultOpen] = useState(false);
+
+  useEffect(() => {
+    if (keyword.length > 0) isResultOpen(true);
+    else isResultOpen(false);
+  }, [keyword]);
 
   useEffect(() => {
     kakao.maps.load(() => {
@@ -59,16 +67,25 @@ function SearchBar(props: SearchBarProps) {
           id="search-input"
           type="text"
           placeholder={placeholder}
-          onChange={(e) => setKeyword(e.currentTarget.value)}
+          value={place || ''}
+          onChange={(e) => {
+            setKeyword(e.currentTarget.value);
+            setPlace(e.currentTarget.value);
+          }}
         />
       </SearchBarContainer>
-      {searchResult && (
+      {resultOpen && (
         <SearchResultContainer>
           {searchResult.map((el, idx) => (
             <LocationItem
               key={idx}
               address_name={el.address_name}
               place_name={el.place_name}
+              setPlace={(value) => {
+                setPlace(value);
+                setSearchResult([]);
+                setKeyword('');
+              }}
             />
           ))}
         </SearchResultContainer>

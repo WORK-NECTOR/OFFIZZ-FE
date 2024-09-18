@@ -1,12 +1,13 @@
-import { SearchPlaceType } from '@/types/searchPlace.type';
+import { LocationItemProps } from '@/types/searchPlace.type';
 import { LocationItemWraper, LocationTextWrapper } from './LocationItem.styled';
 import Image from 'next/image';
 import ic_loc from '../../../public/ic-location.png';
 
-function LocationItem(props: SearchPlaceType) {
-  const { address_name, place_name } = props;
+function LocationItem(props: LocationItemProps) {
+  const { address_name, place_name, setPlace } = props;
+
   return (
-    <LocationItemWraper>
+    <LocationItemWraper onClick={() => setPlace(place_name)}>
       <Image src={ic_loc} alt="위치 아이콘" />
       <LocationTextWrapper>
         <h3>{place_name}</h3>

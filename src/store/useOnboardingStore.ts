@@ -7,6 +7,8 @@ interface OnboardingType {
   setFromDate: (date: string) => void;
   toDate: string;
   setToDate: (date: string) => void;
+  place: string;
+  setPlace: (place: string) => void;
 }
 
 const useOnboardingStore = create<OnboardingType>((set) => ({
@@ -21,6 +23,10 @@ const useOnboardingStore = create<OnboardingType>((set) => ({
   toDate: '',
   setToDate: (date) => {
     set(() => ({ toDate: date }));
+  },
+  place: '',
+  setPlace: (place) => {
+    set(() => ({ place: place }));
   },
 }));
 
