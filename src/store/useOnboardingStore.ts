@@ -1,3 +1,4 @@
+import { TimeFormat } from '@/types/timeRange.type';
 import { create } from 'zustand';
 
 interface OnboardingType {
@@ -9,6 +10,10 @@ interface OnboardingType {
   setToDate: (date: string) => void;
   place: string;
   setPlace: (place: string) => void;
+  coreTimeStart: TimeFormat;
+  setCoreTimeStart: (time: TimeFormat) => void;
+  coreTimeEnd: TimeFormat;
+  setCoreTimeEnd: (time: TimeFormat) => void;
 }
 
 const useOnboardingStore = create<OnboardingType>((set) => ({
@@ -27,6 +32,14 @@ const useOnboardingStore = create<OnboardingType>((set) => ({
   place: '',
   setPlace: (place) => {
     set(() => ({ place }));
+  },
+  coreTimeStart: '00:00',
+  setCoreTimeStart: (time) => {
+    set(() => ({ coreTimeStart: time }));
+  },
+  coreTimeEnd: '00:00',
+  setCoreTimeEnd: (time) => {
+    set(() => ({ coreTimeEnd: time }));
   },
 }));
 
