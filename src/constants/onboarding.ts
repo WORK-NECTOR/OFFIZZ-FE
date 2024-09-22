@@ -1,3 +1,8 @@
+import ic_nature from '../../public/ic-nature.png';
+import ic_art from '../../public/ic-art.png';
+import ic_restaurant from '../../public/ic-restaurant.png';
+import ic_shopping from '../../public/ic-shopping.png';
+
 export const ONBOARDING_DESC = {
   welcomeTitle: '어서오세요!',
   welcomeDesc: `저는 사용자님의 즐거운 워케이션을 도와드릴 피츠라고 해요.\n지금부터 일과 쉼에 몰입하기 위한 몇 가지 질문을 드릴게요.`, // 템플릿 리터럴로 교체 예정
@@ -33,12 +38,28 @@ export const ONBOARDING_DESC = {
   nextBtn: '다음 >',
 };
 
-export const TRAVLE_KIND = {
-  NATURE: '자연',
-  RESTAURANT: '맛집',
-  CULTURE: '문화예술',
-  SHOPPING: '쇼핑',
-};
+export const TRAVLE_KIND = [
+  {
+    icon: ic_nature,
+    title: '자연',
+    keyName: 'NATURE',
+  },
+  {
+    icon: ic_restaurant,
+    title: '맛집',
+    keyName: 'RESTAURANT',
+  },
+  {
+    icon: ic_art,
+    title: '문화예술',
+    keyName: 'CULTURE',
+  },
+  {
+    icon: ic_shopping,
+    title: '쇼핑',
+    keyName: 'SHOPPING',
+  },
+];
 
 export const WORKPLACE_KIND = {
   CAFE: '카페',
