@@ -7,10 +7,10 @@ export const CategoryBox = styled.div`
   align-items: center;
   gap: 0.6rem;
   border-radius: 3.5rem;
-  border: 1px solid var(--Greyscale-200, #d9d9d9);
-  background: var(--Greyscale-White, #fff);
+  border: 1px solid var(--black-200);
+  background: var(--white-main);
   margin-right: 0.5rem;
-  color: var(--Greyscale-400, #9d9d9d);
+  color: var(--black-400);
 
   /* Kor/Caption2-kor */
   font-family: Pretendard;
