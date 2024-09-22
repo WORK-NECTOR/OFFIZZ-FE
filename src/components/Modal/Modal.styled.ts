@@ -16,6 +16,7 @@ export const Overlay = styled.div`
 export const ModalContainer = styled.div`
   display: flex;
   width: 23.25rem;
+  min-height: 23.25rem;
   padding: 2rem 2.5rem;
   flex-direction: column;
   align-items: center;
@@ -35,7 +36,7 @@ export const ModalButton = styled.div`
   padding: 0rem 0.75rem;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5rem;
   flex: 1 0 0;
   border-radius: 0.75rem;
@@ -50,11 +51,11 @@ line-height: 1.375rem; /* 137.5% */
 `;
 export const ModalButtonClose = styled.div`
 display: flex;
-height: 2.25rem;
+height: 2.5rem;
 padding: 0rem 0.75rem;
 flex-direction: column;
 justify-content: center;
-align-items: flex-start;
+align-items: center;
 text-align: center;
 gap: 0.5rem;
 flex: 1 0 0;
@@ -76,4 +77,22 @@ display: flex;
 width: 80%;
 justify-content: center;
 text-align: center;
+`;
+export const ModalButtonConfirm = styled.div`
+display: flex;
+width: 18.25rem;
+padding: 0.5rem 0.75rem;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+gap: 0.5rem;
+flex: 1 0 0;
+border-radius: 0.75rem;
+background: var(--Blue-main, #498DF2);
+color: var(--Greyscale-White, #FFF);
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 600;
 `;

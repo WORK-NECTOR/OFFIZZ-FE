@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 function FocusPage() {
     const router = useRouter();
     const onClickFinish = ()=>{
-        router.push('/information');
+        router.push('/information?modalType=End');
     }
   return (
     <div className={styles.focusWraper}>

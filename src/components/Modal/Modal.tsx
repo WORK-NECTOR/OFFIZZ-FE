@@ -4,6 +4,7 @@ import { StaticImageData } from 'next/image';
 import {
   ModalButton,
   ModalButtonClose,
+  ModalButtonConfirm,
   ModalButtonWrapepr,
   ModalContainer,
   ModalImage,
@@ -30,6 +31,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
     onClose()
     router.push('/focus');
   };
+  const onClickConfirm = () => {
+    onClose()
+    router.push('/information');
+  };
   return (
     <Overlay onClick={onClose}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
@@ -53,7 +58,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
             
           )}
           {content.buttonName == '확인' && (
-            <ModalButton onClick={onClose}>{content.buttonName}</ModalButton>
+            <ModalButtonConfirm onClick={onClickConfirm}>{content.buttonName}</ModalButtonConfirm>
           )}
         </>
       </ModalContainer>

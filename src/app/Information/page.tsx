@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Tab from '@/components/Tab/Tab';
 import styles from './page.module.css';
 import MainCharacterBox from './components/MainCharacterBox';
@@ -10,9 +10,34 @@ import { TimeRangeType } from '@/types/timeRange.type';
 import Todo from './components/Todo';
 import Modal from '@/components/Modal';
 import caractor from '../../../public/charactor-laptop.png';
+import {useSearchParams } from 'next/navigation';
 
 function InformationPage() {
+  const searchParams = useSearchParams();
+  const modalType = searchParams.get('modalType');
+  console.log(modalType)
   const [isModalOpen, setModalOpen] = useState(false);
+  const todoContent = modalType === 'End' 
+    ? {
+        title: '할 일 종료',
+        image: caractor,
+        desc: '최고에요!팀 데이터 그래프화를 무사히 마쳤어요.', 
+        buttonName: '확인',
+      }
+    : {
+        title: '집중하기',
+        image: caractor,
+        desc: '지금부터 집중 타이머를 시작할게요.<br/>집중한 시간은 근무 시간표에 기록돼요.',
+        buttonName: '시작하기',
+      };
+
+
+    useEffect(() => {
+        if (modalType === 'End') {
+          setModalOpen(true);
+        }
+      }, [modalType]);
+
   const handleTodoClick = () => {
     setModalOpen(true);
   };
@@ -35,12 +60,6 @@ function InformationPage() {
     },
   ];
 
-  const todoContent = {
-    title: '집중하기',
-    image: caractor,
-    desc: '지금부터 집중 타이머를 시작할게요.<br/>집중한 시간은 근무 시간표에 기록돼요.',
-    buttonName: '시작하기',
-  };
   return (
     <div style={{ display: 'flex' }}>
       <Tab />
