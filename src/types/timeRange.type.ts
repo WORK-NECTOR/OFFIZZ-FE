@@ -11,6 +11,7 @@ export type TimeRangeType = {
 
 export interface TimeRangeProps {
   timeArr: Array<TimeRangeType>;
+  length: 'short' | 'long';
 }
 
 export type TimeRangeElType = {
