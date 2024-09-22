@@ -30,6 +30,7 @@
   margin-left: 5.19rem;
 }
 .rightWrapper{
+  display: flex;
   width: 41.75rem;
 height: 42rem;
 flex-shrink: 0;
@@ -39,8 +40,8 @@ background: var(--Greyscale-White, #FFF);
 margin-left: 0.75rem;
 padding: 1.5rem;
 }
-.timeTable{
-  
+.rightTitle{
+  margin-bottom: 1rem;
   color: var(--Greyscale-Black, #000);
 
   /* Kor/Body1-kor */
@@ -49,4 +50,25 @@ padding: 1.5rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.75rem; /* 140% */
+  display: flex;
+  justify-content: space-between;
+  width: 17.5rem;
+}
+.addBtn{
+  display: inline-flex;
+height: 2.25rem;
+padding: 0rem 0.75rem;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 0.5rem;
+flex-shrink: 0;
+border-radius: 0.75rem;
+background: var(--Blue-main, #498DF2);
+color: var(--Greyscale-White, #FFF);
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 600;
+line-height: 1.375rem; /* 137.5% */
 }
