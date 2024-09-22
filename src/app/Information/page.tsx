@@ -10,9 +10,9 @@ function InformationPage() {
     <div style={{ display: 'flex' }}>
       <Tab />
       <div style={{ border: '1px solid red', width: '100%' }}>
-        <div className={styles.Top}>
-          <div className={styles.Day}>day1</div>
-          <div className={styles.Switch}>SwitchBtn</div>
+        <div className={styles.top}>
+          <div className={styles.day}>day1</div>
+          <div className={styles.switch}>SwitchBtn</div>
         </div>
         <div>
           <MainCharacterBox />

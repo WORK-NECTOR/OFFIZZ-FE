@@ -1,15 +1,15 @@
-.Day {
+.day {
   border: 1px solid black;
   width: 8rem;
   height: 2rem;
   margin-top: 2.5rem;
 }
-.Top {
+.top {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
-.Switch {
+.switch {
   border: 1px solid black;
   width: 8rem;
   height: 2rem;
