@@ -4,6 +4,7 @@ export const ListContainer = styled.ul`
   width: 20rem;
   border: 1px solid var(--black-100);
   border-radius: 0.5rem;
+  list-style: none;
 
   &:last-child {
     border-bottom: none;

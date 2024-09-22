@@ -9,14 +9,25 @@ function MultiSelectList(props: MultiSelectListProps) {
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
   function handleClick(title: string, keyName: string) {
+    let updatedTitles: string[] = [];
+    let updatedKeys: string[] = [];
+
     if (selectedTitles.includes(title)) {
-      setSelectedTitles(selectedTitles.filter((item) => item !== title));
-      setSelectedKeys(selectedKeys.filter((key) => key !== keyName));
+      // 선택된 항목을 해제 (title, keyName을 배열에서 제거)
+      updatedTitles = selectedTitles.filter((item) => item !== title);
+      updatedKeys = selectedKeys.filter((key) => key !== keyName);
     } else {
-      setSelectedTitles([...selectedTitles, title]);
-      setSelectedKeys([...selectedKeys, keyName]);
+      // 선택되지 않은 항목을 추가
+      updatedTitles = [...selectedTitles, title];
+      updatedKeys = [...selectedKeys, keyName];
     }
-    selectFunc([...selectedKeys, keyName]);
+
+    // 상태 업데이트
+    setSelectedTitles(updatedTitles);
+    setSelectedKeys(updatedKeys);
+
+    // 선택된 keyName 배열을 selectFunc에 전달
+    selectFunc(updatedKeys);
   }
 
   return (
