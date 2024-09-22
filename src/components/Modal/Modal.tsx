@@ -22,14 +22,16 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   content: TodoContent;
+  todoTitle?:string;
+  time?:string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, content,todoTitle,time }) => {
   if (!isOpen) return null;
   const router = useRouter();
   const onClickStart = () => {
     onClose()
-    router.push('/focus');
+    router.push(`/focus?title=${todoTitle}&time=${time}`);
   };
   const onClickConfirm = () => {
     onClose()

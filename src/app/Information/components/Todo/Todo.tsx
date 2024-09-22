@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { TodoBox, TodoSub, TodoTitle } from './Todo.styled';
 import play from '../../../../../public/todo-play.png';
 import clock from '../../../../../public/time.png';
 import { TimeRangeType } from '@/types/timeRange.type';
+import useActivityStore from '@/store/useselectTodo';
+import useTimeStore from '@/store/useSelectTime';
 
 interface TodoProps {
   timeArr: TimeRangeType[];
   onClick: () => void;
 }
+
 const Todo: React.FC<TodoProps> = ({ timeArr, onClick }) => {
+  const { setActivity } = useActivityStore(); 
+  const { setTime } = useTimeStore();
+  const [calculateTime,setCalculateTime ]=useState('');
   const calculateTimeDifference = (from: string, to: string) => {
     const fromTime = new Date(`1970-01-01T${from}:00`);
     const toTime = new Date(`1970-01-01T${to}:00`);
-
-    const differenceInMinutes =
-      (toTime.getTime() - fromTime.getTime()) / (1000 * 60);
-
+    
+    const differenceInMinutes = (toTime.getTime() - fromTime.getTime()) / (1000 * 60);
     const hours = Math.floor(differenceInMinutes / 60);
     const minutes = differenceInMinutes % 60;
 
     return `${hours}시간 ${minutes}분`;
+  };
+
+  const handleActivityClick = (time:any) => {
+    setActivity(time.activity);
+    setTime(calculateTimeDifference(time.from, time.to));
+    onClick(); 
   };
 
   return (
@@ -33,7 +43,7 @@ const Todo: React.FC<TodoProps> = ({ timeArr, onClick }) => {
               alt="play"
               width={36}
               height={36}
-              onClick={onClick}
+              onClick={() => handleActivityClick(time)} // Pass the activity to the handler
             />
             <div style={{ marginLeft: '0.5rem' }}>
               <div style={{ display: 'flex', alignItems: 'center' }}>

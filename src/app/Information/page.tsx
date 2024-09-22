@@ -11,12 +11,16 @@ import Todo from './components/Todo';
 import Modal from '@/components/Modal';
 import caractor from '../../../public/charactor-laptop.png';
 import {useSearchParams } from 'next/navigation';
+import useActivityStore from '@/store/useselectTodo';
+import { time } from 'console';
+import useTimeStore from '@/store/useSelectTime';
 
 function InformationPage() {
   const searchParams = useSearchParams();
   const modalType = searchParams.get('modalType');
-  console.log(modalType)
   const [isModalOpen, setModalOpen] = useState(false);
+  const { activity } = useActivityStore();
+  const { time } = useTimeStore();
   const todoContent = modalType === 'End' 
     ? {
         title: '할 일 종료',
@@ -88,7 +92,7 @@ function InformationPage() {
           </div>
         </div>
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal} content={todoContent} />
+      <Modal isOpen={isModalOpen} onClose={closeModal} todoTitle={activity?activity:''} time={time?time:''}content={todoContent} />
     </div>
   );
 }
