@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react';
-import SingleSelectList from '.';
+import MultiSelectList from '.';
 import ic_nature from '../../../../public/ic-nature.png';
 import ic_restaurant from '../../../../public/ic-restaurant.png';
 import ic_art from '../../../../public/ic-art.png';
 import ic_shopping from '../../../../public/ic-shopping.png';
 
 const meta = {
-  title: 'SingleSelectList',
-  component: SingleSelectList,
+  title: 'MultiSelectList',
+  component: MultiSelectList,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -33,7 +33,7 @@ const meta = {
     ],
     selectFunc: () => {},
   },
-} satisfies Meta<typeof SingleSelectList>;
+} satisfies Meta<typeof MultiSelectList>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

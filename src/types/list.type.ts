@@ -1,6 +1,6 @@
 import { IconTitleProps } from './iconTitle.type';
 
-export interface SingleSelectListProps {
+export interface MultiSelectListProps {
   listArr: Array<IconTitleProps>;
-  selectFunc: (value: string) => void;
+  selectFunc: (value: Array<string>) => void;
 }
