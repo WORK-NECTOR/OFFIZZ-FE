@@ -33,6 +33,14 @@ export const ONBOARDING_DESC = {
   nextBtn: '다음 >',
 };
 
-export const travleKind = ['자연', '맛집', '문화예술', '쇼핑'];
+export const TRAVLE_KIND = {
+  NATURE: '자연',
+  RESTAURANT: '맛집',
+  CULTURE: '문화예술',
+  SHOPPING: '쇼핑',
+};
 
-export const workplaceKind = ['카페', '공유오피스'];
+export const WORKPLACE_KIND = {
+  CAFE: '카페',
+  OFFICE: '공유오피스',
+};
