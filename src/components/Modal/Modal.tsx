@@ -3,10 +3,13 @@ import React from 'react';
 import { StaticImageData } from 'next/image';
 import {
   ModalButton,
+  ModalButtonClose,
+  ModalButtonWrapepr,
   ModalContainer,
   ModalImage,
   Overlay,
 } from './Modal.styled';
+import { useRouter } from 'next/navigation';
 
 interface TodoContent {
   title: string;
@@ -22,7 +25,11 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
   if (!isOpen) return null;
-
+  const router = useRouter();
+  const onClickStart = () => {
+    onClose()
+    router.push('/focus');
+  };
   return (
     <Overlay onClick={onClose}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
@@ -39,7 +46,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
             />
           )}
           {content.buttonName == '시작하기' && (
-            <ModalButton onClick={onClose}>{content.buttonName}</ModalButton>
+            <ModalButtonWrapepr>
+                <ModalButtonClose onClick={onClose}>취소</ModalButtonClose>
+                <ModalButton onClick={onClickStart}>{content.buttonName}</ModalButton>
+            </ModalButtonWrapepr>
+            
           )}
           {content.buttonName == '확인' && (
             <ModalButton onClick={onClose}>{content.buttonName}</ModalButton>

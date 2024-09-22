@@ -23,15 +23,13 @@ export const ModalContainer = styled.div`
   border-radius: 1rem;
   border: 1px solid var(--Greyscale-100, #e9e9e9);
   background: var(--Greyscale-White, #fff);
-
-  /* shadow-48 */
   box-shadow: 0px 4px 48px 0px rgba(0, 0, 0, 0.05);
 `;
 export const ModalImage = styled.img`
   width: 15rem;
   height: 15rem;
 `;
-export const ModalButton = styled.img`
+export const ModalButton = styled.div`
   display: flex;
   height: 2.25rem;
   padding: 0rem 0.75rem;
@@ -42,4 +40,40 @@ export const ModalButton = styled.img`
   flex: 1 0 0;
   border-radius: 0.75rem;
   background: var(--Blue-main, #498df2);
+  color: var(--Greyscale-White, #FFF);
+text-align: center;
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 600;
+line-height: 1.375rem; /* 137.5% */
+`;
+export const ModalButtonClose = styled.div`
+display: flex;
+height: 2.25rem;
+padding: 0rem 0.75rem;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+text-align: center;
+gap: 0.5rem;
+flex: 1 0 0;
+border-radius: 0.75rem;
+background: var(--Blue-greyish, #F4F7F9);
+color: var(--Blue-main, #498DF2);
+text-align: center;
+margin-right: 0.5rem;
+
+/* Kor/Body5-kor */
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 600;
+line-height: 1.375rem; /* 137.5% */
+`;
+export const ModalButtonWrapepr = styled.div`
+display: flex;
+width: 80%;
+justify-content: center;
+text-align: center;
 `;
