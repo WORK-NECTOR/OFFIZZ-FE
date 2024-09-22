@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { RecommendBox } from './Recommend.styled';
+import { RecommendBox } from './Recommend.styled'
 
 function Recommend() {
   return (
