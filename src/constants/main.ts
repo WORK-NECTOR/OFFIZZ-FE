@@ -1,4 +1,5 @@
 export const TOP_MAIN = {
+  name: 'offizz',
   slogan: 'the sparkling way to work',
   title: `답답한 사무실을 벗어나\n톡 쏘는 워케이션!`,
   desc: `워케이션 기간동안 오피츠와 함께\n최고의 생산성을 경험하세요`,

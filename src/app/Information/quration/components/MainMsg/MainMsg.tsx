@@ -1,5 +1,5 @@
 import React from 'react';
-import { HighlightedText, NormalText } from './MainMsg.styled';
+import { HighlightedText, NormalText, BoldText } from './MainMsg.styled';
 
 interface MainMsgProps {
   activity: string;
@@ -10,7 +10,7 @@ interface MainMsgProps {
 // Function Declaration
 function MainMsg({ activity, name, space }: MainMsgProps) {
   return (
-    <div style={{ marginLeft: '3.1rem' }}>
+    <div style={{ marginLeft: '1.5rem' }}>
       <NormalText>{activity}을 즐기는 </NormalText>
       <HighlightedText>{name}</HighlightedText>
       <NormalText>
@@ -18,7 +18,7 @@ function MainMsg({ activity, name, space }: MainMsgProps) {
         <br />
       </NormalText>
       <HighlightedText>{space}</HighlightedText>
-      <NormalText> 추천</NormalText>
+      <BoldText> 추천</BoldText>
     </div>
   );
 }
