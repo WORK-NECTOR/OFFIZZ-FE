@@ -17,18 +17,22 @@ const meta = {
       {
         icon: ic_nature,
         title: '자연',
+        keyName: 'NATURE',
       },
       {
         icon: ic_restaurant,
         title: '맛집',
+        keyName: 'RESTAURANT',
       },
       {
         icon: ic_art,
         title: '문화예술',
+        keyName: 'CULTURE',
       },
       {
         icon: ic_shopping,
         title: '쇼핑',
+        keyName: 'SHOPPING',
       },
     ],
     selectFunc: () => {},

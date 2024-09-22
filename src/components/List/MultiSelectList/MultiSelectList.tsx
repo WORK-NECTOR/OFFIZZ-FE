@@ -5,17 +5,18 @@ import { useState } from 'react';
 
 function MultiSelectList(props: MultiSelectListProps) {
   const { listArr, selectFunc } = props;
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selectedTitles, setSelectedTitles] = useState<string[]>([]);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
-  function handleClick(title: string) {
-    if (selected.includes(title)) {
-      // 이미 선택된 항목이면 제거
-      setSelected(selected.filter((item) => item !== title));
+  function handleClick(title: string, keyName: string) {
+    if (selectedTitles.includes(title)) {
+      setSelectedTitles(selectedTitles.filter((item) => item !== title));
+      setSelectedKeys(selectedKeys.filter((key) => key !== keyName));
     } else {
-      // 선택되지 않은 항목이면 추가
-      setSelected([...selected, title]);
+      setSelectedTitles([...selectedTitles, title]);
+      setSelectedKeys([...selectedKeys, keyName]);
     }
-    selectFunc(selected); // 선택된 항목 리스트를 전달
+    selectFunc([...selectedKeys, keyName]);
   }
 
   return (
@@ -24,8 +25,8 @@ function MultiSelectList(props: MultiSelectListProps) {
         listArr.map((el, idx) => (
           <ListEl
             key={idx}
-            onClick={() => handleClick(el.title)}
-            $selected={selected.includes(el.title)}
+            onClick={() => handleClick(el.title, el.keyName)}
+            $selected={selectedTitles.includes(el.title)}
           >
             <IconTitle icon={el.icon} title={el.title} />
           </ListEl>
