@@ -7,17 +7,15 @@ export const MaincharBox = styled.div`
   border-radius: 1rem;
   border: 1px solid var(--Greyscale-100, #e9e9e9);
   background: var(--Greyscale-White, #fff);
+  padding: 1.5rem;
 `;
 export const MCtitle = styled.div`
-  color: var(--Blue-main, #498df2);
-  text-align: center;
-
-  /* Kor/Body1-kor */
-  font-family: Pretendard;
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.75rem; /* 140% */
+color: var(--Greyscale-Black, #000);
+font-family: Pretendard;
+font-size: 1.25rem;
+font-style: normal;
+font-weight: 600;
+line-height: 1.75rem; /* 140% */
 `;
 export const MCtitlesub = styled.div`
   color: var(--Greyscale-Black, #000);
@@ -30,14 +28,26 @@ export const MCtitlesub = styled.div`
   line-height: 1.75rem;
 `;
 export const MCsub = styled.div`
-  margin-top: 0.5rem;
-  color: var(--Greyscale-700, #434343);
-  text-align: center;
-
-  /* Kor/Body6-kor */
-  font-family: Pretendard;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.375rem; /* 137.5% */
+display: flex;
+width: 17rem;
+padding: 1rem 0.5rem;
+justify-content: center;
+align-items: center;
+gap: 0.5rem;
+border-radius: 0.5rem;
+border: 1px solid var(--Greyscale-100, #E9E9E9);
+background: var(--Greyscale-30, #FCFCFC);
+color: var(--Greyscale-700, #434343);
+text-align: center;
+font-family: Pretendard;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 400;
+line-height: 1.125rem; /* 128.571% */
+`;
+export const ImageWapper = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 1rem;
 `;

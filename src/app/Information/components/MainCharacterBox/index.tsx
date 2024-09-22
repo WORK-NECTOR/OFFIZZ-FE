@@ -1,3 +1,4 @@
-import MainCharacterBox from './MainCharacterBox';
+import MainCharacterBox from "./MainCharacterBox";
+
 
 export default MainCharacterBox;

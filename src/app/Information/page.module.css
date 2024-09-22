@@ -1,17 +1,52 @@
-.day {
-  border: 1px solid black;
-  width: 8rem;
-  height: 2rem;
-  margin-top: 2.5rem;
+.background{
+  width: 100%;
+  background: var(--Blue-greyish, #F4F7F9);
 }
 .top {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  border: 1px solid var(--Greyscale-100, #E9E9E9);
+  height: 3.5rem;
+  align-items: center;
+  background: var(--Greyscale-White, #FFF);
+  
+}
+.day {
+  border: 1px solid black;
+  width: 8rem;
+  height: 2rem;
+  margin-left: 5.19rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .switch {
   border: 1px solid black;
   width: 8rem;
   height: 2rem;
-  margin-top: 2.5rem;
+}
+.leftWrapper{
+  margin-left: 5.19rem;
+}
+.rightWrapper{
+  width: 41.75rem;
+height: 42rem;
+flex-shrink: 0;
+border-radius: 1rem;
+border: 1px solid var(--Greyscale-100, #E9E9E9);
+background: var(--Greyscale-White, #FFF);
+margin-left: 0.75rem;
+padding: 1.5rem;
+}
+.timeTable{
+  
+  color: var(--Greyscale-Black, #000);
+
+  /* Kor/Body1-kor */
+  font-family: Pretendard;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.75rem; /* 140% */
 }
