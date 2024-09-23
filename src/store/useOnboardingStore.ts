@@ -1,4 +1,5 @@
 import { TimeFormat } from '@/types/timeRange.type';
+import { VisitPlaceType } from '@/types/visit.type';
 import { create } from 'zustand';
 
 interface OnboardingType {
@@ -18,6 +19,8 @@ interface OnboardingType {
   setTravel: (travels: Array<string>) => void;
   workplace: Array<string>;
   setWorkplace: (workplaces: Array<string>) => void;
+  visitPlace: Array<VisitPlaceType>;
+  setVisitPlace: (visitPlaces: Array<VisitPlaceType>) => void;
 }
 
 const useOnboardingStore = create<OnboardingType>((set) => ({
@@ -52,6 +55,10 @@ const useOnboardingStore = create<OnboardingType>((set) => ({
   workplace: [],
   setWorkplace: (workplaces) => {
     set(() => ({ workplace: workplaces }));
+  },
+  visitPlace: [],
+  setVisitPlace: (visitPlaces) => {
+    set(() => ({ visitPlace: visitPlaces }));
   },
 }));
 
