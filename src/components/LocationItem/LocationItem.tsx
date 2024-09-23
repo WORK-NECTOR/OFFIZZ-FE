@@ -4,9 +4,10 @@ import { LocationItemWraper, LocationTextWrapper } from './LocationItem.styled';
 import ic_loc from '../../../public/ic-location.png';
 
 function LocationItem(props: LocationItemProps) {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   const {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     address_name,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     place_name,
     setPlace,
     searchBarType,

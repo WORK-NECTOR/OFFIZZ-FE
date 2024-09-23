@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import {
   BtnContainer,
@@ -14,7 +15,6 @@ import BackButton from '@/components/Button/BackButton';
 import BasicButton from '@/components/Button/BasicButton';
 import useStepstore from '@/store/useStepStore';
 import useOnboardingStore from '@/store/useOnboardingStore';
-import { useEffect, useState } from 'react';
 import { TimeRangeType, TimeFormat } from '@/types/timeRange.type';
 
 function OnboardingCoreTime() {

@@ -1,6 +1,6 @@
+import { create } from 'zustand';
 import { TimeFormat } from '@/types/timeRange.type';
 import { VisitPlaceType } from '@/types/visit.type';
-import { create } from 'zustand';
 
 interface OnboardingType {
   reason: string;
@@ -64,7 +64,7 @@ const useOnboardingStore = create<OnboardingType>((set) => ({
   },
   goal: '',
   setGoal: (goal) => {
-    set(() => ({ goal: goal }));
+    set(() => ({ goal }));
   },
 }));
 

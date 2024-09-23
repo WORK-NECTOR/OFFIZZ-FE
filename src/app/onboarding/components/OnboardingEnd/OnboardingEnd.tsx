@@ -1,10 +1,10 @@
+import Image from 'next/image';
 import {
   BtnContainer,
   EndContainer,
   EndTextWrapper,
 } from './OnboardingEnd.styled';
 import end_character from '../../../../../public/onboarding-end-character.png';
-import Image from 'next/image';
 import TitleDesc from '@/components/TitleDesc';
 import { ONBOARDING_DESC } from '@/constants/onboarding';
 import BasicButton from '@/components/Button/BasicButton';

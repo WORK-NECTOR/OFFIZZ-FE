@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import {
   RemovableBadge,
@@ -9,8 +10,6 @@ import TitleDesc from '@/components/TitleDesc';
 import { ONBOARDING_DESC } from '@/constants/onboarding';
 import SearchBar from '@/components/Bar/SearchBar';
 import useOnboardingStore from '@/store/useOnboardingStore';
-import { useEffect } from 'react';
-import Image from 'next/image';
 import ic_x from '../../../../../public/ic-x.png';
 import BackButton from '@/components/Button/BackButton';
 import useStepstore from '@/store/useStepStore';
@@ -23,10 +22,6 @@ function OnboardingVisit() {
   const removePlace = (index: number) => {
     setVisitPlace(visitPlace.filter((_, idx) => idx !== index));
   };
-
-  useEffect(() => {
-    console.log(visitPlace);
-  }, [visitPlace]);
 
   return (
     <VisitContainer>
@@ -47,6 +42,7 @@ function OnboardingVisit() {
       <RemovableBadgeContainer>
         {visitPlace.length > 0 &&
           visitPlace.map((el, idx) => (
+            // eslint-disable-next-line react/no-array-index-key
             <RemovableBadge key={idx}>
               <p className="badge-place">{el.place_name}</p>
               <Image
@@ -76,7 +72,7 @@ function OnboardingVisit() {
           fontSize="1rem"
           clickHandler={visitPlace.length > 0 ? incrementStep : () => {}}
         />
-        <button id="skip-btn" onClick={incrementStep}>
+        <button id="skip-btn" onClick={incrementStep} type="button">
           {ONBOARDING_DESC.skipBtn}
         </button>
       </BtnContainer>

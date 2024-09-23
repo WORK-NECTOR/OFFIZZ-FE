@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import { MultiSelectListProps } from '@/types/list.type';
 import { ListContainer, ListEl } from './MultiSelectList.styled';
 import IconTitle from '@/components/IconTitle';
-import { useState } from 'react';
 
 function MultiSelectList(props: MultiSelectListProps) {
   const { listArr, selectFunc } = props;
@@ -35,6 +35,7 @@ function MultiSelectList(props: MultiSelectListProps) {
       {listArr.length > 0 &&
         listArr.map((el, idx) => (
           <ListEl
+            // eslint-disable-next-line react/no-array-index-key
             key={idx}
             onClick={() => handleClick(el.title, el.keyName)}
             $selected={selectedTitles.includes(el.title)}

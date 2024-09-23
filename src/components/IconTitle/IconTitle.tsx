@@ -1,6 +1,6 @@
+import Image from 'next/image';
 import { IconTitleProps } from '@/types/iconTitle.type';
 import { IconTitleContainer } from './IconTitle.styled';
-import Image from 'next/image';
 
 function IconTitle(props: IconTitleProps) {
   const { icon, title } = props;
