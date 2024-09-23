@@ -2,6 +2,8 @@ import ic_nature from '../../public/ic-nature.png';
 import ic_art from '../../public/ic-art.png';
 import ic_restaurant from '../../public/ic-restaurant.png';
 import ic_shopping from '../../public/ic-shopping.png';
+import ic_cafe from '../../public/ic-cafe.png';
+import ic_office from '../../public/ic-office.png';
 
 export const ONBOARDING_DESC = {
   welcomeTitle: '어서오세요!',
@@ -61,7 +63,15 @@ export const TRAVLE_KIND = [
   },
 ];
 
-export const WORKPLACE_KIND = {
-  CAFE: '카페',
-  OFFICE: '공유오피스',
-};
+export const WORKPLACE_KIND = [
+  {
+    icon: ic_cafe,
+    title: '카페',
+    keyName: 'CAFE',
+  },
+  {
+    icon: ic_office,
+    title: '공유오피스',
+    keyName: 'OFFICE',
+  },
+];
