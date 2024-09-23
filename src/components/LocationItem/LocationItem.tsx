@@ -5,10 +5,30 @@ import ic_loc from '../../../public/ic-location.png';
 
 function LocationItem(props: LocationItemProps) {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { address_name, place_name, setPlace } = props;
+  const {
+    address_name,
+    place_name,
+    setPlace,
+    searchBarType,
+    setVisitPlace,
+    visitPlace,
+  } = props;
 
   return (
-    <LocationItemWraper onClick={() => setPlace(place_name)}>
+    <LocationItemWraper
+      onClick={() => {
+        setPlace(place_name);
+        if (searchBarType === 'visit') {
+          setVisitPlace([
+            ...visitPlace,
+            {
+              address_name,
+              place_name,
+            },
+          ]);
+        }
+      }}
+    >
       <Image src={ic_loc} alt="위치 아이콘" />
       <LocationTextWrapper>
         <h3>{place_name}</h3>

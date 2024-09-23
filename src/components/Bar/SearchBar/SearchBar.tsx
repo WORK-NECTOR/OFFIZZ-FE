@@ -22,9 +22,10 @@ function SearchBar(props: SearchBarProps) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     focusContent = Fragment,
     placeholder = RECOMMEND_TEXT.searchPlaceholder,
+    searchBarType = 'place',
   } = props;
   const { keyword, setKeyword } = useSearchStore();
-  const { place, setPlace } = useOnboardingStore();
+  const { place, setPlace, visitPlace, setVisitPlace } = useOnboardingStore();
   const [searchResult, setSearchResult] = useState<Array<SearchPlaceType>>([]);
   const [resultOpen, isResultOpen] = useState(false);
 
@@ -88,6 +89,9 @@ function SearchBar(props: SearchBarProps) {
                 setSearchResult([]);
                 setKeyword('');
               }}
+              setVisitPlace={setVisitPlace}
+              searchBarType={searchBarType}
+              visitPlace={visitPlace}
             />
           ))}
         </SearchResultContainer>

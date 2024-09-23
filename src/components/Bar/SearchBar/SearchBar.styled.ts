@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const SearchBarResultContainer = styled.div`
   width: 41.25rem;
+  position: relative;
+  overflow: visible;
 `;
 
 export const SearchBarContainer = styled.div<{
@@ -43,6 +45,9 @@ export const SearchResultContainer = styled.div`
   height: 13rem;
   border-radius: 0.5rem;
   border: 1px solid var(--black-100);
+  background-color: var(--white-main);
   overflow-y: scroll;
   overflow-x: hidden;
+  position: absolute;
+  top: 3.25rem;
 `;
