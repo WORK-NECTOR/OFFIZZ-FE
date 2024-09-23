@@ -21,6 +21,8 @@ interface OnboardingType {
   setWorkplace: (workplaces: Array<string>) => void;
   visitPlace: Array<VisitPlaceType>;
   setVisitPlace: (visitPlaces: Array<VisitPlaceType>) => void;
+  goal: string;
+  setGoal: (goal: string) => void;
 }
 
 const useOnboardingStore = create<OnboardingType>((set) => ({
@@ -59,6 +61,10 @@ const useOnboardingStore = create<OnboardingType>((set) => ({
   visitPlace: [],
   setVisitPlace: (visitPlaces) => {
     set(() => ({ visitPlace: visitPlaces }));
+  },
+  goal: '',
+  setGoal: (goal) => {
+    set(() => ({ goal: goal }));
   },
 }));
 
