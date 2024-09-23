@@ -4,4 +4,5 @@ export interface SearchBarProps {
   focusContent?: React.ReactNode;
   focusColor?: string;
   placeholder?: string;
+  searchBarType?: 'visit' | 'place';
 }
