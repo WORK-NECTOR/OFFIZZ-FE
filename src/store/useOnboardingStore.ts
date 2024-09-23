@@ -16,6 +16,8 @@ interface OnboardingType {
   setCoreTimeEnd: (time: TimeFormat) => void;
   travel: Array<string>;
   setTravel: (travels: Array<string>) => void;
+  workplace: Array<string>;
+  setWorkplace: (workplaces: Array<string>) => void;
 }
 
 const useOnboardingStore = create<OnboardingType>((set) => ({
@@ -46,6 +48,10 @@ const useOnboardingStore = create<OnboardingType>((set) => ({
   travel: [],
   setTravel: (travels) => {
     set(() => ({ travel: travels }));
+  },
+  workplace: [],
+  setWorkplace: (workplaces) => {
+    set(() => ({ workplace: workplaces }));
   },
 }));
 
