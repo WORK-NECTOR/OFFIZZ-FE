@@ -11,6 +11,7 @@ import OnboardingTravel from './components/OnboardingTravel';
 import OnboardingWorkplace from './components/OnboardingWorkplace';
 import OnboardingVisit from './components/OnboardingVisit';
 import OnboardingGoal from './components/OnboardingGoal';
+import OnboardingEnd from './components/OnboardingEnd';
 
 const stepPage: { [key: number]: JSX.Element } = {
   0: <OnboardingStart />,
@@ -22,6 +23,7 @@ const stepPage: { [key: number]: JSX.Element } = {
   6: <OnboardingWorkplace />,
   7: <OnboardingVisit />,
   8: <OnboardingGoal />,
+  9: <OnboardingEnd />,
 };
 
 function OnboardingPage() {
