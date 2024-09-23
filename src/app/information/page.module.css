@@ -1,0 +1,17 @@
+.day {
+  border: 1px solid black;
+  width: 8rem;
+  height: 2rem;
+  margin-top: 2.5rem;
+}
+.top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.switch {
+  border: 1px solid black;
+  width: 8rem;
+  height: 2rem;
+  margin-top: 2.5rem;
+}
