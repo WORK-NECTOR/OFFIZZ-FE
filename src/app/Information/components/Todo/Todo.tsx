@@ -4,8 +4,8 @@ import { TodoBox, TodoSub, TodoTitle } from './Todo.styled';
 import play from '../../../../../public/todo-play.png';
 import clock from '../../../../../public/time.png';
 import { TimeRangeType } from '@/types/timeRange.type';
-import useActivityStore from '@/store/useselectTodo';
 import useTimeStore from '@/store/useSelectTime';
+import useActivityStore from '@/store/useSelectTodo';
 
 interface TodoProps {
   timeArr: TimeRangeType[];
