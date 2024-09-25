@@ -20,7 +20,7 @@ import ic_night from '../../../public/ic-night.png';
 import ic_day from '../../../public/ic-day.png';
 
 function TimeRange(props: TimeRangeProps) {
-  const { timeArr } = props;
+  const { timeArr, length = 'long' } = props;
   const fixedHours = Array.from({ length: 25 }, (_, i) => i);
 
   const fixedHourElArr: Array<TimeRangeElType> = useMemo(() => {
@@ -94,14 +94,14 @@ function TimeRange(props: TimeRangeProps) {
 
   return (
     <TimeRangeContainer>
-      <TimeRangeIconWrapper>
+      <TimeRangeIconWrapper $length={length}>
         <Image className="time-icon" src={ic_night} alt="밤 아이콘" />
         <Image className="time-icon" src={ic_day} alt="낮 아이콘" />
         <Image className="time-icon" src={ic_night} alt="밤 아이콘" />
       </TimeRangeIconWrapper>
-      <TimeRangeElWrapper>
+      <TimeRangeElWrapper $length={length}>
         {fixedHourElArr.map((el) => (
-          <TimeRangeEl key={el.hour}>
+          <TimeRangeEl $length={length} key={el.hour}>
             <FixedHour>{convertHourFormat(el.hour)}</FixedHour>
             <TimeRangeBg>
               <TimeRangeFill $left={el.left} $width={el.width}>

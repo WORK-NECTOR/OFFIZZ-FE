@@ -3,4 +3,6 @@ export interface SearchBarProps {
   height: string;
   focusContent?: React.ReactNode;
   focusColor?: string;
+  placeholder?: string;
+  searchBarType?: 'visit' | 'place';
 }
