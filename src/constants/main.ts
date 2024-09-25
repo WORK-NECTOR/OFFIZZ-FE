@@ -1,4 +1,5 @@
 export const TOP_MAIN = {
+  name: 'offizz',
   slogan: 'the sparkling way to work',
   title: `답답한 사무실을 벗어나\n톡 쏘는 워케이션!`,
   desc: `워케이션 기간동안 오피츠와 함께\n최고의 생산성을 경험하세요`,
@@ -46,7 +47,6 @@ export const RECAP_MAIN = {
 export const RECOMMEND_MAIN = {
   title: '그럼, 어디로 떠나볼까요?',
   desc: '워케이션 기간동안 생산성을 높여 줄 공유 오피스예요',
-  regionArr: ['서울', '강원', '제주', '부산', '경기', '기타'],
   notLoginDesc: '로그인하고 더 많은 공유오피스 보기 >',
   viewAllBtnText: '전체보기 >',
 };
