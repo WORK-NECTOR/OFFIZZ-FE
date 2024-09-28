@@ -150,7 +150,7 @@
 .sixth-select-bar {
   display: flex;
   justify-content: space-between;
-  width: max-content;
+  width: 62.5rem;
   margin-top: 1.875rem;
 }
 
