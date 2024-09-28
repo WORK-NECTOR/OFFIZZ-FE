@@ -1,6 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import logo from 'public/offizz-logo.png';
+import { useEffect, useState } from 'react';
 import { HEADER_TEXT } from '@/constants/header';
 import {
   HeaderContainer,
@@ -9,10 +12,7 @@ import {
 } from './Header.styled';
 import useHeaderMenuStore from '@/store/useMenuStore';
 import { HeaderTextUnion } from '@/types/header.type';
-import Image from 'next/image';
-import logo from 'public/offizz-logo.png';
 import useAuth from '@/hook/useAuth';
-import { useEffect, useState } from 'react';
 
 function Header() {
   const { getAccessToken } = useAuth();

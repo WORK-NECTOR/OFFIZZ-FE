@@ -1,6 +1,6 @@
+import { Cookies } from 'react-cookie';
 import { instance } from '@/api/axios';
 import { TokenProps } from '@/types/user.type';
-import { Cookies } from 'react-cookie';
 
 function useAuth() {
   const cookies = new Cookies();
@@ -16,7 +16,7 @@ function useAuth() {
   function isExpired(expires: Date) {
     const now = new Date();
     if (now > expires) return true;
-    else return false;
+    return false;
   }
 
   function setAccessToken(props: TokenProps) {
@@ -37,10 +37,12 @@ function useAuth() {
 
   function removeTokens() {
     if (typeof window !== undefined) {
+      // eslint-disable-next-line no-prototype-builtins
       if (localStorage.hasOwnProperty('accessToken')) {
         localStorage.removeItem('accessToken');
       }
 
+      // eslint-disable-next-line no-prototype-builtins
       if (localStorage.hasOwnProperty('accessExpire')) {
         localStorage.removeItem('accessExpire');
       }
@@ -49,6 +51,12 @@ function useAuth() {
         path: '/',
       });
     }
+  }
+
+  function getRefreshToken() {
+    if (refreshToken) return refreshToken;
+
+    return '';
   }
 
   async function reissueToken() {
@@ -68,24 +76,20 @@ function useAuth() {
           token: res.data.refreshToken,
           expire: res.data.refreshExpiration,
         });
-        return;
       } else {
         removeTokens();
-        return;
       }
+      // eslint-disable-next-line no-empty
     } catch {}
   }
 
-  function getRefreshToken() {
-    if (refreshToken) return refreshToken;
-
-    return '';
-  }
-
+  // eslint-disable-next-line consistent-return
   async function getAccessToken() {
     if (
       typeof window !== 'undefined' &&
+      // eslint-disable-next-line no-prototype-builtins
       localStorage.hasOwnProperty('accessToken') &&
+      // eslint-disable-next-line no-prototype-builtins
       localStorage.hasOwnProperty('accessExpire')
     ) {
       const accessTkn = localStorage.getItem('accessToken');
@@ -94,12 +98,11 @@ function useAuth() {
       if (isExpired(accessExp)) {
         if (getRefreshToken()) {
           await reissueToken();
-          const accessTkn = localStorage.getItem('accessToken');
-          return accessTkn;
-        } else {
-          removeTokens();
-          return '';
+          const accessToken = localStorage.getItem('accessToken');
+          return accessToken;
         }
+        removeTokens();
+        return '';
       }
 
       if (!isExpired(accessExp)) return accessTkn;
@@ -108,7 +111,8 @@ function useAuth() {
         await reissueToken();
         const accessTkn = localStorage.getItem('accessToken');
         return accessTkn;
-      } else return '';
+      }
+      return '';
     }
   }
 
