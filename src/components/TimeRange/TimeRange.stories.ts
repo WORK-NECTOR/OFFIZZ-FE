@@ -21,6 +21,7 @@ const meta = {
         activity: 'test',
       },
     ],
+    length: 'short',
   },
 } satisfies Meta<typeof TimeRange>;
 
