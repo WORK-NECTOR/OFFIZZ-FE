@@ -1,99 +1,142 @@
-.focusWraper{
+.focusWraper {
     background: var(--Greyscale-800, #262626);
     width: 100%;
     height: 100%;
 }
+
 .centerImage img {
     position: absolute;
     top: 9.5rem; 
     left: 50%;
-    transform: translate(-50%, -50%); /* Offset to truly center it */
+    transform: translate(-50%, -50%);
 }
-.title{
+
+.title {
     position: absolute;
-    left: 45%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ left: 47%;
     top: 14.25rem; 
     color: var(--Greyscale-White, #FFF);
-text-align: center;
-
-/* Kor/Body1-kor */
-font-family: Pretendard;
-font-size: 1.25rem;
-font-style: normal;
-font-weight: 600;
-line-height: 1.75rem; /* 140% */
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.75rem;
 }
-.time{
+
+.time {
     position: absolute;
-    left: 47.5%;
+    left: 48%;
     top: 16.25rem;
     color: var(--Greyscale-300, #C4C4C4);
-
-/* Eng/Caption4-eng */
-font-family: Figtree;
-font-size: 0.75rem;
-font-style: normal;
-font-weight: 400;
-line-height: 1rem; /* 133.333% */
+    font-family: Figtree;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1rem;
 }
-.timer{
+
+.timer {
     position: absolute;
-    left: 44%;
+    left: 46%;
     top: 19.06rem;
     width: 11.5rem;
-height: 11.5rem;
-flex-shrink: 0;
-background-color: white;
+    height: 11.5rem;
+    flex-shrink: 0;
 }
-.buttonWrapper{
-display: flex;
-position: absolute;
+
+.progressCircle {
+    transform: rotate(-90deg);
+}
+
+.progressBackground {
+stroke: var(--Greyscale-700, #434343);
+}
+
+.progressForeground {
+    stroke: #3498db;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.buttonWrapper {
+    display: flex;
+    position: absolute;
     left: 40%;
     top: 34.37rem;
     text-align: center;
 }
-.buttonStop{
+
+.buttonStop {
     display: flex;
     text-align: center;
-height: 2.25rem;
-width: 8.875rem;
-padding: 0rem 0.75rem;
-margin-right: 0.75rem;
-flex-direction: column;
-justify-content: center;
-align-items: flex-start;
-gap: 0.5rem;
-flex: 1 0 0;
-border-radius: 0.75rem;
-background: var(--Greyscale-700, #434343);
-color: var(--Greyscale-White, #FFF);
-
-/* Kor/Body5-kor */
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 600;
-line-height: 1.375rem; /* 137.5% */
+    height: 2.25rem;
+    width: 8.875rem;
+    padding: 0rem 0.75rem;
+    margin-right: 0.75rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    flex: 1 0 0;
+    border-radius: 0.75rem;
+    background: var(--Greyscale-700, #434343);
+    color: var(--Greyscale-White, #FFF);
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.375rem;
 }
-.buttonEnd{
+
+.buttonEnd {
     display: flex;
     width: 8.875rem;
     height: 2.25rem;
     padding: 0rem 0.75rem;
-    flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.5rem;
     flex: 1 0 0;
     border-radius: 0.75rem;
-background: var(--Blue-dark, #3E6BC3);
-color: var(--Greyscale-White, #FFF);
+    background: var(--Blue-dark, #3E6BC3);
+    color: var(--Greyscale-White, #FFF);
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.375rem;
+}
+.timeText {
+    position: absolute;
+    left: 47.5%;
+    top: 25rem;
+    margin-top: 5rem;
+    color: var(--Greyscale-White, #FFF);
+    text-align: center;
+    
+    /* Kor/Body3-kor */
+    font-family: Pretendard;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem; /* 133.333% */
+}
+.timeTextSub{
+    position: absolute;
+    left: 47%;
+    top: 28rem;
+    color: var(--Greyscale-300, #C4C4C4);
 text-align: center;
 
-/* Kor/Body5-kor */
+/* Kor/Body3-kor */
 font-family: Pretendard;
-font-size: 1rem;
+font-size: 1.125rem;
 font-style: normal;
 font-weight: 600;
-line-height: 1.375rem; /* 137.5% */
+line-height: 1.5rem; /* 133.333% */
+
 }

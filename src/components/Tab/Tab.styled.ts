@@ -4,20 +4,14 @@ export const TabContainer = styled.div`
   width: 13.4rem;
   height: 100vh;
   flex-shrink: 0;
-  background-color: #f9f9f9;
-  padding-top: 2.95rem;
+  border: 1px solid var(--Greyscale-100, #E9E9E9);
+background: var(--Greyscale-White, #FFF);
   display: flex;
   flex-direction: column;
   align-items: center;
 
   #tab-title {
-    color: var(--Greyscale-Black, #000);
-    text-align: center;
-    font-family: SUIT;
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    margin-top: 1.26rem;
   }
 `;
 export const TabListContainer = styled.div`
@@ -29,21 +23,45 @@ export const TabListContainer = styled.div`
   align-items: center;
   gap: 0.4rem;
   margin-top: 3.67rem;
+  border: 1px solid red;
 
   #tab-list {
     display: flex;
-    width: 9rem;
-    padding: 0.4rem;
-    margin-bottom: 1.12rem;
-    align-items: center;
-    gap: 0.4rem;
-    background: #e6e6e6;
-    color: var(--Greyscale-Black, #000);
-    text-align: center;
-    font-family: SUIT;
-    font-size: 0.9rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    width: 10.5rem;
+padding: 0.5rem;
+align-items: center;
+gap: 0.5rem;
+align-self: stretch;
+border-radius: 0.5rem;
+background: var(--Greyscale-White, #FFF);
+
+    color: var(--Greyscale-600, #555);
+text-align: center;
+
+/* Kor/Body6-kor */
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 1.375rem; /* 137.5% */
   }
+  #tab-list.active {
+    display: flex;
+    width: 10.5rem;
+padding: 0.5rem;
+align-items: center;
+gap: 0.5rem;
+align-self: stretch;
+border-radius: 0.5rem;
+background: var(--Blue-greyish, #F4F7F9);
+    color: var(--Greyscale-600, #555);
+text-align: center;
+
+/* Kor/Body6-kor */
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 1.375rem; /* 137.5% */
+}
 `;
