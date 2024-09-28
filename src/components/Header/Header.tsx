@@ -7,6 +7,8 @@ import {
 } from './Header.styled';
 import useHeaderMenuStore from '@/store/useMenuStore';
 import { HeaderTextUnion } from '@/types/header.type';
+import Image from 'next/image';
+import logo from 'public/offizz-logo.png';
 
 function Header() {
   const router = useRouter();
@@ -28,7 +30,14 @@ function Header() {
 
   return (
     <HeaderContainer>
-      <h1>{HEADER_TEXT.appName}</h1>
+      <Image
+        src={logo}
+        alt="오피츠 로고 이미지"
+        id="logo-img"
+        onClick={() => {
+          router.push('/');
+        }}
+      />
       <HeaderMenuContainer>
         <HeaderMenu
           $isSelected={selectedMenu === HEADER_TEXT.home}
