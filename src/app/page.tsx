@@ -20,7 +20,7 @@ import useRegionStore, { Region } from '@/store/useRegionStore';
 
 export default function MainPage() {
   // const { accessToken, setAccessToken } = useUserStore.getState();
-  const { selectedRegion, setSelectedRegion } = useRegionStore.getState();
+  const { selectedRegion, setSelectedRegion } = useRegionStore();
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     const text = e.currentTarget.innerText as Region;
