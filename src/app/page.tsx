@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import Header from '@/components/Header';
-import thumbnail from '../../public/thumbnail.png';
 import main_dashboard from 'public/main-dashboard.png';
 import main_todo from 'public/main-todo.png';
 import main_retro from 'public/main-retrospective.png';
 import main_ywt from 'public/main-ywt.png';
 import main_recap from 'public/main-recap.png';
+import thumbnail from '../../public/thumbnail.png';
+import Header from '@/components/Header';
 import TitleDesc from '@/components/TitleDesc';
 import {
   DASHBOARD_MAIN,
