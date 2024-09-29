@@ -6,34 +6,48 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2.5rem;
+  padding: 0 11.4375rem;
   backdrop-filter: blur(14px);
   position: fixed;
   top: 0;
   z-index: 1;
+  font-family: Figtree;
 
-  h1 {
-    cursor: pointer;
+  #logo-img {
+    width: 3.125rem;
+    height: 1rem;
   }
 
   button {
-    cursor: pointer;
     border: none;
     background-color: transparent;
-    font-size: 1.5rem;
+    width: fit-content;
+    height: 2.25rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
   }
 `;
 
 export const HeaderMenuContainer = styled.ul`
-  width: 60%;
-  height: 1.82rem;
+  width: 13.4375rem;
+  height: 2.25rem;
   display: flex;
   justify-content: space-between;
   list-style-type: none;
+  position: absolute;
+  left: 17.8125rem;
 `;
 
 export const HeaderMenu = styled.li<{ $isSelected: boolean }>`
-  font-size: 1.5rem;
+  width: fit-content;
+  height: 2.25rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
   cursor: pointer;
   color: ${(props) =>
     props.$isSelected ? 'var(--black-main)' : 'var(--inactive-gray)'};
