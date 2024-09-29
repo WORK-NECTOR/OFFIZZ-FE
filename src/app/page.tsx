@@ -3,9 +3,15 @@
 import Image from 'next/image';
 import Header from '@/components/Header';
 import thumbnail from '../../public/thumbnail.png';
+import main_dashboard from 'public/main-dashboard.png';
+import main_todo from 'public/main-todo.png';
+import main_retro from 'public/main-retrospective.png';
+import main_ywt from 'public/main-ywt.png';
+import main_recap from 'public/main-recap.png';
 import TitleDesc from '@/components/TitleDesc';
 import {
   DASHBOARD_MAIN,
+  RECAP_MAIN,
   RECOMMEND_MAIN,
   RETROSPECT_MAIN,
   TODO_MAIN,
@@ -71,8 +77,8 @@ export default function MainPage() {
           />
           <div className={styles['second-main-image-wrapper']}>
             <Image
-              src={thumbnail}
-              alt="임시 이미지"
+              src={main_dashboard}
+              alt="메인 - 대시보드"
               className={styles['second-main-image']}
             />
           </div>
@@ -88,21 +94,21 @@ export default function MainPage() {
               />
             </section>
             <Image
-              src={thumbnail}
-              alt="임시 이미지"
+              src={main_todo}
+              alt="메인 - 투두"
               className={styles['third-main-image']}
             />
           </section>
         </section>
         <section className={styles['fourth-main']}>
           <Image
-            src={thumbnail}
-            alt="임시 이미지"
+            src={main_retro}
+            alt="메인 - 회고"
             className={styles['fourth-main-image']}
           />
           <Image
-            src={thumbnail}
-            alt="임시 서브 이미지"
+            src={main_ywt}
+            alt="메인 - YWT 회고"
             className={styles['fourth-main-sub-image']}
           />
           <section className={styles['fourth-main-text']}>
@@ -114,7 +120,16 @@ export default function MainPage() {
             />
           </section>
         </section>
-        <section className={styles['fifth-main']} />
+        <section className={styles['fifth-main']}>
+          <section className={styles['fifth-main-text']}>
+            <p className={styles['main-index']}>{RECAP_MAIN.index}</p>
+            <TitleDesc
+              title={RECAP_MAIN.title}
+              desc={RECAP_MAIN.desc}
+              sort="center"
+            />
+          </section>
+        </section>
         <section className={styles['sixth-main']}>
           <TitleDesc
             title={RECOMMEND_MAIN.title}
