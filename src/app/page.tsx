@@ -23,6 +23,7 @@ import { regionArr } from '@/constants/office';
 import SelectButton from '@/components/Button/SelectButton';
 import useRegionStore, { Region } from '@/store/useRegionStore';
 import FeatureInfo from '@/components/FeatureInfo';
+import Footer from '@/components/Footer';
 // import useUserStore from '@/store/useUserStore';
 
 export default function MainPage() {
@@ -182,6 +183,7 @@ export default function MainPage() {
             />
           </div>
         </section>
+        <Footer />
       </main>
     </>
   );
