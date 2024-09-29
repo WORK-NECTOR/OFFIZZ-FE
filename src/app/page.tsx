@@ -22,6 +22,7 @@ import styles from './page.module.css';
 import { regionArr } from '@/constants/office';
 import SelectButton from '@/components/Button/SelectButton';
 import useRegionStore, { Region } from '@/store/useRegionStore';
+import FeatureInfo from '@/components/FeatureInfo';
 // import useUserStore from '@/store/useUserStore';
 
 export default function MainPage() {
@@ -128,6 +129,27 @@ export default function MainPage() {
               desc={RECAP_MAIN.desc}
               sort="center"
             />
+          </section>
+          <section className={styles['fifth-main-content']}>
+            <Image
+              src={main_recap}
+              alt="리캡 이미지"
+              className={styles['fifth-main-img']}
+            />
+            <div className={styles['fifth-features']}>
+              <FeatureInfo
+                title={RECAP_MAIN.goalTitle}
+                desc={RECAP_MAIN.goalDesc}
+              />
+              <FeatureInfo
+                title={RECAP_MAIN.statisticTitle}
+                desc={RECAP_MAIN.statisticDesc}
+              />
+              <FeatureInfo
+                title={RECAP_MAIN.achievementTitle}
+                desc={RECAP_MAIN.achievementDesc}
+              />
+            </div>
           </section>
         </section>
         <section className={styles['sixth-main']}>
