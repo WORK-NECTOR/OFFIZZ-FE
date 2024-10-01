@@ -24,16 +24,32 @@ import SelectButton from '@/components/Button/SelectButton';
 import useRegionStore, { Region } from '@/store/useRegionStore';
 import FeatureInfo from '@/components/FeatureInfo';
 import Footer from '@/components/Footer';
-// import useUserStore from '@/store/useUserStore';
+import { useRecRegionOfficeQuery } from '@/services/office/useRecRegionOfficeQuery';
+import OfficeAccordion from '@/components/OfficeAccordion';
+import { useRouter } from 'next/navigation';
+import useAuth from '@/hook/useAuth';
+import { useEffect, useState } from 'react';
 
 export default function MainPage() {
-  // const { accessToken, setAccessToken } = useUserStore.getState();
+  const [token, setToken] = useState('');
+  const router = useRouter();
+  const { getAccessToken } = useAuth();
   const { selectedRegion, setSelectedRegion } = useRegionStore();
+  const { data } = useRecRegionOfficeQuery({
+    region: selectedRegion,
+    size: 4,
+  });
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     const text = e.currentTarget.innerText as Region;
     setSelectedRegion(text);
   };
+
+  useEffect(() => {
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) setToken(accessTkn);
+    });
+  }, []);
 
   return (
     <>
@@ -57,7 +73,13 @@ export default function MainPage() {
               textColor="var(--white-main)"
               hoverColor="var(--blue-dark)"
               padding="1rem 2rem"
-              clickHandler={() => {}}
+              clickHandler={() => {
+                if (token) {
+                  router.push('/onboarding');
+                } else {
+                  router.push('/login');
+                }
+              }}
             />
           </section>
           <div className={styles['first-main-image-wrapper']}>
@@ -179,9 +201,46 @@ export default function MainPage() {
               textColor="var(--blue-main)"
               hoverColor="var(--blue-greyish)"
               padding="0.5rem 1rem"
-              clickHandler={() => {}}
+              clickHandler={() => {
+                if (token) {
+                  router.push('/recommend');
+                } else {
+                  router.push('/login');
+                }
+              }}
             />
           </div>
+          {!token && data && data.length > 0 && (
+            <div className={styles['sixth-blur']}>
+              <BasicButton
+                btnType="full"
+                btnHeight="3.25rem"
+                btnText={RECOMMEND_MAIN.notLoginDesc}
+                btnColor="var(--blue-main)"
+                textColor="var(--white-main)"
+                hoverColor="var(--blue-dark)"
+                padding="0.5rem 1.5rem"
+                clickHandler={() => {
+                  router.push('/login');
+                }}
+              />
+            </div>
+          )}
+          {data && data.length > 0 && (
+            <div className={styles['sixth-accordion-list']}>
+              {data.map((el) => (
+                <OfficeAccordion
+                  key={el.officeId}
+                  placeName={el.name}
+                  placeAddress={el.address}
+                  allYearRound={el.facilities.openAllYear || false}
+                  dayAndNight={el.facilities.twentyFourHoursOperation || false}
+                  price={el.price}
+                  priceUnit={el.priceType}
+                />
+              ))}
+            </div>
+          )}
         </section>
         <Footer />
       </main>
