@@ -2,43 +2,45 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { TodoBox, TodoBoxAdd, TodoSub, TodoTimeInput, TodoTitle, TodoTitleInput } from './Todo.styled';
 import play from '../../../../../public/todo-play.png';
+import playvacation from '../../../../../public/todo-vac.png';
+import playDone from '../../../../../public/done.png';
 import clock from '../../../../../public/time.png';
-import { TimeRangeType } from '@/types/timeRange.type';
+import { TimeRangeType, TodoTime } from '@/types/timeRange.type';
 import useTimeStore from '@/store/useSelectTime';
 import useActivityStore from '@/store/useSelectTodo';
 import axios from 'axios';
+import useAuth from '@/hook/useAuth';
+import { useSearchParams } from 'next/navigation';
 
 interface TodoProps {
-  timeArr: TimeRangeType[];
+  day: number,
   onClick: () => void;
   isTodoAdded: boolean;
 }
 
-const Todo: React.FC<TodoProps> = ({ timeArr, onClick, isTodoAdded }) => {
+
+const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
+  const searchParams = useSearchParams();
+  const { getAccessToken } = useAuth();
   const { setActivity } = useActivityStore(); 
   const { setTime } = useTimeStore();
-  const [calculateTime, setCalculateTime] = useState('');
   const [newActivity, setNewActivity] = useState('');
   const [newTime, setNewTime] = useState('');
-  const [updatedTimeArr, setUpdatedTimeArr] = useState<TimeRangeType[]>([]); // 초기화
+  const [workArr, setWorkArr] = useState<TodoTime[]>([]); 
+  const [VacationArr, setVacationArr] = useState<TodoTime[]>([]); 
+  const vacationType = searchParams.get('kind');
 
-  const calculateTimeDifference = (from: string, to: string) => {
-    const fromTime = new Date(`1970-01-01T${from}:00`);
-    const toTime = new Date(`1970-01-01T${to}:00`);
-    
-    const differenceInMinutes = (toTime.getTime() - fromTime.getTime()) / (1000 * 60);
-    const hours = Math.floor(differenceInMinutes / 60);
-    const minutes = differenceInMinutes % 60;
-
-    return `${hours}시간 ${minutes}분`;
-  };
-
-  const handleActivityClick = (time: any) => {
+  const handleActivityClick = (time: TodoTime) => {
     setActivity(time.activity);
-    setTime(calculateTimeDifference(time.from, time.to));
+    setTime(formatTimeDisplay(time.time));
     onClick(); 
   };
 
+  const formatTimeDisplay = (time: string): string => {
+    const [hours, minutes] = time.split(':');
+    return `${hours}시 ${minutes}분`;
+  };
+  
   const formatTimeInput = (time: string): `${number}:${number}` => {
     const parts = time.split(':');
     if (parts.length === 2) {
@@ -49,32 +51,136 @@ const Todo: React.FC<TodoProps> = ({ timeArr, onClick, isTodoAdded }) => {
     return '00:00' as `${number}:${number}`; // 기본값
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      const planTime = formatTimeInput(newTime);
+      const activityName = newActivity;
+      const urlType = vacationType === 'vacation' ? 'vacation' : 'work';
+      
+      getAccessToken().then(async (token) => {
+        try {
+          const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/${urlType}/todo/${day}`,
+            {
+              icon: 0,
+              planTime: planTime,
+              name: activityName,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`, // 헤더에 액세스 토큰 추가
+              },
+            }
+          );
+
+          alert('Todo 추가 성공');
+          window.location.reload();
+        } catch (error) {
+          console.error('Todo 추가 실패:', error);
+        }
+      });
     }
   };
+
   useEffect(() => {
-    const fetchData = async () => {
+    const tempWorkArr: TodoTime[] = [
+      {
+        time: '04:10',
+        activity: 'Core Time',
+        isComplete: true,
+        icon: '😎',
+      },
+      {
+        time: '04:10',
+        activity: 'Test',
+        isComplete: false,
+        icon: '😂',
+      },
+    ];
+
+    setWorkArr(tempWorkArr);
+    setVacationArr(tempWorkArr)
+    getAccessToken().then(async (token) => {
       try {
-        const day = 1;
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/${day}`);
-        const fetchedData = response.data; 
-        console.log(fetchedData)
-        setUpdatedTimeArr(fetchedData);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/${day}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        
+        const workData = response.data.workTodoResponses;
+        const vacationData = response.data.vacationTodoResponses; // vacation 데이터 가져오기
+        setVacationArr(vacationData);
+        setWorkArr(workData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-    };
-
-    fetchData();
+    });
   }, []);
-  useEffect(() => {
-    // timeArr의 변화를 감지하여 updatedTimeArr 업데이트
-    setUpdatedTimeArr(timeArr); 
-  }, [timeArr]);
 
   return (
     <>
+      {vacationType=='vacation' &&
+      <>
+      {isTodoAdded && (
+        <TodoBoxAdd>
+          <div style={{ display: 'flex' ,alignItems:'center',justifyContent:'center'}}>
+            <Image
+              src={playvacation}
+              alt="play"
+              width={36}
+              height={36}
+            />
+            <div style={{ marginLeft: '0.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Image src={clock} alt="time" width={15} height={15} />
+                <TodoTitleInput
+                  type="text"
+                  value={newActivity}
+                  onChange={(e) => setNewActivity(e.target.value)}
+                  placeholder="할 일 입력"
+                />
+              </div>
+            </div>
+          </div>
+        </TodoBoxAdd>
+      )}
+      {(vacationType === 'vacation' ? VacationArr : workArr).map((time, index) => (
+        <TodoBox key={index}>
+          <div style={{ display: 'flex',alignItems:'center',justifyContent:'center' }}>
+            {time.isComplete ? (
+              <Image
+                src={playvacation}
+                alt="play"
+                width={36}
+                height={36}
+                onClick={() => handleActivityClick(time)} 
+              />
+            ) : (
+              <Image
+                src={playDone}
+                alt="play"
+                width={36}
+                height={36}
+              />
+            )}
+            
+            <div style={{ marginLeft: '0.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div>{time.icon ? time.icon : ''}</div>
+                <TodoTitle>{time.activity}</TodoTitle>
+              </div>
+            
+            </div>
+          </div>
+          <div>...</div>
+        </TodoBox>
+      ))}</>}
+      {vacationType!=='vacation' &&
+      <>
       {isTodoAdded && (
         <TodoBoxAdd>
           <div style={{ display: 'flex' }}>
@@ -108,16 +214,26 @@ const Todo: React.FC<TodoProps> = ({ timeArr, onClick, isTodoAdded }) => {
           </div>
         </TodoBoxAdd>
       )}
-      {updatedTimeArr.map((time, index) => (
+      {(vacationType === 'vacation' ? VacationArr : workArr).map((time, index) => (
         <TodoBox key={index}>
           <div style={{ display: 'flex' }}>
-            <Image
-              src={play}
-              alt="play"
-              width={36}
-              height={36}
-              onClick={() => handleActivityClick(time)} // Pass the activity to the handler
-            />
+            {time.isComplete ? (
+              <Image
+                src={play}
+                alt="play"
+                width={36}
+                height={36}
+                onClick={() => handleActivityClick(time)} 
+              />
+            ) : (
+              <Image
+                src={playDone}
+                alt="play"
+                width={36}
+                height={36}
+              />
+            )}
+            
             <div style={{ marginLeft: '0.5rem' }}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div>{time.icon ? time.icon : ''}</div>
@@ -125,13 +241,13 @@ const Todo: React.FC<TodoProps> = ({ timeArr, onClick, isTodoAdded }) => {
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Image src={clock} alt="time" width={15} height={15} />
-                <TodoSub>{calculateTimeDifference(time.from, time.to)}</TodoSub>
+                <TodoSub>{formatTimeDisplay(time.time)}</TodoSub>
               </div>
             </div>
           </div>
           <div>...</div>
         </TodoBox>
-      ))}
+      ))}</>}
     </>
   );
 };

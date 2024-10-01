@@ -6,17 +6,18 @@ import chatactor from '../../../public/charactor-laptop.png';
 import clock from '../../../public/time.png';
 import { useRouter, useSearchParams } from 'next/navigation';
 import axios from 'axios';
-
+import useAuth from '@/hook/useAuth';
+const { getAccessToken } = useAuth();
 function FocusPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const title = searchParams.get('title');
     const time = searchParams.get('time');
-
+    const day = searchParams.get('day');
     // 시간에 따른 원형 그래프 상태
     const [percentage, setPercentage] = useState(0);
     const [elapsedTime, setElapsedTime] = useState(0); // 경과 시간 상태
-    const [isPaused, setIsPaused] = useState(true); // 초기 상태는 일시정지
+    const [isPaused, setIsPaused] = useState(true);
     const [intervalId, setIntervalId] = useState<number | null>(null); // interval ID
 
     // 1시간 기준으로 타이머 설정
@@ -58,26 +59,35 @@ function FocusPage() {
         return () => {
             if (intervalId) clearInterval(intervalId); // 컴포넌트 언마운트 시 정리
         };
-    }, [isPaused, elapsedTime]); // isPaused와 elapsedTime에 따라 실행
+    }, [isPaused, elapsedTime]);
 
     // 종료 버튼 클릭 시
     const onClickFinish = async () => {
+        try {
+            const body = {
+                workTodoId: 0, // 원하는 ID로 설정
+                actualTime: formatTime(elapsedTime),
+            };
 
-      try {
-          const day = 1; // day 값을 1로 설정
-          const body = {
-              workTodoId: 0, // 원하는 ID로 설정
-              actualTime: formatTime(elapsedTime),
-          };
+            // 토큰을 가져와 axios 요청에 사용
+            getAccessToken().then((token) => {
+                axios.patch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/work/todo/fin/${day}`, body, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then(() => {
+                    router.push('/information?modalType=End'); 
+                })
+                .catch((error) => {
+                    console.error("PATCH 요청 실패:", error);
+                });
+            });
+        } catch (error) {
+            console.error("에러 발생:", error);
+        }
+    };
 
-          await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/work/todo/fin/${day}`, body);
-
-          // 페이지 이동
-          router.push('/information?modalType=End');
-      } catch (error) {
-          console.error("PATCH 요청 실패:", error); // 에러 처리
-      }
-  };
     // 일시정지/재생 버튼 클릭 시
     const togglePause = () => {
         setIsPaused((prev) => !prev); // 일시정지 상태를 토글

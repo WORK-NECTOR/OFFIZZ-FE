@@ -36,7 +36,7 @@ function Tab() {
           <div
             id="tab-list"
             className={activeTab === '/information/recap' ? 'active' : ''}
-            onClick={() => setActiveTab('/information/recap')} 
+            // onClick={() => setActiveTab('/information/recap')} 
           >
             회고
           </div>
@@ -45,7 +45,7 @@ function Tab() {
           <div
             id="tab-list"
             className={activeTab === '/information/my' ? 'active' : ''}
-            onClick={() => setActiveTab('/information/my')}
+            // onClick={() => setActiveTab('/information/my')}
           >
             마이
           </div>

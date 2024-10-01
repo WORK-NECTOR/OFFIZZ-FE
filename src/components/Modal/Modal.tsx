@@ -11,6 +11,7 @@ import {
   Overlay,
 } from './Modal.styled';
 import { useRouter } from 'next/navigation';
+import useDayStore from '@/store/useSelectDay';
 
 interface TodoContent {
   title: string;
@@ -27,11 +28,12 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, content,todoTitle,time }) => {
+  const { day} = useDayStore();
   if (!isOpen) return null;
   const router = useRouter();
   const onClickStart = () => {
     onClose()
-    router.push(`/focus?title=${todoTitle}&time=${time}`);
+    router.push(`/focus?title=${todoTitle}&time=${time}&day=${day}`);
   };
   const onClickConfirm = () => {
     onClose()

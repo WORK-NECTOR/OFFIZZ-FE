@@ -20,3 +20,11 @@ export type TimeRangeElType = {
   width: string;
   activity: string;
 };
+
+
+export type TodoTime = {
+  icon?: string | StaticImageData;
+  time:string;
+  activity: string;
+  isComplete:boolean,
+};
