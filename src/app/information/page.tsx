@@ -20,6 +20,7 @@ import leftarrow from '../../../public/leftarrow.png'
 import rightarrow from '../../../public/rightarrow.png'
 import useDayStore from '@/store/useSelectDay';
 import useAuth from '@/hook/useAuth';
+import Recode from './components/Recode/Recode';
 function InformationPage() {
   const searchParams = useSearchParams();
   const modalType = searchParams.get('modalType');
@@ -152,12 +153,12 @@ function InformationPage() {
         <div className={styles.rightWrapperSwitch}>
           <div>
             <div className={styles.rightTitleSwitch}>여행 기록</div>
-            
+        <Recode/>
           </div>
           <div style={{ marginLeft: '8.25rem' }}>
             <div className={styles.rightTitleSwitch}>
               to-do
-              <div className={styles.addBtnSwitch} onClick={handleAddTodo}>추가 +</div>
+              <div className={styles.addBtnSwitch} >추가 +</div>
             </div>
             <Todo onClick={handleTodoClick} isTodoAdded={isTodoAdded} day={day}/>
           </div>

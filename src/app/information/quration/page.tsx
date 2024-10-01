@@ -41,7 +41,10 @@ function QurationPage() {
     <div style={{ display: 'flex' }}>
       <Tab />
       <div>
-        <div className={styles.SwitchBtn}>switchBtn</div>
+        <div className={styles.switchSwitch}>
+          <div className={styles.workSwitch}>work</div>
+          <div className={styles.vacationSwitch} >vacation</div>
+        </div>
         <div style={{ display: 'flex' }}>
           <div style={{ width: '22.75rem' }}>
             <div className={styles.Search}>
