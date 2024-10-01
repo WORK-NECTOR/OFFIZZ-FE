@@ -6,6 +6,8 @@ import main_todo from 'public/main-todo.png';
 import main_retro from 'public/main-retrospective.png';
 import main_ywt from 'public/main-ywt.png';
 import main_recap from 'public/main-recap.png';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import thumbnail from '../../public/thumbnail.png';
 import Header from '@/components/Header';
 import TitleDesc from '@/components/TitleDesc';
@@ -26,9 +28,7 @@ import FeatureInfo from '@/components/FeatureInfo';
 import Footer from '@/components/Footer';
 import { useRecRegionOfficeQuery } from '@/services/office/useRecRegionOfficeQuery';
 import OfficeAccordion from '@/components/OfficeAccordion';
-import { useRouter } from 'next/navigation';
 import useAuth from '@/hook/useAuth';
-import { useEffect, useState } from 'react';
 
 export default function MainPage() {
   const [token, setToken] = useState('');
