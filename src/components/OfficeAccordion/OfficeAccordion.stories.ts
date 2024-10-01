@@ -10,6 +10,9 @@ const meta = {
   },
   args: {
     placeName: '임시 오피스명',
+    allYearRound: true,
+    dayAndNight: true,
+    officeId: 1,
   },
 } satisfies Meta<typeof OfficeAccordion>;
 
