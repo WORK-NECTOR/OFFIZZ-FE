@@ -37,3 +37,28 @@
   width: 1rem;
   height: 1rem;
 }
+
+.result-section {
+  height: auto;
+  padding: 3.625rem 11.4375rem 4.5rem 11.4375rem;
+}
+
+.recommend-result-container {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.recommend-result-container h2 {
+  margin-bottom: 1rem;
+}
+
+.search-result-container {
+}
+
+.recommend-btn-list {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
