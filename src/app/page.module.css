@@ -41,9 +41,8 @@
 
 .second-main {
   width: 100%;
-  height: 100vh;
+  height: 63.75rem;
   margin-top: 5.25rem;
-  margin-bottom: 6.625rem;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -60,14 +59,14 @@
 
 .second-main-image-wrapper {
   width: 100%;
-  height: 100%;
+  height: 42.875rem;
   position: relative;
   margin-top: 4rem;
 }
 
 .second-main-image {
-  width: 73%;
-  height: 58%;
+  width: 62.5rem;
+  height: 36.25rem;
   border-radius: 1.91206rem;
   object-fit: cover;
   box-shadow: 0px 3.824px 42.065px 0px rgba(0, 0, 0, 0.08);
@@ -75,7 +74,7 @@
 
 .third-main {
   width: 100%;
-  height: 100vh;
+  height: 48rem;
   position: relative;
   display: flex;
   background-color: var(--blue-greyish);
@@ -85,7 +84,7 @@
 
 .third-main-content {
   width: 73%;
-  height: 64%;
+  height: 36.1875rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,29 +98,29 @@
   width: 60%;
   height: 100%;
   object-fit: cover;
+  border: 33px solid var(--blue-greyish);
   border-radius: 1.75rem;
   box-shadow: 0px 3.824px 42.065px 0px rgba(0, 0, 0, 0.08);
 }
 
 .fourth-main {
   width: 100%;
-  height: 100vh;
+  height: 48rem;
   position: relative;
   padding: 0 11.44rem;
 }
 
 .fourth-main-image {
-  width: 53%;
+  width: 33.1875rem;
   height: 100%;
   object-fit: cover;
 }
 
 .fourth-main-sub-image {
-  width: 53%;
-  height: 25%;
+  width: 45.125rem;
+  height: 12.125rem;
   object-fit: cover;
   border-radius: 2rem;
-  border: 1px solid #ededed;
   box-shadow: 0px 8px 44px 0px rgba(0, 0, 0, 0.04);
   position: absolute;
   top: 8.5rem;
@@ -136,13 +135,39 @@
 
 .fifth-main {
   width: 100%;
-  height: 100vh;
   position: relative;
+}
+
+.fifth-main-text {
+  text-align: center;
+  margin-top: 6.75rem;
+}
+
+.fifth-main-content {
+  width: 100%;
+  padding-left: 10.9375rem;
+  padding-right: 15.9375rem;
+  margin-top: 3.25rem;
+  margin-bottom: 12.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.fifth-main-img {
+  width: 26.625rem;
+  height: 29.5rem;
+  box-shadow: 0px 4px 48px 0px rgba(0, 0, 0, 0.05);
+}
+
+.fifth-features {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
 }
 
 .sixth-main {
   width: 100%;
-  height: 100vh;
+  height: auto;
   position: relative;
   padding: 6.75rem 11.4375rem 11.125rem 11.4375rem;
 }
@@ -150,7 +175,7 @@
 .sixth-select-bar {
   display: flex;
   justify-content: space-between;
-  width: max-content;
+  width: 62.5rem;
   margin-top: 1.875rem;
 }
 
@@ -158,4 +183,21 @@
   display: flex;
   list-style: none;
   gap: 1rem;
+}
+
+.sixth-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2.25rem;
+}
+
+.sixth-blur {
+  width: 62.5rem;
+  min-height: 20rem;
+  backdrop-filter: blur(6.5px);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

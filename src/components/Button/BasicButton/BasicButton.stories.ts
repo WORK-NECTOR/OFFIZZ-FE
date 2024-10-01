@@ -11,8 +11,10 @@ const meta = {
   args: {
     btnText: 'BasicButton',
     btnHeight: '2.75rem',
-    btnType: 'empty',
-    textColor: '#000',
+    btnType: 'full',
+    btnColor: 'var(--blue-main)',
+    textColor: 'var(--white-main)',
+    padding: '0.5rem 1rem',
     clickHandler: () => {},
   },
 } satisfies Meta<typeof BasicButton>;

@@ -1,11 +1,19 @@
 'use client';
 
 import Image from 'next/image';
-import Header from '@/components/Header';
+import main_dashboard from 'public/main-dashboard.png';
+import main_todo from 'public/main-todo.png';
+import main_retro from 'public/main-retrospective.png';
+import main_ywt from 'public/main-ywt.png';
+import main_recap from 'public/main-recap.png';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import thumbnail from '../../public/thumbnail.png';
+import Header from '@/components/Header';
 import TitleDesc from '@/components/TitleDesc';
 import {
   DASHBOARD_MAIN,
+  RECAP_MAIN,
   RECOMMEND_MAIN,
   RETROSPECT_MAIN,
   TODO_MAIN,
@@ -16,16 +24,32 @@ import styles from './page.module.css';
 import { regionArr } from '@/constants/office';
 import SelectButton from '@/components/Button/SelectButton';
 import useRegionStore, { Region } from '@/store/useRegionStore';
-// import useUserStore from '@/store/useUserStore';
+import FeatureInfo from '@/components/FeatureInfo';
+import Footer from '@/components/Footer';
+import { useRecRegionOfficeQuery } from '@/services/office/useRecRegionOfficeQuery';
+import OfficeAccordion from '@/components/OfficeAccordion';
+import useAuth from '@/hook/useAuth';
 
 export default function MainPage() {
-  // const { accessToken, setAccessToken } = useUserStore.getState();
-  const { selectedRegion, setSelectedRegion } = useRegionStore.getState();
+  const [token, setToken] = useState('');
+  const router = useRouter();
+  const { getAccessToken } = useAuth();
+  const { selectedRegion, setSelectedRegion } = useRegionStore();
+  const { data } = useRecRegionOfficeQuery({
+    region: selectedRegion,
+    size: 4,
+  });
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     const text = e.currentTarget.innerText as Region;
     setSelectedRegion(text);
   };
+
+  useEffect(() => {
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) setToken(accessTkn);
+    });
+  }, []);
 
   return (
     <>
@@ -49,7 +73,13 @@ export default function MainPage() {
               textColor="var(--white-main)"
               hoverColor="var(--blue-dark)"
               padding="1rem 2rem"
-              clickHandler={() => {}}
+              clickHandler={() => {
+                if (token) {
+                  router.push('/onboarding');
+                } else {
+                  router.push('/login');
+                }
+              }}
             />
           </section>
           <div className={styles['first-main-image-wrapper']}>
@@ -71,8 +101,8 @@ export default function MainPage() {
           />
           <div className={styles['second-main-image-wrapper']}>
             <Image
-              src={thumbnail}
-              alt="임시 이미지"
+              src={main_dashboard}
+              alt="메인 - 대시보드"
               className={styles['second-main-image']}
             />
           </div>
@@ -88,21 +118,21 @@ export default function MainPage() {
               />
             </section>
             <Image
-              src={thumbnail}
-              alt="임시 이미지"
+              src={main_todo}
+              alt="메인 - 투두"
               className={styles['third-main-image']}
             />
           </section>
         </section>
         <section className={styles['fourth-main']}>
           <Image
-            src={thumbnail}
-            alt="임시 이미지"
+            src={main_retro}
+            alt="메인 - 회고"
             className={styles['fourth-main-image']}
           />
           <Image
-            src={thumbnail}
-            alt="임시 서브 이미지"
+            src={main_ywt}
+            alt="메인 - YWT 회고"
             className={styles['fourth-main-sub-image']}
           />
           <section className={styles['fourth-main-text']}>
@@ -114,7 +144,37 @@ export default function MainPage() {
             />
           </section>
         </section>
-        <section className={styles['fifth-main']} />
+        <section className={styles['fifth-main']}>
+          <section className={styles['fifth-main-text']}>
+            <p className={styles['main-index']}>{RECAP_MAIN.index}</p>
+            <TitleDesc
+              title={RECAP_MAIN.title}
+              desc={RECAP_MAIN.desc}
+              sort="center"
+            />
+          </section>
+          <section className={styles['fifth-main-content']}>
+            <Image
+              src={main_recap}
+              alt="리캡 이미지"
+              className={styles['fifth-main-img']}
+            />
+            <div className={styles['fifth-features']}>
+              <FeatureInfo
+                title={RECAP_MAIN.goalTitle}
+                desc={RECAP_MAIN.goalDesc}
+              />
+              <FeatureInfo
+                title={RECAP_MAIN.statisticTitle}
+                desc={RECAP_MAIN.statisticDesc}
+              />
+              <FeatureInfo
+                title={RECAP_MAIN.achievementTitle}
+                desc={RECAP_MAIN.achievementDesc}
+              />
+            </div>
+          </section>
+        </section>
         <section className={styles['sixth-main']}>
           <TitleDesc
             title={RECOMMEND_MAIN.title}
@@ -141,10 +201,48 @@ export default function MainPage() {
               textColor="var(--blue-main)"
               hoverColor="var(--blue-greyish)"
               padding="0.5rem 1rem"
-              clickHandler={() => {}}
+              clickHandler={() => {
+                if (token) {
+                  router.push('/recommend');
+                } else {
+                  router.push('/login');
+                }
+              }}
             />
           </div>
+          {!token && data && data.length > 0 && (
+            <div className={styles['sixth-blur']}>
+              <BasicButton
+                btnType="full"
+                btnHeight="3.25rem"
+                btnText={RECOMMEND_MAIN.notLoginDesc}
+                btnColor="var(--blue-main)"
+                textColor="var(--white-main)"
+                hoverColor="var(--blue-dark)"
+                padding="0.5rem 1.5rem"
+                clickHandler={() => {
+                  router.push('/login');
+                }}
+              />
+            </div>
+          )}
+          {data && data.length > 0 && (
+            <div className={styles['sixth-accordion-list']}>
+              {data.map((el) => (
+                <OfficeAccordion
+                  key={el.officeId}
+                  placeName={el.name}
+                  placeAddress={el.address}
+                  allYearRound={el.facilities.openAllYear || false}
+                  dayAndNight={el.facilities.twentyFourHoursOperation || false}
+                  price={el.price}
+                  priceUnit={el.priceType}
+                />
+              ))}
+            </div>
+          )}
         </section>
+        <Footer />
       </main>
     </>
   );

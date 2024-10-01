@@ -9,8 +9,8 @@ export const TimeRangeContainer = styled.div`
   position: relative;
 `;
 
-export const TimeRangeIconWrapper = styled.div`
-  height: 36rem;
+export const TimeRangeIconWrapper = styled.div<{ $length: 'short' | 'long' }>`
+  height: ${(props) => (props.$length === 'short' ? '26.625rem' : '36rem')};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -21,14 +21,14 @@ export const TimeRangeIconWrapper = styled.div`
   }
 `;
 
-export const TimeRangeElWrapper = styled.div`
+export const TimeRangeElWrapper = styled.div<{ $length: 'short' | 'long' }>`
   width: 18.875rem;
-  height: 36.25rem;
+  height: ${(props) => (props.$length === 'short' ? '26.625rem' : '36rem')};
 `;
 
-export const TimeRangeEl = styled.div`
+export const TimeRangeEl = styled.div<{ $length: 'short' | 'long' }>`
   width: 18.875rem;
-  height: 1.45rem;
+  height: ${(props) => (props.$length === 'short' ? '1.07rem' : '1.45rem')};
   display: flex;
   justify-content: space-between;
   align-items: center;

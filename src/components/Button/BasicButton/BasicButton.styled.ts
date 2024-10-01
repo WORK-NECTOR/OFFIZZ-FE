@@ -8,16 +8,18 @@ export const StyledBtn = styled.button<{
   $textColor: string;
   $hoverColor?: string;
   $padding: string;
+  $fontSize?: string;
 }>`
   background-color: ${(props) =>
     props.$btnType === 'empty' ? 'transparent' : props.$btnColor};
   border: ${(props) =>
-    props.$btnType === 'empty' ? 'none' : `1px solid ${props.$textColor}`};
+    props.$btnType === 'empty' ? `1px solid ${props.$textColor}` : 'none'};
   color: ${(props) => props.$textColor};
   border-radius: 3rem;
+  width: fit-content;
   height: ${(props) => props.$btnHeight};
   padding: ${(props) => props.$padding};
-  font-size: 1.25rem;
+  font-size: ${(props) => props.$fontSize || '1.25rem'};
   font-weight: 600;
   font-family: Pretendard;
   line-height: 1.75rem;
