@@ -231,6 +231,7 @@ export default function MainPage() {
               {data.map((el) => (
                 <OfficeAccordion
                   key={el.officeId}
+                  officeId={el.officeId}
                   placeName={el.name}
                   placeAddress={el.address}
                   allYearRound={el.facilities.openAllYear || false}

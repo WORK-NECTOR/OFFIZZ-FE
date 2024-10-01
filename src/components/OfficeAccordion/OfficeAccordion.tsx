@@ -20,6 +20,7 @@ function OfficeAccordion(props: OfficeAccordionProps) {
     dayAndNight,
     price = 0,
     priceUnit = '미정',
+    officeId,
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
