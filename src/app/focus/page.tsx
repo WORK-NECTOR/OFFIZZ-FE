@@ -46,14 +46,14 @@ function FocusPage() {
           setPercentage(0); // 진행률 리셋
         }
       }, 1000); // 1초마다 업데이트
-      setIntervalId(id); // interval ID 저장
+      // setIntervalId(id); // interval ID 저장
     };
 
     if (!isPaused) {
       startTimer(); // 일시정지 상태가 아닐 때 타이머 시작
     } else if (intervalId) {
-        clearInterval(intervalId); // 일시정지 시 interval 정리
-      }
+      clearInterval(intervalId); // 일시정지 시 interval 정리
+    }
 
     return () => {
       if (intervalId) clearInterval(intervalId); // 컴포넌트 언마운트 시 정리

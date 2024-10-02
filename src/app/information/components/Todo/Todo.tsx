@@ -125,7 +125,7 @@ const Todo: React.FC<TodoProps> = ({ timeArr, onClick, isTodoAdded }) => {
             />
             <div style={{ marginLeft: '0.5rem' }}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div>{time.icon ? time.icon : ''}</div>
+                {/* <div>{time.icon ? time.icon : ''}</div> */}
                 <TodoTitle>{time.activity}</TodoTitle>
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
