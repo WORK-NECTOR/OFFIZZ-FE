@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Pagination from '.';
+import PaginationBar from '.';
 
 const meta = {
-  title: 'Pagination',
-  component: Pagination,
+  title: 'PaginationBar',
+  component: PaginationBar,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -13,7 +13,7 @@ const meta = {
     curPage: 1,
     setPage: () => {},
   },
-} satisfies Meta<typeof Pagination>;
+} satisfies Meta<typeof PaginationBar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
