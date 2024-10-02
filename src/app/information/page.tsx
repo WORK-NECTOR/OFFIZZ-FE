@@ -146,7 +146,7 @@ function InformationPage() {
           <div className={styles.rightWrapper}>
             <div>
               <div className={styles.rightTitle}>근무 시간표</div>
-              <TimeRange timeArr={timeArr} />
+              <TimeRange length="long" timeArr={timeArr} />
             </div>
             <div style={{ marginLeft: '6.253rem' }}>
               <div className={styles.rightTitle}>
