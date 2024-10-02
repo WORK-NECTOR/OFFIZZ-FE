@@ -22,6 +22,7 @@ import plus from '../../../../../public/plus.png';
 import plusPink from '../../../../../public/plus-pink.png';
 
 interface RecommendProps {
+  // eslint-disable-next-line
   vacation?: boolean; // vacation prop을 선택적으로 설정
 }
 function Recommend({ vacation }: RecommendProps) {

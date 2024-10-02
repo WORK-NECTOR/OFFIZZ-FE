@@ -16,36 +16,48 @@ function Tab() {
       <TabListContainer>
         <Link href="/information" passHref>
           <div
+            role="button"
+            tabIndex={0}
             id="tab-list"
             className={activeTab === '/information' ? 'active' : ''}
             onClick={() => setActiveTab('/information')}
+            onKeyDown={() => setActiveTab('/information')}
           >
             홈
           </div>
         </Link>
         <Link href="/information/quration" passHref>
           <div
+            role="button"
+            tabIndex={0}
             id="tab-list"
             className={activeTab === '/information/quration' ? 'active' : ''}
             onClick={() => setActiveTab('/information/quration')}
+            onKeyDown={() => setActiveTab('/information/quration')}
           >
             추천
           </div>
         </Link>
         <Link href="/information/recap" passHref>
           <div
+            role="button"
+            tabIndex={0}
             id="tab-list"
             className={activeTab === '/information/recap' ? 'active' : ''}
             onClick={() => setActiveTab('/information/recap')}
+            onKeyDown={() => setActiveTab('/information/recap')}
           >
             회고
           </div>
         </Link>
         <Link href="/information/my" passHref>
           <div
+            role="button"
             id="tab-list"
+            tabIndex={0}
             className={activeTab === '/information/my' ? 'active' : ''}
             onClick={() => setActiveTab('/information/my')}
+            onKeyDown={() => setActiveTab('/information/my')}
           >
             마이
           </div>
