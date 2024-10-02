@@ -9,6 +9,7 @@ import chatactor from '../../../public/charactor-laptop.png';
 import clock from '../../../public/time.png';
 
 function FocusPage() {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [title, setTitle] = useState<string | null>('');
   const [time, setTime] = useState<string | null>('');
@@ -20,12 +21,11 @@ function FocusPage() {
   const [intervalId, setIntervalId] = useState<number | null>(null); // interval ID
 
   useEffect(() => {
-    const searchParams = useSearchParams();
     const getTitle = searchParams.get('title');
     const getTime = searchParams.get('time');
     setTitle(getTitle);
     setTime(getTime);
-  }, []);
+  }, [searchParams]);
 
   // 경과 시간을 "HH:mm:ss" 형식으로 포맷하는 함수
   const formatTime = (milliseconds: number) => {

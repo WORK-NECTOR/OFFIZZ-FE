@@ -15,6 +15,7 @@ import useTimeStore from '@/store/useSelectTime';
 import useActivityStore from '@/store/useSelectTodo';
 
 function InformationPage() {
+  const searchParams = useSearchParams();
   const [modalType, setModalType] = useState<string | null>('');
   const [vacationType, setVacationType] = useState<string | null>('');
   const [isModalOpen, setModalOpen] = useState(false);
@@ -39,12 +40,11 @@ function InformationPage() {
         };
 
   useEffect(() => {
-    const searchParams = useSearchParams();
     const getModalType = searchParams.get('modalType');
     const getVacationType = searchParams.get('kind');
     setModalType(getModalType);
     setVacationType(getVacationType);
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
     if (modalType === 'End') {
