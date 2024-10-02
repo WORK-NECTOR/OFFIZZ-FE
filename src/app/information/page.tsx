@@ -15,14 +15,14 @@ import useTimeStore from '@/store/useSelectTime';
 import useActivityStore from '@/store/useSelectTodo';
 
 function InformationPage() {
-  const searchParams = useSearchParams();
-  const modalType = searchParams.get('modalType');
-  const vacationType = searchParams.get('kind');
+  const [modalType, setModalType] = useState<string | null>('');
+  const [vacationType, setVacationType] = useState<string | null>('');
   const [isModalOpen, setModalOpen] = useState(false);
   const [isTodoAdded, setIsTodoAdded] = useState(false);
   const { activity } = useActivityStore();
   const { time } = useTimeStore();
   const router = useRouter();
+  // modalType이 state로 바뀌어서 todoContent 여기 아마 useEffect 같은 걸로 수정해야 할 수도 있습니다
   const todoContent =
     modalType === 'End'
       ? {
@@ -37,6 +37,14 @@ function InformationPage() {
           desc: '지금부터 집중 타이머를 시작할게요.<br/>집중한 시간은 근무 시간표에 기록돼요.',
           buttonName: '시작하기',
         };
+
+  useEffect(() => {
+    const searchParams = useSearchParams();
+    const getModalType = searchParams.get('modalType');
+    const getVacationType = searchParams.get('kind');
+    setModalType(getModalType);
+    setVacationType(getVacationType);
+  }, []);
 
   useEffect(() => {
     if (modalType === 'End') {
@@ -65,15 +73,19 @@ function InformationPage() {
       icon: '😂',
     },
   ];
+
   const handleAddTodo = () => {
     setIsTodoAdded(true); // Todo 추가 시 true로 설정
   };
+
   const onClickVacation = () => {
     router.push(`/information?kind=vacation`);
   };
+
   const onClickWork = () => {
     router.push(`/information`);
   };
+
   if (vacationType === 'vacation') {
     return (
       <div style={{ display: 'flex' }}>
