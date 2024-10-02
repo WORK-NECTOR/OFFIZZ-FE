@@ -1,14 +1,15 @@
+import React from 'react';
 import { Pagination } from '@mui/material';
-import { PaginationContainer } from './PaginationBar.styled';
-import { PaginationProps } from '@/types/pagination.type';
+import { PaginationBarContainer } from './PaginationBar.styled';
+import { PaginationBarProps } from '../../types/pagination.type';
 
-function PaginationBar(props: PaginationProps) {
+function PaginationBar(props: PaginationBarProps) {
   const { totalPage, curPage, setPage } = props;
 
   return (
-    <PaginationContainer>
+    <PaginationBarContainer>
       <Pagination count={totalPage} />
-    </PaginationContainer>
+    </PaginationBarContainer>
   );
 }
 
