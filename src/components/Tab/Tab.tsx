@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { TabContainer, TabListContainer } from './Tab.styled';
 import Image from 'next/image';
+import { TabContainer, TabListContainer } from './Tab.styled';
 import title from '../../../public/title.png';
 import useTabStore from '@/store/useTabStore';
 
@@ -11,14 +11,14 @@ function Tab() {
   return (
     <TabContainer>
       <div id="tab-title">
-        <Image src={title} alt='title' width={49.84} height={15.81} />
+        <Image src={title} alt="title" width={49.84} height={15.81} />
       </div>
       <TabListContainer>
         <Link href="/information" passHref>
           <div
             id="tab-list"
             className={activeTab === '/information' ? 'active' : ''}
-            onClick={() => setActiveTab('/information')} 
+            onClick={() => setActiveTab('/information')}
           >
             홈
           </div>
@@ -36,7 +36,7 @@ function Tab() {
           <div
             id="tab-list"
             className={activeTab === '/information/recap' ? 'active' : ''}
-            onClick={() => setActiveTab('/information/recap')} 
+            onClick={() => setActiveTab('/information/recap')}
           >
             회고
           </div>

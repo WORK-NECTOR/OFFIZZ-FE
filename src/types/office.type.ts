@@ -5,4 +5,5 @@ export interface OfficeAccordionProps {
   dayAndNight: boolean;
   price?: number;
   priceUnit?: string;
+  officeId: number;
 }

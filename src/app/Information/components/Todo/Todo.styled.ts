@@ -46,24 +46,24 @@ export const TodoTitleInput = styled.input`
   margin-left: 0.5rem;
 
   /* Eng/Caption4-eng */
-  color: var(--Greyscale-400, #9D9D9D);
+  color: var(--Greyscale-400, #9d9d9d);
 
-/* Kor/Caption1-kor */
-font-family: Pretendard;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 600;
-line-height: 1.125rem; /* 128.571% */
-border: none;
+  /* Kor/Caption1-kor */
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.125rem; /* 128.571% */
+  border: none;
 `;
 export const TodoTimeInput = styled.input`
-color: var(--Greyscale-400, #9D9D9D);
-margin-left: 0.5rem;
-/* Eng/Caption4-eng */
-font-family: Figtree;
-font-size: 0.75rem;
-font-style: normal;
-font-weight: 400;
-line-height: 1rem; /* 133.333% */
-border: none;
+  color: var(--Greyscale-400, #9d9d9d);
+  margin-left: 0.5rem;
+  /* Eng/Caption4-eng */
+  font-family: Figtree;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem; /* 133.333% */
+  border: none;
 `;

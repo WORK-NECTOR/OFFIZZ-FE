@@ -37,7 +37,7 @@ function Header() {
     setSelectedMenu(text as HeaderTextUnion);
 
     const route = menuToRouteMap[text];
-    if (route) router.push(route);
+    if (route) router.replace(route);
   };
 
   return (
@@ -47,7 +47,7 @@ function Header() {
         alt="오피츠 로고 이미지"
         id="logo-img"
         onClick={() => {
-          router.push('/');
+          router.replace('/');
         }}
       />
       <HeaderMenuContainer>
