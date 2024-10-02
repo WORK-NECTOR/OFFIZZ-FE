@@ -44,7 +44,7 @@ function InformationPage() {
     const getVacationType = searchParams.get('kind');
     setModalType(getModalType);
     setVacationType(getVacationType);
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
     if (modalType === 'End') {

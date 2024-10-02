@@ -25,7 +25,7 @@ function FocusPage() {
     const getTime = searchParams.get('time');
     setTitle(getTitle);
     setTime(getTime);
-  }, []);
+  }, [searchParams]);
 
   // 경과 시간을 "HH:mm:ss" 형식으로 포맷하는 함수
   const formatTime = (milliseconds: number) => {
