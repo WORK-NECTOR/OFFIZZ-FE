@@ -16,10 +16,11 @@ function OfficeAccordion(props: OfficeAccordionProps) {
   const {
     placeName,
     placeAddress = '주소 미등록',
-    allYearRound = '연중무휴',
-    dayAndNight = '미등록',
+    allYearRound,
+    dayAndNight,
     price = 0,
     priceUnit = '미정',
+    officeId,
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -36,8 +37,8 @@ function OfficeAccordion(props: OfficeAccordionProps) {
         <div id="core-info-container">
           <h3>{placeName}</h3>
           <div id="badge-container">
-            <Badge text={allYearRound} />
-            <Badge text={dayAndNight} />
+            {allYearRound && <Badge text="연중무휴" />}
+            {dayAndNight && <Badge text="24시 운영" />}
           </div>
           <p id="place-address">{placeAddress}</p>
         </div>

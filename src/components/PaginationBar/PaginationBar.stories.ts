@@ -1,20 +1,19 @@
 import { Meta, StoryObj } from '@storybook/react';
-import OfficeAccordion from '.';
+import PaginationBar from '.';
 
 const meta = {
-  title: 'OfficeAccordion',
-  component: OfficeAccordion,
+  title: 'PaginationBar',
+  component: PaginationBar,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
   },
   args: {
-    placeName: '임시 오피스명',
-    allYearRound: true,
-    dayAndNight: true,
-    officeId: 1,
+    totalPage: 16,
+    curPage: 1,
+    setPage: () => {},
   },
-} satisfies Meta<typeof OfficeAccordion>;
+} satisfies Meta<typeof PaginationBar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -1,0 +1,141 @@
+.focusWraper {
+  background: var(--Greyscale-800, #262626);
+  width: 100%;
+  height: 100%;
+}
+
+.centerImage img {
+  position: absolute;
+  top: 9.5rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.title {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 47%;
+  top: 14.25rem;
+  color: var(--Greyscale-White, #fff);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.75rem;
+}
+
+.time {
+  position: absolute;
+  left: 48%;
+  top: 16.25rem;
+  color: var(--Greyscale-300, #c4c4c4);
+  font-family: Figtree;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem;
+}
+
+.timer {
+  position: absolute;
+  left: 46%;
+  top: 19.06rem;
+  width: 11.5rem;
+  height: 11.5rem;
+  flex-shrink: 0;
+}
+
+.progressCircle {
+  transform: rotate(-90deg);
+}
+
+.progressBackground {
+  stroke: var(--Greyscale-700, #434343);
+}
+
+.progressForeground {
+  stroke: #3498db;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.buttonWrapper {
+  display: flex;
+  position: absolute;
+  left: 40%;
+  top: 34.37rem;
+  text-align: center;
+}
+
+.buttonStop {
+  display: flex;
+  text-align: center;
+  height: 2.25rem;
+  width: 8.875rem;
+  padding: 0rem 0.75rem;
+  margin-right: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  flex: 1 0 0;
+  border-radius: 0.75rem;
+  background: var(--Greyscale-700, #434343);
+  color: var(--Greyscale-White, #fff);
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.375rem;
+}
+
+.buttonEnd {
+  display: flex;
+  width: 8.875rem;
+  height: 2.25rem;
+  padding: 0rem 0.75rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 0 0;
+  border-radius: 0.75rem;
+  background: var(--Blue-dark, #3e6bc3);
+  color: var(--Greyscale-White, #fff);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.375rem;
+}
+.timeText {
+  position: absolute;
+  left: 47.5%;
+  top: 25rem;
+  margin-top: 5rem;
+  color: var(--Greyscale-White, #fff);
+  text-align: center;
+
+  /* Kor/Body3-kor */
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem; /* 133.333% */
+}
+.timeTextSub {
+  position: absolute;
+  left: 47%;
+  top: 28rem;
+  color: var(--Greyscale-300, #c4c4c4);
+  text-align: center;
+
+  /* Kor/Body3-kor */
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem; /* 133.333% */
+}
