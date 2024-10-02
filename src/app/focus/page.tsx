@@ -2,30 +2,32 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import styles from './page.module.css';
 import chatactor from '../../../public/charactor-laptop.png';
 import clock from '../../../public/time.png';
+import FocusSearchParams from './components/FocusSearchParams/FocusSearchParams';
 
 function FocusPage() {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const [title, setTitle] = useState<string | null>('');
-  const [time, setTime] = useState<string | null>('');
+  const [title, setTitle] = useState<string | null>(null);
+  const [time, setTime] = useState<string | null>(null);
+
+  // SearchParams에서 title과 time을 받아옴
+  const handleSearchParams = (
+    paramsTitle: string | null,
+    paramsTime: string | null,
+  ) => {
+    setTitle(paramsTitle);
+    setTime(paramsTime);
+  };
 
   // 시간에 따른 원형 그래프 상태
   const [percentage, setPercentage] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0); // 경과 시간 상태
   const [isPaused, setIsPaused] = useState(true); // 초기 상태는 일시정지
   const [intervalId, setIntervalId] = useState<number | null>(null); // interval ID
-
-  useEffect(() => {
-    const getTitle = searchParams.get('title');
-    const getTime = searchParams.get('time');
-    setTitle(getTitle);
-    setTime(getTime);
-  }, [searchParams]);
 
   // 경과 시간을 "HH:mm:ss" 형식으로 포맷하는 함수
   const formatTime = (milliseconds: number) => {
@@ -106,10 +108,11 @@ function FocusPage() {
 
   return (
     <div className={styles.focusWraper}>
+      <FocusSearchParams onParamsChange={handleSearchParams} />
       <div className={styles.centerImage}>
         <Image src={chatactor} alt="캐릭터" width={64} height={64} />
       </div>
-      <div className={styles.title}>{title || ''}</div>
+      <div className={styles.title}>{title}</div>
       <div className={styles.time}>
         <Image
           src={clock}
@@ -118,7 +121,7 @@ function FocusPage() {
           height={10}
           style={{ marginRight: '0.44rem' }}
         />
-        {time || ''}
+        {time}
       </div>
 
       {/* 원형 그래프 */}
