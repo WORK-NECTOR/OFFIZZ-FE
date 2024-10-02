@@ -9,6 +9,7 @@ import chatactor from '../../../public/charactor-laptop.png';
 import clock from '../../../public/time.png';
 
 function FocusPage() {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [title, setTitle] = useState<string | null>('');
   const [time, setTime] = useState<string | null>('');
@@ -20,7 +21,6 @@ function FocusPage() {
   const [intervalId, setIntervalId] = useState<number | null>(null); // interval ID
 
   useEffect(() => {
-    const searchParams = useSearchParams();
     const getTitle = searchParams.get('title');
     const getTime = searchParams.get('time');
     setTitle(getTitle);
