@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Tab from '@/components/Tab/Tab';
 import styles from './page.module.css';
 import MainCharacterBox from './components/MainCharacterBox';
@@ -13,17 +13,25 @@ import Modal from '@/components/Modal';
 import caractor from '../../../public/charactor-laptop.png';
 import useTimeStore from '@/store/useSelectTime';
 import useActivityStore from '@/store/useSelectTodo';
+import InfoSearchParams from './components/InfoSearchParams/InfoSearchParams';
 
 function InformationPage() {
-  const searchParams = useSearchParams();
-  const [modalType, setModalType] = useState<string | null>('');
-  const [vacationType, setVacationType] = useState<string | null>('');
+  const [modalType, setModalType] = useState<string | null>(null);
+  const [vacationType, setVacationType] = useState<string | null>(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [isTodoAdded, setIsTodoAdded] = useState(false);
   const { activity } = useActivityStore();
   const { time } = useTimeStore();
   const router = useRouter();
-  // modalType이 state로 바뀌어서 todoContent 여기 아마 useEffect 같은 걸로 수정해야 할 수도 있습니다
+
+  const handleSearchParams = (
+    paramsModalType: string | null,
+    paramsVacationType: string | null,
+  ) => {
+    setModalType(paramsModalType);
+    setVacationType(paramsVacationType);
+  };
+
   const todoContent =
     modalType === 'End'
       ? {
@@ -38,13 +46,6 @@ function InformationPage() {
           desc: '지금부터 집중 타이머를 시작할게요.<br/>집중한 시간은 근무 시간표에 기록돼요.',
           buttonName: '시작하기',
         };
-
-  useEffect(() => {
-    const getModalType = searchParams.get('modalType');
-    const getVacationType = searchParams.get('kind');
-    setModalType(getModalType);
-    setVacationType(getVacationType);
-  }, [searchParams]);
 
   useEffect(() => {
     if (modalType === 'End') {
@@ -73,19 +74,15 @@ function InformationPage() {
       icon: '😂',
     },
   ];
-
   const handleAddTodo = () => {
     setIsTodoAdded(true); // Todo 추가 시 true로 설정
   };
-
   const onClickVacation = () => {
     router.push(`/information?kind=vacation`);
   };
-
   const onClickWork = () => {
     router.push(`/information`);
   };
-
   if (vacationType === 'vacation') {
     return (
       <div style={{ display: 'flex' }}>
@@ -150,6 +147,7 @@ function InformationPage() {
 
   return (
     <div style={{ display: 'flex' }}>
+      <InfoSearchParams onParamsChange={handleSearchParams} />
       <Tab />
       <div className={styles.background}>
         <div className={styles.top}>
