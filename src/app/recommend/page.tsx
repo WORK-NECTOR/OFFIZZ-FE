@@ -1,13 +1,13 @@
 'use client';
 
+import Image from 'next/image';
+import ic_search from 'public/search.png';
+import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import styles from './page.module.css';
 import TitleDesc from '@/components/TitleDesc';
 import { RECOMMEND_TEXT } from '@/constants/recommend';
-import Image from 'next/image';
-import ic_search from 'public/search.png';
-import { useState } from 'react';
 import { regionArr } from '@/constants/office';
 import SelectButton from '@/components/Button/SelectButton';
 import useRegionStore, { Region } from '@/store/useRegionStore';

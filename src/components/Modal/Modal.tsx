@@ -1,6 +1,7 @@
 // Modal.tsx
 import React from 'react';
 import { StaticImageData } from 'next/image';
+import { useRouter } from 'next/navigation';
 import {
   ModalButton,
   ModalButtonClose,
@@ -10,7 +11,6 @@ import {
   ModalImage,
   Overlay,
 } from './Modal.styled';
-import { useRouter } from 'next/navigation';
 
 interface TodoContent {
   title: string;
@@ -22,19 +22,25 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   content: TodoContent;
-  todoTitle?:string;
-  time?:string;
+  todoTitle?: string;
+  time?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, content,todoTitle,time }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  content,
+  todoTitle,
+  time,
+}) => {
   if (!isOpen) return null;
   const router = useRouter();
   const onClickStart = () => {
-    onClose()
+    onClose();
     router.push(`/focus?title=${todoTitle}&time=${time}`);
   };
   const onClickConfirm = () => {
-    onClose()
+    onClose();
     router.push('/information');
   };
   return (
@@ -54,13 +60,16 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, content,todoTitle,time }
           )}
           {content.buttonName == '시작하기' && (
             <ModalButtonWrapepr>
-                <ModalButtonClose onClick={onClose}>취소</ModalButtonClose>
-                <ModalButton onClick={onClickStart}>{content.buttonName}</ModalButton>
+              <ModalButtonClose onClick={onClose}>취소</ModalButtonClose>
+              <ModalButton onClick={onClickStart}>
+                {content.buttonName}
+              </ModalButton>
             </ModalButtonWrapepr>
-            
           )}
           {content.buttonName == '확인' && (
-            <ModalButtonConfirm onClick={onClickConfirm}>{content.buttonName}</ModalButtonConfirm>
+            <ModalButtonConfirm onClick={onClickConfirm}>
+              {content.buttonName}
+            </ModalButtonConfirm>
           )}
         </>
       </ModalContainer>

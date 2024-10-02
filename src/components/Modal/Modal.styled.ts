@@ -41,58 +41,58 @@ export const ModalButton = styled.div`
   flex: 1 0 0;
   border-radius: 0.75rem;
   background: var(--Blue-main, #498df2);
-  color: var(--Greyscale-White, #FFF);
-text-align: center;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 600;
-line-height: 1.375rem; /* 137.5% */
+  color: var(--Greyscale-White, #fff);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.375rem; /* 137.5% */
 `;
 export const ModalButtonClose = styled.div`
-display: flex;
-height: 2.5rem;
-padding: 0rem 0.75rem;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-gap: 0.5rem;
-flex: 1 0 0;
-border-radius: 0.75rem;
-background: var(--Blue-greyish, #F4F7F9);
-color: var(--Blue-main, #498DF2);
-text-align: center;
-margin-right: 0.5rem;
+  display: flex;
+  height: 2.5rem;
+  padding: 0rem 0.75rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  flex: 1 0 0;
+  border-radius: 0.75rem;
+  background: var(--Blue-greyish, #f4f7f9);
+  color: var(--Blue-main, #498df2);
+  text-align: center;
+  margin-right: 0.5rem;
 
-/* Kor/Body5-kor */
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 600;
-line-height: 1.375rem; /* 137.5% */
+  /* Kor/Body5-kor */
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.375rem; /* 137.5% */
 `;
 export const ModalButtonWrapepr = styled.div`
-display: flex;
-width: 80%;
-justify-content: center;
-text-align: center;
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  text-align: center;
 `;
 export const ModalButtonConfirm = styled.div`
-display: flex;
-width: 18.25rem;
-padding: 0.5rem 0.75rem;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-gap: 0.5rem;
-flex: 1 0 0;
-border-radius: 0.75rem;
-background: var(--Blue-main, #498DF2);
-color: var(--Greyscale-White, #FFF);
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 600;
+  display: flex;
+  width: 18.25rem;
+  padding: 0.5rem 0.75rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  flex: 1 0 0;
+  border-radius: 0.75rem;
+  background: var(--Blue-main, #498df2);
+  color: var(--Greyscale-White, #fff);
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
 `;

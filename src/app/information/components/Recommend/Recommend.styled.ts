@@ -68,9 +68,8 @@ export const NonRecommendBox = styled.div`
   font-weight: 400;
   line-height: 1rem;
 `;
-/////////////vacation//////////////
-export const 
-VRecommendBox = styled.div`
+/// //////////vacation//////////////
+export const VRecommendBox = styled.div`
   width: 20rem;
   height: 22.25rem;
   margin-top: 0.75rem;
@@ -82,7 +81,7 @@ VRecommendBox = styled.div`
 `;
 export const VLinkStyle = styled.a`
   text-decoration: none;
-  color:   var(--Pink-main, #F06FD4);
+  color: var(--Pink-main, #f06fd4);
   font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
@@ -102,7 +101,7 @@ export const VNonRecomend = styled.div`
   align-items: flex-start;
   gap: 0.25rem;
   border-radius: 0.5rem;
-background: var(--Pink-pale, #FFF2FB);
+  background: var(--Pink-pale, #fff2fb);
   p {
     color: var(--Greyscale-Black, #000);
     font-family: Pretendard;
@@ -167,13 +166,13 @@ export const VMCsub = styled.div`
   line-height: 1.125rem; /* 128.571% */
 `;
 export const VtitleSub = styled.div`
-margin-top: 0.5rem;
-  color: var(--Greyscale-400, #9D9D9D);
+  margin-top: 0.5rem;
+  color: var(--Greyscale-400, #9d9d9d);
 
-/* Kor/Caption2-kor */
-font-family: Pretendard;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: 1.125rem; /* 128.571% */
+  /* Kor/Caption2-kor */
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.125rem; /* 128.571% */
 `;

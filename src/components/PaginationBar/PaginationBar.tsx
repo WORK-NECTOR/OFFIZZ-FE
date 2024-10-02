@@ -1,6 +1,6 @@
+import { Pagination } from '@mui/material';
 import { PaginationContainer } from './PaginationBar.styled';
 import { PaginationProps } from '@/types/pagination.type';
-import { Pagination } from '@mui/material';
 
 function PaginationBar(props: PaginationProps) {
   const { totalPage, curPage, setPage } = props;
