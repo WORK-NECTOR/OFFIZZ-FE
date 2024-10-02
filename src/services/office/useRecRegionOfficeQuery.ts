@@ -21,7 +21,8 @@ export const useRecRegionOfficeQuery = (params: GetRecRegionOfficeParams) =>
 
 export const useAllRecRegionOfficeQuery = (
   params: GetAllRecRegionOfficeParams,
-) => useQuery({
+) =>
+  useQuery({
     queryKey: ['officeAll', params],
     queryFn: async () => {
       const response = await getRecAllRegionOffice(params);

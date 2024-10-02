@@ -20,6 +20,18 @@ function FocusPage() {
   const [isPaused, setIsPaused] = useState(true); // 초기 상태는 일시정지
   const [intervalId, setIntervalId] = useState<number | null>(null); // interval ID
 
+  // 경과 시간을 "HH:mm:ss" 형식으로 포맷하는 함수
+  const formatTime = (milliseconds: number) => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
+      2,
+      '0',
+    );
+    const seconds = String(totalSeconds % 60).padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
   // 1시간 기준으로 타이머 설정
   useEffect(() => {
     const totalDuration = 60 * 60 * 1000; // 1시간을 밀리초로 변환
@@ -83,18 +95,6 @@ function FocusPage() {
   // 일시정지/재생 버튼 클릭 시
   const togglePause = () => {
     setIsPaused((prev) => !prev); // 일시정지 상태를 토글
-  };
-
-  // 경과 시간을 "HH:mm:ss" 형식으로 포맷하는 함수
-  const formatTime = (milliseconds: number) => {
-    const totalSeconds = Math.floor(milliseconds / 1000);
-    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
-      2,
-      '0',
-    );
-    const seconds = String(totalSeconds % 60).padStart(2, '0');
-    return `${hours}:${minutes}:${seconds}`;
   };
 
   return (
@@ -161,10 +161,22 @@ function FocusPage() {
         </text>
       </div>
       <div className={styles.buttonWrapper}>
-        <div className={styles.buttonStop} onClick={togglePause}>
+        <div
+          role="button"
+          className={styles.buttonStop}
+          onClick={togglePause}
+          onKeyDown={togglePause}
+          tabIndex={0}
+        >
           {isPaused ? '재생' : '일시정지'}
         </div>
-        <div className={styles.buttonEnd} onClick={onClickFinish}>
+        <div
+          role="button"
+          className={styles.buttonEnd}
+          onClick={onClickFinish}
+          onKeyDown={onClickFinish}
+          tabIndex={0}
+        >
           종료
         </div>
       </div>

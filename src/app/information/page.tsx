@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { time } from 'console';
 import Tab from '@/components/Tab/Tab';
 import styles from './page.module.css';
 import MainCharacterBox from './components/MainCharacterBox';
@@ -83,7 +82,13 @@ function InformationPage() {
           <div className={styles.topSwitch}>
             <div className={styles.daySwitch}>day1</div>
             <div className={styles.switchSwitch}>
-              <div className={styles.workSwitch} onClick={onClickWork}>
+              <div
+                role="button"
+                className={styles.workSwitch}
+                onClick={onClickWork}
+                onKeyDown={onClickWork}
+                tabIndex={0}
+              >
                 work
               </div>
               <div className={styles.vacationSwitch}>vacation</div>
@@ -101,7 +106,13 @@ function InformationPage() {
               <div style={{ marginLeft: '8.25rem' }}>
                 <div className={styles.rightTitleSwitch}>
                   to-do
-                  <div className={styles.addBtnSwitch} onClick={handleAddTodo}>
+                  <div
+                    role="button"
+                    className={styles.addBtnSwitch}
+                    onClick={handleAddTodo}
+                    onKeyDown={handleAddTodo}
+                    tabIndex={0}
+                  >
                     추가 +
                   </div>
                 </div>
@@ -133,7 +144,13 @@ function InformationPage() {
           <div className={styles.day}>day1</div>
           <div className={styles.switch}>
             <div className={styles.work}>work</div>
-            <div className={styles.vacation} onClick={onClickVacation}>
+            <div
+              role="button"
+              tabIndex={0}
+              className={styles.vacation}
+              onClick={onClickVacation}
+              onKeyDown={onClickVacation}
+            >
               vacation
             </div>
           </div>
@@ -151,7 +168,13 @@ function InformationPage() {
             <div style={{ marginLeft: '6.253rem' }}>
               <div className={styles.rightTitle}>
                 to-do
-                <div className={styles.addBtn} onClick={handleAddTodo}>
+                <div
+                  role="button"
+                  tabIndex={0}
+                  className={styles.addBtn}
+                  onClick={handleAddTodo}
+                  onKeyDown={handleAddTodo}
+                >
                   추가 +
                 </div>
               </div>

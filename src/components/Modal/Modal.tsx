@@ -22,10 +22,13 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   content: TodoContent;
+  // eslint-disable-next-line
   todoTitle?: string;
+  // eslint-disable-next-line
   time?: string;
 }
 
+// eslint-disable-next-line
 const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
@@ -34,6 +37,7 @@ const Modal: React.FC<ModalProps> = ({
   time,
 }) => {
   if (!isOpen) return null;
+  // eslint-disable-next-line
   const router = useRouter();
   const onClickStart = () => {
     onClose();
@@ -58,7 +62,7 @@ const Modal: React.FC<ModalProps> = ({
               alt={content.title}
             />
           )}
-          {content.buttonName == '시작하기' && (
+          {content.buttonName === '시작하기' && (
             <ModalButtonWrapepr>
               <ModalButtonClose onClick={onClose}>취소</ModalButtonClose>
               <ModalButton onClick={onClickStart}>
@@ -66,7 +70,7 @@ const Modal: React.FC<ModalProps> = ({
               </ModalButton>
             </ModalButtonWrapepr>
           )}
-          {content.buttonName == '확인' && (
+          {content.buttonName === '확인' && (
             <ModalButtonConfirm onClick={onClickConfirm}>
               {content.buttonName}
             </ModalButtonConfirm>

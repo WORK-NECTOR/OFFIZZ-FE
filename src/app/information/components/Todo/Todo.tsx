@@ -20,7 +20,7 @@ interface TodoProps {
   onClick: () => void;
   isTodoAdded: boolean;
 }
-
+// eslint-disable-next-line
 const Todo: React.FC<TodoProps> = ({ timeArr, onClick, isTodoAdded }) => {
   const { setActivity } = useActivityStore();
   const { setTime } = useTimeStore();
@@ -50,7 +50,9 @@ const Todo: React.FC<TodoProps> = ({ timeArr, onClick, isTodoAdded }) => {
   const formatTimeInput = (time: string): `${number}:${number}` => {
     const parts = time.split(':');
     if (parts.length === 2) {
+      // eslint-disable-next-line
       const hours = Math.min(Math.max(parseInt(parts[0]), 0), 23); // 0~23 범위로 설정
+      // eslint-disable-next-line
       const minutes = Math.min(Math.max(parseInt(parts[1]), 0), 59); // 0~59 범위로 설정
       return `${hours}:${minutes}` as `${number}:${number}`;
     }
@@ -58,8 +60,8 @@ const Todo: React.FC<TodoProps> = ({ timeArr, onClick, isTodoAdded }) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-    }
+    // if (e.key === 'Enter') {
+    // }
   };
   useEffect(() => {
     const fetchData = async () => {
@@ -69,7 +71,7 @@ const Todo: React.FC<TodoProps> = ({ timeArr, onClick, isTodoAdded }) => {
           `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/${day}`,
         );
         const fetchedData = response.data;
-        console.log(fetchedData);
+        // console.log(fetchedData);
         setUpdatedTimeArr(fetchedData);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -114,6 +116,7 @@ const Todo: React.FC<TodoProps> = ({ timeArr, onClick, isTodoAdded }) => {
         </TodoBoxAdd>
       )}
       {updatedTimeArr.map((time, index) => (
+        // eslint-disable-next-line
         <TodoBox key={index}>
           <div style={{ display: 'flex' }}>
             <Image
