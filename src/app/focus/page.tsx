@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
@@ -108,7 +108,9 @@ function FocusPage() {
 
   return (
     <div className={styles.focusWraper}>
-      <FocusSearchParams onParamsChange={handleSearchParams} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <FocusSearchParams onParamsChange={handleSearchParams} />
+      </Suspense>
       <div className={styles.centerImage}>
         <Image src={chatactor} alt="캐릭터" width={64} height={64} />
       </div>

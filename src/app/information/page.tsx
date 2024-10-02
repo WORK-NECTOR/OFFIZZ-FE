@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Tab from '@/components/Tab/Tab';
 import styles from './page.module.css';
@@ -147,7 +147,9 @@ function InformationPage() {
 
   return (
     <div style={{ display: 'flex' }}>
-      <InfoSearchParams onParamsChange={handleSearchParams} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <InfoSearchParams onParamsChange={handleSearchParams} />
+      </Suspense>
       <Tab />
       <div className={styles.background}>
         <div className={styles.top}>
