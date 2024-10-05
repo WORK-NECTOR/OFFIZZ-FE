@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import ic_search from 'public/search.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import styles from './page.module.css';
@@ -13,6 +13,7 @@ import SelectButton from '@/components/Button/SelectButton';
 import useRegionStore, { Region } from '@/store/useRegionStore';
 import { useAllRecRegionOfficeQuery } from '@/services/office/useRecRegionOfficeQuery';
 import OfficeAccordion from '@/components/OfficeAccordion';
+import PaginationBar from '@/components/PaginationBar';
 
 function RecommendPage() {
   const [searchInput, setSearchInput] = useState('');
@@ -24,6 +25,10 @@ function RecommendPage() {
     page: recPage,
     size: 8,
   });
+
+  useEffect(() => {
+    setRecPage(1);
+  }, [selectedRegion]);
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     const text = e.currentTarget.innerText as Region;
@@ -85,6 +90,13 @@ function RecommendPage() {
               />
             ))}
           </div>
+        )}
+        {recData && recData.totalPage > 0 && (
+          <PaginationBar
+            totalPage={recData.totalPage}
+            curPage={recPage}
+            setPage={setRecPage}
+          />
         )}
       </section>
       <Footer />
