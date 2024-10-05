@@ -1,8 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
 import {
   GetOfficeDetailParams,
   getOfficeDetail,
 } from '@/api/office/getOfficeDetail';
-import { useQuery } from '@tanstack/react-query';
 
 export const useOfficeDetailQuery = (params: GetOfficeDetailParams) => {
   const { officeId } = params;

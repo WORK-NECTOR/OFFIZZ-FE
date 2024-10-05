@@ -82,6 +82,7 @@ function OfficeAccordion(props: OfficeAccordionProps) {
           {facilitiesArr &&
             facilitiesArr.map((item, idx) => (
               <Badge
+                // eslint-disable-next-line react/no-array-index-key
                 key={idx}
                 text={item}
                 height="1.875rem"
@@ -101,6 +102,7 @@ function OfficeAccordion(props: OfficeAccordionProps) {
             {data &&
               Object.keys(data.operatingTime).map((el, idx) => (
                 <p
+                  // eslint-disable-next-line react/no-array-index-key
                   key={idx}
                 >{`${OPERATING_TIME_DAY[el]} ${data.operatingTime[el as keyof OperatingTimeInterface]}`}</p>
               ))}

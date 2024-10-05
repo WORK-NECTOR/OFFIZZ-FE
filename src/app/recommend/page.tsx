@@ -28,7 +28,7 @@ function RecommendPage() {
     size: 8,
   });
   const { data: searchData } = useSearchOfficesQuery({
-    searchText: searchText,
+    searchText,
     page: searchPage,
     size: 8,
   });
@@ -127,7 +127,7 @@ function RecommendPage() {
           <>
             <div className={styles['search-header']}>
               <h2>{RECOMMEND_TEXT.searchResult}</h2>
-              <p>{`\'${searchText}\'에 대한 ${searchData ? searchData.totalPage : '0'} 페이지의 검색 결과`}</p>
+              <p>{`'${searchText}'에 대한 ${searchData ? searchData.totalPage : '0'} 페이지의 검색 결과`}</p>
             </div>
             {searchData && (
               <>
