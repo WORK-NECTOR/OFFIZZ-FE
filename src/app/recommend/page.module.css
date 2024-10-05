@@ -27,6 +27,7 @@
   width: 100%;
   height: 1.375rem;
   border: none;
+  outline: none;
 }
 
 .search-input::placeholder {
@@ -43,7 +44,18 @@
   padding: 3.625rem 11.4375rem 4.5rem 11.4375rem;
 }
 
-.recommend-result-container {
+.recommend-header {
+  margin-top: 2.25rem;
+  margin-bottom: 2.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.recommend-header h2 {
+  margin-bottom: 1rem;
+}
+
+.result-container {
   margin-top: 2.25rem;
   margin-bottom: 2.25rem;
   display: flex;
@@ -51,11 +63,19 @@
   gap: 1rem;
 }
 
-.recommend-result-container h2 {
-  margin-bottom: 1rem;
+.search-header {
+  margin-top: 2.25rem;
+  margin-bottom: 2.25rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.search-result-container {
+.search-header h2 {
+  margin-bottom: 1.6875rem;
+}
+
+.search-header p {
+  color: var(--black-500);
 }
 
 .recommend-btn-list {
