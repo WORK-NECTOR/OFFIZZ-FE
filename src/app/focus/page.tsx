@@ -8,26 +8,30 @@ import styles from './page.module.css';
 import chatactor from '../../../public/charactor-laptop.png';
 import clock from '../../../public/time.png';
 import FocusSearchParams from './components/FocusSearchParams/FocusSearchParams';
+import useAuth from '@/hook/useAuth';
 
 function FocusPage() {
   const router = useRouter();
   const [title, setTitle] = useState<string | null>(null);
+  const [Id, setId] = useState<number | null>(null);
   const [time, setTime] = useState<string | null>(null);
   const entryTime = useRef<Date | null>(null); // 진입시간
-  // SearchParams에서 title과 time을 받아옴
+
   const handleSearchParams = (
     paramsTitle: string | null,
     paramsTime: string | null,
+    paramsId: number | null,
   ) => {
     setTitle(paramsTitle);
     setTime(paramsTime);
+    setId(paramsId);
   };
 
-  // 시간에 따른 원형 그래프 상태
   const [percentage, setPercentage] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0); // 경과 시간 상태
-  const [isPaused, setIsPaused] = useState(true); // 초기 상태는 일시정지
-  const [intervalId, setIntervalId] = useState<number | null>(null); // interval ID
+  const [isPaused, setIsPaused] = useState(false); // 초기 상태는 일시정지
+  const intervalIdRef = useRef<number | null>(null); // interval ID를 ref로 관리
+  const { getAccessToken } = useAuth();
   // 경과 시간을 "HH:mm:ss" 형식으로 포맷하는 함수
   const formatTime = (milliseconds: number) => {
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -40,19 +44,26 @@ function FocusPage() {
     return `${hours}:${minutes}:${seconds}`;
   };
 
+  // "HH:mm" 형식으로 변환하는 함수
+  const formatTimeHHMM = (date: Date) => {
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
+
   // 1시간 기준으로 타이머 설정
   useEffect(() => {
     if (!entryTime.current) {
-        const now = new Date();
-        entryTime.current = now;
-        console.log('페이지 진입 시각:', now.toLocaleTimeString());
+      const now = new Date();
+      entryTime.current = now;
+      console.log('페이지 진입 시각:', now.toLocaleTimeString());
     }
     const totalDuration = 60 * 60 * 1000; // 1시간을 밀리초로 변환
 
     const startTimer = () => {
       const startTime = Date.now() - elapsedTime; // 일시정지 후 남은 경과 시간 고려
 
-      const id = setInterval(() => {
+      const id = window.setInterval(() => {
         const currentTime = Date.now();
         const newElapsedTime = currentTime - startTime; // 경과 시간 계산
         const newPercentage = Math.min(
@@ -63,49 +74,69 @@ function FocusPage() {
         setElapsedTime(newElapsedTime); // 경과 시간 업데이트
         setPercentage(newPercentage);
 
-        // 시간이 다 되면 interval 종료 및 리셋
         if (newPercentage === 100) {
           clearInterval(id);
-          // 1시간을 채웠을 때 리셋 및 새로운 1시간 시작
           setElapsedTime(0); // 경과 시간 리셋
           setPercentage(0); // 진행률 리셋
         }
-      }, 1000); // 1초마다 업데이트
-      // setIntervalId(id); // interval ID 저장
+      }, 1000);
+
+      intervalIdRef.current = id; // interval ID 저장
     };
 
     if (!isPaused) {
       startTimer(); // 일시정지 상태가 아닐 때 타이머 시작
-    } else if (intervalId) {
-      clearInterval(intervalId); // 일시정지 시 interval 정리
+    } else if (intervalIdRef.current) {
+      clearInterval(intervalIdRef.current); // 일시정지 시 interval 정리
+      intervalIdRef.current = null;
     }
 
     return () => {
-      if (intervalId) clearInterval(intervalId); // 컴포넌트 언마운트 시 정리
+      if (intervalIdRef.current) clearInterval(intervalIdRef.current); // 컴포넌트 언마운트 시 정리
     };
-  }, [isPaused, elapsedTime]); // isPaused와 elapsedTime에 따라 실행
+  }, [isPaused, elapsedTime]);
 
-  // 종료 버튼 클릭 시
-  const onClickFinish = async () => {
-    try {
-      const day = 1; // day 값을 1로 설정
-      const body = {
-        workTodoId: 0, // 원하는 ID로 설정
-        actualTime: formatTime(elapsedTime),
-      };
+  const onClickFinish = () => {
+    const day = 1;
+    const startTime = entryTime.current
+      ?.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      })
+      .replace(':', ':');
+    const endTime = formatTimeHHMM(new Date()); // 종료 시간
+    const actualTime = formatTimeHHMM(new Date(elapsedTime));
+    const body = {
+      workTodoId: Id,
+      actualTime,
+      startTime,
+      endTime,
+    };
 
-      await axios.patch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/work/todo/fin/${day}`,
-        body,
-      );
+    console.log(body);
 
-      // 페이지 이동
-      router.push('/information?modalType=End');
-    } catch (error) {
-      console.error('PATCH 요청 실패:', error); // 에러 처리
-    }
+    // Access token을 가져오는 Promise
+    getAccessToken()
+      .then((token) =>
+        axios.patch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/work/todo/fin/${day}`,
+          body,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // 헤더에 토큰 추가
+            },
+          },
+        ),
+      )
+      .then(() => {
+        router.push('/information?modalType=End');
+      })
+      .catch((error) => {
+        console.error('요청 중 오류 발생:', error);
+      });
   };
-  // 일시정지/재생 버튼 클릭 시
+
   const togglePause = () => {
     setIsPaused((prev) => !prev); // 일시정지 상태를 토글
   };
@@ -153,10 +184,9 @@ function FocusPage() {
             r="54"
             strokeWidth="12"
             fill="none"
-            strokeDasharray={339.292} // 2 * Math.PI * 54 (원의 둘레)
-            strokeDashoffset={(1 - percentage / 100) * 339.292} // 진행 상황에 따라 변경
+            strokeDasharray={339.292}
+            strokeDashoffset={(1 - percentage / 100) * 339.292}
           />
-          {/* 경과 시간 표시 */}
         </svg>
       </div>
       <div>
@@ -171,9 +201,9 @@ function FocusPage() {
           textAnchor="middle"
           fontSize="16"
           fill="#000"
-          dominantBaseline="middle" // 가운데 정렬을 위한 설정
+          dominantBaseline="middle"
         >
-          {formatTime(elapsedTime)} {/* 경과 시간을 포맷하여 표시 */}
+          {formatTime(elapsedTime)}
         </text>
       </div>
       <div className={styles.buttonWrapper}>

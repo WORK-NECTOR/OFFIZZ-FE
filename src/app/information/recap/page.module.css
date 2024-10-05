@@ -1,0 +1,31 @@
+.backgroundSwitch {
+  width: 100%;
+  background: var(--Blue-greyish, #f4f7f9);
+}
+.topSwitch {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--Greyscale-100, #e9e9e9);
+  height: 3.5rem;
+  align-items: center;
+  background: var(--Greyscale-White, #fff);
+}
+.daySwitch {
+  display: flex;
+  width: 8rem;
+  height: 2rem;
+  margin-left: 5.19rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.recapWrapper {
+  margin-top: 1.25rem;
+  width: 62.5rem;
+  height: 42rem;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  border: 1px solid var(--Greyscale-100, #e9e9e9);
+  background: var(--Greyscale-White, #fff);
+}

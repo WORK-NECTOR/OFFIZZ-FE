@@ -6,7 +6,7 @@ interface DayState {
 }
 
 const useDayStore = create<DayState>((set) => ({
-  day: 1, 
+  day: 1,
   setDay: (day: number) => set({ day }),
 }));
 
