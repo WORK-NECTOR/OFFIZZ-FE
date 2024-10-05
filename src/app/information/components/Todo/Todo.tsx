@@ -87,10 +87,21 @@ const Todo: React.FC<TodoProps> = ({
     return '00:00' as `${number}:${number}`; // 기본값
   };
 
+  const formatNewtime = (time: string): `${number}:${number}` => {
+    const timePattern = /(\d+)\s*시간\s*(\d+)\s*분/; // 정규 표현식
+    const matches = time.match(timePattern); // 정규 표현식으로 시간과 분 추출
+    if (matches) {
+      const hours = Math.min(Math.max(parseInt(matches[1]), 0), 23); // 시간
+      const minutes = Math.min(Math.max(parseInt(matches[2]), 0), 59); // 분
+      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}` as `${number}:${number}`; // HH:MM 형식으로 반환
+    }
+    return '00:00' as `${number}:${number}`; // 기본값
+  };
+
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !isSubmitting) {
       setIsSubmitting(true); // 요청 시작
-      const planTime = formatTimeInput(newTime);
+      const planTime = formatNewtime(newTime);
       const activityName = newActivity;
       const urlType = vacationType === 'vacation' ? 'vacation' : 'work';
 

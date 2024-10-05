@@ -58,7 +58,7 @@ function Recommend({ vacation }: RecommendProps) {
     };
 
     fetchRecommendations();
-  }, [vacation, getAccessToken]);
+  }, [vacation]);
 
   if (vacation) {
     return (

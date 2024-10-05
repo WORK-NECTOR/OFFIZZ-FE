@@ -44,7 +44,7 @@ function Recode() {
     };
 
     fetchRecords();
-  }, [getAccessToken]);
+  }, []);
 
   const truncateComment = (comment: string) =>
     comment.length > 18 ? `${comment.slice(0, 20)}...` : comment;
@@ -54,7 +54,7 @@ function Recode() {
       {recodeData.map((item) => (
         <RecodeBox key={item.vacationTodoId}>
           <RecodeImg>
-            <Image
+            <img
               src={item.image}
               alt={item.title}
               style={{ width: '100%', height: 'auto', borderRadius: '0.5rem' }}
