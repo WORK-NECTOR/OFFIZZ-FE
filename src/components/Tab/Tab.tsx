@@ -3,6 +3,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { TabContainer, TabListContainer } from './Tab.styled';
 import title from '../../../public/title.png';
+import my from '../../../public/my.png';
+import retrospect from '../../../public/retrospect.png';
+import home from '../../../public/home.png';
+import recomend from '../../../public/recomend.png';
 import useTabStore from '@/store/useTabStore';
 
 function Tab() {
@@ -23,7 +27,7 @@ function Tab() {
             onClick={() => setActiveTab('/information')}
             onKeyDown={() => setActiveTab('/information')}
           >
-            홈
+            <Image src={home} alt="home" width={24} height={24} />홈
           </div>
         </Link>
         <Link href="/information/quration" passHref>
@@ -35,6 +39,7 @@ function Tab() {
             onClick={() => setActiveTab('/information/quration')}
             onKeyDown={() => setActiveTab('/information/quration')}
           >
+            <Image src={recomend} alt="recommend" width={24} height={24} />
             추천
           </div>
         </Link>
@@ -47,6 +52,7 @@ function Tab() {
             onClick={() => setActiveTab('/information/recap')}
             onKeyDown={() => setActiveTab('/information/recap')}
           >
+            <Image src={retrospect} alt="retrospect" width={24} height={24} />
             회고
           </div>
         </Link>
@@ -59,6 +65,7 @@ function Tab() {
             onClick={() => setActiveTab('/information/mypage')}
             onKeyDown={() => setActiveTab('/information/mypage')}
           >
+            <Image src={my} alt="my" width={24} height={24} />
             마이
           </div>
         </Link>

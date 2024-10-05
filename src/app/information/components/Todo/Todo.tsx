@@ -23,26 +23,36 @@ import useTodoIdStore from '@/store/useTodoIdStore';
 interface TodoProps {
   day: number;
   onClick: () => void;
+  // eslint-disable-next-line
+  onClickVacation?: () => void;
   isTodoAdded: boolean;
+  isVacationAdded: boolean;
 }
 // eslint-disable-next-line
-const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
+const Todo: React.FC<TodoProps> = ({
+  onClick,
+  onClickVacation,
+  isTodoAdded,
+  isVacationAdded,
+  day,
+}) => {
   const { getAccessToken } = useAuth();
   const searchParams = useSearchParams();
   const { setActivity } = useActivityStore();
   const { setTime } = useTimeStore();
   const { setId } = useTodoIdStore();
-  const [calculateTime, setCalculateTime] = useState('');
   const [newActivity, setNewActivity] = useState('');
   const [newTime, setNewTime] = useState('');
   const [workArr, setWorkArr] = useState<TodoTime[]>([]);
   const [VacationArr, setVacationArr] = useState<TodoTime[]>([]);
-  const [updatedTimeArr, setUpdatedTimeArr] = useState<TimeRangeType[]>([]); // 초기화
   const vacationType = searchParams.get('kind');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const handleActivityClick = (time: TodoTime) => {
     setActivity(time.name);
+    // eslint-disable-next-line
     setTime(formatTimeDisplay(time.time));
     setId(
+      // eslint-disable-next-line
       time.workTodoId
         ? time.workTodoId
         : time.vacationTodoId
@@ -52,6 +62,14 @@ const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
     onClick();
   };
 
+  const handleVacationClick =
+    (time: TodoTime) => (event: React.MouseEvent<HTMLImageElement>) => {
+      setId(time.vacationTodoId ? time.vacationTodoId : 0);
+      if (onClickVacation) {
+        onClickVacation();
+      }
+    };
+
   const formatTimeDisplay = (time: string): string => {
     const [hours, minutes] = time.split(':');
     return `${hours}시 ${minutes}분`;
@@ -60,7 +78,9 @@ const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
   const formatTimeInput = (time: string): `${number}:${number}` => {
     const parts = time.split(':');
     if (parts.length === 2) {
+      // eslint-disable-next-line
       const hours = Math.min(Math.max(parseInt(parts[0]), 0), 23); // 0~23 범위로 설정
+      // eslint-disable-next-line
       const minutes = Math.min(Math.max(parseInt(parts[1]), 0), 59); // 0~59 범위로 설정
       return `${hours}:${minutes}` as `${number}:${number}`;
     }
@@ -68,33 +88,33 @@ const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
   };
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !isSubmitting) {
+      setIsSubmitting(true); // 요청 시작
       const planTime = formatTimeInput(newTime);
       const activityName = newActivity;
       const urlType = vacationType === 'vacation' ? 'vacation' : 'work';
 
-      getAccessToken().then(async (token) => {
-        try {
-          const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/${urlType}/todo/${day}`,
-            {
-              icon: 0,
-              planTime,
-              name: activityName,
+      try {
+        const token = await getAccessToken();
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/${urlType}/todo/${day}`,
+          {
+            icon: 0,
+            planTime,
+            name: activityName,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
             },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`, // 헤더에 액세스 토큰 추가
-              },
-            },
-          );
-
-          alert('Todo 추가 성공');
-          window.location.reload();
-        } catch (error) {
-          console.error('Todo 추가 실패:', error);
-        }
-      });
+          },
+        );
+        // eslint-disable-next-line
+        window.location.reload();
+      } catch (error) {
+      } finally {
+        setIsSubmitting(false); // 요청 완료 후 상태 초기화
+      }
     }
   };
 
@@ -126,22 +146,20 @@ const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
             },
           },
         );
-        console.log(response.data.workTodoResponses);
+
         const workData = response.data.workTodoResponses;
         const vacationData = response.data.vacationTodoResponses;
         setVacationArr(vacationData);
         setWorkArr(workData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+      } catch (error) {}
     });
-  }, []);
+  }, [getAccessToken]);
 
   return (
     <>
-      {vacationType == 'vacation' && (
+      {vacationType === 'vacation' && (
         <>
-          {isTodoAdded && (
+          {isVacationAdded && (
             <TodoBoxAdd>
               <div
                 style={{
@@ -158,46 +176,45 @@ const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
                       type="text"
                       value={newActivity}
                       onChange={(e) => setNewActivity(e.target.value)}
-                      placeholder="할 일 입력"
+                      placeholder="휴가 입력"
+                      onKeyDown={handleKeyDown}
                     />
                   </div>
                 </div>
               </div>
             </TodoBoxAdd>
           )}
-          {(vacationType === 'vacation' ? VacationArr : workArr).map(
-            (time, index) => (
-              <TodoBox key={index}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {time.isComplete ? (
-                    <Image src={playDone} alt="play" width={36} height={36} />
-                  ) : (
-                    <Image
-                      src={playvacation}
-                      alt="play"
-                      width={36}
-                      height={36}
-                      onClick={() => handleActivityClick(time)}
-                    />
-                  )}
+          {VacationArr.map((time) => (
+            <TodoBox key={time.vacationTodoId}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {time.isComplete ? (
+                  <Image src={playDone} alt="play" width={36} height={36} />
+                ) : (
+                  <Image
+                    src={playvacation}
+                    alt="play"
+                    width={36}
+                    height={36}
+                    onClick={handleVacationClick(time)}
+                  />
+                )}
 
-                  <div style={{ marginLeft: '0.5rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      {/* <div>{time.icon ? time.icon : ''}</div> */}
-                      <TodoTitle>{time.name}</TodoTitle>
-                    </div>
+                <div style={{ marginLeft: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div>{time.icon ? time.icon : '😎'}</div>
+                    <TodoTitle>{time.name}</TodoTitle>
                   </div>
                 </div>
-                <div>...</div>
-              </TodoBox>
-            ),
-          )}
+              </div>
+              <div>...</div>
+            </TodoBox>
+          ))}
         </>
       )}
       {vacationType !== 'vacation' && (
@@ -230,37 +247,35 @@ const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
               </div>
             </TodoBoxAdd>
           )}
-          {(vacationType === 'vacation' ? VacationArr : workArr).map(
-            (time, index) => (
-              <TodoBox key={index}>
-                <div style={{ display: 'flex' }}>
-                  {time.isComplete ? (
-                    <Image src={playDone} alt="play" width={36} height={36} />
-                  ) : (
-                    <Image
-                      src={play}
-                      alt="play"
-                      width={36}
-                      height={36}
-                      onClick={() => handleActivityClick(time)}
-                    />
-                  )}
+          {workArr.map((time, index) => (
+            <TodoBox key={time.workTodoId}>
+              <div style={{ display: 'flex' }}>
+                {time.isComplete ? (
+                  <Image src={playDone} alt="play" width={36} height={36} />
+                ) : (
+                  <Image
+                    src={play}
+                    alt="play"
+                    width={36}
+                    height={36}
+                    onClick={() => handleActivityClick(time)}
+                  />
+                )}
 
-                  <div style={{ marginLeft: '0.5rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      {/* <div>{time.icon ? time.icon : ''}</div> */}
-                      <TodoTitle>{time.name}</TodoTitle>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <Image src={clock} alt="time" width={15} height={15} />
-                      <TodoSub>{formatTimeDisplay(time.time)}</TodoSub>
-                    </div>
+                <div style={{ marginLeft: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div>{time.icon ? time.icon : '😎'}</div>
+                    <TodoTitle>{time.name}</TodoTitle>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Image src={clock} alt="time" width={15} height={15} />
+                    <TodoSub>{formatTimeDisplay(time.time)}</TodoSub>
                   </div>
                 </div>
-                <div>...</div>
-              </TodoBox>
-            ),
-          )}
+              </div>
+              <div>...</div>
+            </TodoBox>
+          ))}
         </>
       )}
     </>

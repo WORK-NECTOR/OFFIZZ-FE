@@ -30,7 +30,6 @@ function KakaoLoginPage() {
           router.replace('/');
         })
         .catch((err) => {
-          console.error(err);
           router.replace('/');
         });
     }

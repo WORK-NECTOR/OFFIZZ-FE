@@ -56,7 +56,6 @@ function FocusPage() {
     if (!entryTime.current) {
       const now = new Date();
       entryTime.current = now;
-      console.log('페이지 진입 시각:', now.toLocaleTimeString());
     }
     const totalDuration = 60 * 60 * 1000; // 1시간을 밀리초로 변환
 
@@ -114,8 +113,6 @@ function FocusPage() {
       endTime,
     };
 
-    console.log(body);
-
     // Access token을 가져오는 Promise
     getAccessToken()
       .then((token) =>
@@ -132,9 +129,7 @@ function FocusPage() {
       .then(() => {
         router.push('/information?modalType=End');
       })
-      .catch((error) => {
-        console.error('요청 중 오류 발생:', error);
-      });
+      .catch((error) => {});
   };
 
   const togglePause = () => {

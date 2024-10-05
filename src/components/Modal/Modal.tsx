@@ -31,7 +31,9 @@ interface ModalProps {
   todoTitle?: string;
   // eslint-disable-next-line
   time?: string;
+  // eslint-disable-next-line
   id?: number;
+  // eslint-disable-next-line
   end?: boolean;
 }
 

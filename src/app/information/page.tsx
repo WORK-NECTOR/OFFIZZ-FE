@@ -22,11 +22,13 @@ import rightarrow from '../../../public/rightarrow.png';
 import useAuth from '@/hook/useAuth';
 import useDayStore from '@/store/useSelectDay';
 import useTodoIdStore from '@/store/useTodoIdStore';
+import TodoModal from '@/components/TodoModal/TodoModal';
 
 function InformationPage() {
   const [modalType, setModalType] = useState<string | null>(null);
   const [vacationType, setVacationType] = useState<string | null>(null);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isTodoModalOpen, setTodoModalOpen] = useState(false);
   const [isTodoAdded, setIsTodoAdded] = useState(false);
   const [end, setEnd] = useState(false);
   const { activity } = useActivityStore();
@@ -36,6 +38,7 @@ function InformationPage() {
   const { getAccessToken } = useAuth();
   const { day, setDay } = useDayStore();
   const [timeArr, setTimeArr] = useState<TimeRangeType[]>([]);
+  const [isVacationAdd, setIsVacationAdd] = useState(false);
   const handleSearchParams = (
     paramsModalType: string | null,
     paramsVacationType: string | null,
@@ -68,9 +71,18 @@ function InformationPage() {
   const handleTodoClick = () => {
     setModalOpen(true);
   };
-
+  const handleTodoVacationClick = () => {
+    setTodoModalOpen(true);
+  };
+  const closeTodoModal = () => {
+    setTodoModalOpen(false);
+  };
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  const onClickAddTodo = () => {
+    setIsVacationAdd(true);
   };
   // const timeArr: TimeRangeType[] = [
   //   {
@@ -103,17 +115,13 @@ function InformationPage() {
             .then((response) => {
               setTimeArr(response.data.todoHours);
             })
-            .catch((error) => {
-              console.error('서버에서 데이터를 가져오는 중 오류 발생:', error);
-            });
+            .catch((error) => {});
         })
-        .catch((error) => {
-          console.error('토큰을 가져오는 중 오류 발생:', error);
-        });
+        .catch((error) => {});
     };
 
     fetchTimeArr();
-  }, [day]);
+  }, [day, getAccessToken]);
   const onClickEnd = () => {
     setModalOpen(true);
     setEnd(true);
@@ -137,7 +145,7 @@ function InformationPage() {
   const handlePrevDay = () => {
     if (day > 1) setDay(day - 1); // 1일보다 작아지지 않게 설정
   };
-  console.log(timeArr);
+
   if (vacationType === 'vacation') {
     return (
       <div style={{ display: 'flex' }}>
@@ -180,14 +188,18 @@ function InformationPage() {
                 <div className={styles.rightTitleSwitch}>여행 기록</div>
                 <Recode />
               </div>
-              <div style={{ marginLeft: '8.25rem' }}>
+              <div style={{ marginLeft: '5rem' }}>
                 <div className={styles.rightTitleSwitch}>
                   to-do
-                  <div className={styles.addBtnSwitch}>추가 +</div>
+                  <div className={styles.addBtnSwitch} onClick={onClickAddTodo}>
+                    추가 +
+                  </div>
                 </div>
                 <Todo
                   onClick={handleTodoClick}
+                  onClickVacation={handleTodoVacationClick}
                   isTodoAdded={isTodoAdded}
+                  isVacationAdded={isVacationAdd}
                   day={day}
                 />
               </div>
@@ -200,6 +212,11 @@ function InformationPage() {
           todoTitle={activity || ''}
           time={time || ''}
           content={todoContent}
+        />
+        <TodoModal
+          isOpen={isTodoModalOpen}
+          onClose={closeTodoModal}
+          id={id || 0}
         />
       </div>
     );
@@ -254,6 +271,8 @@ function InformationPage() {
                 </div>
               </div>
               <Todo
+                isVacationAdded={isVacationAdd}
+                onClickVacation={handleTodoVacationClick}
                 onClick={handleTodoClick}
                 isTodoAdded={isTodoAdded}
                 day={day}

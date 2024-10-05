@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import axios from 'axios';
 import {
   RecommendBox,
   LinkStyle,
@@ -14,18 +15,50 @@ import {
   VNonRecomendSub,
   VNonRecommendBox,
   VtitleSub,
+  RecommnedBox,
 } from './Recommend.styled';
 import { MCtitlesub } from '../MainCharacterBox/MainCharacterBox.styled';
 import recommendText from '../../../../../public/recommend.png';
 import recommendTextPink from '../../../../../public/recommend-pink.png';
 import plus from '../../../../../public/plus.png';
 import plusPink from '../../../../../public/plus-pink.png';
+import useAuth from '@/hook/useAuth';
 
 interface RecommendProps {
+  // eslint-disable-next-line
   vacation?: boolean; // vacation prop을 선택적으로 설정
 }
+
 function Recommend({ vacation }: RecommendProps) {
   const [recommend, setRecommend] = useState(false);
+  const [recommendations, setRecommendations] = useState([]);
+  const [recommendPlace, serRecommendPlace] = useState('');
+  const { getAccessToken } = useAuth();
+  useEffect(() => {
+    const fetchRecommendations = async () => {
+      getAccessToken().then(async (token) => {
+        const url = vacation
+          ? `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/recommend/vacation`
+          : `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/recommend/work`;
+
+        try {
+          const response = await axios.get(url, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          serRecommendPlace(response.data.recommends);
+          setRecommendations(response.data.likes);
+        } catch (error) {
+          // eslint-disable-next-line
+          alert('추천 데이터를 가져오는 중 오류가 발생했습니다');
+        }
+      });
+    };
+
+    fetchRecommendations();
+  }, [vacation, getAccessToken]);
 
   if (vacation) {
     return (
@@ -55,7 +88,7 @@ function Recommend({ vacation }: RecommendProps) {
                     width={45}
                     height={20}
                   />
-                  <p>피츠카페</p>
+                  <p>{recommendPlace}</p>
                 </div>
                 <div>
                   <Image src={plusPink} alt="plus" width={22} height={22} />
@@ -65,7 +98,13 @@ function Recommend({ vacation }: RecommendProps) {
                 카페를 좋아하는 성현님을 위한 카페 추천
               </VNonRecomendSub>
             </VNonRecomend>
-            <VNonRecommendBox>아직 추가된 work 장소가 없어요.</VNonRecommendBox>
+            <VNonRecommendBox>
+              {recommendations.length > 0 ? (
+                recommendations.map((rec) => <RecommnedBox>{rec}</RecommnedBox>)
+              ) : (
+                <RecommnedBox>아직 추가된 추천 장소가 없습니다.</RecommnedBox>
+              )}
+            </VNonRecommendBox>
           </>
         )}
       </VRecommendBox>
@@ -95,7 +134,7 @@ function Recommend({ vacation }: RecommendProps) {
             >
               <div style={{ display: 'flex' }}>
                 <Image src={recommendText} alt="추천" width={45} height={20} />
-                <p>피츠카페</p>
+                <p>{recommendPlace}</p>
               </div>
               <div>
                 <Image src={plus} alt="plus" width={22} height={22} />
@@ -105,7 +144,15 @@ function Recommend({ vacation }: RecommendProps) {
               카페를 좋아하는 성현님을 위한 카페 추천
             </NonRecomendSub>
           </NonRecomend>
-          <NonRecommendBox>아직 추가된 work 장소가 없어요.</NonRecommendBox>
+          <VNonRecommendBox>
+            {recommendations.length > 0 ? (
+              recommendations.map((rec) => <RecommnedBox>{rec}</RecommnedBox>)
+            ) : (
+              <NonRecommendBox>
+                아직 추가된 추천 장소가 없습니다.
+              </NonRecommendBox>
+            )}
+          </VNonRecommendBox>
         </>
       )}
     </RecommendBox>

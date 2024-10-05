@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import axios from 'axios';
 import {
   RecodeWapper,
   RecodeBox,
@@ -9,34 +10,51 @@ import {
   RecodeComment,
 } from './Record.styled';
 import local from '../../../../../public/local.png';
+import useAuth from '@/hook/useAuth';
+
+interface RecodeItem {
+  vacationTodoId: number;
+  title: string;
+  locate: string;
+  comment: string;
+  image: string;
+}
 
 function Recode() {
-  const sample = [
-    {
-      vacationTodoId: 1,
-      title: '해변에서의 하루',
-      locate: '제주도',
-      comment: '일출과 일몰을 즐기고, 해변에서 산책하기ㅇㅇㅇㅓㅓ',
-      image: 'https://via.placeholder.com/300',
-    },
-    {
-      vacationTodoId: 2,
-      title: '산 정상에서의 하이킹',
-      locate: '한라산',
-      comment: '정상에서의 멋진 경치를 감상하기',
-      image: 'https://via.placeholder.com/300',
-    },
-  ];
+  const [recodeData, setRecordData] = useState<RecodeItem[]>([]);
+  const { getAccessToken } = useAuth();
+
+  useEffect(() => {
+    const fetchRecords = () => {
+      getAccessToken().then((token) => {
+        axios
+          .get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/record/vacation/1`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          )
+          .then((response) => {
+            setRecordData(response.data);
+          })
+          .catch((error) => {});
+      });
+    };
+
+    fetchRecords();
+  }, [getAccessToken]);
 
   const truncateComment = (comment: string) =>
     comment.length > 18 ? `${comment.slice(0, 20)}...` : comment;
 
   return (
     <RecodeWapper>
-      {sample.map((item) => (
+      {recodeData.map((item) => (
         <RecodeBox key={item.vacationTodoId}>
           <RecodeImg>
-            <img
+            <Image
               src={item.image}
               alt={item.title}
               style={{ width: '100%', height: 'auto', borderRadius: '0.5rem' }}
