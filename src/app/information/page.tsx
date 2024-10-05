@@ -15,7 +15,10 @@ import useTimeStore from '@/store/useSelectTime';
 import useActivityStore from '@/store/useSelectTodo';
 import InfoSearchParams from './components/InfoSearchParams/InfoSearchParams';
 import Recode from './components/Record';
-
+import leftarrow from '../../../public/leftarrow.png'
+import rightarrow from '../../../public/rightarrow.png'
+import axios from 'axios';
+import useAuth from '@/hook/useAuth';
 function InformationPage() {
   const [modalType, setModalType] = useState<string | null>(null);
   const [vacationType, setVacationType] = useState<string | null>(null);
@@ -24,7 +27,9 @@ function InformationPage() {
   const { activity } = useActivityStore();
   const { time } = useTimeStore();
   const router = useRouter();
-
+  const { getAccessToken } = useAuth();
+  const { day, setDay } = useDayStore();
+  const [timeArr, setTimeArr] = useState<TimeRangeType[]>([]);
   const handleSearchParams = (
     paramsModalType: string | null,
     paramsVacationType: string | null,
@@ -61,29 +66,63 @@ function InformationPage() {
   const closeModal = () => {
     setModalOpen(false);
   };
-  const timeArr: TimeRangeType[] = [
-    {
-      from: '11:30',
-      to: '15:30',
-      activity: 'Core Time',
-      icon: '😎',
-    },
-    {
-      from: '16:00',
-      to: '17:15',
-      activity: 'Test',
-      icon: '😂',
-    },
-  ];
-  const handleAddTodo = () => {
+  // const timeArr: TimeRangeType[] = [
+  //   {
+  //     from: '11:30',
+  //     to: '15:30',
+  //     activity: 'Core Time',
+  //     icon: '😎',
+  //   },
+  //   {
+  //     from: '16:00',
+  //     to: '17:15',
+  //     activity: 'Test',
+  //     icon: '😂',
+  //   },
+  // ];
+
+  useEffect(() => {
+    const fetchTimeArr = async () => {
+      getAccessToken().then((token) => {
+        axios
+          .get(`http://3.38.48.179/api/dashboard/coretime/${day}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            setTimeArr(response.data.todoHours);
+          })
+          .catch((error) => {
+            console.error('서버에서 데이터를 가져오는 중 오류 발생:', error);
+          });
+      }).catch((error) => {
+        console.error('토큰을 가져오는 중 오류 발생:', error);
+      });
+    };
+  
+    fetchTimeArr();
+  }, [day]);
+
+  const handleAddTodo = async () => {
     setIsTodoAdded(true); // Todo 추가 시 true로 설정
+
   };
-  const onClickVacation = () => {
+  const onClickVacation = ()=>{
     router.push(`/information?kind=vacation`);
-  };
-  const onClickWork = () => {
+  }
+  const onClickWork = ()=>{
     router.push(`/information`);
+  }
+
+  const handleNextDay = () => {
+    setDay(day + 1); // 다음 날로 변경
   };
+
+  const handlePrevDay = () => {
+    if (day > 1) setDay(day - 1); // 1일보다 작아지지 않게 설정
+  };
+
   if (vacationType === 'vacation') {
     return (
       <div style={{ display: 'flex' }}>
