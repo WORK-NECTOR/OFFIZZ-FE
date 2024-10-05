@@ -36,3 +36,13 @@ export const FACILITY_TEXT = {
   cafeRestaurant: '카페/레스토랑',
   copierPrinter: '복사(인쇄기)',
 };
+
+export const OPERATING_TIME_DAY: Record<string, string> = {
+  operatingHoursMonday: '월',
+  operatingHoursTuesday: '화',
+  operatingHoursWednesday: '수',
+  operatingHoursThursday: '목',
+  operatingHoursFriday: '금',
+  operatingHoursSaturday: '토',
+  operatingHoursSunday: '일',
+};

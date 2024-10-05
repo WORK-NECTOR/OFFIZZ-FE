@@ -5,8 +5,27 @@ export interface GetOfficeDetailParams {
 }
 
 export interface FacilitiesInterface {
+  heating: boolean;
+  parking: boolean;
+  publicLounge: boolean;
+  sharedKitchen: boolean;
+  waterPurifier: boolean;
+  terraceRooftop: boolean;
+  snacksDrinks: boolean;
+  personalLocker: boolean;
+  tvProject: boolean;
+  whiteboard: boolean;
+  internetWifi: boolean;
+  showerFacility: boolean;
+  storage: boolean;
+  doorLock: boolean;
+  powerOutlet: boolean;
+  fax: boolean;
   twentyFourHoursOperation: boolean;
   openAllYear: boolean;
+  airConditioning: boolean;
+  cafeRestaurant: boolean;
+  copierPrinter: boolean;
 }
 
 export interface OperatingTimeInterface {

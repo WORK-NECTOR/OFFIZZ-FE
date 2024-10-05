@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { OfficeAccordionProps } from '@/types/office.type';
 import {
   OfficeAccordionContainer,
@@ -9,9 +9,18 @@ import {
 import Badge from '@/components/Badge';
 import PriceUnit from '@/components/PriceUnit';
 import down_arrow from '../../../public/down-arrow.png';
-import { OFFICE_INFO_TITLE, regionArr } from '@/constants/office';
+import {
+  FACILITY_TEXT,
+  OFFICE_INFO_TITLE,
+  OPERATING_TIME_DAY,
+  regionArr,
+} from '@/constants/office';
 import TitleContent from '../TitleContent';
 import { useOfficeDetailQuery } from '@/services/office/useOfficeDetailQuery';
+import {
+  FacilitiesInterface,
+  OperatingTimeInterface,
+} from '@/api/office/getOfficeDetail';
 
 function OfficeAccordion(props: OfficeAccordionProps) {
   const {
@@ -27,6 +36,20 @@ function OfficeAccordion(props: OfficeAccordionProps) {
     officeId,
   });
   const [isOpen, setIsOpen] = useState(false);
+  const [facilitiesArr, setFacilitiesArr] = useState<Array<string>>([]);
+
+  useEffect(() => {
+    function getAvailableFacilities(facilities: FacilitiesInterface): string[] {
+      return Object.keys(facilities)
+        .filter((key) => facilities[key as keyof FacilitiesInterface])
+        .map((key) => FACILITY_TEXT[key as keyof typeof FACILITY_TEXT])
+        .filter(Boolean);
+    }
+
+    if (data) {
+      setFacilitiesArr(getAvailableFacilities(data.facilities));
+    }
+  }, [data]);
 
   return (
     <OfficeAccordionContainer>
@@ -56,24 +79,32 @@ function OfficeAccordion(props: OfficeAccordionProps) {
       </OfficeAccordionToggle>
       <OfficeAccordionContent $isOpen={isOpen}>
         <TitleContent title={OFFICE_INFO_TITLE.facility}>
-          {regionArr.map((item) => (
-            <Badge
-              key={item.id}
-              text={item.region}
-              height="1.875rem"
-              fontSize="1rem"
-              padding="0.25rem 0.75rem"
-              backgroundColor="var(--black-50)"
-              color="var(--black-600)"
-              borderRadius="1.75rem"
-            />
-          ))}
+          {facilitiesArr &&
+            facilitiesArr.map((item, idx) => (
+              <Badge
+                key={idx}
+                text={item}
+                height="1.875rem"
+                fontSize="1rem"
+                padding="0.25rem 0.75rem"
+                backgroundColor="var(--black-50)"
+                color="var(--black-600)"
+                borderRadius="1.75rem"
+              />
+            ))}
         </TitleContent>
         <TitleContent title={OFFICE_INFO_TITLE.capacity}>
-          <p>1명~20명</p>
+          <p>{data && data.capacity}</p>
         </TitleContent>
         <TitleContent title={OFFICE_INFO_TITLE.operatingTime}>
-          <p>월 00:00 ~ 24:00</p>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {data &&
+              Object.keys(data.operatingTime).map((el, idx) => (
+                <p
+                  key={idx}
+                >{`${OPERATING_TIME_DAY[el]} ${data.operatingTime[el as keyof OperatingTimeInterface]}`}</p>
+              ))}
+          </div>
         </TitleContent>
       </OfficeAccordionContent>
     </OfficeAccordionContainer>
