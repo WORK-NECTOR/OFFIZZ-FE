@@ -69,7 +69,6 @@ line-height: 1.375rem; /* 137.5% */
 }
 .recapMiddle{
     margin-top: 1rem;
-    border: 1px solid red;
 }
 .middleWork{}
 .middleVacation{}
@@ -98,12 +97,11 @@ line-height: 1.125rem; /* 128.571% */
 .middleBox{
     display: flex;
     justify-content: space-between;
-    border: 1px solid red;
+
 }
 .middleSubBox{
     width: 22rem;
     margin-left: 3.1rem;
-    border: 1px solid black;
 }
 .middleSubTime{
     margin-bottom: 0.56rem;
@@ -187,4 +185,40 @@ line-height: 1.125rem; /* 128.571% */
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.notWrite{
+    display: flex;
+width: 10.6875rem;
+padding: 0.5rem;
+align-items: center;
+gap: 0.5rem;
+border-radius: 0.5rem;
+border: 1px solid var(--Greyscale-200, #D9D9D9);
+background: var(--Greyscale-50, #F5F5F5);
+color: var(--Greyscale-400, #9D9D9D);
+
+/* Eng/Caption2-eng */
+font-family: Figtree;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 400;
+line-height: 1.125rem; /* 128.571% */
+}
+.bottomNotWrite{
+    display: flex;
+width: 51.625rem;
+padding: 0.5rem;
+align-items: center;
+gap: 0.5rem;
+border-radius: 0.5rem;
+border: 1px solid var(--Greyscale-200, #D9D9D9);
+background: var(--Greyscale-50, #F5F5F5);
+color: var(--Greyscale-400, #9D9D9D);
+
+/* Eng/Caption2-eng */
+font-family: Figtree;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 400;
+line-height: 1.125rem; /* 128.571% */
 }
