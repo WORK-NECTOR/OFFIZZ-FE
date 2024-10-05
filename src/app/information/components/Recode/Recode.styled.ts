@@ -10,16 +10,17 @@ gap: 0.5rem;
 `;
 export const RecodeBox = styled.div`
 width: 18.625rem;
-height: 5rem;
-  border: 1px solid black;
+min-height: 5rem;
+  border-bottom: 1px solid var(--Greyscale-100, #E9E9E9);
   display: flex;
 `;
 export const RecodeImg = styled.div`
+border-radius: 0.5rem;
 width: 5rem;
 height: 5rem;
-background-color: gray;
   border: 1px solid black;
   margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
 `;
 export const RecodeTitle = styled.div`
 margin-top: 0.44rem;
@@ -55,4 +56,5 @@ font-size: 0.75rem;
 font-style: normal;
 font-weight: 400;
 line-height: 1rem; /* 133.333% */
+margin-bottom: 0.5rem;
 `;

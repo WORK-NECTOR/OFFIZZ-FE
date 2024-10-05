@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './page.module.css';
 import Image from 'next/image';
 import chatactor from '../../../public/charactor-laptop.png';
@@ -17,11 +17,18 @@ function FocusPage() {
     // 시간에 따른 원형 그래프 상태
     const [percentage, setPercentage] = useState(0);
     const [elapsedTime, setElapsedTime] = useState(0); // 경과 시간 상태
-    const [isPaused, setIsPaused] = useState(true);
+    const [isPaused, setIsPaused] = useState(false);
     const [intervalId, setIntervalId] = useState<number | null>(null); // interval ID
-
+    const entryTime = useRef<Date | null>(null); // 진입시간
+    const [endTime, setEndTime] = useState<Date | null>(null); // 종료 시각
     // 1시간 기준으로 타이머 설정
     useEffect(() => {
+        if (!entryTime.current) {
+            const now = new Date();
+            entryTime.current = now;
+            console.log('페이지 진입 시각:', now.toLocaleTimeString());
+        }
+
         const totalDuration = 60 * 60 * 1000; // 1시간을 밀리초로 변환
 
         const startTimer = () => {
@@ -63,6 +70,9 @@ function FocusPage() {
 
     // 종료 버튼 클릭 시
     const onClickFinish = async () => {
+        const endTime = new Date();
+        setEndTime(endTime);
+            console.log('종료 버튼 클릭 시각:', endTime.toLocaleTimeString());
         try {
             const body = {
                 workTodoId: 0, // 원하는 ID로 설정

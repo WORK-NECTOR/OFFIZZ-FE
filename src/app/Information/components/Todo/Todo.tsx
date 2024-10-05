@@ -42,12 +42,24 @@ const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
   };
   
   const formatTimeInput = (time: string): `${number}:${number}` => {
-    const parts = time.split(':');
+    // 한글 시간을 숫자 형식으로 변환
+    const timeInKorean = time.replace('시간', ':').replace('분', '').trim();
+    const parts = timeInKorean.split(':');
+    
     if (parts.length === 2) {
-      const hours = Math.min(Math.max(parseInt(parts[0]), 0), 23); // 0~23 범위로 설정
-      const minutes = Math.min(Math.max(parseInt(parts[1]), 0), 59); // 0~59 범위로 설정
-      return `${hours}:${minutes}` as `${number}:${number}`;
+      let hours = parseInt(parts[0].trim());
+      let minutes = parseInt(parts[1].trim());
+  
+      // 자릿수 맞추기 (예: 4시간 3분 -> 04:03)
+      hours = Math.min(Math.max(hours, 0), 23);
+      minutes = Math.min(Math.max(minutes, 0), 59);
+  
+      const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
+      const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  
+      return `${formattedHours}:${formattedMinutes}` as `${number}:${number}`;
     }
+  
     return '00:00' as `${number}:${number}`; // 기본값
   };
 
@@ -56,7 +68,6 @@ const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
       const planTime = formatTimeInput(newTime);
       const activityName = newActivity;
       const urlType = vacationType === 'vacation' ? 'vacation' : 'work';
-      
       getAccessToken().then(async (token) => {
         try {
           const response = await axios.post(
@@ -76,7 +87,7 @@ const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
           alert('Todo 추가 성공');
           window.location.reload();
         } catch (error) {
-          console.error('Todo 추가 실패:', error);
+          alert('Todo 추가 실패: 다시 시도해주세요');
         }
       });
     }
@@ -91,7 +102,7 @@ const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
         icon: '😎',
       },
       {
-        time: '04:10',
+        time: '4:10',
         activity: 'Test',
         isComplete: false,
         icon: '😂',
@@ -206,7 +217,7 @@ const Todo: React.FC<TodoProps> = ({ onClick, isTodoAdded, day }) => {
                   type="text"
                   value={newTime}
                   onChange={(e) => setNewTime(e.target.value)}
-                  placeholder="0시간 0분"
+                  placeholder="00시간 00분"
                   onKeyDown={handleKeyDown}
                 />
               </div>
