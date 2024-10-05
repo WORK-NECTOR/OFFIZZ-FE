@@ -50,14 +50,14 @@ function Tab() {
             회고
           </div>
         </Link>
-        <Link href="/information/my" passHref>
+        <Link href="/information/mypage" passHref>
           <div
             role="button"
             id="tab-list"
             tabIndex={0}
-            className={activeTab === '/information/my' ? 'active' : ''}
-            onClick={() => setActiveTab('/information/my')}
-            onKeyDown={() => setActiveTab('/information/my')}
+            className={activeTab === '/information/mypage' ? 'active' : ''}
+            onClick={() => setActiveTab('/information/mypage')}
+            onKeyDown={() => setActiveTab('/information/mypage')}
           >
             마이
           </div>

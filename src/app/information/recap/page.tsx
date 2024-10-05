@@ -89,12 +89,12 @@ function RecapPage() {
               </div>
             </div>
             {/* 미들 */}
-            {write ? <>
+            {/* {write ? <>
               <div style={{marginTop:'3rem'}}>
             <div className={styles.middleTitle}>여행 기록</div>
             <div className={styles.photo}>사진</div>
             </div>
-            </>:''}
+            </>:''} */}
             {/* 마지막 */}
             <div className={styles.bottom}>
               <div className={styles.bottomTitle}>YWT 회고</div>
