@@ -65,6 +65,7 @@ const Todo: React.FC<TodoProps> = ({
   const handleVacationClick =
     (time: TodoTime) => (event: React.MouseEvent<HTMLImageElement>) => {
       setId(time.vacationTodoId ? time.vacationTodoId : 0);
+      setActivity(time.name)
       if (onClickVacation) {
         onClickVacation();
       }
@@ -218,7 +219,7 @@ const Todo: React.FC<TodoProps> = ({
 
                 <div style={{ marginLeft: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div>{time.icon ? time.icon : '😎'}</div>
+                    <div>{time.icon ? time.icon : '🏞️'}</div>
                     <TodoTitle>{time.name}</TodoTitle>
                   </div>
                 </div>

@@ -217,6 +217,7 @@ function InformationPage() {
           isOpen={isTodoModalOpen}
           onClose={closeTodoModal}
           id={id || 0}
+          todoTitle={activity || ''}
         />
       </div>
     );

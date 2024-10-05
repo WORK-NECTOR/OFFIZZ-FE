@@ -21,9 +21,10 @@ interface TodoModalProps {
   isOpen: boolean;
   onClose: () => void;
   id: number;
+  todoTitle:string;
 }
 // eslint-disable-next-line
-const TodoModal: React.FC<TodoModalProps> = ({ isOpen, onClose, id }) => {
+const TodoModal: React.FC<TodoModalProps> = ({ isOpen, onClose, id ,todoTitle}) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null); // 선택된 이미지 상태 관리
   const [locate, setLocate] = useState<string>(''); // 위치 상태
@@ -68,7 +69,7 @@ const TodoModal: React.FC<TodoModalProps> = ({ isOpen, onClose, id }) => {
 
   const onClickCamera = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click(); // 파일 입력 클릭
+      fileInputRef.current.click();
     }
   };
 
@@ -77,9 +78,9 @@ const TodoModal: React.FC<TodoModalProps> = ({ isOpen, onClose, id }) => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setSelectedImage(reader.result as string); // 선택한 이미지를 Base64로 설정
+        setSelectedImage(reader.result as string); 
       };
-      reader.readAsDataURL(file); // 파일을 Data URL로 변환
+      reader.readAsDataURL(file); 
     }
   };
 
@@ -96,14 +97,14 @@ const TodoModal: React.FC<TodoModalProps> = ({ isOpen, onClose, id }) => {
           다음에는 저도 데려가 주세요!
         </TodoModalSub>
         <ModalContent>
-          <TodoPostTitle>🏞️ ddddddd</TodoPostTitle>
+          <TodoPostTitle>🏞️ {todoTitle}</TodoPostTitle>
           <TodoPlaceInput
             placeholder="위치 입력"
-            value={locate} // 위치 상태를 설정
-            onChange={(e) => setLocate(e.target.value)} // 입력 시 상태 업데이트
+            value={locate} 
+            onChange={(e) => setLocate(e.target.value)} 
           />
           <div style={{ position: 'relative', width: '64px', height: '64px' }}>
-            {selectedImage ? ( // 선택된 이미지가 있으면 표시
+            {selectedImage ? ( 
               <Image
                 src={selectedImage}
                 alt="selected"
@@ -123,15 +124,15 @@ const TodoModal: React.FC<TodoModalProps> = ({ isOpen, onClose, id }) => {
             <input
               type="file"
               ref={fileInputRef}
-              accept="image/*" // 이미지 파일만 허용
-              style={{ display: 'none' }} // 파일 입력 숨기기
-              onChange={onFileChange} // 파일 변경 이벤트 처리
+              accept="image/*"
+              style={{ display: 'none' }} 
+              onChange={onFileChange}
             />
           </div>
           <TodoWriteInput
             placeholder="한줄평을 입력해주세요."
-            value={comment} // 한줄평 상태를 설정
-            onChange={(e) => setComment(e.target.value)} // 입력 시 상태 업데이트
+            value={comment} 
+            onChange={(e) => setComment(e.target.value)} 
           />
           <div style={{ display: 'flex' }}>
             <TodoBtnCancel onClick={onClose}>나가기</TodoBtnCancel>
