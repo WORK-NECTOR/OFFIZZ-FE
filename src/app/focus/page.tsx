@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
@@ -13,7 +13,7 @@ function FocusPage() {
   const router = useRouter();
   const [title, setTitle] = useState<string | null>(null);
   const [time, setTime] = useState<string | null>(null);
-
+  const entryTime = useRef<Date | null>(null); // 진입시간
   // SearchParams에서 title과 time을 받아옴
   const handleSearchParams = (
     paramsTitle: string | null,
@@ -28,7 +28,6 @@ function FocusPage() {
   const [elapsedTime, setElapsedTime] = useState(0); // 경과 시간 상태
   const [isPaused, setIsPaused] = useState(true); // 초기 상태는 일시정지
   const [intervalId, setIntervalId] = useState<number | null>(null); // interval ID
-
   // 경과 시간을 "HH:mm:ss" 형식으로 포맷하는 함수
   const formatTime = (milliseconds: number) => {
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -43,6 +42,11 @@ function FocusPage() {
 
   // 1시간 기준으로 타이머 설정
   useEffect(() => {
+    if (!entryTime.current) {
+        const now = new Date();
+        entryTime.current = now;
+        console.log('페이지 진입 시각:', now.toLocaleTimeString());
+    }
     const totalDuration = 60 * 60 * 1000; // 1시간을 밀리초로 변환
 
     const startTimer = () => {

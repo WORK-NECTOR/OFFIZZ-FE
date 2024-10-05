@@ -14,6 +14,7 @@ import caractor from '../../../public/charactor-laptop.png';
 import useTimeStore from '@/store/useSelectTime';
 import useActivityStore from '@/store/useSelectTodo';
 import InfoSearchParams from './components/InfoSearchParams/InfoSearchParams';
+import Recode from './components/Record';
 
 function InformationPage() {
   const [modalType, setModalType] = useState<string | null>(null);
@@ -111,6 +112,7 @@ function InformationPage() {
             <div className={styles.rightWrapperSwitch}>
               <div>
                 <div className={styles.rightTitleSwitch}>여행 기록</div>
+                <Recode/>
               </div>
               <div style={{ marginLeft: '8.25rem' }}>
                 <div className={styles.rightTitleSwitch}>
