@@ -11,6 +11,7 @@ import PriceUnit from '@/components/PriceUnit';
 import down_arrow from '../../../public/down-arrow.png';
 import { OFFICE_INFO_TITLE, regionArr } from '@/constants/office';
 import TitleContent from '../TitleContent';
+import { useOfficeDetailQuery } from '@/services/office/useOfficeDetailQuery';
 
 function OfficeAccordion(props: OfficeAccordionProps) {
   const {
@@ -22,7 +23,9 @@ function OfficeAccordion(props: OfficeAccordionProps) {
     priceUnit = '미정',
     officeId,
   } = props;
-
+  const { data } = useOfficeDetailQuery({
+    officeId,
+  });
   const [isOpen, setIsOpen] = useState(false);
 
   return (
