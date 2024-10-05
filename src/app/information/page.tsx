@@ -19,6 +19,7 @@ import leftarrow from '../../../public/leftarrow.png'
 import rightarrow from '../../../public/rightarrow.png'
 import axios from 'axios';
 import useAuth from '@/hook/useAuth';
+import useDayStore from '@/store/useSelectDay';
 function InformationPage() {
   const [modalType, setModalType] = useState<string | null>(null);
   const [vacationType, setVacationType] = useState<string | null>(null);
