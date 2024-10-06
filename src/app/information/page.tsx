@@ -9,7 +9,7 @@ import styles from './page.module.css';
 import MainCharacterBox from './components/MainCharacterBox';
 import Recommend from './components/Recommend';
 import TimeRange from '@/components/TimeRange';
-import { TimeRangeType } from '@/types/timeRange.type';
+import { TimeRangeResponseType, TimeRangeType } from '@/types/timeRange.type';
 import Todo from './components/Todo';
 import Modal from '@/components/Modal';
 import caractor from '../../../public/charactor-laptop.png';
@@ -38,7 +38,8 @@ function InformationPage() {
   const router = useRouter();
   const { getAccessToken } = useAuth();
   const { day, setDay } = useDayStore();
-  const [timeArr, setTimeArr] = useState<TimeRangeType[]>([]);
+  const [timeArr, setTimeArr] = useState<TimeRangeResponseType[]>([]);
+  const [coreTime, setCoreTime] = useState('');
   const [isVacationAdd, setIsVacationAdd] = useState(false);
   const handleSearchParams = (
     paramsModalType: string | null,
@@ -118,7 +119,15 @@ function InformationPage() {
               },
             )
             .then((response) => {
-              setTimeArr(response.data.todoHours);
+              const coreTimeEntry = {
+                startTime: response.data.startCoreTime, 
+                endTime: response.data.endCoreTime,     
+                name: 'coreTime',               
+              };
+              setTimeArr([
+                coreTimeEntry,
+                ...response.data.todoHours,
+              ]);
             })
             .catch((error) => {});
         })
@@ -127,6 +136,10 @@ function InformationPage() {
 
     fetchTimeArr();
   }, [day, getAccessToken]);
+console.log(timeArr)
+
+
+
   const onClickEnd = () => {
     setModalOpen(true);
     setEnd(true);
@@ -191,7 +204,9 @@ function InformationPage() {
             <div className={styles.rightWrapperSwitch}>
               <div>
                 <div className={styles.rightTitleSwitch}>여행 기록</div>
+                <div className={styles.todoWrapper}>
                 <Recode onClickVacation={handleVacationRecode} />
+                </div>
               </div>
               <div style={{ marginLeft: '5rem' }}>
                 <div className={styles.rightTitleSwitch}>
@@ -200,6 +215,7 @@ function InformationPage() {
                     추가 +
                   </div>
                 </div>
+                <div className={styles.todoWrapper}>
                 <Todo
                   onClick={handleTodoClick}
                   onClickVacation={handleTodoVacationClick}
@@ -207,6 +223,7 @@ function InformationPage() {
                   isVacationAdded={isVacationAdd}
                   day={day}
                 />
+                </div>
               </div>
             </div>
           </div>
@@ -277,6 +294,7 @@ function InformationPage() {
                   추가 +
                 </div>
               </div>
+              <div className={styles.todoWrapper}>
               <Todo
                 isVacationAdded={isVacationAdd}
                 onClickVacation={handleTodoVacationClick}
@@ -284,6 +302,7 @@ function InformationPage() {
                 isTodoAdded={isTodoAdded}
                 day={day}
               />
+              </div>
             </div>
           </div>
         </div>

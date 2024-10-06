@@ -233,3 +233,7 @@
   font-weight: 600;
   line-height: 1.375rem; /* 137.5% */
 }
+.todoWrapper{
+  max-height: 34rem;
+  overflow-y: auto;
+}

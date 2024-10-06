@@ -8,7 +8,18 @@ export type TimeRangeType = {
   icon?: string | StaticImageData;
   activity: string;
 };
-
+export type TimeRangeResponseType = {
+  startTime: TimeFormat;
+  endTime: TimeFormat;
+  icon?: string | StaticImageData;
+  name: string;
+};
+export type CoreTimeType = {
+  startTime: TimeFormat;
+  endTime: TimeFormat;
+  icon?: string | StaticImageData;
+  name: string;
+};
 export interface TimeRangeProps {
   timeArr: Array<TimeRangeType>;
   length: 'short' | 'long';
