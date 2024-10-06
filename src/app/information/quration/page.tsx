@@ -17,10 +17,12 @@ import search from '../../../../public/search.png';
 function QurationPage() {
   useKakaoLoader();
 
-  const [searchString, setSearchString] = useState<string>(''); // 검색하기 위한 입력값
+  const [searchString, setSearchString] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
   const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({
     searchText: debouncedSearchText,
+    page,
   });
   const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,
@@ -40,6 +42,10 @@ function QurationPage() {
   };
   const onClickWork = () => {};
   const onClickVacation = () => {};
+
+  const handlePageClick = (page: number) => {
+    setPage(page);
+  };
 
   return (
     <div style={{ display: 'flex' }}>
@@ -97,7 +103,11 @@ function QurationPage() {
             </div>
             <div className={styles.pagenation}>
               {pages.map((page) => (
-                <button key={page} className={styles.pageButton}>
+                <button
+                  key={page}
+                  className={styles.pageButton}
+                  onClick={() => handlePageClick(page)}
+                >
                   {page}
                 </button>
               ))}

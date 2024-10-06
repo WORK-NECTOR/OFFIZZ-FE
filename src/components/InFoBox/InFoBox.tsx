@@ -23,12 +23,12 @@ function InFoBox({ title, address, image }: InfoBoxProps) {
       >
         {image ? (
           <Image
-              src={image}
-              alt="image"
-              width={80}
-              height={80}
-              style={{ borderRadius: '0.5rem' }}
-            />
+            src={image}
+            alt="image"
+            width={80}
+            height={80}
+            style={{ borderRadius: '0.5rem' }}
+          />
         ) : (
           <InfoImage />
         )}
