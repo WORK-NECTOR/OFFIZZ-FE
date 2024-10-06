@@ -12,6 +12,7 @@ const meta = {
     address_name: '강원특별자치도 강릉시 경포로 365',
     place_name: '경포대',
     setPlace: () => {},
+    setAddress: () => {},
     searchBarType: 'place',
     visitPlace: [
       {
