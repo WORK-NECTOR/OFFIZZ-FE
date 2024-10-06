@@ -30,6 +30,7 @@ function InformationPage() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isTodoModalOpen, setTodoModalOpen] = useState(false);
   const [isTodoAdded, setIsTodoAdded] = useState(false);
+  const [save, setSave] = useState(false);
   const [end, setEnd] = useState(false);
   const { activity } = useActivityStore();
   const { time } = useTimeStore();
@@ -72,6 +73,10 @@ function InformationPage() {
     setModalOpen(true);
   };
   const handleTodoVacationClick = () => {
+    setTodoModalOpen(true);
+  };
+  const handleVacationRecode = () => {
+    setSave(true);
     setTodoModalOpen(true);
   };
   const closeTodoModal = () => {
@@ -186,7 +191,7 @@ function InformationPage() {
             <div className={styles.rightWrapperSwitch}>
               <div>
                 <div className={styles.rightTitleSwitch}>여행 기록</div>
-                <Recode />
+                <Recode onClickVacation={handleVacationRecode} />
               </div>
               <div style={{ marginLeft: '5rem' }}>
                 <div className={styles.rightTitleSwitch}>
@@ -218,6 +223,7 @@ function InformationPage() {
           onClose={closeTodoModal}
           id={id || 0}
           todoTitle={activity || ''}
+          save={save}
         />
       </div>
     );

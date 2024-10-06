@@ -15,7 +15,7 @@ export const Overlay = styled.div`
 export const ModalContainer = styled.div`
   display: flex;
   width: 23.25rem;
-  height: 39.5rem;
+  max-height: 39.5rem;
   padding: 2rem 2.5rem;
   flex-direction: column;
   align-items: center;
@@ -61,6 +61,13 @@ export const ModalContent = styled.div`
   border-radius: 0.5rem;
   border: 1px solid var(--Greyscale-200, #d9d9d9);
 `;
+export const ModalContentSave = styled.div`
+  display: flex;
+  padding: 1.0625rem 1rem;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-self: stretch;
+`;
 
 export const TodoPostTitle = styled.div`
   width: 100%;
@@ -74,6 +81,18 @@ export const TodoPostTitle = styled.div`
   line-height: 1.125rem; /* 128.571% */
   padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--Greyscale-200, #d9d9d9);
+`;
+export const TodoPostTitleSave = styled.div`
+  width: 100%;
+  color: var(--Greyscale-Black, #000);
+
+  /* Kor/Body5-kor */
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.375rem; /* 137.5% */
+  padding-bottom: 0.5rem;
 `;
 
 export const TodoPlaceInput = styled.input`
@@ -90,6 +109,7 @@ export const TodoPlaceInput = styled.input`
 export const TodoWriteInput = styled.input`
   display: flex;
   height: 9rem;
+  width: 100%;
   padding: 0.5rem;
   align-items: flex-start;
   gap: 0.5rem;
@@ -97,6 +117,24 @@ export const TodoWriteInput = styled.input`
   border-radius: 0.5rem;
   background: var(--Greyscale-50, #f5f5f5);
   border: none;
+`;
+export const TodoWrite = styled.div`
+  display: flex;
+  height: 9rem;
+  padding: 0.5rem;
+  align-items: flex-start;
+  gap: 0.5rem;
+  align-self: stretch;
+  border-radius: 0.5rem;
+  background: var(--Greyscale-50, #f5f5f5);
+  color: var(--Greyscale-Black, #000);
+
+  /* Kor/Caption2-kor */
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.125rem; /* 128.571% */
 `;
 
 export const TodoBtnCancel = styled.div`

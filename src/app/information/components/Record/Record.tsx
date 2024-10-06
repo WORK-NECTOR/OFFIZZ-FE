@@ -11,6 +11,8 @@ import {
 } from './Record.styled';
 import local from '../../../../../public/local.png';
 import useAuth from '@/hook/useAuth';
+import useActivityStore from '@/store/useSelectTodo';
+import useTodoIdStore from '@/store/useTodoIdStore';
 
 interface RecodeItem {
   vacationTodoId: number;
@@ -19,11 +21,17 @@ interface RecodeItem {
   comment: string;
   image: string;
 }
-
-function Recode() {
+interface RecodeProps {
+  onClickVacation: () => void;
+}
+function Recode({ onClickVacation }: RecodeProps) {
   const [recodeData, setRecordData] = useState<RecodeItem[]>([]);
   const { getAccessToken } = useAuth();
-
+  const { setActivity } = useActivityStore();
+  const { setId } = useTodoIdStore();
+  const { setContent } = useTodoIdStore();
+  const { setImage } = useTodoIdStore();
+  const { setPlace } = useTodoIdStore();
   useEffect(() => {
     const fetchRecords = () => {
       getAccessToken().then((token) => {
@@ -49,10 +57,21 @@ function Recode() {
   const truncateComment = (comment: string) =>
     comment.length > 18 ? `${comment.slice(0, 20)}...` : comment;
 
+  const handleRecodeBoxClick = (item: RecodeItem) => {
+    setActivity(item.title);
+    setId(item.vacationTodoId);
+    setContent(item.comment);
+    setImage(item.image);
+    setPlace(item.locate);
+    onClickVacation();
+  };
   return (
     <RecodeWapper>
       {recodeData.map((item) => (
-        <RecodeBox key={item.vacationTodoId}>
+        <RecodeBox
+          key={item.vacationTodoId}
+          onClick={() => handleRecodeBoxClick(item)}
+        >
           <RecodeImg>
             <img
               src={item.image}
