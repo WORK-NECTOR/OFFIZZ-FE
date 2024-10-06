@@ -202,21 +202,21 @@ const TodoModal: React.FC<TodoModalProps> = ({
         )}
         {(save || isSaved) && (
           <ModalContentSave>
-              <TodoPostTitleSave>🏞️ {todoTitle}</TodoPostTitleSave>
-              <TodoPostTitle>
-                <Image src={location} alt="location" width={12} height={12} />{' '}
-                {locate || palce}
-              </TodoPostTitle>
-              {selectedImage && (
-                <Image
-                    src={selectedImage}
-                    alt="selectedImage"
-                    width={292}
-                    height={292}
-                  />
-              )}
-              <TodoWrite>{comment || content}</TodoWrite>
-            </ModalContentSave>
+            <TodoPostTitleSave>🏞️ {todoTitle}</TodoPostTitleSave>
+            <TodoPostTitle>
+              <Image src={location} alt="location" width={12} height={12} />{' '}
+              {locate || palce}
+            </TodoPostTitle>
+            {selectedImage && (
+              <Image
+                src={selectedImage}
+                alt="selectedImage"
+                width={292}
+                height={292}
+              />
+            )}
+            <TodoWrite>{comment || content}</TodoWrite>
+          </ModalContentSave>
         )}
       </ModalContainer>
     </Overlay>

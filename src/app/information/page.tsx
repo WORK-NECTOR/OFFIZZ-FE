@@ -38,7 +38,7 @@ function InformationPage() {
   const router = useRouter();
   const { getAccessToken } = useAuth();
   const { day, setDay } = useDayStore();
-  const [timeArr, setTimeArr] = useState<TimeRangeResponseType[]>([]);
+  const [timeArr, setTimeArr] = useState<TimeRangeType[]>([]);
   const [coreTime, setCoreTime] = useState('');
   const [isVacationAdd, setIsVacationAdd] = useState(false);
   const handleSearchParams = (
@@ -119,15 +119,25 @@ function InformationPage() {
               },
             )
             .then((response) => {
+              console.log('response', response.data);
               const coreTimeEntry = {
-                startTime: response.data.startCoreTime, 
-                endTime: response.data.endCoreTime,     
-                name: 'coreTime',               
+                from: response.data.startCoreTime
+                  ? response.data.startCoreTime.substring(0, 5)
+                  : '',
+                to: response.data.endCoreTime
+                  ? response.data.endCoreTime.substring(0, 5)
+                  : '',
+                activity: 'coreTime',
               };
-              setTimeArr([
-                coreTimeEntry,
-                ...response.data.todoHours,
-              ]);
+              const todoHoursFormatted = response.data.todoHours.map(
+                (todo: any) => ({
+                  from: todo.startTime ? todo.startTime.substring(0, 5) : '',
+                  to: todo.endTime ? todo.endTime.substring(0, 5) : '',
+                  activity: todo.name,
+                }),
+              );
+
+              setTimeArr([coreTimeEntry, ...todoHoursFormatted]);
             })
             .catch((error) => {});
         })
@@ -135,10 +145,8 @@ function InformationPage() {
     };
 
     fetchTimeArr();
-  }, [day, getAccessToken]);
-console.log(timeArr)
-
-
+  }, [day]);
+  console.log(timeArr);
 
   const onClickEnd = () => {
     setModalOpen(true);
@@ -205,7 +213,7 @@ console.log(timeArr)
               <div>
                 <div className={styles.rightTitleSwitch}>여행 기록</div>
                 <div className={styles.todoWrapper}>
-                <Recode onClickVacation={handleVacationRecode} />
+                  <Recode onClickVacation={handleVacationRecode} />
                 </div>
               </div>
               <div style={{ marginLeft: '5rem' }}>
@@ -216,13 +224,13 @@ console.log(timeArr)
                   </div>
                 </div>
                 <div className={styles.todoWrapper}>
-                <Todo
-                  onClick={handleTodoClick}
-                  onClickVacation={handleTodoVacationClick}
-                  isTodoAdded={isTodoAdded}
-                  isVacationAdded={isVacationAdd}
-                  day={day}
-                />
+                  <Todo
+                    onClick={handleTodoClick}
+                    onClickVacation={handleTodoVacationClick}
+                    isTodoAdded={isTodoAdded}
+                    isVacationAdded={isVacationAdd}
+                    day={day}
+                  />
                 </div>
               </div>
             </div>
@@ -285,7 +293,7 @@ console.log(timeArr)
           <div className={styles.rightWrapper}>
             <div>
               <div className={styles.rightTitle}>근무 시간표</div>
-              {/* <TimeRange timeArr={timeArr}length = 'long' /> */}
+              <TimeRange timeArr={timeArr} length="long" />
             </div>
             <div style={{ marginLeft: '6.253rem' }}>
               <div className={styles.rightTitle}>
@@ -295,13 +303,13 @@ console.log(timeArr)
                 </div>
               </div>
               <div className={styles.todoWrapper}>
-              <Todo
-                isVacationAdded={isVacationAdd}
-                onClickVacation={handleTodoVacationClick}
-                onClick={handleTodoClick}
-                isTodoAdded={isTodoAdded}
-                day={day}
-              />
+                <Todo
+                  isVacationAdded={isVacationAdd}
+                  onClickVacation={handleTodoVacationClick}
+                  onClick={handleTodoClick}
+                  isTodoAdded={isTodoAdded}
+                  day={day}
+                />
               </div>
             </div>
           </div>

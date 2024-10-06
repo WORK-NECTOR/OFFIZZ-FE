@@ -25,9 +25,11 @@ function QurationPage() {
   const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,
   }));
+  const totalPages = 5; // 총 페이지 수
+  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
-  const activity = '영화';
-  const name = '홍길동';
+  const activity = '카공';
+  const name = '성현';
   const space = '공간';
   const nowLocation = userAddress || '위치를 가져오는 중...';
 
@@ -36,12 +38,23 @@ function QurationPage() {
       setSearchString((e.target as HTMLInputElement).value);
     }
   };
+  const onClickWork = () => {};
+  const onClickVacation = () => {};
 
   return (
     <div style={{ display: 'flex' }}>
       <Tab />
       <div>
-        <div className={styles.SwitchBtn}>switchBtn</div>
+        <div className={styles.switchWrapper}>
+          <div className={styles.switch}>
+            <div className={styles.work} onClick={onClickWork}>
+              work
+            </div>
+            <div className={styles.vacation} onClick={onClickVacation}>
+              vacation
+            </div>
+          </div>
+        </div>
         <div style={{ display: 'flex' }}>
           <div style={{ width: '22.75rem' }}>
             <div className={styles.Search}>
@@ -74,9 +87,20 @@ function QurationPage() {
                 data?.offices.length &&
                 data.offices.map((office) => (
                   <div key={office.officeId} className={styles.officeItem}>
-                    <InFoBox title={office.name} address={office.address} />
+                    <InFoBox
+                      title={office.name}
+                      address={office.address}
+                      image=""
+                    />
                   </div>
                 ))}
+            </div>
+            <div className={styles.pagenation}>
+              {pages.map((page) => (
+                <button key={page} className={styles.pageButton}>
+                  {page}
+                </button>
+              ))}
             </div>
           </div>
           <div>
