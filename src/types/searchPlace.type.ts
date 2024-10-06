@@ -7,6 +7,7 @@ export type SearchPlaceType = {
 
 export interface LocationItemProps extends SearchPlaceType {
   setPlace: (place: string) => void;
+  setAddress: (address: string) => void;
   searchBarType: 'visit' | 'place';
   visitPlace: VisitPlaceType[];
   setVisitPlace: (visitPlaces: VisitPlaceType[]) => void;
