@@ -25,7 +25,8 @@ function SearchBar(props: SearchBarProps) {
     searchBarType = 'place',
   } = props;
   const { keyword, setKeyword } = useSearchStore();
-  const { place, setPlace, visitPlace, setVisitPlace } = useOnboardingStore();
+  const { place, setPlace, visitPlace, setVisitPlace, address, setAddress } =
+    useOnboardingStore();
   const [searchResult, setSearchResult] = useState<Array<SearchPlaceType>>([]);
   const [resultOpen, isResultOpen] = useState(false);
 
@@ -38,15 +39,17 @@ function SearchBar(props: SearchBarProps) {
     kakao.maps.load(() => {
       const ps = new kakao.maps.services.Places();
 
-      ps.keywordSearch(keyword, (data, status) => {
-        if (status) {
-          const requiredArr = data.map(({ address_name, place_name }) => ({
-            address_name,
-            place_name,
-          }));
-          setSearchResult(requiredArr);
-        }
-      });
+      if (keyword) {
+        ps.keywordSearch(keyword, (data, status) => {
+          if (status) {
+            const requiredArr = data.map(({ address_name, place_name }) => ({
+              address_name,
+              place_name,
+            }));
+            setSearchResult(requiredArr);
+          }
+        });
+      }
     });
   }, [keyword]);
 
@@ -69,10 +72,10 @@ function SearchBar(props: SearchBarProps) {
           id="search-input"
           type="text"
           placeholder={placeholder}
-          value={place || ''}
+          value={searchBarType === 'place' ? place || '' : keyword}
           onChange={(e) => {
             setKeyword(e.currentTarget.value);
-            setPlace(e.currentTarget.value);
+            if (searchBarType === 'place') setPlace(e.currentTarget.value);
           }}
         />
       </SearchBarContainer>
@@ -89,7 +92,14 @@ function SearchBar(props: SearchBarProps) {
                 setSearchResult([]);
                 setKeyword('');
               }}
-              setVisitPlace={setVisitPlace}
+              setAddress={(value) => {
+                setAddress(value);
+              }}
+              setVisitPlace={(value) => {
+                setSearchResult([]);
+                setKeyword('');
+                setVisitPlace(value);
+              }}
               searchBarType={searchBarType}
               visitPlace={visitPlace}
             />
