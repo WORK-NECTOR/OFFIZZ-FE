@@ -8,7 +8,14 @@ function PaginationBar(props: PaginationBarProps) {
 
   return (
     <PaginationBarContainer>
-      <Pagination count={totalPage} />
+      <Pagination
+        count={totalPage}
+        defaultPage={1}
+        page={curPage}
+        onChange={(event: React.ChangeEvent<unknown>, value: number) => {
+          setPage(value);
+        }}
+      />
     </PaginationBarContainer>
   );
 }
