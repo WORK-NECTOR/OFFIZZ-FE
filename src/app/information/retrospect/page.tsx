@@ -7,7 +7,7 @@ import styles from './page.module.css';
 import leftarrow from '../../../../public/leftarrow.png';
 import rightarrow from '../../../../public/rightarrow.png';
 
-function RecapPage() {
+function RetrospectPage() {
   const [write, setWrite] = useState(false);
   const conditions = ['최고였어', '좋았어', '괜찮았어', '별로였어', '힘들었어'];
   const onClickWrite = () => {
@@ -162,4 +162,4 @@ function RecapPage() {
   );
 }
 
-export default RecapPage;
+export default RetrospectPage;

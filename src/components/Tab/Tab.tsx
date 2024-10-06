@@ -43,14 +43,14 @@ function Tab() {
             추천
           </div>
         </Link>
-        <Link href="/information/recap" passHref>
+        <Link href="/information/retrospect" passHref>
           <div
             role="button"
             tabIndex={0}
             id="tab-list"
-            className={activeTab === '/information/recap' ? 'active' : ''}
-            onClick={() => setActiveTab('/information/recap')}
-            onKeyDown={() => setActiveTab('/information/recap')}
+            className={activeTab === '/information/retrospect' ? 'active' : ''}
+            onClick={() => setActiveTab('/information/retrospect')}
+            onKeyDown={() => setActiveTab('/information/retrospect')}
           >
             <Image src={retrospect} alt="retrospect" width={24} height={24} />
             회고
