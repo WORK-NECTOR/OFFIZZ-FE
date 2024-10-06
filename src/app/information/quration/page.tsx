@@ -18,11 +18,11 @@ function QurationPage() {
   useKakaoLoader();
 
   const [searchString, setSearchString] = useState<string>('');
-  const [page, setPage] = useState<number>(1);
+  const [clickPage, setClickPage] = useState<number>(1);
   const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({
     searchText: debouncedSearchText,
-    page,
+    clickPage,
   });
   const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,
@@ -44,7 +44,7 @@ function QurationPage() {
   const onClickVacation = () => {};
 
   const handlePageClick = (page: number) => {
-    setPage(page);
+    setClickPage(page);
   };
 
   return (
@@ -104,6 +104,7 @@ function QurationPage() {
             <div className={styles.pagenation}>
               {pages.map((page) => (
                 <button
+                  type="button"
                   key={page}
                   className={styles.pageButton}
                   onClick={() => handlePageClick(page)}

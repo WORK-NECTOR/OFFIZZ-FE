@@ -76,27 +76,17 @@ const Todo: React.FC<TodoProps> = ({
     return `${hours}시 ${minutes}분`;
   };
 
-  const formatTimeInput = (time: string): `${number}:${number}` => {
-    const parts = time.split(':');
-    if (parts.length === 2) {
-      // eslint-disable-next-line
-      const hours = Math.min(Math.max(parseInt(parts[0]), 0), 23); // 0~23 범위로 설정
-      // eslint-disable-next-line
-      const minutes = Math.min(Math.max(parseInt(parts[1]), 0), 59); // 0~59 범위로 설정
-      return `${hours}:${minutes}` as `${number}:${number}`;
-    }
-    return '00:00' as `${number}:${number}`; // 기본값
-  };
-
   const formatNewtime = (time: string): `${number}:${number}` => {
-    const timePattern = /(\d+)\s*시간\s*(\d+)\s*분/; // 정규 표현식
-    const matches = time.match(timePattern); // 정규 표현식으로 시간과 분 추출
+    const timePattern = /(\d+)\s*시간\s*(\d+)\s*분/;
+    const matches = time.match(timePattern);
     if (matches) {
-      const hours = Math.min(Math.max(parseInt(matches[1]), 0), 23); // 시간
-      const minutes = Math.min(Math.max(parseInt(matches[2]), 0), 59); // 분
-      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}` as `${number}:${number}`; // HH:MM 형식으로 반환
+      const hours = Math.min(Math.max(parseInt(matches[1], 10), 0), 23);
+      const minutes = Math.min(Math.max(parseInt(matches[2], 10), 0), 59);
+      return `${hours.toString().padStart(2, '0')}:${minutes
+        .toString()
+        .padStart(2, '0')}` as `${number}:${number}`;
     }
-    return '00:00' as `${number}:${number}`; // 기본값
+    return '00:00' as `${number}:${number}`;
   };
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {

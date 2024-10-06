@@ -2,7 +2,7 @@ import { instance } from '../axios';
 
 export interface SearchOfficeParams {
   searchText?: string | undefined;
-  page: number;
+  clickPage: number;
 }
 
 export interface OfficeInfoType {
@@ -24,12 +24,12 @@ export interface SearchOfficeResponse {
 
 export const searchOffices = (params: SearchOfficeParams) => {
   const { searchText = '' } = params;
-  const { page = 0 } = params;
+  const { clickPage = 0 } = params;
 
   const size = 8;
 
   return instance.get<SearchOfficeResponse>(
-    `/work/office/search/${page}/${size}`,
+    `/work/office/search/${clickPage}/${size}`,
     {
       params: { search: searchText },
     },

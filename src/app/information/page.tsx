@@ -119,7 +119,6 @@ function InformationPage() {
               },
             )
             .then((response) => {
-              console.log('response', response.data);
               const coreTimeEntry = {
                 from: response.data.startCoreTime
                   ? response.data.startCoreTime.substring(0, 5)
@@ -146,7 +145,6 @@ function InformationPage() {
 
     fetchTimeArr();
   }, [day]);
-  console.log(timeArr);
 
   const onClickEnd = () => {
     setModalOpen(true);
