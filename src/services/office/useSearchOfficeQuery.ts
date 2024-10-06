@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { SearchOfficeParams, searchOffices } from '@/api/office/searchOffice';
 
-
 export const useSearchOfficesQuery = (params: SearchOfficeParams) => {
   const { searchText, page, size } = params;
-  
+
   return useQuery({
     queryKey: ['searchOffices', searchText, page],
     queryFn: async () => {

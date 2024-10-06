@@ -24,9 +24,7 @@ export interface SearchOfficeResponse {
 }
 
 export const searchOffices = (params: SearchOfficeParams) => {
-
   const { searchText = '', page = 1, size = 8 } = params;
-
 
   return instance.get<SearchOfficeResponse>(
     `/work/office/search/${page}/${size}`,

@@ -18,11 +18,11 @@ function QurationPage() {
   useKakaoLoader();
 
   const [searchString, setSearchString] = useState<string>('');
-  const [clickPage, setClickPage] = useState<number>(1);
+  const [page, setClickPage] = useState<number>(1);
   const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({
     searchText: debouncedSearchText,
-    clickPage,
+    page,
   });
   const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,
