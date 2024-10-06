@@ -1,8 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
 import {
   PostOnboardingParams,
   postOnboarding,
 } from '@/api/onboarding/postOnboarding';
-import { useQuery } from '@tanstack/react-query';
 
 export const useOnboardingQuery = (params: PostOnboardingParams) => {
   const {

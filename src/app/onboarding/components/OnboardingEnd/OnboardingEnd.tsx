@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   BtnContainer,
   EndContainer,
@@ -11,10 +13,8 @@ import BasicButton from '@/components/Button/BasicButton';
 import useStepstore from '@/store/useStepStore';
 import BackButton from '@/components/Button/BackButton';
 import useOnboardingStore from '@/store/useOnboardingStore';
-import { useEffect, useState } from 'react';
 import useAuth from '@/hook/useAuth';
 import { useOnboardingQuery } from '@/services/onboarding/useOnboardingQuery';
-import { useRouter } from 'next/navigation';
 import useWorkationStore from '@/store/useWorkationStore';
 
 function OnboardingEnd() {
