@@ -10,9 +10,66 @@ import { ONBOARDING_DESC } from '@/constants/onboarding';
 import BasicButton from '@/components/Button/BasicButton';
 import useStepstore from '@/store/useStepStore';
 import BackButton from '@/components/Button/BackButton';
+import useOnboardingStore from '@/store/useOnboardingStore';
+import { useEffect, useState } from 'react';
+import useAuth from '@/hook/useAuth';
+import { useOnboardingQuery } from '@/services/onboarding/useOnboardingQuery';
+import { useRouter } from 'next/navigation';
+import useWorkationStore from '@/store/useWorkationStore';
 
 function OnboardingEnd() {
   const { decrementStep } = useStepstore();
+  const {
+    reason,
+    fromDate: startDate,
+    toDate: endDate,
+    place: locate,
+    address,
+    coreTimeStart: startCoreTime,
+    coreTimeEnd: endCoreTime,
+    travel: vacationKeywords,
+    workplace: workKeywords,
+    visitPlace,
+    goal,
+  } = useOnboardingStore();
+  const { setWorkationId } = useWorkationStore();
+  const [token, setToken] = useState('');
+  const { getAccessToken } = useAuth();
+  const router = useRouter();
+  const { data, refetch } = useOnboardingQuery({
+    reason,
+    locate,
+    address,
+    startDate,
+    endDate,
+    startCoreTime,
+    endCoreTime,
+    workKeywords,
+    vacationKeywords,
+    goal,
+    bucketlists: visitPlace.map((place) => ({
+      name: place.place_name,
+      address: place.address_name,
+    })),
+    token,
+  });
+
+  useEffect(() => {
+    getAccessToken().then((tkn) => {
+      if (tkn) setToken(tkn);
+    });
+  }, []);
+
+  const clickHandler = () => {
+    if (token) {
+      refetch();
+
+      if (data && data.code === 200) {
+        setWorkationId(data.workationId);
+        router.push('/information');
+      }
+    }
+  };
 
   return (
     <EndContainer>
@@ -35,7 +92,7 @@ function OnboardingEnd() {
             btnHeight="2.5rem"
             padding="0.5rem 1rem"
             fontSize="1rem"
-            clickHandler={() => {}} // 추후 api 연결 및 링크 이동
+            clickHandler={clickHandler} // 추후 api 연결 및 링크 이동
           />
         </BtnContainer>
       </EndTextWrapper>
