@@ -22,6 +22,7 @@ import Recommend from './components/Recommend';
 import Recode from './components/Record';
 import Todo from './components/Todo';
 import styles from './page.module.css';
+import useSelectToggleStore from '@/store/useSelectToggleStore';
 
 function InformationPage() {
   const [modalType, setModalType] = useState<string | null>(null);
@@ -37,8 +38,8 @@ function InformationPage() {
   const router = useRouter();
   const { getAccessToken } = useAuth();
   const { day, setDay } = useDayStore();
+  const {activeToggle,setToggleTab} = useSelectToggleStore();
   const [timeArr, setTimeArr] = useState<TimeRangeType[]>([]);
-  const [coreTime, setCoreTime] = useState('');
   const [isVacationAdd, setIsVacationAdd] = useState(false);
   const handleSearchParams = (
     paramsModalType: string | null,
@@ -154,10 +155,12 @@ function InformationPage() {
   };
   const onClickVacation = () => {
     handleSearchParams(null, 'vacation');
+    setToggleTab('vacation')
     router.push(`/information?kind=vacation`);
   };
   const onClickWork = () => {
     handleSearchParams(null, 'work');
+    setToggleTab('work')
     router.push(`/information`);
   };
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
-import { useSearchParams } from 'next/navigation';
 import {
   TodoBox,
   TodoBoxAdd,
@@ -14,17 +13,18 @@ import playvacation from '../../../../../public/todo-vac.png';
 import playDone from '../../../../../public/done.png';
 import play from '../../../../../public/todo-play.png';
 import clock from '../../../../../public/time.png';
-import { TimeRangeType, TodoTime } from '@/types/timeRange.type';
+import { TodoTime } from '@/types/timeRange.type';
 import useTimeStore from '@/store/useSelectTime';
 import useActivityStore from '@/store/useSelectTodo';
 import useAuth from '@/hook/useAuth';
 import useTodoIdStore from '@/store/useTodoIdStore';
+import useSelectToggleStore from '@/store/useSelectToggleStore';
 
 interface TodoProps {
   day: number;
   onClick: () => void;
   // eslint-disable-next-line
-  onClickVacation?: () => void;
+  onClickVacation: () => void;
   isTodoAdded: boolean;
   isVacationAdded: boolean;
 }
@@ -37,15 +37,15 @@ const Todo: React.FC<TodoProps> = ({
   day,
 }) => {
   const { getAccessToken } = useAuth();
-  const searchParams = useSearchParams();
   const { setActivity } = useActivityStore();
   const { setTime } = useTimeStore();
   const { setId } = useTodoIdStore();
+  const {activeToggle} = useSelectToggleStore();
   const [newActivity, setNewActivity] = useState('');
   const [newTime, setNewTime] = useState('');
   const [workArr, setWorkArr] = useState<TodoTime[]>([]);
-  const [VacationArr, setVacationArr] = useState<TodoTime[]>([]);
-  const vacationType = searchParams.get('kind');
+  const [vacationArr, setVacationArr] = useState<TodoTime[]>([]);
+  // const vacationType = searchParams.get('kind');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const handleActivityClick = (time: TodoTime) => {
     setActivity(time.name);
@@ -94,7 +94,7 @@ const Todo: React.FC<TodoProps> = ({
       setIsSubmitting(true); // 요청 시작
       const planTime = formatNewtime(newTime);
       const activityName = newActivity;
-      const urlType = vacationType === 'vacation' ? 'vacation' : 'work';
+      const urlType = activeToggle === 'vacation' ? 'vacation' : 'work';
 
       try {
         const token = await getAccessToken();
@@ -112,7 +112,7 @@ const Todo: React.FC<TodoProps> = ({
           },
         );
         // eslint-disable-next-line
-        window.location.reload();
+        // window.location.reload();
       } catch (error) {
         alert(error);
       } finally {
@@ -142,7 +142,7 @@ const Todo: React.FC<TodoProps> = ({
     getAccessToken().then(async (token) => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/todo/1`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/todo/${day}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -158,11 +158,11 @@ const Todo: React.FC<TodoProps> = ({
         alert(error);
       }
     });
-  }, [getAccessToken]);
+  }, [workArr,vacationArr]);
 
   return (
     <>
-      {vacationType === 'vacation' && (
+      {activeToggle === 'vacation' && (
         <>
           {isVacationAdded && (
             <TodoBoxAdd>
@@ -189,7 +189,7 @@ const Todo: React.FC<TodoProps> = ({
               </div>
             </TodoBoxAdd>
           )}
-          {VacationArr.map((time) => (
+          {vacationArr.map((time) => (
             <TodoBox key={time.vacationTodoId}>
               <div
                 style={{
@@ -222,7 +222,7 @@ const Todo: React.FC<TodoProps> = ({
           ))}
         </>
       )}
-      {vacationType !== 'vacation' && (
+      {activeToggle !== 'vacation' && (
         <>
           {isTodoAdded && (
             <TodoBoxAdd>

@@ -19,10 +19,12 @@ function QurationPage() {
 
   const [searchString, setSearchString] = useState<string>('');
   const [clickPage, setClickPage] = useState<number>(1);
+  const [filter,setFilter]=useState('');
   const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({
     searchText: debouncedSearchText,
     clickPage,
+    filter,
   });
   const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,
