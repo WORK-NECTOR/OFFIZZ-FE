@@ -39,7 +39,7 @@ export const searchOffices = (params: SearchOfficeParams) => {
   return instance.get<SearchOfficeResponse>(
     `/work/${activeCategory}/location/${clickPage}/${size}`,
     {
-      params: { search: searchText },
+      params: { search: searchText, lat: userLat, lon: userLng },
     },
   );
 };
