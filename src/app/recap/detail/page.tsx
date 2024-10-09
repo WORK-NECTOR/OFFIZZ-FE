@@ -10,6 +10,7 @@ const stepPage: { [key: number]: JSX.Element } = {
 
 function RecapDetailPage() {
   const { step } = useStepstore();
+  // useQuery 로딩 끝나면 step++
 
   return (
     <div className={styles.background}>
