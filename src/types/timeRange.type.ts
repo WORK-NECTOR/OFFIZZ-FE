@@ -9,7 +9,6 @@ export type TimeRangeType = {
   activity: string;
 };
 
-
 export interface TimeRangeProps {
   timeArr: Array<TimeRangeType>;
   length: 'short' | 'long';

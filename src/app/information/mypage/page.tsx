@@ -43,6 +43,7 @@ function MyPage() {
               className={styles.userExit}
               onClick={onClickAlert}
               onKeyDown={onKeyPressAlert}
+              aria-hidden="true"
             >
               회원 탈퇴
             </div>

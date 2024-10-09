@@ -114,6 +114,7 @@ const Todo: React.FC<TodoProps> = ({
         // eslint-disable-next-line
         window.location.reload();
       } catch (error) {
+        alert(error);
       } finally {
         setIsSubmitting(false); // 요청 완료 후 상태 초기화
       }
@@ -153,7 +154,9 @@ const Todo: React.FC<TodoProps> = ({
         const vacationData = response.data.vacationTodoResponses;
         setVacationArr(vacationData);
         setWorkArr(workData);
-      } catch (error) {}
+      } catch (error) {
+        alert(error);
+      }
     });
   }, [getAccessToken]);
 

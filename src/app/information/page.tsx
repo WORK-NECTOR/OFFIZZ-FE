@@ -1,5 +1,9 @@
 'use client';
 
+import axios from 'axios';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import Modal from '@/components/Modal';
 import Tab from '@/components/Tab/Tab';
 import TimeRange from '@/components/TimeRange';
@@ -10,10 +14,6 @@ import useTimeStore from '@/store/useSelectTime';
 import useActivityStore from '@/store/useSelectTodo';
 import useTodoIdStore from '@/store/useTodoIdStore';
 import { TimeRangeType } from '@/types/timeRange.type';
-import axios from 'axios';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import caractor from '../../../public/charactor-laptop.png';
 import leftarrow from '../../../public/leftarrow.png';
 import rightarrow from '../../../public/rightarrow.png';
@@ -193,10 +193,18 @@ function InformationPage() {
               />
             </div>
             <div className={styles.switchSwitch}>
-              <div className={styles.workSwitch} onClick={onClickWork}>
+              <div
+                className={styles.workSwitch}
+                onClick={onClickWork}
+                aria-hidden="true"
+              >
                 work
               </div>
-              <div className={styles.vacationSwitch} onClick={onClickVacation}>
+              <div
+                className={styles.vacationSwitch}
+                onClick={onClickVacation}
+                aria-hidden="true"
+              >
                 vacation
               </div>
             </div>
@@ -216,7 +224,11 @@ function InformationPage() {
               <div style={{ marginLeft: '5rem' }}>
                 <div className={styles.rightTitleSwitch}>
                   to-do
-                  <div className={styles.addBtnSwitch} onClick={onClickAddTodo}>
+                  <div
+                    className={styles.addBtnSwitch}
+                    onClick={onClickAddTodo}
+                    aria-hidden="true"
+                  >
                     추가 +
                   </div>
                 </div>
@@ -240,7 +252,7 @@ function InformationPage() {
           time={time || ''}
           content={todoContent}
           end={end}
-          id={id||0}
+          id={id || 0}
         />
         <TodoModal
           isOpen={isTodoModalOpen}
@@ -276,10 +288,18 @@ function InformationPage() {
             />
           </div>
           <div className={styles.switch}>
-            <div className={styles.work} onClick={onClickWork}>
+            <div
+              className={styles.work}
+              onClick={onClickWork}
+              aria-hidden="true"
+            >
               work
             </div>
-            <div className={styles.vacation} onClick={onClickVacation}>
+            <div
+              className={styles.vacation}
+              onClick={onClickVacation}
+              aria-hidden="true"
+            >
               vacation
             </div>
           </div>
@@ -297,7 +317,11 @@ function InformationPage() {
             <div style={{ marginLeft: '6.253rem' }}>
               <div className={styles.rightTitle}>
                 to-do
-                <div className={styles.addBtn} onClick={handleAddTodo}>
+                <div
+                  className={styles.addBtn}
+                  onClick={handleAddTodo}
+                  aria-hidden="true"
+                >
                   추가 +
                 </div>
               </div>
@@ -314,7 +338,7 @@ function InformationPage() {
           </div>
         </div>
       </div>
-      <div className={styles.end} onClick={onClickEnd}>
+      <div className={styles.end} onClick={onClickEnd} aria-hidden="true">
         워케이션이 마무리되었나요?&nbsp;&nbsp;&nbsp;&nbsp; &gt;
       </div>
       <Modal

@@ -35,7 +35,11 @@ function RetrospectPage() {
           <div className={styles.recapWrapper}>
             <div className={styles.recapTop}>
               <div className={styles.recapTitle}>회고</div>
-              <div className={styles.recapBtn} onClick={onClickWrite}>
+              <div
+                className={styles.recapBtn}
+                onClick={onClickWrite}
+                aria-hidden="true"
+              >
                 작성
               </div>
             </div>

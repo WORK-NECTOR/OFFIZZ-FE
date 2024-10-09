@@ -95,7 +95,7 @@ function Recommend({ vacation }: RecommendProps) {
                 </div>
               </div>
               <VNonRecomendSub>
-                카페를 좋아하는 성현님을 위한 카페 추천
+                편안한 분위기에서 작업할 수 있는 카페 추천
               </VNonRecomendSub>
             </VNonRecomend>
             <VNonRecommendBox>
@@ -141,7 +141,7 @@ function Recommend({ vacation }: RecommendProps) {
               </div>
             </div>
             <NonRecomendSub>
-              카페를 좋아하는 성현님을 위한 카페 추천
+              편안한 분위기에서 작업할 수 있는 카페 추천
             </NonRecomendSub>
           </NonRecomend>
           <VNonRecommendBox>

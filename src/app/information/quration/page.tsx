@@ -18,11 +18,11 @@ function QurationPage() {
   useKakaoLoader();
 
   const [searchString, setSearchString] = useState<string>('');
-  const [page, setClickPage] = useState<number>(1);
+  const [clickPage, setClickPage] = useState<number>(1);
   const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({
     searchText: debouncedSearchText,
-    page,
+    clickPage,
   });
   const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,
@@ -43,9 +43,9 @@ function QurationPage() {
   const onClickWork = () => {};
   const onClickVacation = () => {};
 
-  const handlePageClick = (page: number) => {
-    setClickPage(page);
-  };
+  // const handlePageClick = (clickPage: number) => {
+  //   setClickPage(clickPage);
+  // };
 
   return (
     <div style={{ display: 'flex' }}>
@@ -53,10 +53,18 @@ function QurationPage() {
       <div>
         <div className={styles.switchWrapper}>
           <div className={styles.switch}>
-            <div className={styles.work} onClick={onClickWork}>
+            <div
+              className={styles.work}
+              onClick={onClickWork}
+              aria-hidden="true"
+            >
               work
             </div>
-            <div className={styles.vacation} onClick={onClickVacation}>
+            <div
+              className={styles.vacation}
+              onClick={onClickVacation}
+              aria-hidden="true"
+            >
               vacation
             </div>
           </div>
@@ -107,7 +115,7 @@ function QurationPage() {
                   type="button"
                   key={page}
                   className={styles.pageButton}
-                  onClick={() => handlePageClick(page)}
+                  // onClick={() => handlePageClick(page)}
                 >
                   {page}
                 </button>
