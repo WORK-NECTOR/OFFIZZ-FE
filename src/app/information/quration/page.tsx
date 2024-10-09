@@ -24,7 +24,7 @@ function QurationPage() {
   const { activeCategory } = useCategoryStore();
   const { userLat } = useUserLocationStore();
   const { userLng } = useUserLocationStore();
-  const { setToggleTab } = useSelectToggleStore();
+  const { activeToggle,setToggleTab } = useSelectToggleStore();
   const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({
     searchText: debouncedSearchText,
@@ -32,6 +32,7 @@ function QurationPage() {
     activeCategory,
     userLat,
     userLng,
+    activeToggle
   });
   console.log(data);
   const { userAddress } = useUserLocationStore((state) => ({
@@ -66,6 +67,7 @@ function QurationPage() {
       <Tab />
       <div>
         <div className={styles.switchWrapper}>
+        {activeToggle =='work' &&
           <div className={styles.switch}>
             <div
               className={styles.work}
@@ -82,6 +84,24 @@ function QurationPage() {
               vacation
             </div>
           </div>
+}
+{activeToggle =='vacation' &&
+        <div className={styles.switchSwitch}>
+        <div
+          className={styles.workSwitch}
+          onClick={onClickWork}
+          aria-hidden="true"
+        >
+          work
+        </div>
+        <div
+          className={styles.vacationSwitch}
+          onClick={onClickVacation}
+          aria-hidden="true"
+        >
+          vacation
+        </div>
+      </div>}
         </div>
         <div style={{ display: 'flex' }}>
           <div style={{ width: '22.75rem' }}>

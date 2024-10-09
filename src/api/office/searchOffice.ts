@@ -7,6 +7,7 @@ export interface SearchOfficeParams {
   activeCategory: string;
   userLng: number;
   userLat: number;
+  activeToggle:string
 }
 
 export interface serchMapInfoType {
@@ -26,15 +27,18 @@ export interface SearchOfficeResponse {
 }
 
 export const searchOffices = async (params: SearchOfficeParams) => {
-  const { searchText, clickPage, activeCategory, userLng, userLat } = params;
+  const { searchText, clickPage, activeCategory, userLng, userLat,activeToggle } = params;
   const { getAccessToken } = useAuth();
   const size = 8;
 
   try {
     const token = await getAccessToken();
-
+    const url = activeToggle === 'vacation'
+    ? `/vacation/recommend/${activeCategory}/location/${clickPage}/${size}`
+    : `/work/${activeCategory}/location/${clickPage}/${size}`;
+console.log(url)
     return await instance.get<SearchOfficeResponse>(
-      `/work/${activeCategory}/location/${clickPage}/${size}`,
+      url,
       {
         params: { search: searchText, lat: userLat, lon: userLng },
         headers: {
