@@ -9,7 +9,6 @@ export const useSearchOfficesQuery = (params: SearchOfficeParams) => {
     activeCategory,
     userLat,
     userLng,
-    filter,
   } = params;
 
   return useQuery({
@@ -22,7 +21,6 @@ export const useSearchOfficesQuery = (params: SearchOfficeParams) => {
         activeCategory,
         userLng,
         userLat,
-        filter,
       });
 
       const { data } = response;
