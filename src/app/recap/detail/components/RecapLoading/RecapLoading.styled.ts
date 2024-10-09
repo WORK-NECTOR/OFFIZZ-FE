@@ -3,6 +3,15 @@ import styled from 'styled-components';
 export const RecapLoadingContainer = styled.div`
   position: relative;
 
+  #logo-img {
+    width: 1.75rem;
+    height: 0.5625rem;
+    position: absolute;
+    bottom: 11.625rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   #recap-character {
     width: 12.5rem;
     height: 12.5rem;
@@ -22,11 +31,13 @@ export const RecapLoadingContainer = styled.div`
   .circle[data-size='small'] {
     width: 15.75rem;
     height: 15.75rem;
+    position: relative;
   }
 
   .circle[data-size='medium'] {
     width: 28.625rem;
     height: 28.625rem;
+    position: relative;
   }
 
   .circle[data-size='large'] {
@@ -35,7 +46,7 @@ export const RecapLoadingContainer = styled.div`
     position: relative;
   }
 
-  .icon {
+  /* .icon {
     width: 28px;
     height: 28px;
     background-color: red;
@@ -46,14 +57,13 @@ export const RecapLoadingContainer = styled.div`
     transform: translate(-50%, 0);
     transform-origin: 50% 8.8rem;
     animation: rotateIcon 3s linear infinite;
-  }
+  } */
 
-  @keyframes rotateIcon {
-    from {
-      transform: translate(-50%, 0) rotate(0deg);
-    }
-    to {
-      transform: translate(-50%, 0) rotate(360deg);
-    }
+  #loading-text {
+    position: absolute;
+    bottom: 9.375rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 600;
   }
 `;
