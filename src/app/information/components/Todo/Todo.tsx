@@ -40,7 +40,7 @@ const Todo: React.FC<TodoProps> = ({
   const { setActivity } = useActivityStore();
   const { setTime } = useTimeStore();
   const { setId } = useTodoIdStore();
-  const {activeToggle} = useSelectToggleStore();
+  const { activeToggle } = useSelectToggleStore();
   const [newActivity, setNewActivity] = useState('');
   const [newTime, setNewTime] = useState('');
   const [workArr, setWorkArr] = useState<TodoTime[]>([]);
@@ -158,7 +158,7 @@ const Todo: React.FC<TodoProps> = ({
         alert(error);
       }
     });
-  }, [workArr,vacationArr]);
+  }, [workArr, vacationArr]);
 
   return (
     <>

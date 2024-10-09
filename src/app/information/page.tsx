@@ -38,7 +38,7 @@ function InformationPage() {
   const router = useRouter();
   const { getAccessToken } = useAuth();
   const { day, setDay } = useDayStore();
-  const {activeToggle,setToggleTab} = useSelectToggleStore();
+  const { activeToggle, setToggleTab } = useSelectToggleStore();
   const [timeArr, setTimeArr] = useState<TimeRangeType[]>([]);
   const [isVacationAdd, setIsVacationAdd] = useState(false);
   const handleSearchParams = (
@@ -155,12 +155,12 @@ function InformationPage() {
   };
   const onClickVacation = () => {
     handleSearchParams(null, 'vacation');
-    setToggleTab('vacation')
+    setToggleTab('vacation');
     router.push(`/information?kind=vacation`);
   };
   const onClickWork = () => {
     handleSearchParams(null, 'work');
-    setToggleTab('work')
+    setToggleTab('work');
     router.push(`/information`);
   };
 

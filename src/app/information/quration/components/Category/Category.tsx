@@ -5,7 +5,7 @@ function QurationCategory() {
   const categories = ['전체', '카페', '공유오피스'];
   const [selectedCategory, setSelectedCategory] = useState('전체');
 
-  const handleCategoryClick = (category:string) => {
+  const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
   };
 

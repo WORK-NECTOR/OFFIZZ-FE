@@ -6,7 +6,7 @@ interface StoreState {
 }
 
 const useCategoryStore = create<StoreState>((set) => ({
-    activeCategory: 'all', 
+  activeCategory: 'all',
   setActiveTab: (tab: string) => set({ activeCategory: tab }), // 탭 상태 업데이트 함수
 }));
 
