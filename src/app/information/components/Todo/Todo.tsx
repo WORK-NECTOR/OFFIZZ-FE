@@ -221,7 +221,12 @@ const Todo: React.FC<TodoProps> = ({
 
                 <div style={{ marginLeft: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div>{time.icon ? time.icon : ''}</div>
+                    <Image
+                      src={time.icon || ''}
+                      alt="Icon"
+                      width={16}
+                      height={16}
+                    />
                     <TodoTitle>{time.name}</TodoTitle>
                   </div>
                 </div>
@@ -278,7 +283,12 @@ const Todo: React.FC<TodoProps> = ({
 
                 <div style={{ marginLeft: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div>{time.icon ? time.icon : ''}</div>
+                    <Image
+                      src={time.icon || ''}
+                      alt="Icon"
+                      width={16}
+                      height={16}
+                    />
                     <TodoTitle>{time.name}</TodoTitle>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
