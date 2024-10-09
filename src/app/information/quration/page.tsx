@@ -20,7 +20,6 @@ function QurationPage() {
 
   const [searchString, setSearchString] = useState<string>('');
   const [clickPage, setClickPage] = useState<number>(1);
-  const [filter, setFilter] = useState('');
   const { activeCategory } = useCategoryStore();
   const { userLat } = useUserLocationStore();
   const { userLng } = useUserLocationStore();
