@@ -6,7 +6,7 @@ interface WorkationStoreType {
 }
 
 const useWorkationStore = create<WorkationStoreType>((set) => ({
-  workationId: 0,
+  workationId: 2, // 디폴트 0으로 수정
   setWorkationId: (id) => {
     set(() => ({ workationId: id }));
   },
