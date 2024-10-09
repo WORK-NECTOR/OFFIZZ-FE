@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import axios from 'axios';
 import {
   TodoBox,
@@ -20,6 +20,10 @@ import useAuth from '@/hook/useAuth';
 import useTodoIdStore from '@/store/useTodoIdStore';
 import useSelectToggleStore from '@/store/useSelectToggleStore';
 
+const playvacationImg: StaticImageData = playvacation;
+const playDoneImg: StaticImageData = playDone;
+const playImg: StaticImageData = play;
+const clockImg: StaticImageData = clock;
 interface TodoProps {
   day: number;
   onClick: () => void;
@@ -173,10 +177,15 @@ const Todo: React.FC<TodoProps> = ({
                   justifyContent: 'center',
                 }}
               >
-                <Image src={playvacation} alt="play" width={36} height={36} />
+                <Image
+                  src={playvacationImg}
+                  alt="play"
+                  width={36}
+                  height={36}
+                />
                 <div style={{ marginLeft: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Image src={clock} alt="time" width={15} height={15} />
+                    <Image src={clockImg} alt="time" width={15} height={15} />
                     <TodoTitleInput
                       type="text"
                       value={newActivity}
@@ -199,10 +208,10 @@ const Todo: React.FC<TodoProps> = ({
                 }}
               >
                 {time.isComplete ? (
-                  <Image src={playDone} alt="play" width={36} height={36} />
+                  <Image src={playDoneImg} alt="play" width={36} height={36} />
                 ) : (
                   <Image
-                    src={playvacation}
+                    src={playvacationImg}
                     alt="play"
                     width={36}
                     height={36}
@@ -227,10 +236,10 @@ const Todo: React.FC<TodoProps> = ({
           {isTodoAdded && (
             <TodoBoxAdd>
               <div style={{ display: 'flex' }}>
-                <Image src={play} alt="play" width={36} height={36} />
+                <Image src={playImg} alt="play" width={36} height={36} />
                 <div style={{ marginLeft: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Image src={clock} alt="time" width={15} height={15} />
+                    <Image src={clockImg} alt="time" width={15} height={15} />
                     <TodoTitleInput
                       type="text"
                       value={newActivity}
@@ -239,7 +248,7 @@ const Todo: React.FC<TodoProps> = ({
                     />
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Image src={clock} alt="time" width={15} height={15} />
+                    <Image src={clockImg} alt="time" width={15} height={15} />
                     <TodoTimeInput
                       type="text"
                       value={newTime}
@@ -256,10 +265,10 @@ const Todo: React.FC<TodoProps> = ({
             <TodoBox key={time.workTodoId}>
               <div style={{ display: 'flex' }}>
                 {time.isComplete ? (
-                  <Image src={playDone} alt="play" width={36} height={36} />
+                  <Image src={playDoneImg} alt="play" width={36} height={36} />
                 ) : (
                   <Image
-                    src={play}
+                    src={playImg}
                     alt="play"
                     width={36}
                     height={36}
@@ -273,7 +282,7 @@ const Todo: React.FC<TodoProps> = ({
                     <TodoTitle>{time.name}</TodoTitle>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Image src={clock} alt="time" width={15} height={15} />
+                    <Image src={clockImg} alt="time" width={15} height={15} />
                     <TodoSub>{formatTimeDisplay(time.time)}</TodoSub>
                   </div>
                 </div>
