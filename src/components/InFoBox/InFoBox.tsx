@@ -8,9 +8,13 @@ import {
   InfoDescP,
 } from './InFoBox.styled';
 import heart from '../../../public/heart.png';
+import workHeart from '../../../public/w-like.png';
+import vacHeart from '../../../public/v-like.png';
 import { InfoBoxProps } from '@/types/quration.type';
+import useSelectToggleStore from '@/store/useSelectToggleStore';
 
-function InFoBox({ title, address, image }: InfoBoxProps) {
+function InFoBox({ title, address, image, like }: InfoBoxProps) {
+  const { activeToggle } = useSelectToggleStore();
   return (
     <InFoBoxContent>
       <div
@@ -23,7 +27,7 @@ function InFoBox({ title, address, image }: InfoBoxProps) {
       >
         {image ? (
           <Image
-            src={image}
+            src={activeToggle === 'work' ? workHeart : vacHeart}
             alt="image"
             width={80}
             height={80}
@@ -37,13 +41,23 @@ function InFoBox({ title, address, image }: InfoBoxProps) {
           <InfoDescP>{address}</InfoDescP>
         </Info>
       </div>
-      <Image
-        src={heart}
-        alt="heart"
-        width={20}
-        height={20}
-        style={{ marginTop: '0.81rem' }}
-      />
+      {like ? (
+        <Image
+          src={workHeart}
+          alt="heart"
+          width={20}
+          height={20}
+          style={{ marginTop: '0.81rem' }}
+        />
+      ) : (
+        <Image
+          src={heart}
+          alt="heart"
+          width={20}
+          height={20}
+          style={{ marginTop: '0.81rem' }}
+        />
+      )}
     </InFoBoxContent>
   );
 }

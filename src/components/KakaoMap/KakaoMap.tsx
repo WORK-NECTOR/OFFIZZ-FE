@@ -2,9 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import useKakaoLoader from './use-kakao-loader';
 import useUserLocationStore from '@/store/userLocation';
+import { MarkerWrapper } from './KakaoMap.styled';
+import { SearchMapInfoType } from '@/api/office/searchOffice';
 
-function KakaoMap() {
+interface KakaoMapProps {
+  markerData: SearchMapInfoType[];
+}
+
+function KakaoMap({ markerData }: KakaoMapProps) {
   useKakaoLoader();
+
   const [locationstate, setLocationState] = useState<{
     center: { lat: number; lng: number };
     errMsg: string | null;
@@ -17,9 +24,10 @@ function KakaoMap() {
     errMsg: null,
     isLoading: true,
   });
+
   const setUserAddress = useUserLocationStore((state) => state.setUserAddress);
-  const { setUserLat } = useUserLocationStore();
-  const { setUserLng } = useUserLocationStore();
+  const { setUserLat, setUserLng } = useUserLocationStore();
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -76,6 +84,7 @@ function KakaoMap() {
       }));
     }
   }, [setUserAddress]);
+
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <Map
@@ -85,15 +94,23 @@ function KakaoMap() {
           width: '100%',
           height: '100%',
         }}
-        level={3} // 지도의 확대 레벨
+        level={10} // 지도의 확대 레벨
       >
         {!locationstate.isLoading && (
           <MapMarker position={locationstate.center}>
-            <div style={{ padding: '5px', color: '#000' }}>
+            <MarkerWrapper>
               {locationstate.errMsg ? locationstate.errMsg : '사용자의 위치'}
-            </div>
+            </MarkerWrapper>
           </MapMarker>
         )}
+        {markerData.map((location) => (
+          <MapMarker
+            key={location.id}
+            position={{ lat: location.lat, lng: location.lon }}
+          >
+            <MarkerWrapper>{location.name}</MarkerWrapper>
+          </MapMarker>
+        ))}
       </Map>
     </div>
   );

@@ -14,14 +14,18 @@ function MainMsg({ activity, name, space }: MainMsgProps) {
   const { activeToggle } = useSelectToggleStore();
   return (
     <div style={{ marginLeft: '1.5rem' }}>
-      {activeToggle =='work' && 
-      <NormalText>
-      워케이션 기간 몰입을 도와줄<br/>
-      </NormalText>}
-      {activeToggle =='vacation' && 
-      <NormalText>
-      워케이션 기간 푹 쉬어갈 수 있는<br/>
-      </NormalText>}
+      {activeToggle === 'work' && (
+        <NormalText>
+          워케이션 기간 몰입을 도와줄
+          <br />
+        </NormalText>
+      )}
+      {activeToggle === 'vacation' && (
+        <NormalText>
+          워케이션 기간 푹 쉬어갈 수 있는
+          <br />
+        </NormalText>
+      )}
       <HighlightedText>{activeCategoryString}</HighlightedText>
       <BoldText> 추천</BoldText>
     </div>

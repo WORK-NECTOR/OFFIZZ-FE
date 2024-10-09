@@ -24,7 +24,7 @@ function QurationPage() {
   const { activeCategory } = useCategoryStore();
   const { userLat } = useUserLocationStore();
   const { userLng } = useUserLocationStore();
-  const { activeToggle,setToggleTab } = useSelectToggleStore();
+  const { activeToggle, setToggleTab } = useSelectToggleStore();
   const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({
     searchText: debouncedSearchText,
@@ -32,9 +32,9 @@ function QurationPage() {
     activeCategory,
     userLat,
     userLng,
-    activeToggle
+    activeToggle,
   });
-  console.log(data);
+
   const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,
   }));
@@ -57,7 +57,7 @@ function QurationPage() {
   const onClickVacation = () => {
     setToggleTab('vacation');
   };
-
+  // eslint-disable-next-line
   const handlePageClick = (clickPage: number) => {
     setClickPage(clickPage);
   };
@@ -67,41 +67,42 @@ function QurationPage() {
       <Tab />
       <div>
         <div className={styles.switchWrapper}>
-        {activeToggle =='work' &&
-          <div className={styles.switch}>
-            <div
-              className={styles.work}
-              onClick={onClickWork}
-              aria-hidden="true"
-            >
-              work
+          {activeToggle === 'work' && (
+            <div className={styles.switch}>
+              <div
+                className={styles.work}
+                onClick={onClickWork}
+                aria-hidden="true"
+              >
+                work
+              </div>
+              <div
+                className={styles.vacation}
+                onClick={onClickVacation}
+                aria-hidden="true"
+              >
+                vacation
+              </div>
             </div>
-            <div
-              className={styles.vacation}
-              onClick={onClickVacation}
-              aria-hidden="true"
-            >
-              vacation
+          )}
+          {activeToggle === 'vacation' && (
+            <div className={styles.switchSwitch}>
+              <div
+                className={styles.workSwitch}
+                onClick={onClickWork}
+                aria-hidden="true"
+              >
+                work
+              </div>
+              <div
+                className={styles.vacationSwitch}
+                onClick={onClickVacation}
+                aria-hidden="true"
+              >
+                vacation
+              </div>
             </div>
-          </div>
-}
-{activeToggle =='vacation' &&
-        <div className={styles.switchSwitch}>
-        <div
-          className={styles.workSwitch}
-          onClick={onClickWork}
-          aria-hidden="true"
-        >
-          work
-        </div>
-        <div
-          className={styles.vacationSwitch}
-          onClick={onClickVacation}
-          aria-hidden="true"
-        >
-          vacation
-        </div>
-      </div>}
+          )}
         </div>
         <div style={{ display: 'flex' }}>
           <div style={{ width: '22.75rem' }}>
@@ -139,6 +140,7 @@ function QurationPage() {
                       title={office.name}
                       address={office.address}
                       image=""
+                      like={office.isLike}
                     />
                   </div>
                 ))}
@@ -158,7 +160,7 @@ function QurationPage() {
           </div>
           <div>
             <div className={styles.MapView}>
-              <KakaoMap />
+              <KakaoMap markerData={data?.serchData || []} />
             </div>
           </div>
         </div>

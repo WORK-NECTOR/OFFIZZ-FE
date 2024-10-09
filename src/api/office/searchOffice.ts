@@ -7,10 +7,10 @@ export interface SearchOfficeParams {
   activeCategory: string;
   userLng: number;
   userLat: number;
-  activeToggle:string
+  activeToggle: string;
 }
 
-export interface serchMapInfoType {
+export interface SearchMapInfoType {
   address: string;
   category: string;
   image: string;
@@ -22,31 +22,33 @@ export interface serchMapInfoType {
 }
 
 export interface SearchOfficeResponse {
-  cafeAndOffices: Array<serchMapInfoType>;
+  cafeAndOffices: Array<SearchMapInfoType>;
   totalPage: number;
 }
 
 export const searchOffices = async (params: SearchOfficeParams) => {
-  const { searchText, clickPage, activeCategory, userLng, userLat,activeToggle } = params;
+  // eslint-disable-next-line
   const { getAccessToken } = useAuth();
+  const {
+    searchText,
+    clickPage,
+    activeCategory,
+    userLng,
+    userLat,
+    activeToggle,
+  } = params;
   const size = 8;
 
-  try {
-    const token = await getAccessToken();
-    const url = activeToggle === 'vacation'
-    ? `/vacation/recommend/${activeCategory}/location/${clickPage}/${size}`
-    : `/work/${activeCategory}/location/${clickPage}/${size}`;
-console.log(url)
-    return await instance.get<SearchOfficeResponse>(
-      url,
-      {
-        params: { search: searchText, lat: userLat, lon: userLng },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
-  } catch (error) {
-    throw error;
-  }
+  const token = await getAccessToken();
+  const url =
+    activeToggle === 'vacation'
+      ? `/vacation/recommend/${activeCategory}/location/${clickPage}/${size}`
+      : `/work/${activeCategory}/location/${clickPage}/${size}`;
+
+  return instance.get<SearchOfficeResponse>(url, {
+    params: { search: searchText, lat: userLat, lon: userLng },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };

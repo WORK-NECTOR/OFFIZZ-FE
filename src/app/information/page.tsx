@@ -165,6 +165,7 @@ function InformationPage() {
   };
 
   const handleNextDay = () => {
+    alert('오늘은 Day 1이에요. 지금 이 순간을 최대한 즐겨보세요!')
     setDay(day + 1); // 다음 날로 변경
   };
 

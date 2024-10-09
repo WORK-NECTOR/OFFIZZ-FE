@@ -13,6 +13,8 @@ import playvacation from '../../../../../public/todo-vac.png';
 import playDone from '../../../../../public/done.png';
 import play from '../../../../../public/todo-play.png';
 import clock from '../../../../../public/time.png';
+import vacationIcon from '../../../../../public/v-photo.png';
+import workIcon from '../../../../../public/book.png';
 import { TodoTime } from '@/types/timeRange.type';
 import useTimeStore from '@/store/useSelectTime';
 import useActivityStore from '@/store/useSelectTodo';
@@ -116,7 +118,7 @@ const Todo: React.FC<TodoProps> = ({
           },
         );
         // eslint-disable-next-line
-        // window.location.reload();
+        window.location.reload();
       } catch (error) {
         alert(error);
       } finally {
@@ -222,7 +224,7 @@ const Todo: React.FC<TodoProps> = ({
                 <div style={{ marginLeft: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Image
-                      src={time.icon || ''}
+                      src={time.icon ? time.icon: vacationIcon}
                       alt="Icon"
                       width={16}
                       height={16}
@@ -284,7 +286,7 @@ const Todo: React.FC<TodoProps> = ({
                 <div style={{ marginLeft: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Image
-                      src={time.icon || ''}
+                      src={time.icon ? time.icon: workIcon}
                       alt="Icon"
                       width={16}
                       height={16}

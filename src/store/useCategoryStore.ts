@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 interface StoreState {
   activeCategory: string;
-  activeCategoryString: string,
+  activeCategoryString: string;
   setActiveTab: (tab: string) => void;
   setActiveTabString: (tab: string) => void;
 }
