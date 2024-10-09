@@ -22,13 +22,16 @@ function QurationCategory() {
 
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const { setActiveTab } = useCategoryStore();
+  const { setActiveTabString } = useCategoryStore();
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
+    setActiveTabString(category)
     setActiveTab(categoryMap[category]);
   };
   const handleCategoryClickVacation = (category: string) => {
     setSelectedCategory(category);
+    setActiveTabString(category)
     setActiveTab(categoryMapVacation[category]);
   };
 
