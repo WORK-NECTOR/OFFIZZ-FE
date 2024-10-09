@@ -8,9 +8,11 @@ import { useEffect, useState } from 'react';
 import { useRecapDetailQuery } from '@/services/recap/useRecapDetailQuery';
 import useWorkationStore from '@/store/useWorkationStore';
 import useRecapStore from '@/store/useRecapStore';
+import RecapStart from './components/RecapStart';
 
 const stepPage: { [key: number]: JSX.Element } = {
   0: <RecapLoading />,
+  1: <RecapStart />,
 };
 
 function RecapDetailPage() {
