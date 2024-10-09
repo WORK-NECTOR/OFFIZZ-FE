@@ -30,7 +30,6 @@ export const RecapLayout = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 1.375rem;
-    z-index: 10;
   }
 
   #recap-img {
