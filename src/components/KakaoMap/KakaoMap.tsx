@@ -18,13 +18,15 @@ function KakaoMap() {
     isLoading: true,
   });
   const setUserAddress = useUserLocationStore((state) => state.setUserAddress);
-
+  const { setUserLat } = useUserLocationStore();
+  const { setUserLng } = useUserLocationStore();
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
-
+          setUserLat(latitude);
+          setUserLng(longitude);
           setLocationState((prev) => ({
             ...prev,
             center: {

@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { SearchOfficeParams, searchOffices } from '@/api/office/searchOffice';
 
 export const useSearchOfficesQuery = (params: SearchOfficeParams) => {
-  const { searchText, clickPage, size, activeCategory } = params;
+  const { searchText, clickPage, size, activeCategory, userLat, userLng } =
+    params;
 
   return useQuery({
     queryKey: ['searchOffices', searchText, clickPage],
@@ -12,6 +13,8 @@ export const useSearchOfficesQuery = (params: SearchOfficeParams) => {
         clickPage,
         size,
         activeCategory,
+        userLng,
+        userLat,
       });
 
       const { data } = response;

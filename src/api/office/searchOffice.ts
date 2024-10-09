@@ -5,6 +5,8 @@ export interface SearchOfficeParams {
   clickPage?: number;
   size?: number;
   activeCategory: string;
+  userLat: number;
+  userLng: number;
 }
 
 export interface OfficeInfoType {
@@ -25,7 +27,14 @@ export interface SearchOfficeResponse {
 }
 
 export const searchOffices = (params: SearchOfficeParams) => {
-  const { searchText, clickPage = 1, size = 8, activeCategory} = params;
+  const {
+    searchText,
+    clickPage = 1,
+    size = 8,
+    activeCategory,
+    userLat,
+    userLng,
+  } = params;
 
   return instance.get<SearchOfficeResponse>(
     `/work/${activeCategory}/location/${clickPage}/${size}`,

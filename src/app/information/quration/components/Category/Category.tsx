@@ -5,12 +5,11 @@ import useCategoryStore from '@/store/useCategoryStore';
 function QurationCategory() {
   const categories = ['전체', '카페', '공유오피스'];
   const categoryMap: Record<string, string> = {
-    '전체': 'all',
-    '카페': 'cafe',
-    '공유오피스': 'office',
+    전체: 'all',
+    카페: 'cafe',
+    공유오피스: 'office',
   };
 
-  
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const { setActiveTab } = useCategoryStore();
 
