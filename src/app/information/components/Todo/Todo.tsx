@@ -224,7 +224,7 @@ const Todo: React.FC<TodoProps> = ({
                 <div style={{ marginLeft: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Image
-                      src={time.icon ? time.icon: vacationIcon}
+                      src={time.icon ? time.icon : vacationIcon}
                       alt="Icon"
                       width={16}
                       height={16}
@@ -286,7 +286,7 @@ const Todo: React.FC<TodoProps> = ({
                 <div style={{ marginLeft: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Image
-                      src={time.icon ? time.icon: workIcon}
+                      src={time.icon ? time.icon : workIcon}
                       alt="Icon"
                       width={16}
                       height={16}
