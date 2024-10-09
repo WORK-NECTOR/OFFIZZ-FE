@@ -11,6 +11,8 @@ interface OnboardingType {
   setToDate: (date: string) => void;
   place: string;
   setPlace: (place: string) => void;
+  address: string;
+  setAddress: (address: string) => void;
   coreTimeStart: TimeFormat | '';
   setCoreTimeStart: (time: TimeFormat) => void;
   coreTimeEnd: TimeFormat | '';
@@ -41,6 +43,10 @@ const useOnboardingStore = create<OnboardingType>((set) => ({
   place: '',
   setPlace: (place) => {
     set(() => ({ place }));
+  },
+  address: '',
+  setAddress: (address) => {
+    set(() => ({ address }));
   },
   coreTimeStart: '',
   setCoreTimeStart: (time) => {

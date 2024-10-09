@@ -9,6 +9,9 @@ import CookieProviderWrapper from '@/lib/CookieProviderWrapper';
 export const metadata: Metadata = {
   title: 'OFFIZZ',
   description: '워케이션 지원 서비스',
+  icons: {
+    icon: '/charactor-laptop.png',
+  },
 };
 
 export default function RootLayout({
