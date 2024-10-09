@@ -2,11 +2,6 @@ import { instance } from '../axios';
 
 export interface SearchOfficeParams {
   searchText?: string | undefined;
-  clickPage?: number;
-  size?: number;
-  activeCategory: string;
-  userLat: number;
-  userLng: number;
 }
 
 export interface OfficeInfoType {
@@ -27,19 +22,15 @@ export interface SearchOfficeResponse {
 }
 
 export const searchOffices = (params: SearchOfficeParams) => {
-  const {
-    searchText,
-    clickPage = 1,
-    size = 8,
-    activeCategory,
-    userLat,
-    userLng,
-  } = params;
+  const { searchText = '' } = params;
+
+  const page = 1;
+  const size = 8;
 
   return instance.get<SearchOfficeResponse>(
-    `/work/${activeCategory}/location/${clickPage}/${size}`,
+    `/work/office/search/${page}/${size}`,
     {
-      params: { search: searchText, lat: userLat, lon: userLng },
+      params: { search: searchText },
     },
   );
 };
