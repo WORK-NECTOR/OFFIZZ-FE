@@ -17,17 +17,22 @@ import search from '../../../../public/search.png';
 function QurationPage() {
   useKakaoLoader();
 
-  const [searchString, setSearchString] = useState<string>(''); // 검색하기 위한 입력값
+  const [searchString, setSearchString] = useState<string>('');
+  const [clickPage, setClickPage] = useState<number>(1);
   const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({
     searchText: debouncedSearchText,
+    clickPage,
+    filter: '',
   });
   const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,
   }));
+  const totalPages = 5; // 총 페이지 수
+  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
-  const activity = '영화';
-  const name = '홍길동';
+  const activity = '카공';
+  const name = '성현';
   const space = '공간';
   const nowLocation = userAddress || '위치를 가져오는 중...';
 
@@ -36,12 +41,35 @@ function QurationPage() {
       setSearchString((e.target as HTMLInputElement).value);
     }
   };
+  const onClickWork = () => {};
+  const onClickVacation = () => {};
+
+  // const handlePageClick = (clickPage: number) => {
+  //   setClickPage(clickPage);
+  // };
 
   return (
     <div style={{ display: 'flex' }}>
       <Tab />
       <div>
-        <div className={styles.SwitchBtn}>switchBtn</div>
+        <div className={styles.switchWrapper}>
+          <div className={styles.switch}>
+            <div
+              className={styles.work}
+              onClick={onClickWork}
+              aria-hidden="true"
+            >
+              work
+            </div>
+            <div
+              className={styles.vacation}
+              onClick={onClickVacation}
+              aria-hidden="true"
+            >
+              vacation
+            </div>
+          </div>
+        </div>
         <div style={{ display: 'flex' }}>
           <div style={{ width: '22.75rem' }}>
             <div className={styles.Search}>
@@ -74,9 +102,25 @@ function QurationPage() {
                 data?.offices.length &&
                 data.offices.map((office) => (
                   <div key={office.officeId} className={styles.officeItem}>
-                    <InFoBox title={office.name} address={office.address} />
+                    <InFoBox
+                      title={office.name}
+                      address={office.address}
+                      image=""
+                    />
                   </div>
                 ))}
+            </div>
+            <div className={styles.pagenation}>
+              {pages.map((page) => (
+                <button
+                  type="button"
+                  key={page}
+                  className={styles.pageButton}
+                  // onClick={() => handlePageClick(page)}
+                >
+                  {page}
+                </button>
+              ))}
             </div>
           </div>
           <div>

@@ -10,6 +10,7 @@ function LocationItem(props: LocationItemProps) {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     place_name,
     setPlace,
+    setAddress,
     searchBarType,
     setVisitPlace,
     visitPlace,
@@ -18,7 +19,10 @@ function LocationItem(props: LocationItemProps) {
   return (
     <LocationItemWraper
       onClick={() => {
-        setPlace(place_name);
+        if (searchBarType === 'place') {
+          setPlace(place_name);
+          setAddress(address_name);
+        }
         if (searchBarType === 'visit') {
           setVisitPlace([
             ...visitPlace,

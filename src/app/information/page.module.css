@@ -2,6 +2,30 @@
   width: 100%;
   background: var(--Blue-greyish, #f4f7f9);
 }
+.end {
+  z-index: 1;
+  margin-left: 75.19rem;
+  margin-top: 42.78rem;
+  position: absolute;
+  display: inline-flex;
+  padding: 0.75rem 1.5rem;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 1rem;
+  background: var(--Greyscale-600, #555);
+
+  /* shadow-48 */
+  box-shadow: 0px 4px 48px 0px rgba(0, 0, 0, 0.05);
+  color: var(--Greyscale-White, #fff);
+  text-align: center;
+
+  /* Kor/Body5-kor */
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.375rem; /* 137.5% */
+}
 .top {
   width: 100%;
   display: flex;
@@ -12,7 +36,6 @@
   background: var(--Greyscale-White, #fff);
 }
 .day {
-  border: 1px solid black;
   width: 8rem;
   height: 2rem;
   margin-left: 5.19rem;
@@ -123,7 +146,7 @@
   background: var(--Greyscale-White, #fff);
 }
 .daySwitch {
-  border: 1px solid black;
+  display: flex;
   width: 8rem;
   height: 2rem;
   margin-left: 5.19rem;
@@ -209,4 +232,8 @@
   font-style: normal;
   font-weight: 600;
   line-height: 1.375rem; /* 137.5% */
+}
+.todoWrapper {
+  max-height: 34rem;
+  overflow-y: auto;
 }

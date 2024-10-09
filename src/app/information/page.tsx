@@ -1,29 +1,46 @@
 'use client';
 
-import React, { Suspense, useEffect, useState } from 'react';
+import axios from 'axios';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import Tab from '@/components/Tab/Tab';
-import styles from './page.module.css';
-import MainCharacterBox from './components/MainCharacterBox';
-import Recommend from './components/Recommend';
-import TimeRange from '@/components/TimeRange';
-import { TimeRangeType } from '@/types/timeRange.type';
-import Todo from './components/Todo';
+import { useEffect, useState } from 'react';
 import Modal from '@/components/Modal';
-import caractor from '../../../public/charactor-laptop.png';
+import Tab from '@/components/Tab/Tab';
+import TimeRange from '@/components/TimeRange';
+import TodoModal from '@/components/TodoModal/TodoModal';
+import useAuth from '@/hook/useAuth';
+import useDayStore from '@/store/useSelectDay';
 import useTimeStore from '@/store/useSelectTime';
 import useActivityStore from '@/store/useSelectTodo';
-import InfoSearchParams from './components/InfoSearchParams/InfoSearchParams';
+import useTodoIdStore from '@/store/useTodoIdStore';
+import { TimeRangeType } from '@/types/timeRange.type';
+import caractor from '../../../public/charactor-laptop.png';
+import leftarrow from '../../../public/leftarrow.png';
+import rightarrow from '../../../public/rightarrow.png';
+import MainCharacterBox from './components/MainCharacterBox';
+import Recommend from './components/Recommend';
+import Recode from './components/Record';
+import Todo from './components/Todo';
+import styles from './page.module.css';
+import useSelectToggleStore from '@/store/useSelectToggleStore';
 
 function InformationPage() {
   const [modalType, setModalType] = useState<string | null>(null);
   const [vacationType, setVacationType] = useState<string | null>(null);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isTodoModalOpen, setTodoModalOpen] = useState(false);
   const [isTodoAdded, setIsTodoAdded] = useState(false);
+  const [save, setSave] = useState(false);
+  const [end, setEnd] = useState(false);
   const { activity } = useActivityStore();
   const { time } = useTimeStore();
+  const { id } = useTodoIdStore();
   const router = useRouter();
-
+  const { getAccessToken } = useAuth();
+  const { day, setDay } = useDayStore();
+  const { activeToggle, setToggleTab } = useSelectToggleStore();
+  const [timeArr, setTimeArr] = useState<TimeRangeType[]>([]);
+  const [isVacationAdd, setIsVacationAdd] = useState(false);
   const handleSearchParams = (
     paramsModalType: string | null,
     paramsVacationType: string | null,
@@ -56,51 +73,143 @@ function InformationPage() {
   const handleTodoClick = () => {
     setModalOpen(true);
   };
-
+  const handleTodoVacationClick = () => {
+    setTodoModalOpen(true);
+  };
+  const handleVacationRecode = () => {
+    setSave(true);
+    setTodoModalOpen(true);
+  };
+  const closeTodoModal = () => {
+    setTodoModalOpen(false);
+  };
   const closeModal = () => {
     setModalOpen(false);
   };
-  const timeArr: TimeRangeType[] = [
-    {
-      from: '11:30',
-      to: '15:30',
-      activity: 'Core Time',
-      icon: '😎',
-    },
-    {
-      from: '16:00',
-      to: '17:15',
-      activity: 'Test',
-      icon: '😂',
-    },
-  ];
-  const handleAddTodo = () => {
+
+  const onClickAddTodo = () => {
+    setIsVacationAdd(true);
+  };
+  // const timeArr: TimeRangeType[] = [
+  //   {
+  //     from: '11:30',
+  //     to: '15:30',
+  //     activity: 'Core Time',
+  //     icon: '😎',
+  //   },
+  //   {
+  //     from: '16:00',
+  //     to: '17:15',
+  //     activity: 'Test',
+  //     icon: '😂',
+  //   },
+  // ];
+
+  useEffect(() => {
+    const fetchTimeArr = async () => {
+      getAccessToken()
+        .then((token) => {
+          axios
+            .get(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/coretime/${day}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              },
+            )
+            .then((response) => {
+              const coreTimeEntry = {
+                from: response.data.startCoreTime
+                  ? response.data.startCoreTime.substring(0, 5)
+                  : '',
+                to: response.data.endCoreTime
+                  ? response.data.endCoreTime.substring(0, 5)
+                  : '',
+                activity: 'coreTime',
+              };
+              const todoHoursFormatted = response.data.todoHours.map(
+                (todo: any) => ({
+                  from: todo.startTime ? todo.startTime.substring(0, 5) : '',
+                  to: todo.endTime ? todo.endTime.substring(0, 5) : '',
+                  activity: todo.name,
+                }),
+              );
+
+              setTimeArr([coreTimeEntry, ...todoHoursFormatted]);
+            })
+            .catch((error) => {});
+        })
+        .catch((error) => {});
+    };
+
+    fetchTimeArr();
+  }, [day]);
+
+  const onClickEnd = () => {
+    setModalOpen(true);
+    setEnd(true);
+  };
+  const handleAddTodo = async () => {
     setIsTodoAdded(true); // Todo 추가 시 true로 설정
   };
   const onClickVacation = () => {
+    handleSearchParams(null, 'vacation');
+    setToggleTab('vacation');
     router.push(`/information?kind=vacation`);
   };
   const onClickWork = () => {
+    handleSearchParams(null, 'work');
+    setToggleTab('work');
     router.push(`/information`);
   };
+
+  const handleNextDay = () => {
+    setDay(day + 1); // 다음 날로 변경
+  };
+
+  const handlePrevDay = () => {
+    if (day > 1) setDay(day - 1); // 1일보다 작아지지 않게 설정
+  };
+
   if (vacationType === 'vacation') {
     return (
       <div style={{ display: 'flex' }}>
         <Tab />
         <div className={styles.backgroundSwitch}>
           <div className={styles.topSwitch}>
-            <div className={styles.daySwitch}>day1</div>
+            <div className={styles.daySwitch}>
+              <Image
+                src={leftarrow}
+                alt="arrow"
+                width={40}
+                height={40}
+                onClick={handlePrevDay}
+              />
+              day {day}
+              <Image
+                src={rightarrow}
+                alt="arrow"
+                width={40}
+                height={40}
+                onClick={handleNextDay}
+              />
+            </div>
             <div className={styles.switchSwitch}>
               <div
-                role="button"
                 className={styles.workSwitch}
                 onClick={onClickWork}
-                onKeyDown={onClickWork}
-                tabIndex={0}
+                aria-hidden="true"
               >
                 work
               </div>
-              <div className={styles.vacationSwitch}>vacation</div>
+              <div
+                className={styles.vacationSwitch}
+                onClick={onClickVacation}
+                aria-hidden="true"
+              >
+                vacation
+              </div>
             </div>
           </div>
           <div style={{ display: 'flex' }}>
@@ -111,25 +220,30 @@ function InformationPage() {
             <div className={styles.rightWrapperSwitch}>
               <div>
                 <div className={styles.rightTitleSwitch}>여행 기록</div>
+                <div className={styles.todoWrapper}>
+                  <Recode onClickVacation={handleVacationRecode} />
+                </div>
               </div>
-              <div style={{ marginLeft: '8.25rem' }}>
+              <div style={{ marginLeft: '5rem' }}>
                 <div className={styles.rightTitleSwitch}>
                   to-do
                   <div
-                    role="button"
                     className={styles.addBtnSwitch}
-                    onClick={handleAddTodo}
-                    onKeyDown={handleAddTodo}
-                    tabIndex={0}
+                    onClick={onClickAddTodo}
+                    aria-hidden="true"
                   >
                     추가 +
                   </div>
                 </div>
-                <Todo
-                  timeArr={timeArr}
-                  onClick={handleTodoClick}
-                  isTodoAdded={isTodoAdded}
-                />
+                <div className={styles.todoWrapper}>
+                  <Todo
+                    onClick={handleTodoClick}
+                    onClickVacation={handleTodoVacationClick}
+                    isTodoAdded={isTodoAdded}
+                    isVacationAdded={isVacationAdd}
+                    day={day}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -140,6 +254,15 @@ function InformationPage() {
           todoTitle={activity || ''}
           time={time || ''}
           content={todoContent}
+          end={end}
+          id={id || 0}
+        />
+        <TodoModal
+          isOpen={isTodoModalOpen}
+          onClose={closeTodoModal}
+          id={id || 0}
+          todoTitle={activity || ''}
+          save={save}
         />
       </div>
     );
@@ -147,21 +270,38 @@ function InformationPage() {
 
   return (
     <div style={{ display: 'flex' }}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <InfoSearchParams onParamsChange={handleSearchParams} />
-      </Suspense>
       <Tab />
       <div className={styles.background}>
         <div className={styles.top}>
-          <div className={styles.day}>day1</div>
+          <div className={styles.day}>
+            <Image
+              src={leftarrow}
+              alt="arrow"
+              width={40}
+              height={40}
+              onClick={handlePrevDay}
+            />
+            day {day}
+            <Image
+              src={rightarrow}
+              alt="arrow"
+              width={40}
+              height={40}
+              onClick={handleNextDay}
+            />
+          </div>
           <div className={styles.switch}>
-            <div className={styles.work}>work</div>
             <div
-              role="button"
-              tabIndex={0}
+              className={styles.work}
+              onClick={onClickWork}
+              aria-hidden="true"
+            >
+              work
+            </div>
+            <div
               className={styles.vacation}
               onClick={onClickVacation}
-              onKeyDown={onClickVacation}
+              aria-hidden="true"
             >
               vacation
             </div>
@@ -175,36 +315,43 @@ function InformationPage() {
           <div className={styles.rightWrapper}>
             <div>
               <div className={styles.rightTitle}>근무 시간표</div>
-              <TimeRange length="long" timeArr={timeArr} />
+              <TimeRange timeArr={timeArr} length="long" />
             </div>
             <div style={{ marginLeft: '6.253rem' }}>
               <div className={styles.rightTitle}>
                 to-do
                 <div
-                  role="button"
-                  tabIndex={0}
                   className={styles.addBtn}
                   onClick={handleAddTodo}
-                  onKeyDown={handleAddTodo}
+                  aria-hidden="true"
                 >
                   추가 +
                 </div>
               </div>
-              <Todo
-                timeArr={timeArr}
-                onClick={handleTodoClick}
-                isTodoAdded={isTodoAdded}
-              />
+              <div className={styles.todoWrapper}>
+                <Todo
+                  isVacationAdded={isVacationAdd}
+                  onClickVacation={handleTodoVacationClick}
+                  onClick={handleTodoClick}
+                  isTodoAdded={isTodoAdded}
+                  day={day}
+                />
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      <div className={styles.end} onClick={onClickEnd} aria-hidden="true">
+        워케이션이 마무리되었나요?&nbsp;&nbsp;&nbsp;&nbsp; &gt;
       </div>
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
         todoTitle={activity || ''}
         time={time || ''}
+        id={id || 0}
         content={todoContent}
+        end={end}
       />
     </div>
   );

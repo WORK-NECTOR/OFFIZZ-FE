@@ -121,7 +121,9 @@ export const VNonRecomendSub = styled.div`
   line-height: 1rem;
 `;
 export const VNonRecommendBox = styled.div`
+  margin-top: 1rem;
   display: flex;
+  justify-content: space-between;
   width: 17rem;
   height: 10rem;
   padding: 0.5rem;
@@ -129,6 +131,7 @@ export const VNonRecommendBox = styled.div`
   gap: 0.5rem;
   flex-shrink: 0;
   border-radius: 0.5rem;
+  border: 1px solid var(--Greyscale-100, #e9e9e9);
   background: var(--Greyscale-30, #fcfcfc);
   color: var(--Greyscale-400, #9d9d9d);
   font-family: Pretendard;
@@ -175,4 +178,22 @@ export const VtitleSub = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 1.125rem; /* 128.571% */
+`;
+export const RecommnedBox = styled.div`
+  width: 17rem;
+  height: 2.25rem;
+  display: flex;
+  padding: 0rem 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  background-color: var(--Greyscale-White, #fff);
+  color: var(--Greyscale-700, #434343);
+
+  /* Kor/Caption4-kor */
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem; /* 133.333% */
 `;

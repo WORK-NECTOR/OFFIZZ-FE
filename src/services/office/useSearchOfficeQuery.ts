@@ -1,13 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import { searchOffices } from '@/api/office/searchOffice';
+import { SearchOfficeParams, searchOffices } from '@/api/office/searchOffice';
 
-export const useSearchOfficesQuery = (params: { searchText?: string }) => {
-  const { searchText } = params;
+export const useSearchOfficesQuery = (params: SearchOfficeParams) => {
+  const { searchText, clickPage, size, filter } = params;
 
   return useQuery({
-    queryKey: ['searchOffices', searchText],
+    queryKey: ['searchOffices', searchText, clickPage],
     queryFn: async () => {
-      const response = await searchOffices({ searchText });
+      const response = await searchOffices({
+        searchText,
+        clickPage,
+        size,
+        filter,
+      });
+
       const { data } = response;
 
       if (!data || !data.recOffices) {
