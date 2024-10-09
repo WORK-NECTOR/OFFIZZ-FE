@@ -14,6 +14,7 @@ import useDebounce from '@/hook/useDebounce';
 import QurationCategory from './components/Category';
 import search from '../../../../public/search.png';
 import useCategoryStore from '@/store/useCategoryStore';
+import useSelectToggleStore from '@/store/useSelectToggleStore';
 
 function QurationPage() {
   useKakaoLoader();
@@ -23,6 +24,7 @@ function QurationPage() {
   const { activeCategory } = useCategoryStore();
   const { userLat } = useUserLocationStore();
   const { userLng } = useUserLocationStore();
+  const { setToggleTab } = useSelectToggleStore();
   const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({
     searchText: debouncedSearchText,
@@ -31,10 +33,11 @@ function QurationPage() {
     userLat,
     userLng,
   });
+  console.log(data);
   const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,
   }));
-  const totalPages = 5; // 총 페이지 수
+  const totalPages = 5;
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   const activity = '카공';
@@ -47,12 +50,16 @@ function QurationPage() {
       setSearchString((e.target as HTMLInputElement).value);
     }
   };
-  const onClickWork = () => {};
-  const onClickVacation = () => {};
+  const onClickWork = () => {
+    setToggleTab('work');
+  };
+  const onClickVacation = () => {
+    setToggleTab('vacation');
+  };
 
-  // const handlePageClick = (clickPage: number) => {
-  //   setClickPage(clickPage);
-  // };
+  const handlePageClick = (clickPage: number) => {
+    setClickPage(clickPage);
+  };
 
   return (
     <div style={{ display: 'flex' }}>
@@ -105,9 +112,9 @@ function QurationPage() {
               {error && <p>Error: {error.message}</p>}
               {!isLoading &&
                 !error &&
-                data?.offices.length &&
-                data.offices.map((office) => (
-                  <div key={office.officeId} className={styles.officeItem}>
+                data?.serchData.length &&
+                data.serchData.map((office) => (
+                  <div key={office.id} className={styles.officeItem}>
                     <InFoBox
                       title={office.name}
                       address={office.address}
@@ -122,7 +129,7 @@ function QurationPage() {
                   type="button"
                   key={page}
                   className={styles.pageButton}
-                  // onClick={() => handlePageClick(page)}
+                  onClick={() => handlePageClick(page)}
                 >
                   {page}
                 </button>

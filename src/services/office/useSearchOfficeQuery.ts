@@ -2,8 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { SearchOfficeParams, searchOffices } from '@/api/office/searchOffice';
 
 export const useSearchOfficesQuery = (params: SearchOfficeParams) => {
-  const { searchText, clickPage, size, activeCategory, userLat, userLng } =
-    params;
+  const { searchText, clickPage, activeCategory, userLat, userLng } = params;
 
   return useQuery({
     queryKey: ['searchOffices', searchText, clickPage],
@@ -11,21 +10,21 @@ export const useSearchOfficesQuery = (params: SearchOfficeParams) => {
       const response = await searchOffices({
         searchText,
         clickPage,
-        size,
         activeCategory,
         userLng,
         userLat,
       });
 
       const { data } = response;
+      console.log('datadata', data);
 
-      if (!data || !data.recOffices) {
+      if (!data || !data.cafeAndOffices) {
         throw new Error('Invalid response data');
       }
 
-      const { recOffices, totalPage } = data;
+      const { cafeAndOffices, totalPage } = data;
 
-      return { offices: recOffices, totalPage };
+      return { serchData: cafeAndOffices, totalPage };
     },
     staleTime: 1000 * 20,
   });

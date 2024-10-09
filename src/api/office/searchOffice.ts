@@ -1,36 +1,48 @@
+import useAuth from '@/hook/useAuth';
 import { instance } from '../axios';
 
 export interface SearchOfficeParams {
-  searchText?: string | undefined;
+  searchText: string;
+  clickPage: number;
+  activeCategory: string;
+  userLng: number;
+  userLat: number;
 }
 
-export interface OfficeInfoType {
-  officeId: number;
-  name: string;
-  facilities: {
-    twentyFourHoursOperation: boolean;
-    openAllYear: boolean;
-  };
+export interface serchMapInfoType {
   address: string;
-  price: number;
-  priceType: string;
+  category: string;
+  image: string;
+  id: number;
+  isLike: boolean;
+  lat: number;
+  lon: number;
+  name: string;
 }
 
 export interface SearchOfficeResponse {
-  recOffices: Array<OfficeInfoType>;
+  cafeAndOffices: Array<serchMapInfoType>;
   totalPage: number;
 }
 
-export const searchOffices = (params: SearchOfficeParams) => {
-  const { searchText = '' } = params;
-
-  const page = 1;
+export const searchOffices = async (params: SearchOfficeParams) => {
+  const { searchText, clickPage, activeCategory, userLng, userLat } = params;
+  const { getAccessToken } = useAuth();
   const size = 8;
 
-  return instance.get<SearchOfficeResponse>(
-    `/work/office/search/${page}/${size}`,
-    {
-      params: { search: searchText },
-    },
-  );
+  try {
+    const token = await getAccessToken();
+
+    return await instance.get<SearchOfficeResponse>(
+      `/work/${activeCategory}/location/${clickPage}/${size}`,
+      {
+        params: { search: searchText, lat: userLat, lon: userLng },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+  } catch (error) {
+    throw error;
+  }
 };

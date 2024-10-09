@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { CategoryBox } from './Category.styled';
 import useCategoryStore from '@/store/useCategoryStore';
+import useSelectToggleStore from '@/store/useSelectToggleStore';
 
 function QurationCategory() {
+  const { activeToggle } = useSelectToggleStore();
   const categories = ['전체', '카페', '공유오피스'];
   const categoryMap: Record<string, string> = {
     전체: 'all',
     카페: 'cafe',
     공유오피스: 'office',
+  };
+  const categoriesVacation = ['전체', '자연', '맛집', '문화예술','쇼핑'];
+  const categoryMapVacation: Record<string, string> = {
+    전체: 'all',
+    자연: 'nature',
+    맛집: 'restaurant',
+    문화예술:'culture',
+    쇼핑:'shopping',
   };
 
   const [selectedCategory, setSelectedCategory] = useState('전체');
@@ -17,17 +27,37 @@ function QurationCategory() {
     setSelectedCategory(category);
     setActiveTab(categoryMap[category]);
   };
+  const handleCategoryClickVacation = (category: string) => {
+    setSelectedCategory(category);
+    setActiveTab(categoryMapVacation[category]);
+  };
 
   return (
     <>
-      {categories.map((category) => (
-        <CategoryBox
-          key={category}
-          onClick={() => handleCategoryClick(category)}
-        >
-          {category}
-        </CategoryBox>
-      ))}
+      {activeToggle == 'work' && (
+        <>
+          {categories.map((category) => (
+            <CategoryBox
+              key={category}
+              onClick={() => handleCategoryClick(category)}
+            >
+              {category}
+            </CategoryBox>
+          ))}
+        </>
+      )}
+      {activeToggle == 'vacation' && (
+        <>
+          {categoriesVacation.map((category) => (
+            <CategoryBox
+              key={category}
+              onClick={() => handleCategoryClickVacation(category)}
+            >
+              {category}
+            </CategoryBox>
+          ))}
+        </>
+      )}
     </>
   );
 }
