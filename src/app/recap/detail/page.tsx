@@ -7,16 +7,18 @@ import useAuth from '@/hook/useAuth';
 import { useEffect, useState } from 'react';
 import { useRecapDetailQuery } from '@/services/recap/useRecapDetailQuery';
 import useWorkationStore from '@/store/useWorkationStore';
+import useRecapStore from '@/store/useRecapStore';
 
 const stepPage: { [key: number]: JSX.Element } = {
   0: <RecapLoading />,
 };
 
 function RecapDetailPage() {
-  const { step } = useStepstore();
+  const { step, incrementStep } = useStepstore();
   const { getAccessToken } = useAuth();
   const [token, setToken] = useState('');
   const { workationId } = useWorkationStore();
+  const { setRecapDetailData } = useRecapStore();
   const { data, refetch } = useRecapDetailQuery({
     workationId,
     token,
@@ -33,7 +35,8 @@ function RecapDetailPage() {
       refetch();
 
       if (data) {
-        console.log(data);
+        setRecapDetailData(data);
+        if (step === 0) incrementStep();
       }
     }
   }, [data, token, workationId]);
