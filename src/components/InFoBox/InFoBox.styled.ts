@@ -15,6 +15,7 @@ export const InfoImage = styled.div`
   height: 5rem;
   flex-shrink: 0;
   background: var(--Greyscale-200, #d9d9d9);
+  border-radius: 0.5rem;
 `;
 export const InfoDesc = styled.div`
   color: var(--Greyscale-Black, #000);

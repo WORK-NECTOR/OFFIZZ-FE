@@ -10,7 +10,7 @@ import {
 import heart from '../../../public/heart.png';
 import { InfoBoxProps } from '@/types/quration.type';
 
-function InFoBox({ title, address }: InfoBoxProps) {
+function InFoBox({ title, address, image }: InfoBoxProps) {
   return (
     <InFoBoxContent>
       <div
@@ -21,7 +21,17 @@ function InFoBox({ title, address }: InfoBoxProps) {
           marginBottom: '1rem',
         }}
       >
-        <InfoImage />
+        {image ? (
+          <Image
+            src={image}
+            alt="image"
+            width={80}
+            height={80}
+            style={{ borderRadius: '0.5rem' }}
+          />
+        ) : (
+          <InfoImage />
+        )}
         <Info>
           <InfoDesc>{title}</InfoDesc>
           <InfoDescP>{address}</InfoDescP>

@@ -14,7 +14,7 @@ import useRegionStore, { Region } from '@/store/useRegionStore';
 import { useAllRecRegionOfficeQuery } from '@/services/office/useRecRegionOfficeQuery';
 import OfficeAccordion from '@/components/OfficeAccordion';
 import PaginationBar from '@/components/PaginationBar';
-import { useSearchOfficesQuery } from '@/services/office/useSearchOfficeQuery';
+import { useSearchWorkOfficesQuery } from '@/services/office/useSearchWorkOfficeQuery';
 
 function RecommendPage() {
   const [searchInput, setSearchInput] = useState('');
@@ -27,7 +27,7 @@ function RecommendPage() {
     page: recPage,
     size: 8,
   });
-  const { data: searchData } = useSearchOfficesQuery({
+  const { data: searchData } = useSearchWorkOfficesQuery({
     searchText,
     page: searchPage,
     size: 8,
