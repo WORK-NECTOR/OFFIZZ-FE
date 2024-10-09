@@ -28,13 +28,13 @@ interface ModalProps {
   onClose: () => void;
   content: TodoContent;
   // eslint-disable-next-line
-  todoTitle?: string;
+  todoTitle: string;
   // eslint-disable-next-line
-  time?: string;
+  time: string;
   // eslint-disable-next-line
-  id?: number;
+  id: number;
   // eslint-disable-next-line
-  end?: boolean;
+  end: boolean;
 }
 
 // eslint-disable-next-line

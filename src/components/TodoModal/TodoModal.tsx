@@ -21,6 +21,7 @@ import camera from '../../../public/camera.png';
 import useAuth from '@/hook/useAuth';
 import location from '../../../public/local.png';
 import useTodoIdStore from '@/store/useTodoIdStore';
+import useDayStore from '@/store/useSelectDay';
 
 interface TodoModalProps {
   isOpen: boolean;
@@ -47,6 +48,7 @@ const TodoModal: React.FC<TodoModalProps> = ({
   const { image } = useTodoIdStore();
   const { content } = useTodoIdStore();
   const { palce } = useTodoIdStore();
+  const { day } = useDayStore();
   const onClickSave = () => {
     getAccessToken().then((token) => {
       const body = {
@@ -79,7 +81,7 @@ const TodoModal: React.FC<TodoModalProps> = ({
 
             axios
               .patch(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/vacation/todo/fin/1`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/vacation/todo/fin/${day}`,
                 body,
                 {
                   headers: {
@@ -102,7 +104,7 @@ const TodoModal: React.FC<TodoModalProps> = ({
         // 선택한 이미지 파일이 없는 경우 PATCH 요청
         axios
           .patch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/vacation/todo/fin/1`,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/vacation/todo/fin/${day}`,
             body,
             {
               headers: {

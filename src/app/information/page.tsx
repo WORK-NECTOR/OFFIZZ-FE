@@ -1,28 +1,27 @@
 'use client';
 
-import React, { Suspense, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
-import Image from 'next/image';
-import Tab from '@/components/Tab/Tab';
-import styles from './page.module.css';
-import MainCharacterBox from './components/MainCharacterBox';
-import Recommend from './components/Recommend';
-import TimeRange from '@/components/TimeRange';
-import { TimeRangeResponseType, TimeRangeType } from '@/types/timeRange.type';
-import Todo from './components/Todo';
 import Modal from '@/components/Modal';
-import caractor from '../../../public/charactor-laptop.png';
-import useTimeStore from '@/store/useSelectTime';
-import useActivityStore from '@/store/useSelectTodo';
-import InfoSearchParams from './components/InfoSearchParams/InfoSearchParams';
-import Recode from './components/Record';
-import leftarrow from '../../../public/leftarrow.png';
-import rightarrow from '../../../public/rightarrow.png';
+import Tab from '@/components/Tab/Tab';
+import TimeRange from '@/components/TimeRange';
+import TodoModal from '@/components/TodoModal/TodoModal';
 import useAuth from '@/hook/useAuth';
 import useDayStore from '@/store/useSelectDay';
+import useTimeStore from '@/store/useSelectTime';
+import useActivityStore from '@/store/useSelectTodo';
 import useTodoIdStore from '@/store/useTodoIdStore';
-import TodoModal from '@/components/TodoModal/TodoModal';
+import { TimeRangeType } from '@/types/timeRange.type';
+import axios from 'axios';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import caractor from '../../../public/charactor-laptop.png';
+import leftarrow from '../../../public/leftarrow.png';
+import rightarrow from '../../../public/rightarrow.png';
+import MainCharacterBox from './components/MainCharacterBox';
+import Recommend from './components/Recommend';
+import Recode from './components/Record';
+import Todo from './components/Todo';
+import styles from './page.module.css';
 
 function InformationPage() {
   const [modalType, setModalType] = useState<string | null>(null);
@@ -240,6 +239,8 @@ function InformationPage() {
           todoTitle={activity || ''}
           time={time || ''}
           content={todoContent}
+          end={end}
+          id={id||0}
         />
         <TodoModal
           isOpen={isTodoModalOpen}
