@@ -13,6 +13,7 @@ import MainMsg from './components/MainMsg/MainMsg';
 import useDebounce from '@/hook/useDebounce';
 import QurationCategory from './components/Category';
 import search from '../../../../public/search.png';
+import useCategoryStore from '@/store/useCategoryStore';
 
 function QurationPage() {
   useKakaoLoader();
@@ -20,11 +21,13 @@ function QurationPage() {
   const [searchString, setSearchString] = useState<string>('');
   const [clickPage, setClickPage] = useState<number>(1);
   const [filter, setFilter] = useState('');
+  const {activeCategory} = useCategoryStore();
+  console.log(activeCategory)
   const debouncedSearchText = useDebounce(searchString, 500); // 검색클릭 값
   const { data, isLoading, error } = useSearchOfficesQuery({
     searchText: debouncedSearchText,
     clickPage,
-    filter,
+    activeCategory,
   });
   const { userAddress } = useUserLocationStore((state) => ({
     userAddress: state.userAddress,

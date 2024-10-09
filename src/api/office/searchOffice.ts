@@ -4,7 +4,7 @@ export interface SearchOfficeParams {
   searchText?: string | undefined;
   clickPage?: number;
   size?: number;
-  filter: '';
+  activeCategory: string;
 }
 
 export interface OfficeInfoType {
@@ -25,10 +25,10 @@ export interface SearchOfficeResponse {
 }
 
 export const searchOffices = (params: SearchOfficeParams) => {
-  const { searchText = '', clickPage = 1, size = 8, filter = '' } = params;
+  const { searchText, clickPage = 1, size = 8, activeCategory} = params;
 
   return instance.get<SearchOfficeResponse>(
-    `/work/${filter}/location/${clickPage}/${size}`,
+    `/work/${activeCategory}/location/${clickPage}/${size}`,
     {
       params: { search: searchText },
     },
