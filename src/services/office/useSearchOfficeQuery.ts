@@ -12,7 +12,7 @@ export const useSearchOfficesQuery = (params: SearchOfficeParams) => {
   } = params;
 
   return useQuery({
-    queryKey: ['searchOffices', searchText, clickPage],
+    queryKey: ['searchOffices', searchText, clickPage, activeCategory],
     queryFn: async () => {
       const response = await searchOffices({
         searchText,
@@ -25,12 +25,14 @@ export const useSearchOfficesQuery = (params: SearchOfficeParams) => {
 
       const { data } = response;
 
-      if (!data || !data.cafeAndOffices) {
+      if (!data) {
         throw new Error('Invalid response data');
       }
-
+      if (activeToggle === 'vacation') {
+        const { vacationRecommendResponses, totalPage } = data;
+        return { serchData: vacationRecommendResponses, totalPage };
+      }
       const { cafeAndOffices, totalPage } = data;
-
       return { serchData: cafeAndOffices, totalPage };
     },
     staleTime: 1000 * 20,

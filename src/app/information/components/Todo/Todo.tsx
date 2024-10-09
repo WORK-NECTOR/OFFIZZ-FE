@@ -100,12 +100,11 @@ const Todo: React.FC<TodoProps> = ({
       setIsSubmitting(true); // 요청 시작
       const planTime = formatNewtime(newTime);
       const activityName = newActivity;
-      const urlType = activeToggle === 'vacation' ? 'vacation' : 'work';
 
       try {
         const token = await getAccessToken();
         await axios.post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/${urlType}/todo/${day}`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/${activeToggle}/todo/${day}`,
           {
             icon: 0,
             planTime,
@@ -128,23 +127,6 @@ const Todo: React.FC<TodoProps> = ({
   };
 
   useEffect(() => {
-    // const tempWorkArr: TodoTime[] = [
-    //   {
-    //     time: '04:10',
-    //     activity: 'Core Time',
-    //     isComplete: true,
-    //     icon: '😎',
-    //   },
-    //   {
-    //     time: '04:10',
-    //     activity: 'Test',
-    //     isComplete: false,
-    //     icon: '😂',
-    //   },
-    // ];
-
-    // setWorkArr(tempWorkArr);
-    // setVacationArr(tempWorkArr)
     getAccessToken().then(async (token) => {
       try {
         const response = await axios.get(

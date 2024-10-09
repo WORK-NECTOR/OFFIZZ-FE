@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CategoryBox } from './Category.styled';
+import { CategoryBox, CategoryBoxVacation } from './Category.styled';
 import useCategoryStore from '@/store/useCategoryStore';
 import useSelectToggleStore from '@/store/useSelectToggleStore';
 
@@ -43,6 +43,7 @@ function QurationCategory() {
             <CategoryBox
               key={category}
               onClick={() => handleCategoryClick(category)}
+              isActive={selectedCategory === category}
             >
               {category}
             </CategoryBox>
@@ -52,12 +53,13 @@ function QurationCategory() {
       {activeToggle === 'vacation' && (
         <>
           {categoriesVacation.map((category) => (
-            <CategoryBox
+            <CategoryBoxVacation
               key={category}
               onClick={() => handleCategoryClickVacation(category)}
+              isActive={selectedCategory === category}
             >
               {category}
-            </CategoryBox>
+            </CategoryBoxVacation>
           ))}
         </>
       )}

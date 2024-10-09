@@ -23,6 +23,7 @@ export interface SearchMapInfoType {
 
 export interface SearchOfficeResponse {
   cafeAndOffices: Array<SearchMapInfoType>;
+  vacationRecommendResponses: Array<SearchMapInfoType>;
   totalPage: number;
 }
 
@@ -40,10 +41,7 @@ export const searchOffices = async (params: SearchOfficeParams) => {
   const size = 8;
 
   const token = await getAccessToken();
-  const url =
-    activeToggle === 'vacation'
-      ? `/vacation/recommend/${activeCategory}/location/${clickPage}/${size}`
-      : `/work/${activeCategory}/location/${clickPage}/${size}`;
+  const url = `/${activeToggle}/${activeCategory}/location/${clickPage}/${size}`;
 
   return instance.get<SearchOfficeResponse>(url, {
     params: { search: searchText, lat: userLat, lon: userLng },
