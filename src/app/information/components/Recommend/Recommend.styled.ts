@@ -122,11 +122,9 @@ export const VNonRecomendSub = styled.div`
 `;
 export const VNonRecommendBox = styled.div`
   margin-top: 1rem;
-  display: flex;
   justify-content: space-between;
   width: 17rem;
   height: 10rem;
-  padding: 0.5rem;
   align-items: flex-start;
   gap: 0.5rem;
   flex-shrink: 0;
@@ -180,10 +178,11 @@ export const VtitleSub = styled.div`
   line-height: 1.125rem; /* 128.571% */
 `;
 export const RecommnedBox = styled.div`
-  width: 17rem;
+  width: 16rem;
   height: 2.25rem;
   display: flex;
   padding: 0rem 0.5rem;
+  margin: 0.3rem;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
