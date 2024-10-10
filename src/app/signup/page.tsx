@@ -5,8 +5,10 @@ import thumbnail from '../../../public/thumbnail.png';
 import offizz_logo from '../../../public/offizz-logo.png';
 import styles from './page.module.css';
 import { TOP_MAIN } from '@/constants/main';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import useAuth from '@/hook/useAuth';
 
 function SignupPage() {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -15,6 +17,7 @@ function SignupPage() {
   const [passwordCheck, setPasswordCheck] = useState('');
   const [btnActive, setBtnActive] = useState(false);
   const router = useRouter();
+  const { setAccessToken, setRefreshToken } = useAuth();
 
   useEffect(() => {
     setBtnActive(
@@ -26,6 +29,33 @@ function SignupPage() {
     );
   }, [email, password, passwordCheck]);
 
+  const signupHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (btnActive) {
+      axios
+        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/signup`, {
+          email,
+          password,
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            setAccessToken({
+              token: res.data.accessToken,
+              expire: res.data.accessExpiration,
+            });
+            setRefreshToken({
+              token: res.data.refreshToken,
+              expire: res.data.refreshExpiration,
+            });
+          }
+          router.replace('/');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
+
   return (
     <main className={styles.main}>
       <section className={styles['fir-section']}>
@@ -36,7 +66,10 @@ function SignupPage() {
             className={styles['logo-img']}
           />
           <p className={styles['service-text']}>{TOP_MAIN.title}</p>
-          <form className={styles['signup-form-container']}>
+          <form
+            className={styles['signup-form-container']}
+            onSubmit={signupHandler}
+          >
             <div className={styles['signup-input-wrapper']}>
               <label htmlFor="email" className={styles['signup-label']}>
                 이메일
@@ -91,6 +124,7 @@ function SignupPage() {
               type="submit"
               className={styles['signup-btn']}
               data-active={btnActive}
+              disabled={!btnActive}
             >
               회원가입
             </button>
