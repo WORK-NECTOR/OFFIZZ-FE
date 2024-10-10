@@ -64,6 +64,9 @@ function SignupPage() {
             src={offizz_logo}
             alt="offizz 로고"
             className={styles['logo-img']}
+            onClick={() => {
+              router.push('/');
+            }}
           />
           <p className={styles['service-text']}>{TOP_MAIN.title}</p>
           <form

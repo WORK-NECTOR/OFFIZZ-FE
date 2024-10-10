@@ -59,6 +59,9 @@ function LoginPage() {
             src={offizz_logo}
             alt="offizz 로고"
             className={styles['logo-img']}
+            onClick={() => {
+              router.push('/');
+            }}
           />
           <p className={styles['service-text']}>{TOP_MAIN.title}</p>
           {/* <Image
@@ -96,7 +99,7 @@ function LoginPage() {
                 onChange={(e) => setPassword(e.currentTarget.value)}
               />
             </div>
-            <button type="button" className={styles['login-btn']}>
+            <button type="submit" className={styles['login-btn']}>
               로그인
             </button>
             <button
