@@ -9,6 +9,7 @@ import offizz_logo from '../../../public/offizz-logo.png';
 import styles from './page.module.css';
 import { TOP_MAIN } from '@/constants/main';
 import useAuth from '@/hook/useAuth';
+import useHeaderMenuStore from '@/store/useMenuStore';
 
 function SignupPage() {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -18,6 +19,7 @@ function SignupPage() {
   const [btnActive, setBtnActive] = useState(false);
   const router = useRouter();
   const { setAccessToken, setRefreshToken } = useAuth();
+  const { setSelectedMenu } = useHeaderMenuStore();
 
   useEffect(() => {
     setBtnActive(
@@ -48,6 +50,7 @@ function SignupPage() {
               expire: res.data.refreshExpiration,
             });
           }
+          setSelectedMenu('홈');
           router.replace('/');
         })
         .catch((err) => {
@@ -64,6 +67,9 @@ function SignupPage() {
             src={offizz_logo}
             alt="offizz 로고"
             className={styles['logo-img']}
+            onClick={() => {
+              router.push('/');
+            }}
           />
           <p className={styles['service-text']}>{TOP_MAIN.title}</p>
           <form
