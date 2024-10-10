@@ -53,22 +53,22 @@ function RecapPage() {
     },
   };
   // 샘플 데이터
-  const workationData = [
-    {
-      workationId: 1,
-      name: 'Workation A',
-      address: '123 Ocean Drive',
-      startDate: '2024-10-09',
-      endDate: '2024-10-15',
-    },
-    {
-      workationId: 2,
-      name: 'Workation B',
-      address: '456 Mountain Ave',
-      startDate: '2024-11-01',
-      endDate: '2024-11-07',
-    },
-  ];
+  // const workationData = [
+  //   {
+  //     workationId: 1,
+  //     name: 'Workation A',
+  //     address: '123 Ocean Drive',
+  //     startDate: '2024-10-09',
+  //     endDate: '2024-10-15',
+  //   },
+  //   {
+  //     workationId: 2,
+  //     name: 'Workation B',
+  //     address: '456 Mountain Ave',
+  //     startDate: '2024-11-01',
+  //     endDate: '2024-11-07',
+  //   },
+  // ];
 
   const { getAccessToken } = useAuth();
   useEffect(() => {
@@ -106,8 +106,8 @@ function RecapPage() {
             />
           </ThemeProvider>
         </div>
-        {!workationData && <NonRecapDataBox />}
-        {workationData && (
+        {!recapData && <NonRecapDataBox />}
+        {recapData && (
           <div
             style={{
               display: 'flex',
@@ -115,7 +115,7 @@ function RecapPage() {
               width: '72rem',
             }}
           >
-            {workationData.map((recap, index) => (
+            {recapData.slice(0, 2).map((recap, index) => (
               <RecapBox
                 workationId={recap.workationId}
                 name={recap.name}
