@@ -19,7 +19,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   position: absolute;
   top: 50%;
   right: 7.8125rem;
@@ -40,19 +39,14 @@
   margin: 0 auto;
 }
 
-.login-btn {
-  width: 20.3rem;
-  height: 3rem;
-}
-
 .thumbnail-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.login-form-container {
-  width: 19rem;
+.signup-form-container {
+  width: 21rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,14 +54,14 @@
   margin-top: 2rem;
 }
 
-.login-input-wrapper {
-  width: 19rem;
+.signup-input-wrapper {
+  width: 21rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.login-input {
+.signup-input {
   width: 14rem;
   height: 2rem;
   border-radius: 0.4rem;
@@ -76,12 +70,12 @@
   outline: none;
 }
 
-.login-input::placeholder {
+.signup-input::placeholder {
   font-family: Pretendard;
 }
 
-.login-btn {
-  width: 19rem;
+.signup-btn {
+  width: 21rem;
   height: 2.2rem;
   cursor: pointer;
   border: none;
@@ -93,14 +87,12 @@
   margin-top: 2rem;
 }
 
-.not-user-btn {
-  width: 6rem;
-  border: none;
-  font-family: Pretendard;
+.signup-btn[data-active='false'] {
+  background-color: var(--black-400);
+}
+
+.pwd-validator {
   font-size: 0.75rem;
-  color: var(--black-300);
-  border-bottom: 1px solid var(--black-300);
-  cursor: pointer;
-  background-color: transparent;
+  color: red;
   margin-top: 1rem;
 }
