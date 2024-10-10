@@ -8,11 +8,14 @@ import styles from './page.module.css';
 import { TOP_MAIN } from '@/constants/main';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import useAuth from '@/hook/useAuth';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const { setAccessToken, setRefreshToken } = useAuth();
 
   // const loginHandler = () => {
   //   if (typeof window !== undefined) {
@@ -22,8 +25,30 @@ function LoginPage() {
   //   }
   // };
 
-  const loginHandler = () => {
-    // 로그인 로직
+  const loginHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    axios
+      .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/login`, {
+        email,
+        password,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          setAccessToken({
+            token: res.data.accessToken,
+            expire: res.data.accessExpiration,
+          });
+          setRefreshToken({
+            token: res.data.refreshToken,
+            expire: res.data.refreshExpiration,
+          });
+        }
+        router.replace('/');
+      })
+      .catch((err) => {
+        console.error(err);
+        router.replace('/');
+      });
   };
 
   return (
@@ -42,7 +67,10 @@ function LoginPage() {
             onClick={loginHandler}
             className={styles['login-btn']}
           /> */}
-          <div className={styles['login-form-container']}>
+          <form
+            className={styles['login-form-container']}
+            onSubmit={loginHandler}
+          >
             <div className={styles['login-input-wrapper']}>
               <label htmlFor="email" className={styles['login-label']}>
                 아이디
@@ -55,7 +83,7 @@ function LoginPage() {
                 onChange={(e) => setEmail(e.currentTarget.value)}
               />
             </div>
-            <form className={styles['login-input-wrapper']}>
+            <div className={styles['login-input-wrapper']}>
               <label htmlFor="password" className={styles['login-label']}>
                 비밀번호
               </label>
@@ -67,19 +95,17 @@ function LoginPage() {
                 autoComplete="off"
                 onChange={(e) => setPassword(e.currentTarget.value)}
               />
-            </form>
-          </div>
-          <button className={styles['login-btn']} onClick={loginHandler}>
-            로그인
-          </button>
-          <button
-            className={styles['not-user-btn']}
-            onClick={() => {
-              router.push('/signup');
-            }}
-          >
-            회원이 아니신가요?
-          </button>
+            </div>
+            <button className={styles['login-btn']}>로그인</button>
+            <button
+              className={styles['not-user-btn']}
+              onClick={() => {
+                router.push('/signup');
+              }}
+            >
+              회원이 아니신가요?
+            </button>
+          </form>
         </div>
       </section>
       <section className={styles['sec-section']}>
