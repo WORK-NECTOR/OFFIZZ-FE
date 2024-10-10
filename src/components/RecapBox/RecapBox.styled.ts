@@ -11,6 +11,7 @@ export const RecapLayout = styled.div`
     height: 6.565rem;
     margin-top: 1.81rem;
     margin-left: 1.5rem;
+    cursor: pointer;
   }
 
   #recap-info-main {
