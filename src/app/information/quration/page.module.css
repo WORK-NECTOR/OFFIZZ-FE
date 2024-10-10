@@ -189,3 +189,37 @@
   font-weight: 400;
   line-height: 1.375rem; /* 137.5% */
 }
+.switchSwitch {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 2.25rem;
+  padding: 0rem 0.25rem;
+  width: 9.25rem;
+  border-radius: 2rem;
+  background: var(--Blue-greyish, #f4f7f9);
+  display: flex;
+  align-items: center;
+}
+.workSwitch {
+  margin-left: 0.91rem;
+  margin-right: 0.59rem;
+  color: var(--Greyscale-400, #9d9d9d);
+
+  /* Eng/Body6-eng */
+  font-family: Figtree;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.375rem; /* 137.5% */
+}
+.vacationSwitch {
+  display: flex;
+  width: 5.25rem;
+  padding: 0.25rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 2rem;
+  border: 1px solid var(--Greyscale-100, #e9e9e9);
+  background: #fff;
+}

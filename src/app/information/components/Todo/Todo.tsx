@@ -13,6 +13,8 @@ import playvacation from '../../../../../public/todo-vac.png';
 import playDone from '../../../../../public/done.png';
 import play from '../../../../../public/todo-play.png';
 import clock from '../../../../../public/time.png';
+import vacationIcon from '../../../../../public/v-photo.png';
+import workIcon from '../../../../../public/book.png';
 import { TodoTime } from '@/types/timeRange.type';
 import useTimeStore from '@/store/useSelectTime';
 import useActivityStore from '@/store/useSelectTodo';
@@ -98,12 +100,11 @@ const Todo: React.FC<TodoProps> = ({
       setIsSubmitting(true); // 요청 시작
       const planTime = formatNewtime(newTime);
       const activityName = newActivity;
-      const urlType = activeToggle === 'vacation' ? 'vacation' : 'work';
 
       try {
         const token = await getAccessToken();
         await axios.post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/${urlType}/todo/${day}`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/${activeToggle}/todo/${day}`,
           {
             icon: 0,
             planTime,
@@ -116,7 +117,7 @@ const Todo: React.FC<TodoProps> = ({
           },
         );
         // eslint-disable-next-line
-        // window.location.reload();
+        window.location.reload();
       } catch (error) {
         alert(error);
       } finally {
@@ -126,23 +127,6 @@ const Todo: React.FC<TodoProps> = ({
   };
 
   useEffect(() => {
-    // const tempWorkArr: TodoTime[] = [
-    //   {
-    //     time: '04:10',
-    //     activity: 'Core Time',
-    //     isComplete: true,
-    //     icon: '😎',
-    //   },
-    //   {
-    //     time: '04:10',
-    //     activity: 'Test',
-    //     isComplete: false,
-    //     icon: '😂',
-    //   },
-    // ];
-
-    // setWorkArr(tempWorkArr);
-    // setVacationArr(tempWorkArr)
     getAccessToken().then(async (token) => {
       try {
         const response = await axios.get(
@@ -222,7 +206,7 @@ const Todo: React.FC<TodoProps> = ({
                 <div style={{ marginLeft: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Image
-                      src={time.icon || ''}
+                      src={time.icon ? time.icon : vacationIcon}
                       alt="Icon"
                       width={16}
                       height={16}
@@ -284,7 +268,7 @@ const Todo: React.FC<TodoProps> = ({
                 <div style={{ marginLeft: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Image
-                      src={time.icon || ''}
+                      src={time.icon ? time.icon : workIcon}
                       alt="Icon"
                       width={16}
                       height={16}
