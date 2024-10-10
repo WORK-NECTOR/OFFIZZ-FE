@@ -7,10 +7,11 @@ export const RecapLayout = styled.div`
   background-color: var(--blue-pale);
 
   #recap-info-wrapper {
-    width: 15.875rem;
+    width: 20.875rem;
     height: 6.565rem;
     margin-top: 1.81rem;
     margin-left: 1.5rem;
+    cursor: pointer;
   }
 
   #recap-info-main {

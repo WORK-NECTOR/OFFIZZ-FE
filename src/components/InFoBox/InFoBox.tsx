@@ -26,8 +26,9 @@ function InFoBox({ title, address, image, like }: InfoBoxProps) {
         }}
       >
         {image ? (
-          <Image
-            src={activeToggle === 'work' ? workHeart : vacHeart}
+          // eslint-disable-next-line
+          <img
+            src={image}
             alt="image"
             width={80}
             height={80}
@@ -43,7 +44,7 @@ function InFoBox({ title, address, image, like }: InfoBoxProps) {
       </div>
       {like ? (
         <Image
-          src={workHeart}
+          src={activeToggle === 'work' ? workHeart : vacHeart}
           alt="heart"
           width={20}
           height={20}

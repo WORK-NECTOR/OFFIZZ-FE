@@ -94,7 +94,7 @@ function KakaoMap({ markerData }: KakaoMapProps) {
           width: '100%',
           height: '100%',
         }}
-        level={10} // 지도의 확대 레벨
+        level={5} // 지도의 확대 레벨
       >
         {!locationstate.isLoading && (
           <MapMarker position={locationstate.center}>

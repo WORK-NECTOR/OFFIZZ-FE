@@ -76,7 +76,7 @@ function Recode({ onClickVacation }: RecodeProps) {
             <img
               src={item.image}
               alt={item.title}
-              style={{ width: '100%', height: 'auto', borderRadius: '0.5rem' }}
+              style={{ width: '5rem', height: '5rem', borderRadius: '0.5rem' }}
             />
           </RecodeImg>
           <div>

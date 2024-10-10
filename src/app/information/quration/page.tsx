@@ -139,7 +139,7 @@ function QurationPage() {
                     <InFoBox
                       title={office.name}
                       address={office.address}
-                      image=""
+                      image={office.image}
                       like={office.isLike}
                     />
                   </div>

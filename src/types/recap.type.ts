@@ -1,8 +1,9 @@
 import { StaticImageData } from 'next/image';
 
 export interface RecapContentProps {
-  mainText: string;
-  subText: string;
+  workationId: number;
+  name: string;
+  address: string;
   startDate: string;
   endDate: string;
   img: StaticImageData;
