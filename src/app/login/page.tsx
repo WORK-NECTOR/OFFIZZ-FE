@@ -10,12 +10,14 @@ import offizz_logo from '../../../public/offizz-logo.png';
 import styles from './page.module.css';
 import { TOP_MAIN } from '@/constants/main';
 import useAuth from '@/hook/useAuth';
+import useHeaderMenuStore from '@/store/useMenuStore';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
   const { setAccessToken, setRefreshToken } = useAuth();
+  const { setSelectedMenu } = useHeaderMenuStore();
 
   // const loginHandler = () => {
   //   if (typeof window !== undefined) {
@@ -43,6 +45,7 @@ function LoginPage() {
             expire: res.data.refreshExpiration,
           });
         }
+        setSelectedMenu('홈');
         router.replace('/');
       })
       .catch((err) => {
@@ -59,6 +62,9 @@ function LoginPage() {
             src={offizz_logo}
             alt="offizz 로고"
             className={styles['logo-img']}
+            onClick={() => {
+              router.push('/');
+            }}
           />
           <p className={styles['service-text']}>{TOP_MAIN.title}</p>
           {/* <Image
@@ -96,7 +102,7 @@ function LoginPage() {
                 onChange={(e) => setPassword(e.currentTarget.value)}
               />
             </div>
-            <button type="button" className={styles['login-btn']}>
+            <button type="submit" className={styles['login-btn']}>
               로그인
             </button>
             <button

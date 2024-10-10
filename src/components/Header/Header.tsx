@@ -29,7 +29,7 @@ function Header() {
   const menuToRouteMap: Record<HeaderTextUnion, string> = {
     [HEADER_TEXT.home]: '/',
     [HEADER_TEXT.recommendation]: '/recommend',
-    [HEADER_TEXT.recap]: '/recap',
+    [HEADER_TEXT.recap]: token ? '/recap' : '/login',
   };
 
   const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
