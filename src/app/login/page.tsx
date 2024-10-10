@@ -2,13 +2,13 @@
 
 import Image from 'next/image';
 // import kakao_login from '../../../public/kakao-login.png';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 import thumbnail from '../../../public/thumbnail.png';
 import offizz_logo from '../../../public/offizz-logo.png';
 import styles from './page.module.css';
 import { TOP_MAIN } from '@/constants/main';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
 import useAuth from '@/hook/useAuth';
 
 function LoginPage() {
@@ -96,8 +96,11 @@ function LoginPage() {
                 onChange={(e) => setPassword(e.currentTarget.value)}
               />
             </div>
-            <button className={styles['login-btn']}>로그인</button>
+            <button type="button" className={styles['login-btn']}>
+              로그인
+            </button>
             <button
+              type="button"
               className={styles['not-user-btn']}
               onClick={() => {
                 router.push('/signup');

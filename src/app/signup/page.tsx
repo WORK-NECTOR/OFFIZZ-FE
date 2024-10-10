@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 import thumbnail from '../../../public/thumbnail.png';
 import offizz_logo from '../../../public/offizz-logo.png';
 import styles from './page.module.css';
 import { TOP_MAIN } from '@/constants/main';
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
 import useAuth from '@/hook/useAuth';
 
 function SignupPage() {
