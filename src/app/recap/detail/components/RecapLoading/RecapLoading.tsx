@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { RecapLoadingContainer } from './RecapLoading.styled';
-import ic_recap from 'public/onboarding-character.png';
+import ic_recap from 'public/workation-fizz-retrospect.png';
 import ic_cafe from 'public/ic-cafe.png';
 import ic_vac from 'public/ic-vac.png';
 import ic_nature from 'public/ic-nature.png';
