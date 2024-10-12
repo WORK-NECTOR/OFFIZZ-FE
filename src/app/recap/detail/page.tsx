@@ -12,6 +12,7 @@ import RecapStart from './components/RecapStart';
 import RecapReason from './components/RecapReason';
 import RecapWorkTime from './components/RecapWorkTime';
 import RecapWorkRate from './components/RecapWorkRate';
+import RecapWorkMost from './components/RecapWorkMost';
 
 const stepPage: { [key: number]: JSX.Element } = {
   0: <RecapLoading />,
@@ -19,6 +20,7 @@ const stepPage: { [key: number]: JSX.Element } = {
   2: <RecapReason />,
   3: <RecapWorkTime />,
   4: <RecapWorkRate />,
+  5: <RecapWorkMost />,
 };
 
 function RecapDetailPage() {
