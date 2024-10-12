@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const RecapReasonContainer = styled.div`
+export const WorkTimeContainer = styled.div`
   width: 100%;
   height: 100%;
 `;

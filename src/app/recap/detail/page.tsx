@@ -10,11 +10,13 @@ import useWorkationStore from '@/store/useWorkationStore';
 import useRecapStore from '@/store/useRecapStore';
 import RecapStart from './components/RecapStart';
 import RecapReason from './components/RecapReason';
+import RecapWorkTime from './components/RecapWorkTime';
 
 const stepPage: { [key: number]: JSX.Element } = {
   0: <RecapLoading />,
   1: <RecapStart />,
   2: <RecapReason />,
+  3: <RecapWorkTime />,
 };
 
 function RecapDetailPage() {
