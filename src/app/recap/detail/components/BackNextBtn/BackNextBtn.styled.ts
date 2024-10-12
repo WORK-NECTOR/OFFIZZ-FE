@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const BackNextBtnContainer = styled.div`
   display: flex;
   gap: 0.5rem;
+  position: absolute;
+  bottom: 2rem;
 `;
 
 export const BackBtn = styled.button`

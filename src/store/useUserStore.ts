@@ -8,7 +8,7 @@ interface UserStoreType {
 }
 
 const useUserStore = create<UserStoreType>((set) => ({
-  name: '',
+  name: '사용자',
   setName: (name) => {
     set(() => ({ name }));
   },
