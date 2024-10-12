@@ -1,17 +1,17 @@
 import { RECAP_DETAIL_TITLE } from '@/constants/recap';
 import TitleLine from '../TitleLine';
-import { RateContainer } from './RecapRate.styled';
+import { WorkRateContainer } from './RecapWorkRate.styled';
 import useRecapStore from '@/store/useRecapStore';
 import RecapText from '../RecapText';
 import TextContainer from '../TextContainer';
 import BackNextBtn from '../BackNextBtn';
 
-function RecapRate() {
+function RecapWorkRate() {
   const { recapDetailData } = useRecapStore();
   const data = recapDetailData.thirdPage;
 
   return (
-    <RateContainer>
+    <WorkRateContainer>
       <TitleLine title={RECAP_DETAIL_TITLE.workTodo} />
       <TextContainer>
         <RecapText text="워케이션 기간동안 계획했던 일들을" />
@@ -21,8 +21,8 @@ function RecapRate() {
         </div>
       </TextContainer>
       <BackNextBtn />
-    </RateContainer>
+    </WorkRateContainer>
   );
 }
 
-export default RecapRate;
+export default RecapWorkRate;
