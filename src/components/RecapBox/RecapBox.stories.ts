@@ -10,11 +10,12 @@ const meta = {
     layout: 'fullscreen',
   },
   args: {
-    mainText: '메인 텍스트',
-    subText: '서브 텍스트',
-    startDate: '2024.09.26',
-    endDate: '2024.09.28',
+    name: '이름',
+    address: '주소',
     img: ic_logo,
+    startDate: '2024.10.20',
+    endDate: '2024.10.22',
+    workationId: 0,
   },
 } satisfies Meta<typeof RecapBox>;
 

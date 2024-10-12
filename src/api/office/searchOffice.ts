@@ -1,36 +1,52 @@
+import useAuth from '@/hook/useAuth';
 import { instance } from '../axios';
 
 export interface SearchOfficeParams {
-  searchText?: string | undefined;
-  clickPage?: number;
-  size?: number;
-  filter: '';
+  searchText: string;
+  clickPage: number;
+  activeCategory: string;
+  userLng: number;
+  userLat: number;
+  activeToggle: string;
 }
 
-export interface OfficeInfoType {
-  officeId: number;
-  name: string;
-  facilities: {
-    twentyFourHoursOperation: boolean;
-    openAllYear: boolean;
-  };
+export interface SearchMapInfoType {
   address: string;
-  price: number;
-  priceType: string;
+  category: string;
+  image: string;
+  id: number;
+  isLike: boolean;
+  lat: number;
+  lon: number;
+  name: string;
 }
 
 export interface SearchOfficeResponse {
-  recOffices: Array<OfficeInfoType>;
+  cafeAndOffices: Array<SearchMapInfoType>;
+  vacationRecommendResponses: Array<SearchMapInfoType>;
   totalPage: number;
 }
 
-export const searchOffices = (params: SearchOfficeParams) => {
-  const { searchText = '', clickPage = 1, size = 8, filter = '' } = params;
+export const searchOffices = async (params: SearchOfficeParams) => {
+  // eslint-disable-next-line
+  const { getAccessToken } = useAuth();
+  const {
+    searchText,
+    clickPage,
+    activeCategory,
+    userLng,
+    userLat,
+    activeToggle,
+  } = params;
+  const size = 8;
 
-  return instance.get<SearchOfficeResponse>(
-    `/work/${filter}/location/${clickPage}/${size}`,
-    {
-      params: { search: searchText },
+  const token = await getAccessToken();
+  const url = `/${activeToggle}/${activeCategory}/location/${clickPage}/${size}`;
+
+  return instance.get<SearchOfficeResponse>(url, {
+    params: { search: searchText, lat: userLat, lon: userLng },
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  );
+  });
 };

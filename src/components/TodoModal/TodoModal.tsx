@@ -76,7 +76,7 @@ const TodoModal: React.FC<TodoModalProps> = ({
             },
           )
           .then((uploadResponse) => {
-            const imageUrl = uploadResponse.data.url; // 서버에서 반환된 이미지 URL
+            const imageUrl = uploadResponse.data;
             body.image = imageUrl; // 이미지 URL을 body에 추가한 후 최종 요청 전송
 
             axios

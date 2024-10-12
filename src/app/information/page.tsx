@@ -26,7 +26,6 @@ import useSelectToggleStore from '@/store/useSelectToggleStore';
 
 function InformationPage() {
   const [modalType, setModalType] = useState<string | null>(null);
-  const [vacationType, setVacationType] = useState<string | null>(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [isTodoModalOpen, setTodoModalOpen] = useState(false);
   const [isTodoAdded, setIsTodoAdded] = useState(false);
@@ -41,13 +40,6 @@ function InformationPage() {
   const { activeToggle, setToggleTab } = useSelectToggleStore();
   const [timeArr, setTimeArr] = useState<TimeRangeType[]>([]);
   const [isVacationAdd, setIsVacationAdd] = useState(false);
-  const handleSearchParams = (
-    paramsModalType: string | null,
-    paramsVacationType: string | null,
-  ) => {
-    setModalType(paramsModalType);
-    setVacationType(paramsVacationType);
-  };
 
   const todoContent =
     modalType === 'End'
@@ -90,20 +82,6 @@ function InformationPage() {
   const onClickAddTodo = () => {
     setIsVacationAdd(true);
   };
-  // const timeArr: TimeRangeType[] = [
-  //   {
-  //     from: '11:30',
-  //     to: '15:30',
-  //     activity: 'Core Time',
-  //     icon: '😎',
-  //   },
-  //   {
-  //     from: '16:00',
-  //     to: '17:15',
-  //     activity: 'Test',
-  //     icon: '😂',
-  //   },
-  // ];
 
   useEffect(() => {
     const fetchTimeArr = async () => {
@@ -154,17 +132,15 @@ function InformationPage() {
     setIsTodoAdded(true); // Todo 추가 시 true로 설정
   };
   const onClickVacation = () => {
-    handleSearchParams(null, 'vacation');
     setToggleTab('vacation');
-    router.push(`/information?kind=vacation`);
   };
   const onClickWork = () => {
-    handleSearchParams(null, 'work');
     setToggleTab('work');
     router.push(`/information`);
   };
 
   const handleNextDay = () => {
+    alert('오늘은 Day 1이에요. 지금 이 순간을 최대한 즐겨보세요!');
     setDay(day + 1); // 다음 날로 변경
   };
 
@@ -172,7 +148,7 @@ function InformationPage() {
     if (day > 1) setDay(day - 1); // 1일보다 작아지지 않게 설정
   };
 
-  if (vacationType === 'vacation') {
+  if (activeToggle === 'vacation') {
     return (
       <div style={{ display: 'flex' }}>
         <Tab />
