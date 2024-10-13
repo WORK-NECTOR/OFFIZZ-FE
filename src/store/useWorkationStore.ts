@@ -13,19 +13,19 @@ interface WorkationStoreType {
 }
 
 const useWorkationStore = create<WorkationStoreType>((set) => ({
-  workationId: 2, // 디폴트 0으로 수정
+  workationId: 0,
   setWorkationId: (id) => {
     set(() => ({ workationId: id }));
   },
-  name: '데스커 강릉',
+  name: '',
   setName: (name) => {
     set(() => ({ name }));
   },
-  startDate: '2024-10-02',
+  startDate: '',
   setStartDate: (date) => {
     set(() => ({ startDate: date }));
   },
-  endDate: '2024-10-03',
+  endDate: '',
   setEndDate: (date) => {
     set(() => ({ endDate: date }));
   },
