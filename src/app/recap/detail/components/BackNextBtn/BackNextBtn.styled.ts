@@ -23,7 +23,7 @@ export const BackBtn = styled.button`
   }
 `;
 
-export const NextBtn = styled.button`
+export const NextBtn = styled.button<{ $color: string }>`
   width: 5rem;
   height: 2.5rem;
   padding: 0.5rem 1rem;
@@ -31,7 +31,7 @@ export const NextBtn = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 3rem;
-  background-color: var(--blue-main);
+  background-color: ${(props) => props.$color || 'var(--blue-main)'};
   color: var(--white-main);
   border: none;
   font-family: Pretendard;

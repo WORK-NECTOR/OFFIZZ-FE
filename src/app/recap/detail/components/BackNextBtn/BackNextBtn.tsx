@@ -3,7 +3,7 @@ import { BackBtn, BackNextBtnContainer, NextBtn } from './BackNextBtn.styled';
 import arrow from 'public/down-arrow.png';
 import useStepstore from '@/store/useStepStore';
 
-function BackNextBtn() {
+function BackNextBtn({ color }: { color?: string }) {
   const { decrementStep, incrementStep } = useStepstore();
 
   return (
@@ -11,7 +11,7 @@ function BackNextBtn() {
       <BackBtn onClick={decrementStep}>
         <Image id="arrow-img" src={arrow} alt="화살표 이미지" />
       </BackBtn>
-      <NextBtn onClick={incrementStep}>{`다음 >`}</NextBtn>
+      <NextBtn $color={color || ''} onClick={incrementStep}>{`다음 >`}</NextBtn>
     </BackNextBtnContainer>
   );
 }

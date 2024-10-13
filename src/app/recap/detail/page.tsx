@@ -47,7 +47,6 @@ function RecapDetailPage() {
       refetch();
 
       if (data) {
-        console.log(data);
         setRecapDetailData(data);
         if (step === 0) incrementStep();
       }
