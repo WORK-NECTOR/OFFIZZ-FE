@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import useStepstore from '@/store/useStepStore';
 import styles from './page.module.css';
 import RecapLoading from './components/RecapLoading';
@@ -61,7 +61,7 @@ function RecapDetailPage() {
 
   return (
     <div className={styles.background}>
-      {step === 0 && <>{stepPage[step]}</>}
+      {step === 0 && <div>{stepPage[step]}</div>}
       {step > 0 && (
         <div className={styles['card-container']}>{stepPage[step]}</div>
       )}

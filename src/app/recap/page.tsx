@@ -94,7 +94,7 @@ function RecapPage() {
   }, []);
 
   return (
-    <Fragment>
+    <>
       <Header />
       <div className={styles['recap-wrapper']}>
         <div className={styles['recap-title-wrapper']}>
@@ -128,7 +128,7 @@ function RecapPage() {
           </div>
         )}
       </div>
-    </Fragment>
+    </>
   );
 }
 
