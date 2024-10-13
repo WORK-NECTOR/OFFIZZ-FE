@@ -5,8 +5,6 @@ import {
 import { useQuery } from '@tanstack/react-query';
 
 export const useOngoingWorkationQuery = (params: GetOngoingWorkationParams) => {
-  const { token } = params;
-
   return useQuery({
     queryKey: ['ongoing-workation'],
     queryFn: async () => {

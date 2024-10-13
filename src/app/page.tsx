@@ -29,6 +29,7 @@ import Footer from '@/components/Footer';
 import { useRecRegionOfficeQuery } from '@/services/office/useRecRegionOfficeQuery';
 import OfficeAccordion from '@/components/OfficeAccordion';
 import useAuth from '@/hook/useAuth';
+import { useOngoingWorkationQuery } from '@/services/workation/useOngoingWorkation';
 
 export default function MainPage() {
   const [token, setToken] = useState('');
@@ -39,6 +40,7 @@ export default function MainPage() {
     region: selectedRegion,
     size: 4,
   });
+  const { data: isOngoing, refetch } = useOngoingWorkationQuery({ token });
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     const text = e.currentTarget.innerText as Region;
@@ -50,6 +52,17 @@ export default function MainPage() {
       if (accessTkn) setToken(accessTkn);
     });
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      refetch();
+
+      // 진행 중인 워케이션이 있으면 /information으로 진입
+      if (isOngoing && isOngoing.data === true) {
+        router.push('/information');
+      }
+    }
+  }, [isOngoing, token]);
 
   return (
     <>
