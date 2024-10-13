@@ -1,11 +1,10 @@
+import { useQuery } from '@tanstack/react-query';
 import {
   GetOngoingWorkationParams,
   getOngoingWorkation,
 } from '@/api/workation/getOngoing';
-import { useQuery } from '@tanstack/react-query';
 
-export const useOngoingWorkationQuery = (params: GetOngoingWorkationParams) => {
-  return useQuery({
+export const useOngoingWorkationQuery = (params: GetOngoingWorkationParams) => useQuery({
     queryKey: ['ongoing-workation'],
     queryFn: async () => {
       const response = await getOngoingWorkation(params);
@@ -16,4 +15,3 @@ export const useOngoingWorkationQuery = (params: GetOngoingWorkationParams) => {
     staleTime: 1000 * 20,
     enabled: false,
   });
-};
