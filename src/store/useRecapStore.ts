@@ -8,6 +8,12 @@ interface RecapStoreType {
 
 const useRecapStore = create<RecapStoreType>((set) => ({
   recapDetailData: {
+    zeroPage: {
+      name: '',
+      address: '',
+      startDate: '',
+      endDate: '',
+    },
     firstPage: {
       reason: '',
     },
@@ -25,16 +31,13 @@ const useRecapStore = create<RecapStoreType>((set) => ({
       diff: 0,
     },
     fifthPage: {
-      bestWorkDays: [],
-    },
-    sixthPage: {
       totalVacation: 0,
       averageRate: 0,
     },
-    seventhPage: {
-      bestVacationDays: [],
+    sixthPage: {
+      rate: 0,
     },
-    eighthPage: {
+    seventhPage: {
       bestVacations: [],
     },
   },

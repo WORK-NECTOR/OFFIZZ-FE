@@ -6,6 +6,7 @@ export interface GetRecapDetailParams {
 }
 
 export interface RecapDetailResponseType {
+  zeroPage: ZeroPageType;
   firstPage: FirstPageType;
   secondPage: SecondPageType;
   thirdPage: ThirdPageType;
@@ -13,7 +14,13 @@ export interface RecapDetailResponseType {
   fifthPage: FifthPageType;
   sixthPage: SixthPageType;
   seventhPage: SeventhPageType;
-  eighthPage: EighthPageType;
+}
+
+export interface ZeroPageType {
+  name: string;
+  address: string;
+  startDate: string;
+  endDate: string;
 }
 
 export interface FirstPageType {
@@ -37,19 +44,15 @@ export interface FourthPageType {
 }
 
 export interface FifthPageType {
-  bestWorkDays: Array<string>;
-}
-
-export interface SixthPageType {
   totalVacation: number;
   averageRate: number;
 }
 
-export interface SeventhPageType {
-  bestVacationDays: Array<string>;
+export interface SixthPageType {
+  rate: number;
 }
 
-export interface EighthPageType {
+export interface SeventhPageType {
   bestVacations: Array<VacationType>;
 }
 

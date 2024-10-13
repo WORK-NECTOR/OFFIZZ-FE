@@ -16,6 +16,7 @@ export const useRecapDetailQuery = (params: GetRecapDetailParams) => {
       });
       const { data } = response;
       const {
+        zeroPage,
         firstPage,
         secondPage,
         thirdPage,
@@ -23,10 +24,10 @@ export const useRecapDetailQuery = (params: GetRecapDetailParams) => {
         fifthPage,
         sixthPage,
         seventhPage,
-        eighthPage,
       } = data;
 
       return {
+        zeroPage,
         firstPage,
         secondPage,
         thirdPage,
@@ -34,7 +35,6 @@ export const useRecapDetailQuery = (params: GetRecapDetailParams) => {
         fifthPage,
         sixthPage,
         seventhPage,
-        eighthPage,
       };
     },
     enabled: false,
