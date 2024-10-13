@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
 import Header from '@/components/Header';
