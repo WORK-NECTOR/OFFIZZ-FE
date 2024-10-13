@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { RecapLoadingContainer } from './RecapLoading.styled';
 import ic_recap from 'public/workation-fizz-retrospect.png';
 import ic_cafe from 'public/ic-cafe.png';
 import ic_vac from 'public/ic-vac.png';
@@ -12,6 +11,7 @@ import ic_nature from 'public/ic-nature.png';
 // import ic_laptop from 'public/ic-laptop.png';
 // import ic_car from 'public/ic-car.png';
 import ic_logo from 'public/offizz-logo.png';
+import { RecapLoadingContainer } from './RecapLoading.styled';
 import RotatingIcon from '../RotatingIcon';
 import useUserStore from '@/store/useUserStore';
 import { RECAP_DETAIL } from '@/constants/recap';

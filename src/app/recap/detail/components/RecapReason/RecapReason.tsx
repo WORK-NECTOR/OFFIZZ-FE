@@ -19,9 +19,9 @@ function RecapReason() {
         <RecapText text={`${name}님은`} />
         <div style={{ display: 'flex' }}>
           <RecapText text={data.reason} color="var(--blue-main)" />
-          <RecapText text={'(이)라는 이유로'} />
+          <RecapText text="(이)라는 이유로" />
         </div>
-        <RecapText text={'워케이션을 왔어요.'} />
+        <RecapText text="워케이션을 왔어요." />
       </TextContainer>
       <BackNextBtn />
     </RecapReasonContainer>

@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { BackBtn, BackNextBtnContainer, NextBtn } from './BackNextBtn.styled';
 import arrow from 'public/down-arrow.png';
+import { BackBtn, BackNextBtnContainer, NextBtn } from './BackNextBtn.styled';
 import useStepstore from '@/store/useStepStore';
 
 function BackNextBtn({ color }: { color?: string }) {

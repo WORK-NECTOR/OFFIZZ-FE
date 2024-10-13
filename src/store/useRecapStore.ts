@@ -1,5 +1,5 @@
-import { RecapDetailResponseType } from '@/api/recap/getRecapDetail';
 import { create } from 'zustand';
+import { RecapDetailResponseType } from '@/api/recap/getRecapDetail';
 
 interface RecapStoreType {
   recapDetailData: RecapDetailResponseType;

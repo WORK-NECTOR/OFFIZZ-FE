@@ -1,3 +1,6 @@
+import Image from 'next/image';
+import ic_loc from 'public/ic-location.png';
+import { useEffect } from 'react';
 import { TOP_MAIN } from '@/constants/main';
 import TitleLine from '../TitleLine';
 import {
@@ -6,11 +9,8 @@ import {
   RecapStartTop,
 } from './RecapStart.styled';
 import { RECAP_DETAIL } from '@/constants/recap';
-import Image from 'next/image';
-import ic_loc from 'public/ic-location.png';
 import useWorkationStore from '@/store/useWorkationStore';
 import useStepstore from '@/store/useStepStore';
-import { useEffect } from 'react';
 
 function RecapStart() {
   const { name, startDate, endDate } = useWorkationStore();
