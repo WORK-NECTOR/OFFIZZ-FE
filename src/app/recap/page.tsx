@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
 import Header from '@/components/Header';
@@ -94,7 +94,7 @@ function RecapPage() {
   }, []);
 
   return (
-    <>
+    <Fragment>
       <Header />
       <div className={styles['recap-wrapper']}>
         <div className={styles['recap-title-wrapper']}>
@@ -128,7 +128,7 @@ function RecapPage() {
           </div>
         )}
       </div>
-    </>
+    </Fragment>
   );
 }
 

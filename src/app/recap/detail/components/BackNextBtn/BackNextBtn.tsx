@@ -3,7 +3,7 @@ import arrow from 'public/down-arrow.png';
 import { BackBtn, BackNextBtnContainer, NextBtn } from './BackNextBtn.styled';
 import useStepstore from '@/store/useStepStore';
 
-function BackNextBtn({ color }: { color?: string }) {
+function BackNextBtn({ color = 'var(--blue-main)' }: { color?: string }) {
   const { decrementStep, incrementStep } = useStepstore();
 
   return (
