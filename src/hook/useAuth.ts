@@ -80,7 +80,9 @@ function useAuth() {
         removeTokens();
       }
       // eslint-disable-next-line no-empty
-    } catch {}
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   // eslint-disable-next-line consistent-return
