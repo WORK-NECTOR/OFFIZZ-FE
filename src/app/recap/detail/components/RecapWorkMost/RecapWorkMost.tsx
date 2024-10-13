@@ -5,17 +5,11 @@ import TextContainer from '../TextContainer';
 import RecapText from '../RecapText';
 import useRecapStore from '@/store/useRecapStore';
 import BackNextBtn from '../BackNextBtn';
+import { formatDate } from '@/utils/formatDate';
 
 function RecapWorkMost() {
   const { recapDetailData } = useRecapStore();
   const data = recapDetailData.fourthPage;
-
-  function formatDate(dateString: string): string {
-    const [year, month, day] = dateString.split('-');
-    const monthNum = parseInt(month);
-
-    return `${monthNum}월 ${parseInt(day)}일`;
-  }
 
   return (
     <WorkMostContainer>
