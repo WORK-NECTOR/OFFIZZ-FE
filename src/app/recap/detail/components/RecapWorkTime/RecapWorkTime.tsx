@@ -12,8 +12,8 @@ function RecapWorkTime() {
 
   function formatTime(time: string): string {
     const [hourStr, minuteStr] = time.split(':');
-    let hour = parseInt(hourStr);
-    const minute = parseInt(minuteStr);
+    let hour = parseInt(hourStr, 10);
+    const minute = parseInt(minuteStr, 10);
 
     const period = hour < 12 ? '오전' : '오후';
 
